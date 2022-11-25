@@ -3,8 +3,8 @@
     "type": "module",
     "version": "1.0.0",
     "main": "lib.js",
+    "module": "lib.js",
     "description": "Tabler UI components for Vue3",
-    "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },

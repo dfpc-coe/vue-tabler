@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v1.0.1
+
+- :bug: package.json fixes for exporting as module
+
 ### v1.0.0
 
 - Initial Release
