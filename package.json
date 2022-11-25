@@ -1,5 +1,5 @@
 {
-    "name": "@tak-os/vue-tabler",
+    "name": "@tak-ps/vue-tabler",
     "type": "module",
     "version": "1.0.0",
     "main": "lib.js",
