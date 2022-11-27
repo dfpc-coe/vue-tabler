@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v1.1.0
+
+- :rocket: Add new components & linting
+
 ### v1.0.1
 
 - :bug: package.json fixes for exporting as module
