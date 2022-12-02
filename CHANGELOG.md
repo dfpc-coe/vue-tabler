@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v1.2.0
+
+- :rocket: `Input` Component
+
 ### v1.1.0
 
 - :rocket: Add new components & linting
