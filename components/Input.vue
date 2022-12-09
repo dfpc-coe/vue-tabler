@@ -3,12 +3,12 @@
     <label v-if='label' class="form-label" v-text='label'></label>
 
     <template v-if='!rows || rows <= 1'>
-        <input :value='modelValue' @input='event => current = event.target.value' type="text" :class='{
+        <input :disabled='disabled' :value='modelValue' @input='event => current = event.target.value' type="text" :class='{
             "is-invalid": error
         }' class="form-control" :placeholder='label||placeholder||""'/>
     </template>
     <template v-else>
-        <textarea :rows='rows' :value='modelValue' @input='event => current = event.target.value' type="text" :class='{
+        <textarea :disabled='disabled' :rows='rows' :value='modelValue' @input='event => current = event.target.value' type="text" :class='{
             "is-invalid": error
         }' class="form-control" :placeholder='label||placeholder||""'/>
     </template>
@@ -25,13 +25,17 @@ export default {
             default: '',
             required: true
         },
-        label: String,
-        placeholder: String,
-        error: String,
+        disabled: {
+            type: Boolean,
+            default: false,
+        },
         rows: {
             type: Number,
             default: 1
-        }
+        },
+        label: String,
+        placeholder: String,
+        error: String,
     },
     data: function() {
         return {
