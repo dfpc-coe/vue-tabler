@@ -10,13 +10,22 @@
 
 ## Version History
 
+### v2.0.0
+
+- :rocket: Prefix all components with `Tabler` to pass Vue ESLint
+- :tada: Allow user defined `type` prop in Input Component
+
+### v1.4.0
+
+- :tada: `Loading` component
+
 ### v1.3.0
 
 - :rocket: `Input#disabled` prop
 
 ### v1.2.0
 
-- :rocket: `Input` Component
+- :tada: `Input` Component
 
 ### v1.1.0
 
