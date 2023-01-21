@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v2.1.0
+
+- :rocket: Add `inline` prop to loading mode
+
 ### v2.0.0
 
 - :rocket: Prefix all components with `Tabler` to pass Vue ESLint
