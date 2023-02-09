@@ -6,7 +6,7 @@
     <template v-if='inline'>
         <div class='d-flex'>
             <div class="spinner-border" role="status"></div>
-            <div v-id='desc && desc.length' class='mx-3 align-self-center' v-text='desc'></div>
+            <div v-if='desc && desc.length' class='mx-3 align-self-center' v-text='desc'></div>
         </div>
     </template>
     <template v-else='inline'>
