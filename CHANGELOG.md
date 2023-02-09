@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v2.1.1
+
+- :bug: Fix directive name
+
 ### v2.1.0
 
 - :rocket: Add `inline` prop to loading mode
