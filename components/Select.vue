@@ -10,7 +10,6 @@
             :class='{
                 active: value === current
             }'
-            href="#"
             v-text='value'
         ></a>
     </div>
