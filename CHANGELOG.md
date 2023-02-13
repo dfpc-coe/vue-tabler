@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v2.1.2
+
+- :bug: Remove href in TablerSelect
+
 ### v2.1.1
 
 - :bug: Fix directive name
