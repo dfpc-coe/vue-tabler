@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v2.2.0
+
+- :tada: Add toggle & list components
+
 ### v2.1.2
 
 - :bug: Remove href in TablerSelect
