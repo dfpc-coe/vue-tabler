@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v2.2.1
+
+- :tada: Add initial value for TablerList
+
 ### v2.2.0
 
 - :tada: Add toggle & list components

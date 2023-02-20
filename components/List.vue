@@ -23,6 +23,7 @@ export default {
         url: String,
         listkey: String,
         namekey: String,
+        initial: Object,
         label: {
             type: String,
             default: ''
@@ -49,6 +50,9 @@ export default {
     },
     mounted: async function() {
         await this.fetchList();
+    },
+    mounted: function() {
+        if (this.initial) this.filter = this.initial[this.namekey];
     },
     methods: {
         select: function(ele) {
