@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v2.2.2
+
+- :bug: TablerList: Only update filter if namekey is present
+
 ### v2.2.1
 
 - :tada: Add initial value for TablerList
