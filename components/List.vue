@@ -53,6 +53,7 @@ export default {
     },
     mounted: function() {
         if (this.initial && this.initial[this.namekey]) this.filter = this.initial[this.namekey];
+        await this.fetchlist();
     },
     methods: {
         select: function(ele) {
