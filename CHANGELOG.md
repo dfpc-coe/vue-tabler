@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v2.2.6
+
+- :tada: Bump GH Actions
+
 ### v2.2.5
 
 - :tada: Add GH AutoReleaser

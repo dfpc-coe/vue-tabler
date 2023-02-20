@@ -49,11 +49,8 @@ export default {
         }
     },
     mounted: async function() {
-        await this.fetchList();
-    },
-    mounted: async function() {
         if (this.initial && this.initial[this.namekey]) this.filter = this.initial[this.namekey];
-        await this.fetchlist();
+        await this.fetchList();
     },
     methods: {
         select: function(ele) {
