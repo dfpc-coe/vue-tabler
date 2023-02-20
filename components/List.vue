@@ -18,7 +18,7 @@
 import TablerInput from './Input.vue';
 
 export default {
-    name: 'UserDropdown',
+    name: 'TablerList',
     props: {
         url: String,
         listkey: String,
@@ -52,7 +52,7 @@ export default {
         await this.fetchList();
     },
     mounted: function() {
-        if (this.initial) this.filter = this.initial[this.namekey];
+        if (this.initial && this.initial[this.namekey]) this.filter = this.initial[this.namekey];
     },
     methods: {
         select: function(ele) {
