@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v2.2.5
+
+- :tada: Add GH AutoReleaser
+
 ### v2.2.4
 
 - :bug: TablerList: Async Call
