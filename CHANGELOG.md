@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v2.2.3
+
+- :bug: TablerList: Prepopulate list
+
 ### v2.2.2
 
 - :bug: TablerList: Only update filter if namekey is present
