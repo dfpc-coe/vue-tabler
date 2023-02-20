@@ -51,7 +51,7 @@ export default {
     mounted: async function() {
         await this.fetchList();
     },
-    mounted: function() {
+    mounted: async function() {
         if (this.initial && this.initial[this.namekey]) this.filter = this.initial[this.namekey];
         await this.fetchlist();
     },

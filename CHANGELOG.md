@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v2.2.4
+
+- :bug: TablerList: Async Call
+
 ### v2.2.3
 
 - :bug: TablerList: Prepopulate list
