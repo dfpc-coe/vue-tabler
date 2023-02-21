@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v2.2.7
+
+- :bug: Toggle: Should expect boolean value for modelValue
+
 ### v2.2.6
 
 - :tada: Bump GH Actions
