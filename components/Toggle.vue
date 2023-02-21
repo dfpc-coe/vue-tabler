@@ -14,8 +14,8 @@ export default {
     name: 'TablerToggle',
     props: {
         modelValue: {
-            type: String,
-            required: ''
+            type: Boolean,
+            required: true
         },
         disabled: {
             type: Boolean,
