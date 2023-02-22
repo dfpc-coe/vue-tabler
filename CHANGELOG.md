@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v2.2.9
+
+- :rocket: Toggle: Centre Label
+
 ### v2.2.8
 
 - :bug: Toggle: Set initial value
