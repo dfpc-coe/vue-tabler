@@ -28,6 +28,9 @@ export default {
             current: this.modelValue
         }
     },
+    mounted: function() {
+        this.current = this.modelValue;
+    },
     watch: {
         current: function() {
             if (this.current === this.modelValue) return;
