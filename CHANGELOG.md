@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v2.3.0
+
+- :rocket: Improved List Component
+
 ### v2.2.9
 
 - :rocket: Toggle: Centre Label
