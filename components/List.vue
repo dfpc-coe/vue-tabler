@@ -7,7 +7,7 @@
             <span v-else style='padding-top: 6px;'>Select <span v-text='label'/></span>
 
             <div class='ms-auto'>
-                <SettingsIcon class='mt-1'/>
+                <SettingsIcon style='margin-top: 4px;'/>
             </div>
         </div>
     </div>
@@ -52,12 +52,16 @@ export default {
     },
     data: function() {
         return {
+            ele: null,
             isMounted: false,
             filter: '',
             list: {}
         }
     },
     watch: {
+        ele: function() {
+            this.filter = '';
+        },
         filter: async function() {
             await this.fetchList();
         }
@@ -77,6 +81,7 @@ export default {
     },
     methods: {
         select: function(ele) {
+            this.ele = ele;
             this.filter = ele[this.namekey];
             this.$emit("selected", ele)
         },
