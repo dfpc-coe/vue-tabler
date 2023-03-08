@@ -67,7 +67,7 @@ export default {
         }
     },
     mounted: async function() {
-        if (this.initial && this.initial[this.namekey]) this.filter = this.initial[this.namekey];
+        if (this.initial && this.initial[this.namekey]) this.ele = this.initial;
         await this.fetchList();
         this.isMounted = true;
     },
