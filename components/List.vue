@@ -1,11 +1,21 @@
 <template>
 <div class="dropdown">
     <label class='form-label' v-text='label'></label>
-    <div type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        <TablerInput :disabled='disabled' placeholder='Name' v-model='filter'/>
+    <div type="button" ref='button' id="list-menu-button" data-bs-toggle="dropdown" aria-expanded="false" class='border rounded' style='height: 36px;'>
+        <div class='d-flex mx-2'>
+            <span v-if='ele' style='padding-top: 6px;' v-text='ele[namekey]'/>
+            <span v-else style='padding-top: 6px;'>Select <span v-text='label'/></span>
+
+            <div class='ms-auto'>
+                <SettingsIcon class='mt-1'/>
+            </div>
+        </div>
     </div>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <ul class="dropdown-menu" aria-labelledby="list-menu-button" :style='{
+            "width": `${buttonHeight}px`
+        }'>
         <div class='m-1'>
+            <TablerInput :disabled='disabled' placeholder='Name' v-model='filter'/>
             <div @click='select(ele)' :key='ele.id' v-for='ele in list[listkey]'>
                 <div class="d-flex align-items-center my-1 cursor-pointer" v-text='ele[namekey]'></div>
             </div>
@@ -16,6 +26,9 @@
 
 <script>
 import TablerInput from './Input.vue';
+import {
+    SettingsIcon
+} from 'vue-tabler-icons';
 
 export default {
     name: 'TablerList',
@@ -39,6 +52,7 @@ export default {
     },
     data: function() {
         return {
+            isMounted: false,
             filter: '',
             list: {}
         }
@@ -51,6 +65,15 @@ export default {
     mounted: async function() {
         if (this.initial && this.initial[this.namekey]) this.filter = this.initial[this.namekey];
         await this.fetchList();
+        this.isMounted = true;
+    },
+    computed: {
+        buttonHeight() {
+            if(!this.isMounted) return 100;
+            const buttonDOM = this.$refs.button
+            console.error(buttonDOM);
+            return buttonDOM ? buttonDOM.offsetWidth : 100;
+        },
     },
     methods: {
         select: function(ele) {
@@ -65,6 +88,7 @@ export default {
         }
     },
     components: {
+        SettingsIcon,
         TablerInput
     }
 }
