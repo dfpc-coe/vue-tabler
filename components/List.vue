@@ -75,7 +75,6 @@ export default {
         buttonHeight() {
             if(!this.isMounted) return 100;
             const buttonDOM = this.$refs.button
-            console.error(buttonDOM);
             return buttonDOM ? buttonDOM.offsetWidth : 100;
         },
     },
