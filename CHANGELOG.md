@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v2.3.1
+
+- :rocket: Remove Debug Code
+
 ### v2.3.0
 
 - :rocket: Improved List Component
