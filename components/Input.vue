@@ -21,7 +21,7 @@ export default {
     name: 'TablerInput',
     props: {
         modelValue: {
-            type: String,
+            type: [String, Number],
             required: true
         },
         disabled: {
@@ -47,8 +47,20 @@ export default {
     },
     watch: {
         current: function() {
-            if (this.current === this.modelValue) return;
-            this.$emit('update:modelValue', this.current);
+            if (typeof this.modelValue === 'number') {
+                const current = Number(this.current);
+
+                if (isNaN(current)) {
+                    this.error = 'Must be a number!';
+                } else if (current === this.modelValue) {
+                    return;
+                } else {
+                    this.$emit('update:modelValue', current);
+                }
+            } else {
+                if (this.current === this.modelValue) return;
+                this.$emit('update:modelValue', this.current);
+            }
         }
     }
 }
