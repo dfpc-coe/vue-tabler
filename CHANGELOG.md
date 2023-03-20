@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v2.4.0
+
+- :bug: Numeric input should output numerics in TablerInput
+
 ### v2.3.1
 
 - :rocket: Remove Debug Code
