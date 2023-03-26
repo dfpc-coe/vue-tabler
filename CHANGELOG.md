@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v2.5.0
+
+- :tada: Add BreadCrumb Component
+
 ### v2.4.0
 
 - :bug: Numeric input should output numerics in TablerInput

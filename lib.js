@@ -6,8 +6,10 @@ import TablerProgress from './components/Progress.vue'
 import TablerLoading from './components/Loading.vue'
 import TablerToggle from './components/Toggle.vue'
 import TablerInput from './components/Input.vue'
+import TablerBreadCrumb from './components/BreadCrumb.vue';
 
 export {
+    TablerBreadCrumb,
     TablerError,
     TablerSelect,
     TablerLoading,
