@@ -10,6 +10,11 @@
 
 ## Version History
 
+### v2.6.0
+
+- :tada: Add Epoch Component
+- :tada: Add EpochRange Component
+
 ### v2.5.0
 
 - :tada: Add BreadCrumb Component
