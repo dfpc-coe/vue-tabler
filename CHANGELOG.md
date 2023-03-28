@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v2.7.0
+
+- :tada: Add Bytes Component
+
 ### v2.6.0
 
 - :tada: Add Epoch Component
