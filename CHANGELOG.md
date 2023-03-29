@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v2.8.0
+
+- :tada: Add Enum Component
+
 ### v2.7.0
 
 - :tada: Add Bytes Component
