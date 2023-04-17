@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v2.9.0
+
+- :bug: Add `white-space: pre;` to text area to retain newline characters
+
 ### v2.8.0
 
 - :tada: Add Enum Component

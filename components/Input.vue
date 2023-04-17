@@ -1,5 +1,5 @@
 <template>
-<div>
+<div style='white-space: pre;'>
     <label v-if='label' class="form-label" v-text='label'></label>
 
     <template v-if='!rows || rows <= 1'>
