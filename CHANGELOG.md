@@ -10,6 +10,11 @@
 
 ## Version History
 
+### v2.10.0
+
+- :tada: Add Normalize Option to BreadCrumb component
+- :bug: Move `whitespace: pre;` to text area to avoid breaking date inputs
+
 ### v2.9.0
 
 - :bug: Add `white-space: pre;` to text area to retain newline characters

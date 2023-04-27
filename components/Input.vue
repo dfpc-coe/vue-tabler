@@ -1,5 +1,5 @@
 <template>
-<div style='white-space: pre;'>
+<div>
     <label v-if='label' class="form-label" v-text='label'></label>
 
     <template v-if='!rows || rows <= 1'>
@@ -8,7 +8,7 @@
         }' class="form-control" :placeholder='label||placeholder||""'/>
     </template>
     <template v-else>
-        <textarea :disabled='disabled' :rows='rows' :value='modelValue' @input='event => current = event.target.value' :type='type' :class='{
+        <textarea style='white-space: pre;' :disabled='disabled' :rows='rows' :value='modelValue' @input='event => current = event.target.value' :type='type' :class='{
             "is-invalid": error
         }' class="form-control" :placeholder='label||placeholder||""'/>
     </template>
