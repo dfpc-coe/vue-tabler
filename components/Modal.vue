@@ -10,6 +10,6 @@
 
 <script>
 export default {
-    name: 'Modal',
+    name: 'TablerModal',
 }
 </script>

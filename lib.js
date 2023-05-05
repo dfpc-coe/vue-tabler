@@ -11,11 +11,13 @@ import TablerBytes from './components/Bytes.vue';
 import TablerEnum from './components/Enum.vue';
 import TablerEpoch from './components/Epoch.vue';
 import TablerEpochRange from './components/EpochRange.vue';
+import TablerMarkdown from './components/Markdown.vue';
 
 export {
     TablerEnum,
     TablerBytes,
     TablerEpoch,
+    TablerMarkdown,
     TablerEpochRange,
     TablerBreadCrumb,
     TablerError,
@@ -25,5 +27,5 @@ export {
     TablerProgress,
     TablerToggle,
     TablerInput,
-    TablerList
+    TablerList,
 }

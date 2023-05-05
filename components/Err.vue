@@ -24,7 +24,7 @@ import {
 } from 'vue-tabler-icons'
 
 export default {
-    name: 'Err',
+    name: 'TablerErr',
     props: ['err'],
     methods: {
         close: function() {

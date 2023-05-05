@@ -25,7 +25,7 @@
 
 <script>
 export default {
-    name: 'Loading',
+    name: 'TablerLoading',
     props: {
         inline: {
             type: Boolean,

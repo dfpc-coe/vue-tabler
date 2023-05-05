@@ -24,6 +24,7 @@
         "@vue/cli-plugin-babel": "^5.0.8",
         "eslint": "^8.28.0",
         "eslint-plugin-vue": "^9.8.0",
+        "showdown": "^2.1.0",
         "vue-tabler-icons": "^2.16.0"
     }
 }

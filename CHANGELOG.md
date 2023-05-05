@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v2.11.0
+
+- :tada: Add `TablerMarkdown` component
+
 ### v2.10.0
 
 - :tada: Add Normalize Option to BreadCrumb component

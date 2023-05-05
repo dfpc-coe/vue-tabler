@@ -4,7 +4,7 @@
 
 <script>
 export default {
-    name: 'Epoch',
+    name: 'TablerEpoch',
     props: {
         date: {
             type: Number,

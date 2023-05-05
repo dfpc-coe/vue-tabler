@@ -4,7 +4,7 @@
 
 <script>
 export default {
-    name: 'Bytes',
+    name: 'TablerBytes',
     props: {
         bytes: {
             type: Number,
