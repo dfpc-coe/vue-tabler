@@ -10,7 +10,7 @@
 
 ## Version History
 
-### v2.11.0
+### v2.12.0
 
 - :tada: Add `TablerDelete` component
 
