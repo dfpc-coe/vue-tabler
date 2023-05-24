@@ -2,7 +2,7 @@
     "name": "@tak-ps/vue-tabler",
     "type": "module",
     "version": "2.11.0",
-    "main": "lib.js",
+    "lib": "lib.js",
     "module": "lib.js",
     "description": "Tabler UI components for Vue3",
     "scripts": {
