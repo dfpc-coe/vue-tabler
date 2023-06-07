@@ -3,14 +3,14 @@
     <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-text='current'></a>
     <div class="dropdown-menu dropdown-menu-end">
         <a
-            :key='value'
-            v-for='value in values'
-            @click='current = value'
+            :key='option'
+            v-for='option in options'
+            @click='current = option'
             class="dropdown-item"
             :class='{
-                active: value === current
+                active: option === current
             }'
-            v-text='value'
+            v-text='option'
         ></a>
     </div>
 </div>
@@ -20,8 +20,18 @@
 export default {
     name: 'TablerSelect',
     props: {
-        default: String,
-        values: Array
+        modelValue: {
+            type: String,
+            required: true,
+        },
+        default: {
+            type: String,
+            required: false
+        },
+        options: {
+            type: Array,
+            required: true
+        },
     },
     data: function() {
         return {
@@ -30,17 +40,17 @@ export default {
     },
     watch: {
         current: function() {
-            this.$emit('select', this.current);
+            if (this.modelValue !== this.current) {
+                this.$emit('update:modelValue', this.current);
+            }
         }
     },
     mounted: function() {
         if (!this.default) {
-            this.current = this.values[0];
+            this.current = this.options[0];
         } else {
             this.current = this.default;
         }
-    },
-    methods: {
     },
 }
 </script>

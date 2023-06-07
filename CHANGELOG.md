@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.0.0
+
+- :rocket: Standardize Enum Component
+
 ### v2.12.0
 
 - :tada: Add `TablerDelete` component
