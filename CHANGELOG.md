@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.0.1
+
+- :bug: Fix initial value
+
 ### v3.0.0
 
 - :rocket: Standardize Enum Component
