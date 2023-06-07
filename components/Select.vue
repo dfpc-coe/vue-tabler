@@ -46,11 +46,8 @@ export default {
         }
     },
     mounted: function() {
-        if (!this.default) {
-            this.current = this.options[0];
-        } else {
-            this.current = this.default;
-        }
+        if (!this.modelValue && this.default) this.current = this.default
+        else this.current = this.modelValue;
     },
 }
 </script>
