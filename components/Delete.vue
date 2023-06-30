@@ -1,8 +1,13 @@
 <template>
 <div>
-    <div @click='modal = true' class="btn btn-outline-danger">
-        <span v-text='label'/>
-    </div>
+    <template v-if='style === "button"'>
+        <div @click='modal = true' class="btn btn-outline-danger">
+            <span v-text='label'/>
+        </div>
+    </template>
+    <template v-else>
+        <TrashIcon @click='modal = true' class='cursor-pointer'/>
+    </template>
 
     <TablerModal v-if='modal'>
         <button type="button" class="btn-close" @click='modal = false' aria-label="Close"></button>
@@ -34,6 +39,10 @@ export default {
         label: {
             type: String,
             default: 'Delete'
+        },
+        displaytype: {
+            type: String,
+            default: 'button' // Or icon
         }
     },
     data: function() {
