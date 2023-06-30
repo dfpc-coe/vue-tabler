@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.1.1
+
+- :bug: Fix display type display
+
 ### v3.1.0
 
 - :rocket: Add display type to Delete

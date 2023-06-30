@@ -1,6 +1,6 @@
 <template>
 <div>
-    <template v-if='style === "button"'>
+    <template v-if='displaytype === "button"'>
         <div @click='modal = true' class="btn btn-outline-danger">
             <span v-text='label'/>
         </div>
