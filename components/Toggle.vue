@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class='d-flex align-items-center'>
-        <label class='form-label my-1' v-text='label'/>
+        <label class='form-label my-1 mx-2' v-text='label'/>
         <label class="ms-auto form-check form-switch pt-2">
             <input v-model='current' :disabled='disabled' class="form-check-input" type="checkbox">
         </label>

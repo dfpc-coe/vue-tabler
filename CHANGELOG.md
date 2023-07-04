@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.1.2
+
+- :rocket: `Toggle`: Increase padding between label and toggle
+
 ### v3.1.1
 
 - :bug: Fix display type display
