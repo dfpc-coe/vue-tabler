@@ -10,6 +10,11 @@
 
 ## Version History
 
+### v3.1.3
+
+- :bug: `Toggle`: Fix modelValue watch state
+- :bug: `Enum`: Fix modelValue watch state
+
 ### v3.1.2
 
 - :rocket: `Toggle`: Increase padding between label and toggle
