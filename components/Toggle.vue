@@ -32,6 +32,9 @@ export default {
         this.current = this.modelValue;
     },
     watch: {
+        modelValue: function() {
+            this.current = this.modelValue;
+        },
         current: function() {
             if (this.current === this.modelValue) return;
             this.$emit('update:modelValue', this.current);
