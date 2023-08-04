@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.2.0
+
+- :rocket: Add `required` Property to labelled components
+
 ### v3.1.3
 
 - :bug: `Toggle`: Fix modelValue watch state
