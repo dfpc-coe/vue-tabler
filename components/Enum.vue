@@ -1,6 +1,13 @@
 <template>
 <div>
-    <label v-if='label' class="form-label" v-text='label'></label>
+    <label
+        v-if='label'
+        class="form-label"
+        :class='{
+            "required": required
+        }'
+        v-text='label'
+    ></label>
 
     <select v-model='current' :disabled='disabled' class='form-select'>
         <option v-for='option in options' :value="option" v-text='option'></option>
@@ -18,6 +25,10 @@ export default {
         },
         default: {
             type: String,
+            required: false
+        },
+        required: {
+            type: Boolean,
             required: false
         },
         options: {

@@ -6,6 +6,7 @@
             <AlertCircleIcon/>
             <h3>Website Error</h3>
             <div class="text-muted" v-text='err.message'></div>
+            <pre v-if='err.body' v-text='err.body'></pre>
         </div>
         <div class="modal-footer">
             <div class="w-100">

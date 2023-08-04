@@ -1,6 +1,13 @@
 <template>
 <div>
-    <label v-if='label' class="form-label" v-text='label'></label>
+    <label
+        v-if='label'
+        class="form-label"
+        v-text='label'
+        :class='{
+            "required": required
+        }'
+    ></label>
 
     <template v-if='!rows || rows <= 1'>
         <input :disabled='disabled' :value='modelValue' @input='event => current = event.target.value' :type='type' :class='{
@@ -23,6 +30,10 @@ export default {
         modelValue: {
             type: [String, Number],
             required: true
+        },
+        required: {
+            type: Boolean,
+            default: false,
         },
         disabled: {
             type: Boolean,

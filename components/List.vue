@@ -1,6 +1,13 @@
 <template>
 <div class="dropdown">
-    <label class='form-label' v-text='label'></label>
+    <label
+        v-if='label'
+        class='form-label'
+        :class='{
+            "required": required
+        }'
+        v-text='label'
+    ></label>
     <div type="button" ref='button' id="list-menu-button" data-bs-toggle="dropdown" aria-expanded="false" class='border rounded' style='height: 36px;'>
         <div class='d-flex mx-2'>
             <span v-if='ele' style='padding-top: 6px;' v-text='ele[namekey]'/>
@@ -40,6 +47,10 @@ export default {
         label: {
             type: String,
             default: ''
+        },
+        required: {
+            type: Boolean,
+            default: false
         },
         disabled: {
             type: Boolean,
