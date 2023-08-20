@@ -12,16 +12,50 @@ export default {
         },
         format: {
             type: String,
-            default: 'ISO'
+            default: 'Human'
+        }
+    },
+    data: function() {
+        return {
+            suffix: {
+                1: 'st',
+                2: 'nd',
+                3: 'rd'
+            },
+            months: [
+                'January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+                'July',
+                'August',
+                'September',
+                'October',
+                'November',
+                'December'
+            ]
         }
     },
     computed: {
         display: function() {
             const date = new Date(this.date)
+
             if (this.format === 'ISO') {
                 return date.toISOString()
                     .replace('T', ' ')
                     .replace(/:[0-9]+\.[0-9]+[A-Z]/, '');
+            } else if (this.format === 'Human') {
+                const day = String(date.getUTCDate());
+                const suffix = this.suffix[day.slice(day.length - 1)] || 'th';
+
+                const res = `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padEnd(2, '0')}, ${this.months[date.getUTCMonth()]} ${date.getUTCDate()}${suffix}`;
+                if (date.getFullYear() === new Date().getFullYear()) {
+                    return res;
+                } else {
+                    return res + `, ${date.getFullYear()}`;
+                }
             } else {
                 return date.toString();
             }

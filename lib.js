@@ -1,5 +1,6 @@
 export { default as TablerError } from './components/Err.vue'
 export { default as TablerList } from './components/List.vue'
+export { default as TablerHelp } from './components/Help.vue'
 export { default as TablerSelect } from './components/Select.vue'
 export { default as TablerModal } from './components/Modal.vue'
 export { default as TablerProgress } from './components/Progress.vue'
