@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.3.0
+
+- :rocket: Add `Human` mode (and make it the default) to `Epoch` and `EpochRange`
+
 ### v3.2.0
 
 - :rocket: Add `required` Property to labelled components
