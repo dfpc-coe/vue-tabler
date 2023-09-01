@@ -23,6 +23,11 @@
 </template>
 
 <script>
+import {
+    InfoSquareIcon
+} from 'vue-tabler-icons';
+import Help from './Help.vue';
+
 export default {
     name: 'TablerEnum',
     props: {
@@ -69,6 +74,10 @@ export default {
             if (this.current === this.modelValue) return;
             this.$emit('update:modelValue', this.current);
         }
+    },
+    components: {
+        InfoSquareIcon,
+        Help
     }
 }
 </script>

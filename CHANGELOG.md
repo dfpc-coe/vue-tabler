@@ -10,6 +10,12 @@
 
 ## Version History
 
+### v3.7.1
+
+- :bug: Include missing components in `Enum` & `Toggle` comps
+- :rocket: `TablerSchema`: Default to empty string for description prop
+- :rocket: `TablerSchema`: Default to false for required prop
+
 ### v3.7.0
 
 - :rocket: Include `description` and `required` to `TablerSchema` and sub components

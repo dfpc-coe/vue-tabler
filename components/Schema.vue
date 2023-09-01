@@ -5,8 +5,8 @@
             <TablerEnum
                 :label='key'
                 :disabled='disabled'
-                :required='schema.properties[key].required'
-                :description='schema.properties[key].description'
+                :required='schema.properties[key].required || false'
+                :description='schema.properties[key].description || ""'
                 v-model='data[key]'
                 :options='schema.properties[key].enum'
                 :default='schema.properties[key].default'
@@ -16,8 +16,8 @@
             <TablerInput
                 :label='key'
                 :disabled='disabled'
-                :required='schema.properties[key].required'
-                :description='schema.properties[key].description'
+                :required='schema.properties[key].required || false'
+                :description='schema.properties[key].description || ""'
                 v-model='data[key]'
             />
         </template>
@@ -25,8 +25,8 @@
             <TablerToggle
                 :label='key'
                 :disabled='disabled'
-                :required='schema.properties[key].required'
-                :description='schema.properties[key].description'
+                :required='schema.properties[key].required || false'
+                :description='schema.properties[key].description || ""'
                 v-model='data[key]'
             />
         </template>

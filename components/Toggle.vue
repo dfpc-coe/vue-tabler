@@ -21,6 +21,11 @@
 </template>
 
 <script>
+import {
+    InfoSquareIcon
+} from 'vue-tabler-icons';
+import Help from './Help.vue';
+
 export default {
     name: 'TablerToggle',
     props: {
@@ -62,5 +67,9 @@ export default {
             this.$emit('update:modelValue', this.current);
         }
     },
+    components: {
+        InfoSquareIcon,
+        Help
+    }
 }
 </script>
