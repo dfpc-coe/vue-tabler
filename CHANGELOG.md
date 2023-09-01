@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.5.0
+
+- :rocket: Add `TablerNone` component for use when a list or property is empty
+
 ### v3.4.0
 
 - :rocket: Add `TablerSchema` component for creating forms from basic JSON Schemas

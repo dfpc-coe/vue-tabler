@@ -1,3 +1,4 @@
+export { default as TablerNone } from './components/None.vue'
 export { default as TablerError } from './components/Err.vue'
 export { default as TablerList } from './components/List.vue'
 export { default as TablerHelp } from './components/Help.vue'
