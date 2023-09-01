@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.6.0
+
+- :rocket: Add `TablerPager` component for iterating over a list
+
 ### v3.5.0
 
 - :rocket: Add `TablerNone` component for use when a list or property is empty
