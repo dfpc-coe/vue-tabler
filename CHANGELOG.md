@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.7.0
+
+- :rocket: Include `description` and `required` to `TablerSchema` and sub components
+
 ### v3.6.0
 
 - :rocket: Add `TablerPager` component for iterating over a list
