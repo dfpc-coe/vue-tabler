@@ -1,6 +1,10 @@
 <template>
 <div>
     <div class='d-flex align-items-center'>
+        <span v-if='description' style='margin-right: 4px;'>
+            <InfoSquareIcon @click='help = true' size='20' class='cursor-pointer'/>
+            <Help v-if='help' @click='help = false' :label='label || placeholder' :description='description'/>
+        </span>
         <label
             v-if='label'
             class='form-label my-1 mx-2'
@@ -30,6 +34,10 @@ export default {
         },
         required: {
             type: Boolean,
+            default: false
+        },
+        description: {
+            type: String,
             default: false
         },
         label: {

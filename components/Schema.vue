@@ -5,16 +5,30 @@
             <TablerEnum
                 :label='key'
                 :disabled='disabled'
+                :required='schema.properties[key].required'
+                :description='schema.properties[key].description'
                 v-model='data[key]'
                 :options='schema.properties[key].enum'
                 :default='schema.properties[key].default'
             />
         </template>
         <template v-else-if='schema.properties[key].type === "string"'>
-            <TablerInput :label='key' :disabled='disabled' v-model='data[key]'/>
+            <TablerInput
+                :label='key'
+                :disabled='disabled'
+                :required='schema.properties[key].required'
+                :description='schema.properties[key].description'
+                v-model='data[key]'
+            />
         </template>
         <template v-else-if='schema.properties[key].type === "boolean"'>
-            <TablerToggle :label='key' :disabled='disabled' v-model='data[key]'/>
+            <TablerToggle
+                :label='key'
+                :disabled='disabled'
+                :required='schema.properties[key].required'
+                :description='schema.properties[key].description'
+                v-model='data[key]'
+            />
         </template>
         <template v-else-if='schema.properties[key].type === "array"'>
             <div class='d-flex'>
@@ -37,7 +51,11 @@
         </template>
         <template v-else>
             <div class='row'>
-                <TablerInput :label='key' :rows='3' :disabled='disabled' v-model='data[key]'/>
+                <TablerInput
+                    :label='key'
+                    :rows='3'
+                    :disabled='disabled'
+                    v-model='data[key]'/>
             </div>
         </template>
     </div>

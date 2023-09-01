@@ -1,17 +1,24 @@
 <template>
-<div>
-    <label
-        v-if='label'
-        class="form-label"
-        :class='{
-            "required": required
-        }'
-        v-text='label'
-    ></label>
-
-    <select v-model='current' :disabled='disabled' class='form-select'>
-        <option v-for='option in options' :value="option" v-text='option'></option>
-    </select>
+<div class='row'>
+    <div class='col-12 d-flex'>
+        <span v-if='description' style='margin-right: 4px;'>
+            <InfoSquareIcon @click='help = true' size='20' class='cursor-pointer'/>
+            <Help v-if='help' @click='help = false' :label='label || placeholder' :description='description'/>
+        </span>
+        <label
+            v-if='label'
+            class="form-label"
+            v-text='label'
+            :class='{
+                "required": required
+            }'
+        ></label>
+    </div>
+    <div class='col-12'>
+        <select v-model='current' :disabled='disabled' class='form-select'>
+            <option v-for='option in options' :value="option" v-text='option'></option>
+        </select>
+    </div>
 </div>
 </template>
 
@@ -29,6 +36,10 @@ export default {
         },
         required: {
             type: Boolean,
+            required: false
+        },
+        description: {
+            type: String,
             required: false
         },
         options: {
