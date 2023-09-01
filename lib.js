@@ -14,3 +14,4 @@ export { default as TablerEpoch } from './components/Epoch.vue';
 export { default as TablerEpochRange } from './components/EpochRange.vue';
 export { default as TablerMarkdown } from './components/Markdown.vue';
 export { default as TablerDelete } from './components/Delete.vue';
+export { default as TablerSchema } from './components/Schema.vue';

@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.4.0
+
+- :rocket: Add `TablerSchema` component for creating forms from basic JSON Schemas
+
 ### v3.3.0
 
 - :rocket: Add `Human` mode (and make it the default) to `Epoch` and `EpochRange`
