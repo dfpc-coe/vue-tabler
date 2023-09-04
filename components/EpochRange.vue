@@ -84,6 +84,8 @@ export default {
                 } else {
                     return `${start_month} ${start.getFullYear()}, ${start_time} - ${end_month} ${end.getFullYear()}, ${end_time}`;
                 }
+            } else {
+                return 'Invalid Format'
             }
         }
     }

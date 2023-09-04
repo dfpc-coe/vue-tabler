@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.8.0
+
+- :tada: Add Preliminary `Dropdown` component for modular Dropdowns
+
 ### v3.7.1
 
 - :bug: Include missing components in `Enum` & `Toggle` comps

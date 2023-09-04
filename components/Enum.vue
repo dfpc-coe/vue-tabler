@@ -16,7 +16,7 @@
     </div>
     <div class='col-12'>
         <select v-model='current' :disabled='disabled' class='form-select'>
-            <option v-for='option in options' :value="option" v-text='option'></option>
+            <option :key='option' v-for='option in options' :value="option" v-text='option'></option>
         </select>
     </div>
 </div>

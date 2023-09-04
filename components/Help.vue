@@ -20,9 +20,6 @@
 
 <script>
 import Modal from './Modal.vue';
-import {
-    InfoSquareIcon
-} from 'vue-tabler-icons'
 
 export default {
     name: 'TablerHelp',
@@ -44,7 +41,6 @@ export default {
     },
     components: {
         Modal,
-        InfoSquareIcon
     }
 }
 </script>

@@ -43,7 +43,7 @@ export default {
         },
         description: {
             type: String,
-            default: false
+            default: ''
         },
         label: {
             type: String,
