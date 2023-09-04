@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.8.1
+
+- :bug: Fix Tabler Icon import
+
 ### v3.8.0
 
 - :tada: Add Preliminary `Dropdown` component for modular Dropdowns
