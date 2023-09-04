@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.8.2
+
+- :rocket: Minimize default Dropdown styling
+
 ### v3.8.1
 
 - :bug: Fix Tabler Icon import
