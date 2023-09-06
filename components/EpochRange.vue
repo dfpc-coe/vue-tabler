@@ -60,9 +60,11 @@ export default {
                 const end = new Date(this.end)
 
                 const start_day = String(start.getUTCDate());
-                const start_day_suffix = this.suffix[start_day.slice(start_day.length - 1)] || 'th';
+                let start_day_suffix = this.suffix[start_day.slice(start_day.length - 1)] || 'th';
+                if (['11', '12', '13'].includes(start_day)) start_day_suffix = 'th';
                 const end_day = String(end.getUTCDate());
-                const end_day_suffix = this.suffix[end_day.slice(end_day.length - 1)] || 'th';
+                let end_day_suffix = this.suffix[end_day.slice(end_day.length - 1)] || 'th';
+                if (['11', '12', '13'].includes(end_day)) end_day_suffix = 'th';
 
                 const start_month = `${this.months[start.getUTCMonth()]} ${start.getUTCDate()}${start_day_suffix}`;
                 const end_month = `${this.months[end.getUTCMonth()]} ${end.getUTCDate()}${end_day_suffix}`;

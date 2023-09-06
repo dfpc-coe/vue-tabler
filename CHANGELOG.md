@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.8.3
+
+- :bug: Fix suffixes on `11th`, `12th`, `13th` because english is lawless
+
 ### v3.8.2
 
 - :rocket: Minimize default Dropdown styling

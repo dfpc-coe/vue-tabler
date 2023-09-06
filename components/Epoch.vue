@@ -48,7 +48,8 @@ export default {
                     .replace(/:[0-9]+\.[0-9]+[A-Z]/, '');
             } else if (this.format === 'Human') {
                 const day = String(date.getUTCDate());
-                const suffix = this.suffix[day.slice(day.length - 1)] || 'th';
+                let suffix = this.suffix[day.slice(day.length - 1)] || 'th';
+                if (['11', '12', '13'].includes(day)) suffix = 'th';
 
                 const res = `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padEnd(2, '0')}, ${this.months[date.getUTCMonth()]} ${date.getUTCDate()}${suffix}`;
                 if (date.getFullYear() === new Date().getFullYear()) {
