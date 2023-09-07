@@ -68,8 +68,8 @@ export default {
 
                 const start_month = `${this.months[start.getUTCMonth()]} ${start.getUTCDate()}${start_day_suffix}`;
                 const end_month = `${this.months[end.getUTCMonth()]} ${end.getUTCDate()}${end_day_suffix}`;
-                const start_time = `${String(start.getHours()).padStart(2, '0')}:${String(start.getMinutes()).padEnd(2, '0')}`;
-                const end_time = `${String(end.getHours()).padStart(2, '0')}:${String(end.getMinutes()).padEnd(2, '0')}`;
+                const start_time = `${String(start.getUTCHours()).padStart(2, '0')}:${String(start.getMinutes()).padEnd(2, '0')}`;
+                const end_time = `${String(end.getUTCHours()).padStart(2, '0')}:${String(end.getMinutes()).padEnd(2, '0')}`;
 
                 if (start.getFullYear() === end.getFullYear() && start.getFullYear() === new Date().getFullYear()) {
                     if (start.getUTCMonth() === end.getUTCMonth() && start.getUTCDate() === end.getUTCDate()) {

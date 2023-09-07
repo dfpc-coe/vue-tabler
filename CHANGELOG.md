@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.8.4
+
+- :bug: Be consistent with using UTC Hours for now
+
 ### v3.8.3
 
 - :bug: Fix suffixes on `11th`, `12th`, `13th` because english is lawless
