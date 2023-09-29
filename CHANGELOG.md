@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.9.0
+
+- :tada: Add `TablerRange`
+
 ### v3.8.4
 
 - :bug: Be consistent with using UTC Hours for now

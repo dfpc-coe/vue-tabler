@@ -1,4 +1,5 @@
 export { default as TablerDropdown } from './components/Dropdown.vue'
+export { default as TablerRange } from './components/Range.vue'
 export { default as TablerPager } from './components/Pager.vue'
 export { default as TablerNone } from './components/None.vue'
 export { default as TablerError } from './components/Err.vue'
