@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.10.0
+
+- :tada: Use uniform `TablerLabel` internal class for inputs & allow slot use to the right of label
+
 ### v3.9.0
 
 - :tada: Add `TablerRange`
