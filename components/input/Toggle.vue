@@ -1,19 +1,19 @@
 <template>
-<div>
-    <div class='d-flex align-items-center'>
-        <span v-if='description' style='margin-right: 4px;'>
-            <InfoSquareIcon @click='help = true' size='20' class='cursor-pointer'/>
-            <Help v-if='help' @click='help = false' :label='label || placeholder' :description='description'/>
-        </span>
-        <label
-            v-if='label'
-            class='form-label my-1 mx-2'
-            :class='{
-                "required": required
-            }'
-            v-text='label'
-        />
-        <label class="ms-auto form-check form-switch pt-2">
+<div class='d-flex'>
+    <span v-if='description' class='align-self-center' style='margin-right: 4px;'>
+        <InfoSquareIcon @click='help = true' size='20' class='cursor-pointer'/>
+        <Help v-if='help' @click='help = false' :label='label || placeholder' :description='description'/>
+    </span>
+    <div
+        v-if='label'
+        class='mx-2 align-self-center'
+        :class='{
+            "required": required
+        }'
+        v-text='label'
+    ></div>
+    <div class="align-self-center ms-auto">
+        <label class='form-switch'>
             <input v-model='current' :disabled='disabled' class="form-check-input" type="checkbox">
         </label>
     </div>
