@@ -1,19 +1,6 @@
 <template>
 <div class='row'>
-    <div class='col-12 d-flex'>
-        <span v-if='description' style='margin-right: 4px;'>
-            <InfoSquareIcon @click='help = true' size='20' class='cursor-pointer'/>
-            <Help v-if='help' @click='help = false' :label='label' :description='description'/>
-        </span>
-        <label
-            v-if='label'
-            class="form-label"
-            v-text='label'
-            :class='{
-                "required": required
-            }'
-        ></label>
-    </div>
+    <TablerLabel :label='label' :description='description' :required='required'><slot/></TablerLabel>
     <div class='col-12'>
         <input :disabled='disabled' v-model='current' type="range" class="form-range" :min="min" :max="max" :step="step">
     </div>
@@ -21,10 +8,7 @@
 </template>
 
 <script>
-import {
-    InfoSquareIcon
-} from 'vue-tabler-icons';
-import Help from './Help.vue';
+import TablerLabel from '../internal/Label.vue';
 
 export default {
     name: 'TablerRange',
@@ -72,8 +56,7 @@ export default {
         }
     },
     components: {
-        Help,
-        InfoSquareIcon
+        TablerLabel
     }
 }
 </script>
