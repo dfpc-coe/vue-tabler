@@ -62,7 +62,7 @@ export default {
                 '#f76707': 'orange',
                 '#f59f00': 'yellow',
                 '#74b816': 'lime'
-            }
+            },
             colours: {
                 dark: '#1d273b',
                 white: '#ffffff',

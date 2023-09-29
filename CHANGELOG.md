@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.11.2
+
+- :bug: Syntax
+
 ### v3.11.1
 
 - :bug: Fix component name
