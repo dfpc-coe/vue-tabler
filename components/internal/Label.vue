@@ -1,12 +1,12 @@
 <template>
 <div class='col-12 d-flex my-1'>
-    <span v-if='description' class='align-self-center' style='margin-right: 4px;'>
+    <span v-if='description' class='align-self-center'>
         <InfoSquareIcon @click='help = true' size='20' class='cursor-pointer'/>
         <Help v-if='help' @click='help = false' :label='label || placeholder' :description='description'/>
     </span>
     <div
         v-if='label'
-        class="align-self-center"
+        class="align-self-center px-2"
         v-text='label'
         :class='{
             "required": required
@@ -28,10 +28,6 @@ export default {
     name: 'TablerInternalLabel',
     props: {
         required: {
-            type: Boolean,
-            default: false,
-        },
-        disabled: {
             type: Boolean,
             default: false,
         },
