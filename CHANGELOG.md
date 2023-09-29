@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.11.1
+
+- :bug: Fix component name
+
 ### v3.11.0
 
 - :tada: Add `TablerColour` Component

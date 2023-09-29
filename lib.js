@@ -1,6 +1,6 @@
 // Inputs
 export { default as TablerRange } from './components/input/Range.vue'
-export { default as TablerColours } from './components/input/Colour.vue'
+export { default as TablerColour } from './components/input/Colour.vue'
 export { default as TablerSelect } from './components/input/Select.vue'
 export { default as TablerToggle } from './components/input/Toggle.vue'
 export { default as TablerInput } from './components/input/Input.vue'
