@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import TablerInput from './Input.vue';
+import TablerInput from './input/Input.vue';
 import {
     SettingsIcon
 } from 'vue-tabler-icons';

@@ -63,9 +63,9 @@
 </template>
 
 <script>
-import TablerInput from './Input.vue';
-import TablerToggle from './Toggle.vue';
-import TablerEnum from './Enum.vue';
+import TablerInput from './input/Input.vue';
+import TablerToggle from './input/Toggle.vue';
+import TablerEnum from './input/Enum.vue';
 import {
     PlusIcon,
     TrashIcon,

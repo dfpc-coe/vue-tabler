@@ -24,7 +24,7 @@
 import {
     InfoSquareIcon
 } from 'vue-tabler-icons';
-import Help from './Help.vue';
+import Help from '../Help.vue';
 
 export default {
     name: 'TablerToggle',
