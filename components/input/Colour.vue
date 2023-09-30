@@ -20,7 +20,7 @@
 import TablerLabel from '../internal/Label.vue';
 
 export default {
-    name: 'TablerEnum',
+    name: 'TablerColour',
     props: {
         modelValue: {
             type: String,
