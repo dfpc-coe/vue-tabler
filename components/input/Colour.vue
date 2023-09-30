@@ -3,10 +3,7 @@
     <TablerLabel :label='label' :description='description' :required='required'><slot/></TablerLabel>
     <div class='col-12'>
         <div class="row g-2">
-            <div :key='color' v-for='color in [
-                "dark", "white", "blue", "azure", "indigo", "purple", "pink", "red", "orange", "yellow", "lime"
-            ]'
-            class="col-auto">
+            <div :key='color' v-for='color in Object.keys(colours)' class='col-auto'>
                 <label class="form-colorinput">
                     <input :disabled='disabled' v-model='current' :value='color' type="radio" class="form-colorinput-input">
                     <span class="form-colorinput-color bg-dark" :class='[
