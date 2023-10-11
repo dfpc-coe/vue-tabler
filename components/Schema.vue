@@ -21,6 +21,16 @@
                 v-model='data[key]'
             />
         </template>
+        <template v-else-if='schema.properties[key].type === "number"'>
+            <TablerInput
+                type='number'
+                :label='key'
+                :disabled='disabled'
+                :required='schema.properties[key].required || false'
+                :description='schema.properties[key].description || ""'
+                v-model='data[key]'
+            />
+        </template>
         <template v-else-if='schema.properties[key].type === "boolean"'>
             <TablerToggle
                 :label='key'
