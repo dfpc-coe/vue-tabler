@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.13.2
+
+- :arrow_up: Update Core Deps
+
 ### v3.13.1
 
 - :bug: Fix Syntax
