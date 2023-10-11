@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.13.3
+
+- :bug: Dynamic Type Resolution
+
 ### v3.13.2
 
 - :arrow_up: Update Core Deps
