@@ -21,9 +21,9 @@
                 v-model='data[key]'
             />
         </template>
-        <template v-else-if='schema.properties[key].type === "number"'>
+        <template v-else-if='schema.properties[key].type === "number" || schema.properties[key].type === "integer"'>
             <TablerInput
-                type='number'
+                type='schema.properties[key].type'
                 :label='key'
                 :disabled='disabled'
                 :required='schema.properties[key].required || false'

@@ -3,12 +3,12 @@
     <TablerLabel :label='label || placeholder' :description='description' :required='required'><slot/></TablerLabel>
     <div class='col-12'>
         <template v-if='!rows || rows <= 1'>
-            <input :disabled='disabled' :value='modelValue' @input='event => current = event.target.value' :type='type' :class='{
+            <input :disabled='disabled' :value='modelValue' @input='event => current = event.target.value' :type='computed_type' :class='{
                 "is-invalid": error
             }' class="form-control" :placeholder='label||placeholder||""'/>
         </template>
         <template v-else>
-            <textarea style='white-space: pre;' :disabled='disabled' :rows='rows' :value='modelValue' @input='event => current = event.target.value' :type='type' :class='{
+            <textarea style='white-space: pre;' :disabled='disabled' :rows='rows' :value='modelValue' @input='event => current = event.target.value' :type='computed_type' :class='{
                 "is-invalid": error
             }' class="form-control" :placeholder='label||placeholder||""'/>
         </template>
@@ -57,13 +57,29 @@ export default {
             current: ''
         }
     },
+    computed: {
+        computed_type: function() {
+            if (this.type === 'integer') return 'number';
+            return this.type;
+        }
+    },
     watch: {
         current: function() {
-            if (typeof this.modelValue === 'number') {
+            if (typeof this.modelValue === 'number' || this.type === 'number') {
                 const current = Number(this.current);
 
                 if (isNaN(current)) {
                     this.error = 'Must be a number!';
+                } else if (current === this.modelValue) {
+                    return;
+                } else {
+                    this.$emit('update:modelValue', current);
+                }
+            if (this.type === 'integer') {
+                const current = parseInt(this.current);
+
+                if (isNaN(current)) {
+                    this.error = 'Must be an integer!';
                 } else if (current === this.modelValue) {
                     return;
                 } else {

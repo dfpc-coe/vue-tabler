@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.13.0
+
+- :tada: Add support for `integer` type in JSON Schema
+
 ### v3.12.0
 
 - :tada: Add support for `number` type in JSON Schema
