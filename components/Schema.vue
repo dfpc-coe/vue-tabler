@@ -23,7 +23,7 @@
         </template>
         <template v-else-if='schema.properties[key].type === "number" || schema.properties[key].type === "integer"'>
             <TablerInput
-                type='schema.properties[key].type'
+                :type='schema.properties[key].type'
                 :label='key'
                 :disabled='disabled'
                 :required='schema.properties[key].required || false'
