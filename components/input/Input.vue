@@ -4,15 +4,15 @@
     <div class='col-12'>
         <template v-if='!rows || rows <= 1'>
             <input :disabled='disabled' :value='modelValue' @input='event => current = event.target.value' :type='computed_type' :class='{
-                "is-invalid": error
+                "is-invalid": errorstr
             }' class="form-control" :placeholder='label||placeholder||""'/>
         </template>
         <template v-else>
             <textarea style='white-space: pre;' :disabled='disabled' :rows='rows' :value='modelValue' @input='event => current = event.target.value' :type='computed_type' :class='{
-                "is-invalid": error
+                "is-invalid": errorstr
             }' class="form-control" :placeholder='label||placeholder||""'/>
         </template>
-        <div v-if='error' v-text='error' class="invalid-feedback"></div>
+        <div v-if='errorstr' v-text='errorstr' class="invalid-feedback"></div>
     </div>
 </div>
 </template>
@@ -54,10 +54,15 @@ export default {
     data: function() {
         return {
             help: false,
+            internal_error: '',
             current: ''
         }
     },
     computed: {
+        errorstr: function() {
+            if (this.error) return this.error;
+            return this.internal_error;
+        },
         computed_type: function() {
             if (this.type === 'integer') return 'number';
             return this.type;
@@ -69,23 +74,28 @@ export default {
                 const current = Number(this.current);
 
                 if (isNaN(current)) {
-                    this.error = 'Must be a number!';
+                    this.internal_error = 'Must be a number!';
                 } else if (current === this.modelValue) {
+                    this.internal_error = '';
                     return;
                 } else {
+                    this.internal_error = '';
                     this.$emit('update:modelValue', current);
                 }
             } else if (this.type === 'integer') {
                 const current = parseInt(this.current);
 
                 if (isNaN(current)) {
-                    this.error = 'Must be an integer!';
+                    this.internal_error = 'Must be an integer!';
                 } else if (current === this.modelValue) {
+                    this.internal_error = '';
                     return;
                 } else {
+                    this.internal_error = '';
                     this.$emit('update:modelValue', current);
                 }
             } else {
+                this.internal_error = '';
                 if (this.current === this.modelValue) return;
                 this.$emit('update:modelValue', this.current);
             }

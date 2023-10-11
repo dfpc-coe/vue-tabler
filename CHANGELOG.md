@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.14.0
+
+- :rocket: Use internal errorstr for handling numeric parsing
+
 ### v3.13.3
 
 - :bug: Dynamic Type Resolution
