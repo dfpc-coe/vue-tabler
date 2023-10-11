@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.13.1
+
+- :bug: Fix Syntax
+
 ### v3.13.0
 
 - :tada: Add support for `integer` type in JSON Schema

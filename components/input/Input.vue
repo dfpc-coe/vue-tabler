@@ -75,7 +75,7 @@ export default {
                 } else {
                     this.$emit('update:modelValue', current);
                 }
-            if (this.type === 'integer') {
+            } else if (this.type === 'integer') {
                 const current = parseInt(this.current);
 
                 if (isNaN(current)) {
