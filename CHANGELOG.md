@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.15.0
+
+- :rocket: Allow changing size of TablerModal
+
 ### v3.14.0
 
 - :rocket: Use internal errorstr for handling numeric parsing
