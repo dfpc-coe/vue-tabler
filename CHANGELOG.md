@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.16.0
+
+- :rocket: `Epoch`: Put time last in Human date format
+
 ### v3.15.0
 
 - :rocket: Allow changing size of TablerModal

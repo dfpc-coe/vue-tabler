@@ -51,12 +51,14 @@ export default {
                 let suffix = this.suffix[day.slice(day.length - 1)] || 'th';
                 if (['11', '12', '13'].includes(day)) suffix = 'th';
 
-                const res = `${String(date.getUTCHours()).padStart(2, '0')}:${String(date.getMinutes()).padEnd(2, '0')}, ${this.months[date.getUTCMonth()]} ${date.getUTCDate()}${suffix}`;
-                if (date.getFullYear() === new Date().getFullYear()) {
-                    return res;
-                } else {
-                    return res + `, ${date.getFullYear()}`;
+                const res = `${this.months[date.getUTCMonth()]} ${date.getUTCDate()}${suffix}`;
+                if (date.getFullYear() !== new Date().getFullYear()) {
+                    return res + ` ${date.getFullYear()}`;
                 }
+
+                res = res + `, ${String(date.getUTCHours()).padStart(2, '0')}:${String(date.getMinutes()).padEnd(2, '0')}`;
+
+                return res;
             } else {
                 return date.toString();
             }
