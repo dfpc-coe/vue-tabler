@@ -10,7 +10,7 @@
 
 ## Version History
 
-### v3.16.1
+### v3.17.0
 
 - :tada: `TimeZone` Component
 
