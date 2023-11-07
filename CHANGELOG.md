@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.17.1
+
+- :bug: `TimeZone` Export in default
+
 ### v3.17.0
 
 - :tada: `TimeZone` Component
