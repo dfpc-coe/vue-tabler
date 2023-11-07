@@ -5,15 +5,13 @@
     :description='description'
     :required='required'
     :default='modelValue'
-    v-on:change='$emit("update:modelValue", $event.target.value)'
+    v-on:change='$emit("update:modelValue", map.get($event.target.value).tzCode)'
 />
 </template>
 
 <script>
-import {
-    TablerEnum
-} from '@tak-ps/vue-tabler'
-import moment from 'moment-timezone';
+import TablerEnum from './Enum.vue'
+import tzs from 'timezones-list'
 
 export default {
     name: 'TablerTimeZone',
@@ -38,28 +36,16 @@ export default {
         },
     },
     data: function() {
-        const timezones = new Set();
+        const map = new Map();
 
-        for (const tz of moment.tz.names()
-            .reduce((memo, tz) => {
-                memo.push({
-                  name: tz,
-                  offset: moment.tz(tz).utcOffset()
-                });
-
-                return memo;
-            }, [])
-          .sort((a, b) => {
-            return a.offset - b.offset
-        })) {
-            const timezone = tz.offset ? moment.tz(tz.name).format('Z') : '';
-
-            timezones.add(`(GMT${timezone}) ${tz.name}`);
+        for (const tz of tzs) {
+            map.set(tz.label, tz);
         }
 
         return {
+            map,
             internal: this.modelValue,
-            timezones
+            timezones: tzs.map((tz) => tz.label)
         }
     },
     components: {

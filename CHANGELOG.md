@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.17.3
+
+- :rocket: `TimeZone` Simpler TimeZone List
+
 ### v3.17.2
 
 - :rocket: `TimeZone` Include desc and req. props
