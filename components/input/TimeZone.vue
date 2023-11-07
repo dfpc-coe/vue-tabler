@@ -2,6 +2,8 @@
 <TablerEnum
     :label='label'
     :options='Array.from(timezones)'
+    :description='description'
+    :required='required'
     :default='modelValue'
     v-on:change='$emit("update:modelValue", $event.target.value)'
 />
@@ -14,11 +16,17 @@ import {
 import moment from 'moment-timezone';
 
 export default {
-    name: 'TimeZone',
+    name: 'TablerTimeZone',
     props: {
         modelValue: {
             type: String,
             required: true
+        },
+        description: {
+            type: String
+        },
+        required: {
+            type: Boolean
         },
         disabled: {
             type: Boolean,
