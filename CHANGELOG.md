@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.17.2
+
+- :rocket: `TimeZone` Include desc and req. props
+
 ### v3.17.1
 
 - :bug: `TimeZone` Export in default
