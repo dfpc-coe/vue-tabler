@@ -12,6 +12,10 @@
 
 ### v3.16.1
 
+- :tada: `TimeZone` Component
+
+### v3.16.1
+
 - :bug: `Epoch`: Fix assignmnet to constant
 
 ### v3.16.0
