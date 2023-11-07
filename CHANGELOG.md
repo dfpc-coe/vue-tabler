@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.17.4
+
+- :rocket: `TimeZone` Add disabled support
+
 ### v3.17.3
 
 - :rocket: `TimeZone` Simpler TimeZone List

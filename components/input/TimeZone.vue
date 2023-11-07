@@ -3,6 +3,7 @@
     :label='label'
     :options='Array.from(timezones)'
     :description='description'
+    :disabled='disabled'
     :required='required'
     :default='modelValue'
     v-on:change='$emit("update:modelValue", map.get($event.target.value).tzCode)'
