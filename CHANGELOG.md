@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.16.1
+
+- :bug: `Epoch`: Fix assignmnet to constant
+
 ### v3.16.0
 
 - :rocket: `Epoch`: Put time last in Human date format
