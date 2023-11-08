@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.17.5
+
+- :rocket: `TimeZone` Add `No TimeZone` option
+
 ### v3.17.4
 
 - :rocket: `TimeZone` Add disabled support

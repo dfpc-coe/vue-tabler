@@ -39,14 +39,17 @@ export default {
     data: function() {
         const map = new Map();
 
+        map.set('No TimeZone', { tzCode: '' });
         for (const tz of tzs) {
             map.set(tz.label, tz);
         }
 
+        const tzs = tzs.map((tz) => tz.label);
+
         return {
             map,
             internal: this.modelValue,
-            timezones: tzs.map((tz) => tz.label)
+            timezones: ['No TimeZone'].concat(tzs.map((tz) => tz.label))
         }
     },
     components: {
