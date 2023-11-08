@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.17.8
+
+- :bug: `TimeZone` Properly set label from value on init
+
 ### v3.17.7
 
 - :rocket: `TimeZone` Default to No Timezone if a falsy model value is set

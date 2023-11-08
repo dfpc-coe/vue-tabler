@@ -5,7 +5,7 @@
     :description='description'
     :disabled='disabled'
     :required='required'
-    :default='modelValue || "No TimeZone"'
+    :default='inverse.has(modelValue) ? inverse.get(modelValue) : "No TimeZone"'
     v-on:change='$emit("update:modelValue", map.get($event.target.value).tzCode)'
 />
 </template>
@@ -464,14 +464,17 @@ export default {
     },
     data: function() {
         const map = new Map();
+        const inverse = new Map();
 
         map.set('No TimeZone', { tzCode: '' });
         for (const tz of tzs) {
             map.set(tz.label, tz);
+            inverse.set(tz.tzCode, tz.label);
         }
 
         return {
             map,
+            inverse,
             internal: this.modelValue,
             timezones: ['No TimeZone'].concat(tzs.map((tz) => tz.label))
         }
