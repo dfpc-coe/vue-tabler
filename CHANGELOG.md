@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.17.6
+
+- :rocket: `TimeZone` Avoid external deps
+
 ### v3.17.5
 
 - :rocket: `TimeZone` Add `No TimeZone` option
