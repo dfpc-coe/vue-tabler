@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.17.7
+
+- :rocket: `TimeZone` Default to No Timezone if a falsy model value is set
+
 ### v3.17.6
 
 - :rocket: `TimeZone` Avoid external deps
