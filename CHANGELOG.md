@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.18.0
+
+- :rocket: `Dropdown` Take 100% of width of parent
+
 ### v3.17.8
 
 - :bug: `TimeZone` Properly set label from value on init

@@ -5,7 +5,7 @@
             <SettingsIcon style='cursor-pointer'/>
         </slot>
     </div>
-    <ul class="dropdown-menu" :aria-labelledby='id'>
+    <ul class="dropdown-menu w-100" :aria-labelledby='id'>
         <slot name='dropdown'>
             Dropdown Content
         </slot>
