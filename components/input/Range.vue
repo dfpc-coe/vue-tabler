@@ -46,13 +46,13 @@ export default {
     data: function() {
         return {
             help: false,
-            current: ''
+            current: this.modelValue
         }
     },
     watch: {
         current: function() {
             if (this.current === this.modelValue) return;
-            this.$emit('update:modelValue', this.current);
+            this.$emit('update:modelValue', Number(this.current));
         }
     },
     components: {

@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.19.0
+
+- :bug: `Range` Fix initial state
+
 ### v3.18.0
 
 - :rocket: `Dropdown` Take 100% of width of parent
