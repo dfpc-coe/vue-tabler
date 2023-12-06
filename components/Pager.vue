@@ -119,7 +119,7 @@ export default {
             return {
                 spread: spread,
                 middle: middleAr,
-                current: 0,
+                current: this.page || 0,
                 end: end
             };
         },
