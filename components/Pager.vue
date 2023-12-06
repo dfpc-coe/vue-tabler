@@ -48,11 +48,24 @@ import {
 
 export default {
     name: 'TablerPager',
-    props: [ 'total', 'limit' ],
+    props: {
+        total: {
+            type: Number
+        },
+        page: {
+            type: Number
+        },
+        limit: {
+            type: Number
+        }
+    },
     data: function() {
         return this.create();
     },
     watch: {
+        page: function() {
+            this.current = page;
+        },
         total: function() {
             const set = this.create();
 

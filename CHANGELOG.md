@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.20.0
+
+- :rocket: `Pager` Allow dynamic updates of page prop
+
 ### v3.19.0
 
 - :bug: `Range` Fix initial state
