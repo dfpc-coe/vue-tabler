@@ -10,6 +10,11 @@
 
 ## Version History
 
+### v3.21.0
+
+- :rocket: Move to `@tabler/icons-vue` for most up-to-date icons
+- :bug: Fix some small papercut warnings in `Pager` component
+
 ### v3.20.1
 
 - :bug: `Pager` Initially set current from page

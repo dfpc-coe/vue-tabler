@@ -21,7 +21,7 @@
 <script>
 import {
     InfoSquareIcon
-} from 'vue-tabler-icons';
+} from '@tabler/icons-vue';
 import Help from '../Help.vue';
 
 export default {

@@ -35,7 +35,7 @@
 import TablerInput from './input/Input.vue';
 import {
     SettingsIcon
-} from 'vue-tabler-icons';
+} from '@tabler/icons-vue';
 
 export default {
     name: 'TablerList',

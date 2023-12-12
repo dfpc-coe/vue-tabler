@@ -79,7 +79,7 @@ import TablerEnum from './input/Enum.vue';
 import {
     PlusIcon,
     TrashIcon,
-} from 'vue-tabler-icons'
+} from '@tabler/icons-vue';
 
 export default {
     name: 'TablerSchema',

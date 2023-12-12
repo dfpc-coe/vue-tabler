@@ -24,7 +24,7 @@
 <script>
 import {
     NotesOffIcon
-} from 'vue-tabler-icons'
+} from '@tabler/icons-vue'
 
 export default {
     name: 'TablerNone',

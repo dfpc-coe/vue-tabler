@@ -2,12 +2,12 @@
 <div class='pagination m-0 ms-auto'>
     <div>
         <template v-if='parseInt(total) <= parseInt(limit)'>
-            <button @click='page(0)' class='btn mx-1' >
+            <button @click='changePage(0)' class='btn mx-1' >
                 <HomeIcon class='icon'/>Home
             </button>
         </template>
         <template v-else>
-            <button @click='page(0)' class='btn mx-1' :class='{ "btn-primary": current === 0 }'>
+            <button @click='changePage(0)' class='btn mx-1' :class='{ "btn-primary": current === 0 }'>
                 <HomeIcon class='icon'/>Home
             </button>
 
@@ -19,7 +19,7 @@
                 <button
                     :key=i
                     v-for='i in middle'
-                    @click='page(i)'
+                    @click='changePage(i)'
                     class='btn mx-1'
                     v-text='i + 1'
                     :class='{ "btn-primary": current === i }'
@@ -31,7 +31,7 @@
                 <span class=''> ... </span>
             </template>
             <button
-                @click='page(end - 1)'
+                @click='changePage(end - 1)'
                 class='btn mx-1'
                 v-text='end'
                 :class='{ "btn-primary": current === end - 1 }'
@@ -44,7 +44,7 @@
 <script>
 import {
     HomeIcon
-} from 'vue-tabler-icons';
+} from '@tabler/icons-vue';
 
 export default {
     name: 'TablerPager',
@@ -64,7 +64,7 @@ export default {
     },
     watch: {
         page: function() {
-            this.current = page;
+            this.current = this.page;
         },
         total: function() {
             const set = this.create();
@@ -123,7 +123,7 @@ export default {
                 end: end
             };
         },
-        page: function(page) {
+        changePage: function(page) {
             this.current = page;
             this.$emit('page', this.current);
         }

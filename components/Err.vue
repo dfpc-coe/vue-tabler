@@ -22,7 +22,7 @@
 import Modal from './Modal.vue';
 import {
     AlertCircleIcon
-} from 'vue-tabler-icons'
+} from '@tabler/icons-vue'
 
 export default {
     name: 'TablerErr',

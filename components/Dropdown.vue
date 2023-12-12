@@ -16,7 +16,7 @@
 <script>
 import {
     SettingsIcon
-} from 'vue-tabler-icons';
+} from '@tabler/icons-vue';
 
 export default {
     name: 'TablerDropdown',

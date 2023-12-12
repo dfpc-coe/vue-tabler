@@ -31,7 +31,7 @@
 import TablerModal from './Modal.vue';
 import {
     TrashIcon
-} from 'vue-tabler-icons';
+} from '@tabler/icons-vue';
 
 export default {
     name: 'TablerDelete',
