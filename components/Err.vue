@@ -3,7 +3,7 @@
         <button type="button" class="btn-close" @click='close' aria-label="Close"></button>
         <div class="modal-status bg-yellow"></div>
         <div class="modal-body text-center py-4">
-            <AlertCircleIcon/>
+            <IconAlertCircle/>
             <h3>Website Error</h3>
             <div class="text-muted" v-text='err.message'></div>
             <pre v-if='err.body' v-text='err.body'></pre>
@@ -21,7 +21,7 @@
 <script>
 import Modal from './Modal.vue';
 import {
-    AlertCircleIcon
+    IconAlertCircle
 } from '@tabler/icons-vue'
 
 export default {
@@ -34,7 +34,7 @@ export default {
     },
     components: {
         Modal,
-        AlertCircleIcon
+        IconAlertCircle
     }
 }
 </script>

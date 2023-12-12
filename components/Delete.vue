@@ -6,7 +6,7 @@
         </div>
     </template>
     <template v-else>
-        <TrashIcon @click='modal = true' class='cursor-pointer'/>
+        <IconTrash @click='modal = true' class='cursor-pointer'/>
     </template>
 
     <TablerModal v-if='modal'>
@@ -20,7 +20,7 @@
         </div>
         <div class="modal-footer">
             <div @click='$emit("delete")' class="btn btn-danger">
-                <TrashIcon/><span class='mx-2' v-text='label'/>
+                <IconTrash/><span class='mx-2' v-text='label'/>
             </div>
         </div>
     </TablerModal>
@@ -30,7 +30,7 @@
 <script>
 import TablerModal from './Modal.vue';
 import {
-    TrashIcon
+    IconTrash
 } from '@tabler/icons-vue';
 
 export default {
@@ -51,7 +51,7 @@ export default {
         }
     },
     components: {
-        TrashIcon,
+        IconTrash,
         TablerModal
     }
 }

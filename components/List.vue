@@ -14,7 +14,7 @@
             <span v-else style='padding-top: 6px;'>Select <span v-text='label'/></span>
 
             <div class='ms-auto'>
-                <SettingsIcon style='margin-top: 4px;'/>
+                <IconSettings style='margin-top: 4px;'/>
             </div>
         </div>
     </div>
@@ -34,7 +34,7 @@
 <script>
 import TablerInput from './input/Input.vue';
 import {
-    SettingsIcon
+    IconSettings
 } from '@tabler/icons-vue';
 
 export default {
@@ -103,7 +103,7 @@ export default {
         }
     },
     components: {
-        SettingsIcon,
+        IconSettings,
         TablerInput
     }
 }

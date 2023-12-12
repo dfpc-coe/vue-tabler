@@ -3,12 +3,12 @@
     <div>
         <template v-if='parseInt(total) <= parseInt(limit)'>
             <button @click='changePage(0)' class='btn mx-1' >
-                <HomeIcon class='icon'/>Home
+                <IconHome class='icon'/>Home
             </button>
         </template>
         <template v-else>
             <button @click='changePage(0)' class='btn mx-1' :class='{ "btn-primary": current === 0 }'>
-                <HomeIcon class='icon'/>Home
+                <IconHome class='icon'/>Home
             </button>
 
             <template v-if='end > 5 && current > 3'>
@@ -43,7 +43,7 @@
 
 <script>
 import {
-    HomeIcon
+    IconHome
 } from '@tabler/icons-vue';
 
 export default {
@@ -129,7 +129,7 @@ export default {
         }
     },
     components: {
-        HomeIcon
+        IconHome
     }
 }
 </script>

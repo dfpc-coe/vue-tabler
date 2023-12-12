@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.21.1
+
+- :bug: Icon is now prefixed
+
 ### v3.21.0
 
 - :rocket: Move to `@tabler/icons-vue` for most up-to-date icons

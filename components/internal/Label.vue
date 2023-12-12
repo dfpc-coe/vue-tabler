@@ -1,7 +1,7 @@
 <template>
 <div class='col-12 d-flex my-1'>
     <span v-if='description' class='align-self-center'>
-        <InfoSquareIcon @click='help = true' size='20' class='cursor-pointer'/>
+        <IconInfoSquare @click='help = true' size='20' class='cursor-pointer'/>
         <Help v-if='help' @click='help = false' :label='label || placeholder' :description='description'/>
     </span>
     <div
@@ -20,7 +20,7 @@
 
 <script>
 import {
-    InfoSquareIcon
+    IconInfoSquare
 } from '@tabler/icons-vue';
 import Help from '../Help.vue';
 
@@ -44,7 +44,7 @@ export default {
     },
     components: {
         Help,
-        InfoSquareIcon
+        IconInfoSquare
     }
 }
 </script>

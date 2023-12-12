@@ -3,8 +3,8 @@
     <div class='d-flex justify-content-center' :class='{
         "mt-4 mb-2": !compact
     }'>
-        <NotesOffIcon v-if='compact' width='32' height='32' />
-        <NotesOffIcon v-else width='48' height='48' />
+        <IconNotesOff v-if='compact' width='32' height='32' />
+        <IconNotesOff v-else width='48' height='48' />
     </div>
 
     <div class='text-center' :class='{
@@ -23,7 +23,7 @@
 
 <script>
 import {
-    NotesOffIcon
+    IconNotesOff
 } from '@tabler/icons-vue'
 
 export default {
@@ -43,7 +43,7 @@ export default {
         },
     },
     components: {
-        NotesOffIcon
+        IconNotesOff
     }
 }
 </script>

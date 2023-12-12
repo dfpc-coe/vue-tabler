@@ -2,7 +2,7 @@
 <div class="dropdown">
     <div type="button" :id='id' data-bs-toggle="dropdown" aria-expanded="false">
         <slot>
-            <SettingsIcon style='cursor-pointer'/>
+            <IconSettings style='cursor-pointer'/>
         </slot>
     </div>
     <ul class="dropdown-menu w-100" :aria-labelledby='id'>
@@ -15,7 +15,7 @@
 
 <script>
 import {
-    SettingsIcon
+    IconSettings
 } from '@tabler/icons-vue';
 
 export default {
@@ -26,7 +26,7 @@ export default {
         }
     },
     components: {
-        SettingsIcon
+        IconSettings
     }
 }
 </script>
