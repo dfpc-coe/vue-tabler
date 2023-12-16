@@ -6,7 +6,7 @@
     </span>
     <div
         v-if='label'
-        class="align-self-center px-2"
+        class="align-self-center px-2 form-label"
         v-text='label'
         :class='{
             "required": required

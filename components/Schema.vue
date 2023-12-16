@@ -1,5 +1,6 @@
 <template>
 <div class='px-2 py-2'>
+    <TablerLoading v-if='loading'/>
     <div :key='key' v-for='key in Object.keys(schema.properties)' class='py-2 floating-input'>
         <template v-if='schema.properties[key].enum'>
             <TablerEnum
@@ -76,6 +77,7 @@
 import TablerInput from './input/Input.vue';
 import TablerToggle from './input/Toggle.vue';
 import TablerEnum from './input/Enum.vue';
+import TablerLoading from './Loading.vue';
 import {
     IconPlus,
     IconTrash,
@@ -99,6 +101,7 @@ export default {
     },
     data: function() {
         return {
+            loading: true,
             data: {},
         };
     },
@@ -111,25 +114,25 @@ export default {
         },
     },
     mounted: async function() {
+        this.loading = true;
         this.data = JSON.parse(JSON.stringify(this.modelValue));
 
-        for (const key of Object.keys(this.schema.properties)) {
-            if (this.schema.properties[key].display === 'table') {
-                this.edit[key] = new Map();
-            }
-        }
-
         if (this.schema.type === 'object' && this.schema.properties) {
+            for (const req of (this.schema.required || [])) {
+                this.schema.properties[req].required = true;
+            }
+
             for (const key in this.schema.properties) {
                 if (!this.data[key] && this.schema.properties[key].type === 'array') {
                     this.data[key] = [];
                 }
             }
         }
+
+        this.loading = false;
     },
     methods: {
         remove: function(key, arr, i) {
-            this.edit[key].delete(arr);
             this.data[key].splice(i, 1)
         },
         push: function(key) {
@@ -150,7 +153,8 @@ export default {
         IconTrash,
         TablerInput,
         TablerToggle,
-        TablerEnum
+        TablerEnum,
+        TablerLoading
     }
 }
 </script>
