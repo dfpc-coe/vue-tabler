@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.22.0
+
+- :bug: Resect `required` fields in Schema component
+
 ### v3.21.1
 
 - :bug: Icon is now prefixed
