@@ -1,16 +1,14 @@
 <template>
 <div class='row'>
     <TablerLabel :label='label' :description='description' :required='required'><slot/></TablerLabel>
-    <div class='col-12'>
-        <div class="row g-2">
-            <div :key='color' v-for='color in Object.keys(colours)' class='col-auto'>
-                <label class="form-colorinput">
-                    <input :disabled='disabled' v-model='current' :value='color' type="radio" class="form-colorinput-input">
-                    <span class="form-colorinput-color bg-dark" :class='[
-                        `bg-${color}`
-                    ]'></span>
-                </label>
-            </div>
+    <div class='col-12 d-flex'>
+        <div :key='color' v-for='color in Object.keys(colours)' class='border border-white rounded mx-1' style='height: 26px;'>
+            <label class="form-colorinput">
+                <input :disabled='disabled' v-model='current' :value='color' type="radio" class="form-colorinput-input">
+                <span class="form-colorinput-color bg-dark rounded" :class='[
+                    `bg-${color}`
+                ]'></span>
+            </label>
         </div>
     </div>
 </div>
@@ -76,8 +74,11 @@ export default {
         }
     },
     mounted: function() {
-        if (!this.modelValue && this.default) this.current = this.invertColours[this.default]
-        else this.current = this.invertColours[this.modelValue];
+        if (!this.modelValue && this.default) {
+            this.current = this.invertColours[this.default]
+        } else {
+            this.current = this.invertColours[this.modelValue];
+        }
     },
     watch: {
         modelValue: function() {

@@ -10,9 +10,13 @@
 
 ## Version History
 
+### v3.22.1
+
+- :bug: White border on colours
+
 ### v3.22.0
 
-- :bug: Resect `required` fields in Schema component
+- :bug: resect `required` fields in schema component
 
 ### v3.21.1
 
