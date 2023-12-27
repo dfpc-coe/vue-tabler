@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.22.2
+
+- :bug: Use new internal obj to avoid mutating schema
+
 ### v3.22.1
 
 - :bug: White border on colours
