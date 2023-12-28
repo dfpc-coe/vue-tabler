@@ -15,7 +15,11 @@ export default {
     },
     computed: {
         html: function() {
-            const converter = new showdown.Converter();
+            const converter = new showdown.Converter({
+                tables: true,
+                tasklists: true,
+                emoji: true
+            });
             return converter.makeHtml(this.markdown);
         }
     }

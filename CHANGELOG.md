@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.23.0
+
+- :rocket: Add table, emoji, and tasklist support to Markdown Component
+
 ### v3.22.2
 
 - :bug: Use new internal obj to avoid mutating schema
