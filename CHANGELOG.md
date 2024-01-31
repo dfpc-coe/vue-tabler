@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.23.1
+
+- :bug: Fix offset from `form-label`
+
 ### v3.23.0
 
 - :rocket: Add table, emoji, and tasklist support to Markdown Component

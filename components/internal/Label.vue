@@ -4,14 +4,16 @@
         <IconInfoSquare @click='help = true' size='20' class='cursor-pointer'/>
         <Help v-if='help' @click='help = false' :label='label || placeholder' :description='description'/>
     </span>
-    <div
-        v-if='label'
-        class="align-self-center px-2 form-label"
-        v-text='label'
-        :class='{
-            "required": required
-        }'
-    ></div>
+    <div class='align-self-center'>
+        <div
+            v-if='label'
+            class="px-2"
+            v-text='label'
+            :class='{
+                "required": required
+            }'
+        ></div>
+    </div>
     <div class='ms-auto align-self-center'>
         <slot/>
     </div>
