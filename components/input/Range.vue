@@ -2,7 +2,16 @@
 <div class='row'>
     <TablerLabel :label='label' :description='description' :required='required'><slot/></TablerLabel>
     <div class='col-12'>
-        <input :disabled='disabled' v-model='current' type="range" class="form-range" :min="min" :max="max" :step="step">
+        <input
+            :disabled='disabled'
+            :value='modelValue'
+            @input='event => current = event.target.value'
+            type='range'
+            class='form-range'
+            :min='min'
+            :max='max'
+            :step='step'
+        >
     </div>
 </div>
 </template>

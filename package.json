@@ -20,7 +20,7 @@
     },
     "homepage": "https://github.com/tak-ps/vue-tabler#readme",
     "dependencies": {
-        "@tabler/icons-vue": "^2.44.0",
+        "@tabler/icons-vue": "^3.0.0",
         "showdown": "^2.1.0"
     },
     "devDependencies": {

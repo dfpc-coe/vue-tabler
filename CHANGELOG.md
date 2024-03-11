@@ -10,6 +10,11 @@
 
 ## Version History
 
+### v3.24.0
+
+- :bug: Update how `TablerRange` `update:modelValue` event is computed
+- :arrow_up: Update all deps
+
 ### v3.23.1
 
 - :bug: Fix offset from `form-label`
