@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.26.0
+
+- :bug: Icon sizes became variable, explicitly fix all icon sizes
+
 ### v3.25.0
 
 - :bug: Add `.stop.prevent` on button & icon click

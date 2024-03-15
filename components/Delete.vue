@@ -6,7 +6,7 @@
         </div>
     </template>
     <template v-else>
-        <IconTrash @click.stop.prevent='modal = true' class='cursor-pointer'/>
+        <IconTrash @click.stop.prevent='modal = true' size='32' class='cursor-pointer'/>
     </template>
 
     <TablerModal v-if='modal'>
@@ -20,7 +20,7 @@
         </div>
         <div class="modal-footer">
             <div @click='$emit("delete")' class="btn btn-danger">
-                <IconTrash/><span class='mx-2' v-text='label'/>
+                <IconTrash size='32'/><span class='mx-2' v-text='label'/>
             </div>
         </div>
     </TablerModal>

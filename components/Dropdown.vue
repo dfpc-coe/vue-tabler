@@ -2,7 +2,7 @@
 <div class="dropdown">
     <div type="button" :id='id' data-bs-toggle="dropdown" aria-expanded="false">
         <slot>
-            <IconSettings style='cursor-pointer'/>
+            <IconSettings size='32' class='cursor-pointer'/>
         </slot>
     </div>
     <ul class="dropdown-menu w-100" :aria-labelledby='id'>

@@ -3,12 +3,12 @@
     <div>
         <template v-if='parseInt(total) <= parseInt(limit)'>
             <button @click='changePage(0)' class='btn mx-1' >
-                <IconHome class='icon'/>Home
+                <IconHome size='32' class='icon'/>Home
             </button>
         </template>
         <template v-else>
             <button @click='changePage(0)' class='btn mx-1' :class='{ "btn-primary": current === 0 }'>
-                <IconHome class='icon'/>Home
+                <IconHome size='32' class='icon'/>Home
             </button>
 
             <template v-if='end > 5 && current > 3'>
