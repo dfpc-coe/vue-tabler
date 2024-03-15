@@ -1,12 +1,12 @@
 <template>
 <div>
     <template v-if='displaytype === "button"'>
-        <div @click='modal = true' class="btn btn-outline-danger">
+        <div @click.stop.prevent='modal = true' class="btn btn-outline-danger">
             <span v-text='label'/>
         </div>
     </template>
     <template v-else>
-        <IconTrash @click='modal = true' class='cursor-pointer'/>
+        <IconTrash @click.stop.prevent='modal = true' class='cursor-pointer'/>
     </template>
 
     <TablerModal v-if='modal'>

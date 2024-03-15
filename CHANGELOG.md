@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.25.0
+
+- :bug: Add `.stop.prevent` on button & icon click
+
 ### v3.24.0
 
 - :bug: Update how `TablerRange` `update:modelValue` event is computed
