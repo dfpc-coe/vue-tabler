@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.27.0
+
+- :tada: Add stack trace to error modal
+
 ### v3.26.0
 
 - :bug: Icon sizes became variable, explicitly fix all icon sizes
