@@ -1,6 +1,6 @@
 <template>
 <div class='row'>
-    <TablerLabel :label='label || placeholder' :description='description' :required='required'><slot/></TablerLabel>
+    <TablerLabel :label='label' :description='description' :required='required'><slot/></TablerLabel>
     <div class='col-12'>
         <template v-if='!rows || rows <= 1'>
             <input :disabled='disabled' :value='modelValue' @input='event => current = event.target.value' :type='computed_type' :class='{

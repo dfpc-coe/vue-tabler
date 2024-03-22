@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.28.0
+
+- :tada: Only `label` is used for label
+
 ### v3.27.0
 
 - :tada: Add stack trace to error modal
