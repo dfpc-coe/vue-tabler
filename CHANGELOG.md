@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.29.1
+
+- :bug: Add `soft` to wrap default
+
 ### v3.29.0
 
 - :tada: Add `wrap` prop for input

@@ -56,6 +56,7 @@ export default {
         },
         wrap: {
             type: String,
+            default: 'soft'
         },
         type: {
             type: String,
