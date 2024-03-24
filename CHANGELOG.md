@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.29.0
+
+- :tada: Add `wrap` prop for input
+
 ### v3.28.0
 
 - :tada: Only `label` is used for label

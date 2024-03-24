@@ -8,9 +8,20 @@
             }' class="form-control" :placeholder='label||placeholder||""'/>
         </template>
         <template v-else>
-            <textarea style='white-space: pre;' :disabled='disabled' :rows='rows' :value='modelValue' @input='event => current = event.target.value' :type='computed_type' :class='{
-                "is-invalid": errorstr
-            }' class="form-control" :placeholder='label||placeholder||""'/>
+            <textarea
+                style='white-space: pre;'
+                :disabled='disabled'
+                :wrap='wrap',
+                :rows='rows'
+                :value='modelValue'
+                @input='event => current = event.target.value'
+                :type='computed_type'
+                :class='{
+                    "is-invalid": errorstr
+                }'
+                class="form-control"
+                :placeholder='label||placeholder||""'
+            />
         </template>
         <div v-if='errorstr' v-text='errorstr' class="invalid-feedback"></div>
     </div>
@@ -42,6 +53,9 @@ export default {
         rows: {
             type: Number,
             default: 1
+        },
+        wrap: {
+            type: String,
         },
         type: {
             type: String,
