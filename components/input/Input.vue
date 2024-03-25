@@ -9,7 +9,6 @@
         </template>
         <template v-else>
             <textarea
-                style='white-space: pre;'
                 :disabled='disabled'
                 :wrap='wrap'
                 :rows='rows'
