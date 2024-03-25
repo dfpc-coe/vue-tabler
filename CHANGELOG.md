@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.29.3
+
+- :bug: Remove Style 
+
 ### v3.29.2
 
 - :bug: Fix Commat 
