@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.29.2
+
+- :bug: Fix Commat 
+
 ### v3.29.1
 
 - :bug: Add `soft` to wrap default

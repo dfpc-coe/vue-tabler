@@ -11,7 +11,7 @@
             <textarea
                 style='white-space: pre;'
                 :disabled='disabled'
-                :wrap='wrap',
+                :wrap='wrap'
                 :rows='rows'
                 :value='modelValue'
                 @input='event => current = event.target.value'
