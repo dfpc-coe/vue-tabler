@@ -7,7 +7,7 @@
     "description": "Tabler UI components for Vue3",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "lint": "eslint lib.js components/**.vue"
+        "lint": "eslint lib.js components/*.vue components/**/*.vue"
     },
     "repository": {
         "type": "git",

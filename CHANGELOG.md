@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.29.4
+
+- :rocket: Update Lint Rules
+
 ### v3.29.3
 
 - :bug: Remove Style 
