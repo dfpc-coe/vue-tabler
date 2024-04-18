@@ -10,17 +10,21 @@
 
 ## Version History
 
+### v3.30.0
+
+- :arrow_up: Update Latest Deps
+
 ### v3.29.4
 
 - :rocket: Update Lint Rules
 
 ### v3.29.3
 
-- :bug: Remove Style 
+- :bug: Remove Style
 
 ### v3.29.2
 
-- :bug: Fix Commat 
+- :bug: Fix Commat
 
 ### v3.29.1
 
