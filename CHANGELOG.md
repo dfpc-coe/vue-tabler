@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.31.0
+
+- :arrow_up: TablerInput `submit` event on `enter`
+
 ### v3.30.0
 
 - :arrow_up: Update Latest Deps
