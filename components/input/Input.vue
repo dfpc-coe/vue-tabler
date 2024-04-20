@@ -3,9 +3,18 @@
     <TablerLabel :label='label' :description='description' :required='required'><slot/></TablerLabel>
     <div class='col-12'>
         <template v-if='!rows || rows <= 1'>
-            <input :disabled='disabled' :value='modelValue' @input='event => current = event.target.value' :type='computed_type' :class='{
-                "is-invalid": errorstr
-            }' class="form-control" :placeholder='label||placeholder||""'/>
+            <input
+                :disabled='disabled'
+                :value='modelValue'
+                @input='event => current = event.target.value'
+                @keyup.enter='$emit("submit")'
+                :type='computed_type'
+                :class='{
+                    "is-invalid": errorstr
+                }'
+                class="form-control"
+                :placeholder='label||placeholder||""'
+            />
         </template>
         <template v-else>
             <textarea
@@ -14,6 +23,7 @@
                 :rows='rows'
                 :value='modelValue'
                 @input='event => current = event.target.value'
+                @keyup.enter='$emit("submit")'
                 :type='computed_type'
                 :class='{
                     "is-invalid": errorstr
@@ -32,6 +42,7 @@ import TablerLabel from '../internal/Label.vue';
 
 export default {
     name: 'TablerInput',
+    emits: ['submit'],
     props: {
         modelValue: {
             type: [String, Number],
