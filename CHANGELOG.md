@@ -10,7 +10,7 @@
 
 ## Version History
 
-### v3.31.0
+### v3.41.0
 
 - :arrow_up: TablerInput `submit` event on `enter`
 
