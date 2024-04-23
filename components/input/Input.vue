@@ -5,8 +5,7 @@
         <template v-if='!rows || rows <= 1'>
             <input
                 :disabled='disabled'
-                :value='modelValue'
-                @input='event => current = event.target.value'
+                v-model='current'
                 @keyup.enter='$emit("submit")'
                 :type='computed_type'
                 :class='{
@@ -21,8 +20,7 @@
                 :disabled='disabled'
                 :wrap='wrap'
                 :rows='rows'
-                :value='modelValue'
-                @input='event => current = event.target.value'
+                v-model='current'
                 @keyup.enter='$emit("submit")'
                 :type='computed_type'
                 :class='{
@@ -80,7 +78,7 @@ export default {
         return {
             help: false,
             internal_error: '',
-            current: ''
+            current: this.modelValue || ''
         }
     },
     computed: {
@@ -94,6 +92,9 @@ export default {
         }
     },
     watch: {
+        modelValue: function() {
+            this.current = String(this.modelValue);
+        },
         current: function() {
             if (typeof this.modelValue === 'number' || this.type === 'number') {
                 const current = Number(this.current);

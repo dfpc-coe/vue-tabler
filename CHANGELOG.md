@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.42.0
+
+- :bug: Use intermediary value so v-model can be used on text input
+
 ### v3.41.0
 
 - :arrow_up: TablerInput `submit` event on `enter`
