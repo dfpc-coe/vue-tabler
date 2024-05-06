@@ -40,7 +40,7 @@ import TablerLabel from '../internal/Label.vue';
 
 export default {
     name: 'TablerInput',
-    emits: ['submit'],
+    emits: ['submit', 'update:modelValue'],
     props: {
         modelValue: {
             type: [String, Number],
@@ -93,7 +93,9 @@ export default {
     },
     watch: {
         modelValue: function() {
-            this.current = String(this.modelValue);
+            if (this.current !== String(this.modelValue)) {
+                this.current = String(this.modelValue);
+            }
         },
         current: function() {
             if (typeof this.modelValue === 'number' || this.type === 'number') {

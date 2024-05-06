@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.43.0
+
+- :rocket: Reduce number of updates in `Input` and also declare all emits
+
 ### v3.42.0
 
 - :bug: Use intermediary value so v-model can be used on text input
