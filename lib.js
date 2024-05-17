@@ -1,4 +1,5 @@
 // Inputs
+export { default as TablerAlert } from './components/Alert.vue'
 export { default as TablerTimeZone } from './components/input/TimeZone.vue'
 export { default as TablerRange } from './components/input/Range.vue'
 export { default as TablerColour } from './components/input/Colour.vue'

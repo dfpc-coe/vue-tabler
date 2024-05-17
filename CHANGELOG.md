@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.44.0
+
+- :tada: Add `Alert` Component and update `Err` to use `Alert` internally
+
 ### v3.43.0
 
 - :rocket: Reduce number of updates in `Input` and also declare all emits
