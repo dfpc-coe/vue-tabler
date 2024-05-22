@@ -54,6 +54,11 @@ export default {
             default: false
         },
     },
+    data: function() {
+        return {
+            open: false
+        }
+    },
     components: {
         IconAlertTriangle,
         IconChevronRight,

@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.44.1
+
+- :bug: Allow alert to open
+
 ### v3.44.0
 
 - :tada: Add `Alert` Component and update `Err` to use `Alert` internally
