@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.45.0
+
+- :rocket: Add loading to delete button
+
 ### v3.44.1
 
 - :bug: Allow alert to open

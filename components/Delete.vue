@@ -20,7 +20,10 @@
         </div>
         <div class="modal-footer">
             <div @click='$emit("delete")' class="btn btn-danger">
-                <IconTrash size='32'/><span class='mx-2' v-text='label'/>
+                <TablerLoading v-if='loading' :inline='true'/>
+                <template v-else>
+                    <IconTrash size='32'/><span class='mx-2' v-text='label'/>
+                </template>
             </div>
         </div>
     </TablerModal>
@@ -29,6 +32,7 @@
 
 <script>
 import TablerModal from './Modal.vue';
+import TablerLoading from './Loading.vue';
 import {
     IconTrash
 } from '@tabler/icons-vue';
@@ -47,11 +51,19 @@ export default {
     },
     data: function() {
         return {
+            loading: false,
             modal: false
+        }
+    },
+    methods: {
+        deleting: function() {
+            this.loading = true;
+            this.$emit('delete')
         }
     },
     components: {
         IconTrash,
+        TablerLoading,
         TablerModal
     }
 }
