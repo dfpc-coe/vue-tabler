@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.45.1
+
+- :bug: Placeholder should be first option on input if present
+
 ### v3.45.0
 
 - :rocket: Add loading to delete button

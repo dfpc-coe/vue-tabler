@@ -12,7 +12,7 @@
                     "is-invalid": errorstr
                 }'
                 class="form-control"
-                :placeholder='label||placeholder||""'
+                :placeholder='placeholder||label||""'
             />
         </template>
         <template v-else>
