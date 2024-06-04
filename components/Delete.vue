@@ -6,7 +6,7 @@
         </div>
     </template>
     <template v-else>
-        <IconTrash @click.stop.prevent='modal = true' size='32' class='cursor-pointer'/>
+        <IconTrash @click.stop.prevent='modal = true' :size='size' class='cursor-pointer'/>
     </template>
 
     <TablerModal v-if='modal'>
@@ -43,6 +43,10 @@ export default {
         label: {
             type: String,
             default: 'Delete'
+        },
+        size: {
+            type: Number,
+            default: 32
         },
         displaytype: {
             type: String,

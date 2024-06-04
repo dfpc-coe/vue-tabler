@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.46.0
+
+- :rocket: Add `size` prop for delete icon size
+
 ### v3.45.1
 
 - :bug: Placeholder should be first option on input if present
