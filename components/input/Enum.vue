@@ -42,13 +42,17 @@ export default {
         label: String,
     },
     data: function() {
-        return {
+        const data = {
             current: ''
         }
-    },
-    mounted: function() {
-        if (!this.modelValue && this.default) this.current = this.default
-        else this.current = this.modelValue;
+
+        if (!this.modelValue && this.default) {
+            data.current = this.default
+        } else {
+            data.current = this.modelValue;
+        }
+
+        return data;
     },
     watch: {
         modelValue: function() {
