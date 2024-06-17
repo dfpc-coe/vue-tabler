@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.47.0
+
+- :rocket: Use data function to setup Enum current state
+
 ### v3.46.0
 
 - :rocket: Add `size` prop for delete icon size
