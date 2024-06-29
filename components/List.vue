@@ -14,7 +14,7 @@
             <span v-else style='padding-top: 6px;'>Select <span v-text='label'/></span>
 
             <div class='ms-auto'>
-                <IconSettings size='32' style='margin-top: 4px;'/>
+                <IconSettings :size='32' :stroke='1' style='margin-top: 4px;'/>
             </div>
         </div>
     </div>

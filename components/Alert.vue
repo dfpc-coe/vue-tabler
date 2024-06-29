@@ -3,8 +3,8 @@
     <div class='d-flex justify-content-center' :class='{
         "mt-4 mb-2": !compact
     }'>
-        <IconAlertTriangle v-if='compact' size='32' />
-        <IconAlertTriangle v-else size='48'/>
+        <IconAlertTriangle v-if='compact' :size='32' :stroke='1' />
+        <IconAlertTriangle v-else :size='48' :stroke='1'/>
     </div>
 
     <h3 class='pt-3 text-center' v-text='title'></h3>
@@ -17,8 +17,8 @@
     <template v-if='err.body || err.stack'>
         <div class="py-2 px-3">
             <div @click='open = !open' class='subheader d-flex align-items-center cursor-pointer'>
-                <IconChevronRight v-if='!open' size='24' class='cursor-pointer'/>
-                <IconChevronDown v-else size='24' class='cursor-pointer'/>
+                <IconChevronRight v-if='!open' :size='24' :stroke='1' class='cursor-pointer'/>
+                <IconChevronDown v-else :size='24' :stroke='1' class='cursor-pointer'/>
                 <span>Advanced</span>
             </div>
             <pre

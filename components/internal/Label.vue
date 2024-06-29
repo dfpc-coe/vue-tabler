@@ -1,7 +1,7 @@
 <template>
 <div class='col-12 d-flex my-1'>
     <span v-if='description' class='align-self-center'>
-        <IconInfoSquare @click='help = true' size='20' class='cursor-pointer'/>
+        <IconInfoSquare @click='help = true' :size='20' :stroke='1' class='cursor-pointer'/>
         <Help v-if='help' @click='help = false' :label='label || placeholder' :description='description'/>
     </span>
     <div class='align-self-center'>

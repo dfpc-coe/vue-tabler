@@ -6,7 +6,7 @@
         </div>
     </template>
     <template v-else>
-        <IconTrash @click.stop.prevent='modal = true' :size='size' class='cursor-pointer'/>
+        <IconTrash @click.stop.prevent='modal = true' :size='size' :stroke='1' class='cursor-pointer'/>
     </template>
 
     <TablerModal v-if='modal'>
@@ -22,7 +22,7 @@
             <div @click='$emit("delete")' class="btn btn-danger">
                 <TablerLoading v-if='loading' :inline='true'/>
                 <template v-else>
-                    <IconTrash size='32'/><span class='mx-2' v-text='label'/>
+                    <IconTrash :size='32' :stroke='1'/><span class='mx-2' v-text='label'/>
                 </template>
             </div>
         </div>

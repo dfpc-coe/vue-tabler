@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.48.0
+
+- :rocket: Setup default stroke state
+
 ### v3.47.0
 
 - :rocket: Use data function to setup Enum current state

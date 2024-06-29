@@ -3,8 +3,8 @@
     <div class='d-flex justify-content-center' :class='{
         "mt-4 mb-2": !compact
     }'>
-        <IconNotesOff v-if='compact' size='32' />
-        <IconNotesOff v-else size='48'/>
+        <IconNotesOff v-if='compact' :size='32' :stroke='1' />
+        <IconNotesOff v-else :size='48' :stroke='1'/>
     </div>
 
     <div class='text-center' :class='{
