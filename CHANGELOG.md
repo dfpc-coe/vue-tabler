@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.49.0
+
+- :rocket: Add ability to specify a search icon for TablerInput
+
 ### v3.48.0
 
 - :rocket: Setup default stroke state

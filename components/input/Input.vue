@@ -3,17 +3,25 @@
     <TablerLabel :label='label' :description='description' :required='required'><slot/></TablerLabel>
     <div class='col-12'>
         <template v-if='!rows || rows <= 1'>
-            <input
-                :disabled='disabled'
-                v-model='current'
-                @keyup.enter='$emit("submit")'
-                :type='computed_type'
-                :class='{
-                    "is-invalid": errorstr
-                }'
-                class="form-control"
-                :placeholder='placeholder||label||""'
-            />
+            <div class='input-icon'>
+                <span v-if='icon' class="input-icon-addon">
+                    <IconSearch v-if='icon === "search"' :size='20' :stroke='1'/>
+                </span>
+                <input
+                    :disabled='disabled'
+                    v-model='current'
+                    @keyup.enter='$emit("submit")'
+                    :type='computed_type'
+                    :class='{
+                        "is-invalid": errorstr
+                    }'
+                    class="form-control"
+                    :placeholder='placeholder||label||""'
+                />
+                <span v-if='$slots.posticon' class="input-icon-addon">
+                    <slot name='prepost'/>
+                </span>
+            </div>
         </template>
         <template v-else>
             <textarea
@@ -37,6 +45,9 @@
 
 <script>
 import TablerLabel from '../internal/Label.vue';
+import {
+    IconSearch
+} from '@tabler/icons-vue';
 
 export default {
     name: 'TablerInput',
@@ -45,6 +56,9 @@ export default {
         modelValue: {
             type: [String, Number],
             required: true
+        },
+        icon: {
+            type: String,
         },
         required: {
             type: Boolean,
@@ -130,6 +144,7 @@ export default {
         }
     },
     components: {
+        IconSearch,
         TablerLabel
     }
 }
