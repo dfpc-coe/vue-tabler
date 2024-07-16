@@ -42,7 +42,7 @@
                     "is-invalid": errorstr
                 }'
                 class="form-control"
-                :placeholder='label||placeholder||""'
+                :placeholder='placeholder||label||""'
             />
         </template>
         <div v-if='errorstr' v-text='errorstr' class="invalid-feedback"></div>

@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.51.2
+
+- :bug: Fix fallback order of placeholder text in textarea
+
 ### v3.51.1
 
 - :rocket: Add `lock` and `user` icons to TablerInput
