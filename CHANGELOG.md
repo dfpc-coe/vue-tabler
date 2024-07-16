@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.50.0
+
+- :rocket: Show label conditionally to avoid 4px margin on top of input
+
 ### v3.49.0
 
 - :rocket: Add ability to specify a search icon for TablerInput

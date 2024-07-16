@@ -1,6 +1,11 @@
 <template>
 <div class='row'>
-    <TablerLabel :label='label' :description='description' :required='required'><slot/></TablerLabel>
+    <TablerLabel
+        v-if='label'
+        :label='label'
+        :description='description'
+        :required='required'
+    ><slot/></TablerLabel>
     <div class='col-12'>
         <template v-if='!rows || rows <= 1'>
             <div class='input-icon'>
