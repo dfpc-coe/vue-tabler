@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.51.1
+
+- :rocket: Add `lock` and `user` icons to TablerInput
+
 ### v3.51.0
 
 - :bug: Fix broken required (`*`) on input forms  ow that we don't use `form-label` due to it's margins

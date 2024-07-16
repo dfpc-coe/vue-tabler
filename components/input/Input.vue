@@ -11,6 +11,8 @@
             <div class='input-icon'>
                 <span v-if='icon' class="input-icon-addon">
                     <IconSearch v-if='icon === "search"' :size='20' :stroke='1'/>
+                    <IconLock v-if='icon === "lock"' :size='20' :stroke='1'/>
+                    <IconUser v-if='icon === "user"' :size='20' :stroke='1'/>
                 </span>
                 <input
                     :disabled='disabled'
@@ -23,8 +25,8 @@
                     class="form-control"
                     :placeholder='placeholder||label||""'
                 />
-                <span v-if='$slots.posticon' class="input-icon-addon">
-                    <slot name='prepost'/>
+                <span v-if='loading' class="input-icon-addon">
+                    <div class="spinner-border spinner-border-sm text-secondary" role="status"></div>
                 </span>
             </div>
         </template>
@@ -51,6 +53,8 @@
 <script>
 import TablerLabel from '../internal/Label.vue';
 import {
+    IconUser,
+    IconLock,
     IconSearch
 } from '@tabler/icons-vue';
 
@@ -64,6 +68,10 @@ export default {
         },
         icon: {
             type: String,
+        },
+        loading: {
+            type: Boolean,
+            default: false
         },
         required: {
             type: Boolean,
@@ -149,6 +157,8 @@ export default {
         }
     },
     components: {
+        IconUser,
+        IconLock,
         IconSearch,
         TablerLabel
     }
