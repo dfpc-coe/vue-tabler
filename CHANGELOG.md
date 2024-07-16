@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.51.0
+
+- :bug: Fix broken required (`*`) on input forms  ow that we don't use `form-label` due to it's margins
+
 ### v3.50.0
 
 - :rocket: Show label conditionally to avoid 4px margin on top of input

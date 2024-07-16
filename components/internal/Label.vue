@@ -8,11 +8,10 @@
         <div
             v-if='label'
             class="px-2"
-            v-text='label'
-            :class='{
-                "required": required
-            }'
-        ></div>
+        >
+            <span v-text='label'/>
+            <span v-if='required' class='text-red mx-1'>*</span>
+        </div>
     </div>
     <div class='ms-auto align-self-center'>
         <slot/>
