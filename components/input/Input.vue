@@ -105,7 +105,7 @@ export default {
         return {
             help: false,
             internal_error: '',
-            current: this.modelValue || ''
+            current: this.modelValue === undefined ? '' : this.modelValue
         }
     },
     computed: {
