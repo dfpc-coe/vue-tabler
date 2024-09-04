@@ -1,6 +1,11 @@
 <template>
 <div class='row'>
-    <TablerLabel :label='label' :description='description' :required='required'><slot/></TablerLabel>
+    <TablerLabel
+        v-if='label'
+        :label='label'
+        :description='description'
+        :required='required'
+    ><slot/></TablerLabel>
     <div class='col-12'>
         <select v-model='current' :disabled='disabled' class='form-select'>
             <option :key='option' v-for='option in options' :value="option" v-text='option'></option>

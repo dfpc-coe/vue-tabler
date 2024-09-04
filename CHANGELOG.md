@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.51.4
+
+- :rocket: Avoid adding div when label isn't set in Enum
+
 ### v3.51.3
 
 - :bug: Avoid overwriting `0` values
