@@ -11,11 +11,11 @@ export default {
             default: 'Human'
         },
         start: {
-            type: Number,
+            type: [Number, String],
             required: true
         },
         end: {
-            type: Number,
+            type: [Number, String],
             required: true
         },
     },

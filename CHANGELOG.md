@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.52.0
+
+- :rocket: Allow string dates in Epoch components
+
 ### v3.51.4
 
 - :rocket: Avoid adding div when label isn't set in Enum

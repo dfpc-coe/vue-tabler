@@ -7,7 +7,7 @@ export default {
     name: 'TablerEpoch',
     props: {
         date: {
-            type: Number,
+            type: [Number, String],
             required: true
         },
         format: {
