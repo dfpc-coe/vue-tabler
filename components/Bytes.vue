@@ -1,5 +1,5 @@
 <template>
-<span v-text='display'/>
+    <span v-text='display' />
 </template>
 
 <script>

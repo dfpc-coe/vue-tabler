@@ -1,19 +1,25 @@
 <template>
-<div class='row'>
-    <TablerLabel :label='label' :description='description' :required='required'><slot/></TablerLabel>
-    <div class='col-12'>
-        <input
-            :disabled='disabled'
-            :value='modelValue'
-            @input='event => current = event.target.value'
-            type='range'
-            class='form-range'
-            :min='min'
-            :max='max'
-            :step='step'
+    <div class='row'>
+        <TablerLabel
+            :label='label'
+            :description='description'
+            :required='required'
         >
+            <slot />
+        </TablerLabel>
+        <div class='col-12'>
+            <input
+                :disabled='disabled'
+                :value='modelValue'
+                type='range'
+                class='form-range'
+                :min='min'
+                :max='max'
+                :step='step'
+                @input='event => current = event.target.value'
+            >
+        </div>
     </div>
-</div>
 </template>
 
 <script>
@@ -21,6 +27,9 @@ import TablerLabel from '../internal/Label.vue';
 
 export default {
     name: 'TablerRange',
+    components: {
+        TablerLabel
+    },
     props: {
         modelValue: {
             type: Number,
@@ -52,6 +61,9 @@ export default {
         },
         label: String,
     },
+    emits: [
+        'update:modelValue'
+    ],
     data: function() {
         return {
             help: false,
@@ -63,9 +75,6 @@ export default {
             if (this.current === this.modelValue) return;
             this.$emit('update:modelValue', Number(this.current));
         }
-    },
-    components: {
-        TablerLabel
     }
 }
 </script>

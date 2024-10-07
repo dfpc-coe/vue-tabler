@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.53.0
+
+- :rocket: Passthrough Autocomplete on input
+
 ### v3.52.0
 
 - :rocket: Allow string dates in Epoch components

@@ -1,14 +1,27 @@
 <template>
     <Modal>
-        <button type="button" class="btn-close" @click='close' aria-label="Close"></button>
-        <div class="modal-status bg-yellow"></div>
+        <button
+            type='button'
+            class='btn-close'
+            aria-label='Close'
+            @click='close'
+        />
+        <div class='modal-status bg-yellow' />
 
-        <Alert :title='title' :err='err'/>
+        <Alert
+            :title='title'
+            :err='err'
+        />
 
-        <div class="modal-footer">
-            <div class="w-100">
-                <div class="row">
-                    <div class="col"><a @click='close' class="cursor-pointer btn w-100">OK</a></div>
+        <div class='modal-footer'>
+            <div class='w-100'>
+                <div class='row'>
+                    <div class='col'>
+                        <a
+                            class='cursor-pointer btn w-100'
+                            @click='close'
+                        >OK</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -21,6 +34,10 @@ import Alert from './Alert.vue';
 
 export default {
     name: 'TablerErr',
+    components: {
+        Alert,
+        Modal
+    },
     props: {
         err: {
             type: Error,
@@ -35,6 +52,9 @@ export default {
             default: true
         }
     },
+    emits: [
+        'close'
+    ],
     data: function() {
         return {
             open: false
@@ -44,10 +64,6 @@ export default {
         close: function() {
             this.$emit('close');
         },
-    },
-    components: {
-        Alert,
-        Modal
     }
 }
 </script>

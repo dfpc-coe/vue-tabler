@@ -1,22 +1,38 @@
 <template>
-<div class='col-12 d-flex my-1'>
-    <span v-if='description' class='align-self-center'>
-        <IconInfoSquare @click='help = true' :size='20' :stroke='1' class='cursor-pointer'/>
-        <Help v-if='help' @click='help = false' :label='label || placeholder' :description='description'/>
-    </span>
-    <div class='align-self-center'>
-        <div
-            v-if='label'
-            class="px-2"
+    <div class='col-12 d-flex my-1'>
+        <span
+            v-if='description'
+            class='align-self-center'
         >
-            <span v-text='label'/>
-            <span v-if='required' class='text-red mx-1'>*</span>
+            <IconInfoSquare
+                :size='20'
+                :stroke='1'
+                class='cursor-pointer'
+                @click='help = true'
+            />
+            <Help
+                v-if='help'
+                :label='label || placeholder'
+                :description='description'
+                @click='help = false'
+            />
+        </span>
+        <div class='align-self-center'>
+            <div
+                v-if='label'
+                class='px-2'
+            >
+                <span v-text='label' />
+                <span
+                    v-if='required'
+                    class='text-red mx-1'
+                >*</span>
+            </div>
+        </div>
+        <div class='ms-auto align-self-center'>
+            <slot />
         </div>
     </div>
-    <div class='ms-auto align-self-center'>
-        <slot/>
-    </div>
-</div>
 </template>
 
 <script>
@@ -27,6 +43,10 @@ import Help from '../Help.vue';
 
 export default {
     name: 'TablerInternalLabel',
+    components: {
+        Help,
+        IconInfoSquare
+    },
     props: {
         required: {
             type: Boolean,
@@ -36,16 +56,15 @@ export default {
             type: String,
             default: '',
         },
-        label: String,
+        label: {
+            type: String,
+            required: true
+        }
     },
     data: function() {
         return {
             help: false,
         }
-    },
-    components: {
-        Help,
-        IconInfoSquare
     }
 }
 </script>

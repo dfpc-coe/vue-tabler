@@ -7,7 +7,7 @@
     "description": "Tabler UI components for Vue3",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "lint": "eslint lib.js components/*.vue components/**/*.vue"
+        "lint": "eslint lib.js components/"
     },
     "repository": {
         "type": "git",
@@ -25,8 +25,9 @@
     },
     "devDependencies": {
         "@babel/eslint-parser": "^7.22.15",
+        "@typescript-eslint/parser": "^8.8.1",
         "@vue/cli-plugin-babel": "^5.0.8",
-        "eslint": "^8.50.0",
+        "eslint": "^9.12.0",
         "eslint-plugin-vue": "^9.17.0"
     }
 }

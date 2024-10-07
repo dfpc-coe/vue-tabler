@@ -1,34 +1,68 @@
 <template>
-<div class="dropdown">
-    <label
-        v-if='label'
-        class='form-label'
-        :class='{
-            "required": required
-        }'
-        v-text='label'
-    ></label>
-    <div type="button" ref='button' id="list-menu-button" data-bs-toggle="dropdown" aria-expanded="false" class='border rounded' style='height: 36px;'>
-        <div class='d-flex mx-2'>
-            <span v-if='ele' style='padding-top: 6px;' v-text='ele[namekey]'/>
-            <span v-else style='padding-top: 6px;'>Select <span v-text='label'/></span>
+    <div class='dropdown'>
+        <label
+            v-if='label'
+            class='form-label'
+            :class='{
+                "required": required
+            }'
+            v-text='label'
+        />
+        <div
+            id='list-menu-button'
+            ref='button'
+            type='button'
+            data-bs-toggle='dropdown'
+            aria-expanded='false'
+            class='border rounded'
+            style='height: 36px;'
+        >
+            <div class='d-flex mx-2'>
+                <span
+                    v-if='ele'
+                    style='padding-top: 6px;'
+                    v-text='ele[namekey]'
+                />
+                <span
+                    v-else
+                    style='padding-top: 6px;'
+                >Select <span v-text='label' /></span>
 
-            <div class='ms-auto'>
-                <IconSettings :size='32' :stroke='1' style='margin-top: 4px;'/>
+                <div class='ms-auto'>
+                    <IconSettings
+                        :size='32'
+                        :stroke='1'
+                        style='margin-top: 4px;'
+                    />
+                </div>
             </div>
         </div>
+        <ul
+            class='dropdown-menu'
+            aria-labelledby='list-menu-button'
+            :style='{
+                "width": `${buttonHeight}px`
+            }'
+        >
+            <div class='m-1'>
+                <TablerInput
+                    v-model='filter'
+                    :disabled='disabled'
+                    placeholder='Name'
+                />
+                <div
+                    v-for='ele in list[listkey]'
+                    :key='ele.id'
+                    @click='select(ele)'
+                >
+                    <div
+                        class='d-flex align-items-center my-1 cursor-pointer'
+                        v-text='ele[namekey]'
+                    />
+                </div>
+            </div>
+        </ul>
     </div>
-    <ul class="dropdown-menu" aria-labelledby="list-menu-button" :style='{
-            "width": `${buttonHeight}px`
-        }'>
-        <div class='m-1'>
-            <TablerInput :disabled='disabled' placeholder='Name' v-model='filter'/>
-            <div @click='select(ele)' :key='ele.id' v-for='ele in list[listkey]'>
-                <div class="d-flex align-items-center my-1 cursor-pointer" v-text='ele[namekey]'></div>
-            </div>
-        </div>
-    </ul>
-</div>
 </template>
 
 <script>
@@ -39,6 +73,10 @@ import {
 
 export default {
     name: 'TablerList',
+    components: {
+        IconSettings,
+        TablerInput
+    },
     props: {
         url: String,
         listkey: String,
@@ -61,6 +99,9 @@ export default {
             default: 10
         },
     },
+    emits: [
+        'selected'
+    ],
     data: function() {
         return {
             ele: null,
@@ -68,6 +109,13 @@ export default {
             filter: '',
             list: {}
         }
+    },
+    computed: {
+        buttonHeight() {
+            if(!this.isMounted) return 100;
+            const buttonDOM = this.$refs.button
+            return buttonDOM ? buttonDOM.offsetWidth : 100;
+        },
     },
     watch: {
         ele: function() {
@@ -82,13 +130,6 @@ export default {
         await this.fetchList();
         this.isMounted = true;
     },
-    computed: {
-        buttonHeight() {
-            if(!this.isMounted) return 100;
-            const buttonDOM = this.$refs.button
-            return buttonDOM ? buttonDOM.offsetWidth : 100;
-        },
-    },
     methods: {
         select: function(ele) {
             this.ele = ele;
@@ -101,10 +142,6 @@ export default {
             url.searchParams.append('limit', this.limit);
             this.list = await window.std(url);
         }
-    },
-    components: {
-        IconSettings,
-        TablerInput
     }
 }
 </script>

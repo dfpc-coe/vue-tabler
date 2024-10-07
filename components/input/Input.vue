@@ -1,53 +1,82 @@
 <template>
-<div class='row'>
-    <TablerLabel
-        v-if='label'
-        :label='label'
-        :description='description'
-        :required='required'
-    ><slot/></TablerLabel>
-    <div class='col-12'>
-        <template v-if='!rows || rows <= 1'>
-            <div class='input-icon'>
-                <span v-if='icon' class="input-icon-addon">
-                    <IconSearch v-if='icon === "search"' :size='20' :stroke='1'/>
-                    <IconLock v-if='icon === "lock"' :size='20' :stroke='1'/>
-                    <IconUser v-if='icon === "user"' :size='20' :stroke='1'/>
-                </span>
-                <input
-                    :disabled='disabled'
+    <div class='row'>
+        <TablerLabel
+            v-if='label'
+            :label='label'
+            :description='description'
+            :required='required'
+        >
+            <slot />
+        </TablerLabel>
+        <div class='col-12'>
+            <template v-if='!rows || rows <= 1'>
+                <div class='input-icon'>
+                    <span
+                        v-if='icon'
+                        class='input-icon-addon'
+                    >
+                        <IconSearch
+                            v-if='icon === "search"'
+                            :size='20'
+                            :stroke='1'
+                        />
+                        <IconLock
+                            v-if='icon === "lock"'
+                            :size='20'
+                            :stroke='1'
+                        />
+                        <IconUser
+                            v-if='icon === "user"'
+                            :size='20'
+                            :stroke='1'
+                        />
+                    </span>
+                    <input
+                        v-model='current'
+                        :disabled='disabled'
+                        :autocomplete='autocomplete'
+                        :type='computed_type'
+                        :class='{
+                            "is-invalid": errorstr
+                        }'
+                        class='form-control'
+                        :placeholder='placeholder||label||""'
+                        @keyup.enter='$emit("submit")'
+                    >
+                    <span
+                        v-if='loading'
+                        class='input-icon-addon'
+                    >
+                        <div
+                            class='spinner-border spinner-border-sm text-secondary'
+                            role='status'
+                        />
+                    </span>
+                </div>
+            </template>
+            <template v-else>
+                <textarea
                     v-model='current'
-                    @keyup.enter='$emit("submit")'
+                    :disabled='disabled'
+                    :autocomplete='autocomplete'
+                    :wrap='wrap'
+                    :rows='rows'
                     :type='computed_type'
                     :class='{
                         "is-invalid": errorstr
                     }'
-                    class="form-control"
+                    class='form-control'
                     :placeholder='placeholder||label||""'
+                    @keyup.enter='$emit("submit")'
                 />
-                <span v-if='loading' class="input-icon-addon">
-                    <div class="spinner-border spinner-border-sm text-secondary" role="status"></div>
-                </span>
-            </div>
-        </template>
-        <template v-else>
-            <textarea
-                :disabled='disabled'
-                :wrap='wrap'
-                :rows='rows'
-                v-model='current'
-                @keyup.enter='$emit("submit")'
-                :type='computed_type'
-                :class='{
-                    "is-invalid": errorstr
-                }'
-                class="form-control"
-                :placeholder='placeholder||label||""'
+            </template>
+            <div
+                v-if='errorstr'
+                class='invalid-feedback'
+                v-text='errorstr'
             />
-        </template>
-        <div v-if='errorstr' v-text='errorstr' class="invalid-feedback"></div>
+        </div>
     </div>
-</div>
 </template>
 
 <script>
@@ -60,11 +89,20 @@ import {
 
 export default {
     name: 'TablerInput',
-    emits: ['submit', 'update:modelValue'],
+    components: {
+        IconUser,
+        IconLock,
+        IconSearch,
+        TablerLabel
+    },
     props: {
         modelValue: {
             type: [String, Number],
             required: true
+        },
+        autocomplete: {
+            type: String,
+            default: 'on'
         },
         icon: {
             type: String,
@@ -101,6 +139,7 @@ export default {
         placeholder: String,
         error: String,
     },
+    emits: ['submit', 'update:modelValue'],
     data: function() {
         return {
             help: false,
@@ -155,12 +194,6 @@ export default {
                 this.$emit('update:modelValue', this.current);
             }
         }
-    },
-    components: {
-        IconUser,
-        IconLock,
-        IconSearch,
-        TablerLabel
     }
 }
 </script>

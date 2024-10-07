@@ -1,13 +1,13 @@
 <template>
-<TablerEnum
-    :label='label'
-    :options='Array.from(timezones)'
-    :description='description'
-    :disabled='disabled'
-    :required='required'
-    :default='inverse.has(modelValue) ? inverse.get(modelValue) : "No TimeZone"'
-    v-on:change='$emit("update:modelValue", map.get($event.target.value).tzCode)'
-/>
+    <TablerEnum
+        :label='label'
+        :options='Array.from(timezones)'
+        :description='description'
+        :disabled='disabled'
+        :required='required'
+        :default='inverse.has(modelValue) ? inverse.get(modelValue) : "No TimeZone"'
+        @change='$emit("update:modelValue", map.get($event.target.value).tzCode)'
+    />
 </template>
 
 <script>
@@ -442,13 +442,17 @@ const tzs = [
 
 export default {
     name: 'TablerTimeZone',
+    components: {
+        TablerEnum
+    },
     props: {
         modelValue: {
             type: String,
             required: true
         },
         description: {
-            type: String
+            type: String,
+            default: ''
         },
         required: {
             type: Boolean
@@ -462,6 +466,9 @@ export default {
             default: 'Default Timezone'
         },
     },
+    emits: [
+        'update:modelValue'
+    ],
     data: function() {
         const map = new Map();
         const inverse = new Map();
@@ -478,9 +485,6 @@ export default {
             internal: this.modelValue,
             timezones: ['No TimeZone'].concat(tzs.map((tz) => tz.label))
         }
-    },
-    components: {
-        TablerEnum
     }
 }
 </script>

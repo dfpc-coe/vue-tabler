@@ -1,17 +1,37 @@
 <template>
-<div class='row'>
-    <TablerLabel :label='label' :description='description' :required='required'><slot/></TablerLabel>
-    <div class='col-12 d-flex'>
-        <div :key='color' v-for='color in Object.keys(colours)' class='border border-white rounded mx-1' style='height: 26px;'>
-            <label class="form-colorinput">
-                <input :disabled='disabled' v-model='current' :value='color' type="radio" class="form-colorinput-input">
-                <span class="form-colorinput-color bg-dark rounded" :class='[
-                    `bg-${color}`
-                ]'></span>
-            </label>
+    <div class='row'>
+        <TablerLabel
+            :label='label'
+            :description='description'
+            :required='required'
+        >
+            <slot />
+        </TablerLabel>
+        <div class='col-12 d-flex'>
+            <div
+                v-for='color in Object.keys(colours)'
+                :key='color'
+                class='border border-white rounded mx-1'
+                style='height: 26px;'
+            >
+                <label class='form-colorinput'>
+                    <input
+                        v-model='current'
+                        :disabled='disabled'
+                        :value='color'
+                        type='radio'
+                        class='form-colorinput-input'
+                    >
+                    <span
+                        class='form-colorinput-color bg-dark rounded'
+                        :class='[
+                            `bg-${color}`
+                        ]'
+                    />
+                </label>
+            </div>
         </div>
     </div>
-</div>
 </template>
 
 <script>
@@ -19,6 +39,9 @@ import TablerLabel from '../internal/Label.vue';
 
 export default {
     name: 'TablerColour',
+    components: {
+        TablerLabel
+    },
     props: {
         modelValue: {
             type: String,
@@ -42,6 +65,9 @@ export default {
         },
         label: String,
     },
+    emits: [
+        'update:modelValue'
+    ],
     data: function() {
         return {
             current: '',
@@ -73,13 +99,6 @@ export default {
             }
         }
     },
-    mounted: function() {
-        if (!this.modelValue && this.default) {
-            this.current = this.invertColours[this.default]
-        } else {
-            this.current = this.invertColours[this.modelValue];
-        }
-    },
     watch: {
         modelValue: function() {
             this.current = this.invertColours[this.modelValue];
@@ -89,8 +108,12 @@ export default {
             this.$emit('update:modelValue', this.colours[this.current]);
         }
     },
-    components: {
-        TablerLabel
+    mounted: function() {
+        if (!this.modelValue && this.default) {
+            this.current = this.invertColours[this.default]
+        } else {
+            this.current = this.invertColours[this.modelValue];
+        }
     }
 }
 </script>

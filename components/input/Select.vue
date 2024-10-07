@@ -1,19 +1,26 @@
 <template>
-<div class="dropdown">
-    <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-text='current'></a>
-    <div class="dropdown-menu dropdown-menu-end">
+    <div class='dropdown'>
         <a
-            :key='option'
-            v-for='option in options'
-            @click='current = option'
-            class="dropdown-item"
-            :class='{
-                active: option === current
-            }'
-            v-text='option'
-        ></a>
+            class='dropdown-toggle text-muted'
+            href='#'
+            data-bs-toggle='dropdown'
+            aria-haspopup='true'
+            aria-expanded='false'
+            v-text='current'
+        />
+        <div class='dropdown-menu dropdown-menu-end'>
+            <a
+                v-for='option in options'
+                :key='option'
+                class='dropdown-item'
+                :class='{
+                    active: option === current
+                }'
+                @click='current = option'
+                v-text='option'
+            />
+        </div>
     </div>
-</div>
 </template>
 
 <script>
@@ -33,6 +40,9 @@ export default {
             required: true
         },
     },
+    emits: [
+        'update:modelValue'
+    ],
     data: function() {
         return {
             current: ''

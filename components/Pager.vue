@@ -1,44 +1,58 @@
 <template>
-<div class='pagination m-0 ms-auto'>
-    <div>
-        <template v-if='parseInt(total) <= parseInt(limit)'>
-            <button @click='changePage(0)' class='btn mx-1' >
-                <IconHome :size='32' :stroke='1' class='icon'/>Home
-            </button>
-        </template>
-        <template v-else>
-            <button @click='changePage(0)' class='btn mx-1' :class='{ "btn-primary": current === 0 }'>
-                <IconHome :size='32' :stroke='1' class='icon'/>Home
-            </button>
-
-            <template v-if='end > 5 && current > 3'>
-                <span class=''> ... </span>
-            </template>
-
-            <template v-if='parseInt(total) / parseInt(limit) > 2'>
+    <div class='pagination m-0 ms-auto'>
+        <div>
+            <template v-if='parseInt(total) <= parseInt(limit)'>
                 <button
-                    :key=i
-                    v-for='i in middle'
-                    @click='changePage(i)'
                     class='btn mx-1'
-                    v-text='i + 1'
-                    :class='{ "btn-primary": current === i }'
+                    @click='changePage(0)'
                 >
+                    <IconHome
+                        :size='32'
+                        :stroke='1'
+                        class='icon'
+                    />Home
                 </button>
             </template>
+            <template v-else>
+                <button
+                    class='btn mx-1'
+                    :class='{ "btn-primary": current === 0 }'
+                    @click='changePage(0)'
+                >
+                    <IconHome
+                        :size='32'
+                        :stroke='1'
+                        class='icon'
+                    />Home
+                </button>
 
-            <template v-if='end > 5 && current < end - spread'>
-                <span class=''> ... </span>
+                <template v-if='end > 5 && current > 3'>
+                    <span class=''> ... </span>
+                </template>
+
+                <template v-if='parseInt(total) / parseInt(limit) > 2'>
+                    <button
+                        v-for='i in middle'
+                        :key='i'
+                        class='btn mx-1'
+                        :class='{ "btn-primary": current === i }'
+                        @click='changePage(i)'
+                        v-text='i + 1'
+                    />
+                </template>
+
+                <template v-if='end > 5 && current < end - spread'>
+                    <span class=''> ... </span>
+                </template>
+                <button
+                    class='btn mx-1'
+                    :class='{ "btn-primary": current === end - 1 }'
+                    @click='changePage(end - 1)'
+                    v-text='end'
+                />
             </template>
-            <button
-                @click='changePage(end - 1)'
-                class='btn mx-1'
-                v-text='end'
-                :class='{ "btn-primary": current === end - 1 }'
-            ></button>
-        </template>
+        </div>
     </div>
-</div>
 </template>
 
 <script>
@@ -48,6 +62,9 @@ import {
 
 export default {
     name: 'TablerPager',
+    components: {
+        IconHome
+    },
     props: {
         total: {
             type: Number
@@ -59,6 +76,9 @@ export default {
             type: Number
         }
     },
+    emits: [
+        'page'
+    ],
     data: function() {
         return this.create();
     },
@@ -127,9 +147,6 @@ export default {
             this.current = page;
             this.$emit('page', this.current);
         }
-    },
-    components: {
-        IconHome
     }
 }
 </script>

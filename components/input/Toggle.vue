@@ -1,11 +1,20 @@
 <template>
-<div>
-    <TablerLabel :label='label' :required='required' :description='description'>
-        <label class='form-switch'>
-            <input v-model='current' :disabled='disabled' class="form-check-input" type="checkbox">
-        </label>
-    </TablerLabel>
-</div>
+    <div>
+        <TablerLabel
+            :label='label'
+            :required='required'
+            :description='description'
+        >
+            <label class='form-switch'>
+                <input
+                    v-model='current'
+                    :disabled='disabled'
+                    class='form-check-input'
+                    type='checkbox'
+                >
+            </label>
+        </TablerLabel>
+    </div>
 </template>
 
 <script>
@@ -13,6 +22,9 @@ import TablerLabel from '../internal/Label.vue';
 
 export default {
     name: 'TablerToggle',
+    components: {
+        TablerLabel
+    },
     props: {
         modelValue: {
             type: Boolean,
@@ -35,13 +47,13 @@ export default {
             default: ''
         }
     },
+    emits: [
+        'update:modelValue'
+    ],
     data: function() {
         return {
             current: this.modelValue
         }
-    },
-    mounted: function() {
-        this.current = this.modelValue;
     },
     watch: {
         modelValue: function() {
@@ -52,8 +64,8 @@ export default {
             this.$emit('update:modelValue', this.current);
         }
     },
-    components: {
-        TablerLabel
+    mounted: function() {
+        this.current = this.modelValue;
     }
 }
 </script>

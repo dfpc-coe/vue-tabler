@@ -1,17 +1,33 @@
 <template>
     <Modal>
-        <button type="button" class="btn-close" @click='close' aria-label="Close"></button>
-        <div class="modal-status bg-yellow"></div>
-        <div class="modal-header d-flex">
-            <span class='modal-title' v-text='label'></span>
+        <button
+            type='button'
+            class='btn-close'
+            aria-label='Close'
+            @click='close'
+        />
+        <div class='modal-status bg-yellow' />
+        <div class='modal-header d-flex'>
+            <span
+                class='modal-title'
+                v-text='label'
+            />
         </div>
-        <div class="modal-body text-center py-4">
-            <div class="text-muted" v-text='description'></div>
+        <div class='modal-body text-center py-4'>
+            <div
+                class='text-muted'
+                v-text='description'
+            />
         </div>
-        <div class="modal-footer">
-            <div class="w-100">
-                <div class="row">
-                    <div class="col"><a @click='close' class="cursor-pointer btn w-100">OK</a></div>
+        <div class='modal-footer'>
+            <div class='w-100'>
+                <div class='row'>
+                    <div class='col'>
+                        <a
+                            class='cursor-pointer btn w-100'
+                            @click='close'
+                        >OK</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -23,6 +39,9 @@ import Modal from './Modal.vue';
 
 export default {
     name: 'TablerHelp',
+    components: {
+        Modal,
+    },
     props: {
         label: {
             type: String,
@@ -34,13 +53,13 @@ export default {
             require: true
         }
     },
+    emits: [
+        'close'
+    ],
     methods: {
         close: function() {
             this.$emit('close');
         }
-    },
-    components: {
-        Modal,
     }
 }
 </script>

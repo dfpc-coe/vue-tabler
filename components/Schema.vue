@@ -1,78 +1,108 @@
 <template>
-<div class='px-2 py-2'>
-    <TablerLoading v-if='loading'/>
-    <template v-else>
-        <div :key='key' v-for='key in Object.keys(s.properties)' class='py-2 floating-input'>
-            <template v-if='s.properties[key].enum'>
-                <TablerEnum
-                    :label='key'
-                    :disabled='disabled'
-                    :required='s.properties[key].required || false'
-                    :description='s.properties[key].description || ""'
-                    v-model='data[key]'
-                    :options='s.properties[key].enum'
-                    :default='s.properties[key].default'
-                />
-            </template>
-            <template v-else-if='s.properties[key].type === "string"'>
-                <TablerInput
-                    :label='key'
-                    :disabled='disabled'
-                    :required='s.properties[key].required || false'
-                    :description='s.properties[key].description || ""'
-                    v-model='data[key]'
-                />
-            </template>
-            <template v-else-if='s.properties[key].type === "number" || s.properties[key].type === "integer"'>
-                <TablerInput
-                    :type='s.properties[key].type'
-                    :label='key'
-                    :disabled='disabled'
-                    :required='s.properties[key].required || false'
-                    :description='s.properties[key].description || ""'
-                    v-model='data[key]'
-                />
-            </template>
-            <template v-else-if='s.properties[key].type === "boolean"'>
-                <TablerToggle
-                    :label='key'
-                    :disabled='disabled'
-                    :required='s.properties[key].required || false'
-                    :description='s.properties[key].description || ""'
-                    v-model='data[key]'
-                />
-            </template>
-            <template v-else-if='s.properties[key].type === "array"'>
-                <div class='d-flex'>
-                    <label class='form-label' v-text='key'/>
-                    <div class='ms-auto'>
-                        <IconPlus v-if='!disabled' @click='push(key)' :size='32' :stroke='1' class='cursor-pointer'/>
-                    </div>
-                </div>
-
-                <div :key='i' v-for='(arr, i) of data[key]' class='border rounded my-2 py-2 mx-2 px-2'>
+    <div class='px-2 py-2'>
+        <TablerLoading v-if='loading' />
+        <template v-else>
+            <div
+                v-for='key in Object.keys(s.properties)'
+                :key='key'
+                class='py-2 floating-input'
+            >
+                <template v-if='s.properties[key].enum'>
+                    <TablerEnum
+                        v-model='data[key]'
+                        :label='key'
+                        :disabled='disabled'
+                        :required='s.properties[key].required || false'
+                        :description='s.properties[key].description || ""'
+                        :options='s.properties[key].enum'
+                        :default='s.properties[key].default'
+                    />
+                </template>
+                <template v-else-if='s.properties[key].type === "string"'>
+                    <TablerInput
+                        v-model='data[key]'
+                        :label='key'
+                        :disabled='disabled'
+                        :required='s.properties[key].required || false'
+                        :description='s.properties[key].description || ""'
+                    />
+                </template>
+                <template v-else-if='s.properties[key].type === "number" || s.properties[key].type === "integer"'>
+                    <TablerInput
+                        v-model='data[key]'
+                        :type='s.properties[key].type'
+                        :label='key'
+                        :disabled='disabled'
+                        :required='s.properties[key].required || false'
+                        :description='s.properties[key].description || ""'
+                    />
+                </template>
+                <template v-else-if='s.properties[key].type === "boolean"'>
+                    <TablerToggle
+                        v-model='data[key]'
+                        :label='key'
+                        :disabled='disabled'
+                        :required='s.properties[key].required || false'
+                        :description='s.properties[key].description || ""'
+                    />
+                </template>
+                <template v-else-if='s.properties[key].type === "array"'>
                     <div class='d-flex'>
-                        <div class='mx-2 my-2'>Entry <span v-text='i + 1'/></div>
-                        <div class='ms-auto mx-2 my-2'>
-                            <IconTrash v-if='!disabled' @click='data[key].splice(i, 1)' :size='32' :stroke='1' class='cursor-pointer'/>
+                        <label
+                            class='form-label'
+                            v-text='key'
+                        />
+                        <div class='ms-auto'>
+                            <IconPlus
+                                v-if='!disabled'
+                                :size='32'
+                                :stroke='1'
+                                class='cursor-pointer'
+                                @click='push(key)'
+                            />
                         </div>
                     </div>
 
-                    <GenericSchema :schema='s.properties[key].items' :disabled='disabled' v-model='data[key][i]' />
-                </div>
-            </template>
-            <template v-else>
-                <div class='row'>
-                    <TablerInput
-                        :label='key'
-                        :rows='3'
-                        :disabled='disabled'
-                        v-model='data[key]'/>
-                </div>
-            </template>
-        </div>
-    </template>
-</div>
+                    <div
+                        v-for='(arr, i) of data[key]'
+                        :key='i'
+                        class='border rounded my-2 py-2 mx-2 px-2'
+                    >
+                        <div class='d-flex'>
+                            <div class='mx-2 my-2'>
+                                Entry <span v-text='i + 1' />
+                            </div>
+                            <div class='ms-auto mx-2 my-2'>
+                                <IconTrash
+                                    v-if='!disabled'
+                                    :size='32'
+                                    :stroke='1'
+                                    class='cursor-pointer'
+                                    @click='data[key].splice(i, 1)'
+                                />
+                            </div>
+                        </div>
+
+                        <GenericSchema
+                            v-model='data[key][i]'
+                            :schema='s.properties[key].items'
+                            :disabled='disabled'
+                        />
+                    </div>
+                </template>
+                <template v-else>
+                    <div class='row'>
+                        <TablerInput
+                            v-model='data[key]'
+                            :label='key'
+                            :rows='3'
+                            :disabled='disabled'
+                        />
+                    </div>
+                </template>
+            </div>
+        </template>
+    </div>
 </template>
 
 <script>
@@ -87,6 +117,14 @@ import {
 
 export default {
     name: 'TablerSchema',
+    components: {
+        IconPlus,
+        IconTrash,
+        TablerInput,
+        TablerToggle,
+        TablerEnum,
+        TablerLoading
+    },
     props: {
         modelValue: {
             type: Object,
@@ -101,6 +139,9 @@ export default {
             default: false
         }
     },
+    emits: [
+        'update:modelValue'
+    ],
     data: function() {
         return {
             loading: true,
@@ -151,14 +192,6 @@ export default {
                 this.data[key].push('');
             }
         }
-    },
-    components: {
-        IconPlus,
-        IconTrash,
-        TablerInput,
-        TablerToggle,
-        TablerEnum,
-        TablerLoading
     }
 }
 </script>

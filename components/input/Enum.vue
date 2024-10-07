@@ -1,17 +1,28 @@
 <template>
-<div class='row'>
-    <TablerLabel
-        v-if='label'
-        :label='label'
-        :description='description'
-        :required='required'
-    ><slot/></TablerLabel>
-    <div class='col-12'>
-        <select v-model='current' :disabled='disabled' class='form-select'>
-            <option :key='option' v-for='option in options' :value="option" v-text='option'></option>
-        </select>
+    <div class='row'>
+        <TablerLabel
+            v-if='label'
+            :label='label'
+            :description='description'
+            :required='required'
+        >
+            <slot />
+        </TablerLabel>
+        <div class='col-12'>
+            <select
+                v-model='current'
+                :disabled='disabled'
+                class='form-select'
+            >
+                <option
+                    v-for='option in options'
+                    :key='option'
+                    :value='option'
+                    v-text='option'
+                />
+            </select>
+        </div>
     </div>
-</div>
 </template>
 
 <script>
@@ -19,6 +30,9 @@ import TablerLabel from '../internal/Label.vue';
 
 export default {
     name: 'TablerEnum',
+    components: {
+        TablerLabel
+    },
     props: {
         modelValue: {
             type: String,
@@ -46,6 +60,9 @@ export default {
         },
         label: String,
     },
+    emits: [
+        'update:modelValue'
+    ],
     data: function() {
         const data = {
             current: ''
@@ -67,9 +84,6 @@ export default {
             if (this.current === this.modelValue) return;
             this.$emit('update:modelValue', this.current);
         }
-    },
-    components: {
-        TablerLabel
     }
 }
 </script>
