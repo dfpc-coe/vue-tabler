@@ -52,6 +52,11 @@
                             role='status'
                         />
                     </span>
+                    <div
+                        v-if='errorstr'
+                        class='invalid-feedback'
+                        v-text='errorstr'
+                    />
                 </div>
             </template>
             <template v-else>
@@ -69,12 +74,12 @@
                     :placeholder='placeholder||label||""'
                     @keyup.enter='$emit("submit")'
                 />
+                <div
+                    v-if='errorstr'
+                    class='invalid-feedback'
+                    v-text='errorstr'
+                />
             </template>
-            <div
-                v-if='errorstr'
-                class='invalid-feedback'
-                v-text='errorstr'
-            />
         </div>
     </div>
 </template>

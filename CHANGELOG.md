@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.53.1
+
+- :bug: Fix error status on Input component
+
 ### v3.53.0
 
 - :rocket: Passthrough Autocomplete on input
