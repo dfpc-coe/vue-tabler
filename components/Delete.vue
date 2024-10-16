@@ -9,10 +9,8 @@
             </div>
         </template>
         <template v-else>
-            <IconTrash
-                :size='size'
-                :stroke='1'
-                class='cursor-pointer'
+            <TablerIconButton
+                :icon='IconTrash'
                 @click.stop.prevent='modal = true'
             />
         </template>
@@ -57,6 +55,7 @@
 
 <script>
 import TablerModal from './Modal.vue';
+import TablerIconButton from './IconButton.vue';
 import TablerLoading from './Loading.vue';
 import {
     IconTrash

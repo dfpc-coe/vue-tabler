@@ -1,22 +1,24 @@
 <template>
-<div
+<component
+    :is='IconButton'
     :title='title'
+    :size='size'
+    :stroke='stroke'
     tabindex='0'
     role='button'
     v-tooltip='title'
     class='cursor-pointer hover-button rounded'
->
-    <slot
-        :size='size'
-        :stroke='stroke'
-    />
-</div>
+/>
 </template>
 
 <script>
 export default {
     name: 'TablerIconButton',
     props: {
+        icon: {
+            type: String,
+            required: true
+        },
         title: {
             type: String,
             required: true
@@ -30,5 +32,8 @@ export default {
             default: 5
         }
     },
+    components: {
+        IconButton: defineAsyncComponent(() => import(`@tabler/icons-vue/dist/esm/icons/${this.icon}.mjs`))
+    }
 }
 </script>

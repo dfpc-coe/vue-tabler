@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.55.0
+
+- :rocket: Dynamic Icon Resolution
+
 ### v3.54.1
 
 - :rocket: Use props instead for IconButton
