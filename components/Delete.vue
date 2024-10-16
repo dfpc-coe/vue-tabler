@@ -10,7 +10,8 @@
         </template>
         <template v-else>
             <TablerIconButton
-                :icon='IconTrash'
+                icon='IconTrash'
+                title='Delete'
                 @click.stop.prevent='modal = true'
             />
         </template>
@@ -66,6 +67,7 @@ export default {
     components: {
         IconTrash,
         TablerLoading,
+        TablerIconButton,
         TablerModal
     },
     props: {

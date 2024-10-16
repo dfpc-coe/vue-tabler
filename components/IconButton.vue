@@ -1,41 +1,40 @@
 <template>
-<component
-    :is='IconButton'
-    :title='title'
-    :size='size'
-    :stroke='stroke'
+<div
     tabindex='0'
     role='button'
     v-tooltip='title'
     class='cursor-pointer hover-button rounded'
-/>
+>
+    <IconButton
+        :title='title'
+        :size='size'
+        :stroke='stroke'
+    />
+</div>
 </template>
 
-<script>
-import { defineAsyncComponent } from 'vue'
+<script setup>
+import { defineAsyncComponent, defineProps } from 'vue'
+import * as Icons from '@tabler/icons-vue';
 
-export default {
-    name: 'TablerIconButton',
-    props: {
-        icon: {
-            type: String,
-            required: true
-        },
-        title: {
-            type: String,
-            required: true
-        },
-        size: {
-            type: Number,
-            default: 32
-        },
-        stroke: {
-            type: Number,
-            default: 5
-        }
+const props = defineProps({
+    icon: {
+        type: String,
+        required: true
     },
-    components: {
-        IconButton: defineAsyncComponent(() => import(`@tabler/icons-vue/dist/esm/icons/${this.icon}.mjs`))
+    title: {
+        type: String,
+        required: true
+    },
+    size: {
+        type: Number,
+        default: 32
+    },
+    stroke: {
+        type: Number,
+        default: 1
     }
-}
+})
+
+const IconButton = Icons[props.icon];
 </script>

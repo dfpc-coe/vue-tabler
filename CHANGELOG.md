@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.55.2
+
+- :bug: Switch to `setup` for IconButton
+
 ### v3.55.1
 
 - :bug: Fix async import dep
