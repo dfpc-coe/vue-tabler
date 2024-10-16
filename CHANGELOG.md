@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.55.1
+
+- :bug: Fix async import dep
+
 ### v3.55.0
 
 - :rocket: Dynamic Icon Resolution
