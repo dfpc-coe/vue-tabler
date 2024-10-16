@@ -1,23 +1,22 @@
 <template>
-    <component
-        :is='icon'
-        :title='title'
+<div
+    :title='title'
+    tabindex='0'
+    role='button'
+    v-tooltip='title'
+    class='cursor-pointer hover-button rounded'
+>
+    <slot
         :size='size'
         :stroke='stroke'
-        tabindex='0'
-        v-tooltip='title'
-        class='cursor-pointer hover-button rounded'
     />
+</div>
 </template>
 
 <script>
 export default {
     name: 'TablerIconButton',
     props: {
-        icon: {
-            type: Object,
-            required: true
-        },
         title: {
             type: String,
             required: true

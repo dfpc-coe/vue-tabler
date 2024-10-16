@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.54.1
+
+- :rocket: Use props instead for IconButton
+
 ### v3.54.0
 
 - :tada: Sketch out new `IconButton` component
