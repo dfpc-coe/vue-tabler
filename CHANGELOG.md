@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.54.0
+
+- :tada: Sketch out new `IconButton` component
+
 ### v3.53.1
 
 - :bug: Fix error status on Input component
