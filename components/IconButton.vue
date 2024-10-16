@@ -1,40 +1,21 @@
 <template>
-<div
-    tabindex='0'
-    role='button'
-    v-tooltip='title'
-    class='cursor-pointer hover-button rounded'
->
-    <IconButton
-        :title='title'
-        :size='size'
-        :stroke='stroke'
-    />
-</div>
+    <div
+        v-tooltip='title'
+        tabindex='0'
+        role='button'
+        class='cursor-pointer hover-button rounded'
+    >
+        <slot />
+    </div>
 </template>
 
 <script setup>
-import { defineAsyncComponent, defineProps } from 'vue'
-import * as Icons from '@tabler/icons-vue';
+import { defineProps } from 'vue'
 
-const props = defineProps({
-    icon: {
-        type: String,
-        required: true
-    },
+defineProps({
     title: {
         type: String,
         required: true
     },
-    size: {
-        type: Number,
-        default: 32
-    },
-    stroke: {
-        type: Number,
-        default: 1
-    }
 })
-
-const IconButton = Icons[props.icon];
 </script>

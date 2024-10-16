@@ -10,10 +10,14 @@
         </template>
         <template v-else>
             <TablerIconButton
-                icon='IconTrash'
                 title='Delete'
                 @click.stop.prevent='modal = true'
-            />
+            >
+                <IconTrash
+                    :size='32'
+                    :stroke='1'
+                />
+            </tablericonbutton>
         </template>
 
         <TablerModal v-if='modal'>

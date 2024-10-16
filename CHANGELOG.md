@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.55.3
+
+- :bug: Dynamic loading causes vite to load all in production mode
+
 ### v3.55.2
 
 - :bug: Switch to `setup` for IconButton
