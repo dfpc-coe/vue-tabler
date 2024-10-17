@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.56.0
+
+- :rocket: Add ability to hide advanced
+
 ### v3.55.3
 
 - :bug: Dynamic loading causes vite to load all in production mode

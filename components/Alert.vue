@@ -31,7 +31,7 @@
             <div><span v-text='err.message' /></div>
         </div>
 
-        <template v-if='err.body || err.stack'>
+        <template v-if='advanced && (err.body || err.stack)'>
             <div class='py-2 px-3'>
                 <div
                     class='subheader d-flex align-items-center cursor-pointer'
@@ -82,6 +82,10 @@ export default {
         compact: {
             type: Boolean,
             default: false
+        },
+        advanced: {
+            type: Boolean,
+            default: true
         },
     },
     data: function() {
