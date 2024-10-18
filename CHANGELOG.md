@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.56.1
+
+- :rocket: Remove Hover On TablerIconButton
+
 ### v3.56.0
 
 - :rocket: Add ability to hide advanced

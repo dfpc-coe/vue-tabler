@@ -3,7 +3,7 @@
         v-tooltip='title'
         tabindex='0'
         role='button'
-        class='cursor-pointer hover-button rounded'
+        class='cursor-pointer rounded'
     >
         <slot />
     </div>
