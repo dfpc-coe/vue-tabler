@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.56.2
+
+- :bug: Pass Icon Size through in TablerDelete
+
 ### v3.56.1
 
 - :rocket: Remove Hover On TablerIconButton

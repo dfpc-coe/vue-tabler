@@ -14,7 +14,7 @@
                 @click.stop.prevent='modal = true'
             >
                 <IconTrash
-                    :size='32'
+                    :size='size'
                     :stroke='1'
                 />
             </tablericonbutton>
