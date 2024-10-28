@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.57.0
+
+- :tada: Add `TablerButton` with accessibility tags
+
 ### v3.56.2
 
 - :bug: Pass Icon Size through in TablerDelete
