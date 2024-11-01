@@ -5,6 +5,7 @@
             type='button'
             data-bs-toggle='dropdown'
             aria-expanded='false'
+            @click.stop.prevent=''
         >
             <slot>
                 <IconSettings

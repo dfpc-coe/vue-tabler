@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.57.1
+
+- :bug: Ensure parent click is ignored on Dropdown
+
 ### v3.57.0
 
 - :tada: Add `TablerButton` with accessibility tags
