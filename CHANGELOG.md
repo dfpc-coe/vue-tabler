@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.58.0
+
+- :rocket: Call focus on Modal when created to allow immediate keyup intercepts
+
 ### v3.57.1
 
 - :bug: Ensure parent click is ignored on Dropdown

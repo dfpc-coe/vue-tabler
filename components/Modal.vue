@@ -1,5 +1,6 @@
 <template>
     <div
+        ref='modal'
         class='modal modal-blur fade show'
         tabindex='-1'
         style='display: block;'
@@ -32,6 +33,11 @@ export default {
             type: String,
             default: 'sm'
         }
+    },
+    mounted: function() {
+        this.$nextTick(() => {
+            this.$refs.modal.focus();
+        })
     }
 }
 </script>
