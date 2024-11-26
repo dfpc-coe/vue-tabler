@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.59.0
+
+- :rocket: Pass `autofocus` through on input components
+
 ### v3.58.0
 
 - :rocket: Call focus on Modal when created to allow immediate keyup intercepts

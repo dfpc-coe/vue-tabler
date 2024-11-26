@@ -18,6 +18,7 @@
                     <input
                         v-model='current'
                         :disabled='disabled'
+                        :autofocus='autofocus'
                         :value='color'
                         type='radio'
                         class='form-colorinput-input'
@@ -46,6 +47,10 @@ export default {
         modelValue: {
             type: String,
             required: true
+        },
+        autofocus: {
+            type: Boolean,
+            default: false
         },
         default: {
             type: String,

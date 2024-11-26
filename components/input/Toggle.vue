@@ -9,6 +9,7 @@
                 <input
                     v-model='current'
                     :disabled='disabled'
+                    :autofocus='autofocus'
                     class='form-check-input'
                     type='checkbox'
                 >
@@ -29,6 +30,10 @@ export default {
         modelValue: {
             type: Boolean,
             required: true
+        },
+        autofocus: {
+            type: Boolean,
+            default: false
         },
         disabled: {
             type: Boolean,

@@ -11,6 +11,7 @@
         <div class='col-12'>
             <select
                 v-model='current'
+                :autofocus='autofocus'
                 :disabled='disabled'
                 class='form-select'
             >
@@ -37,6 +38,10 @@ export default {
         modelValue: {
             type: String,
             required: true
+        },
+        autofocus: {
+            type: Boolean,
+            default: false
         },
         default: {
             type: String,

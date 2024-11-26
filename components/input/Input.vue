@@ -35,6 +35,7 @@
                         v-model='current'
                         :disabled='disabled'
                         :autocomplete='autocomplete'
+                        :autofocus='autofocus'
                         :type='computed_type'
                         :class='{
                             "is-invalid": errorstr
@@ -63,6 +64,7 @@
                 <textarea
                     v-model='current'
                     :disabled='disabled'
+                    :autofocus='autofocus'
                     :autocomplete='autocomplete'
                     :wrap='wrap'
                     :rows='rows'
@@ -108,6 +110,10 @@ export default {
         autocomplete: {
             type: String,
             default: 'on'
+        },
+        autofocus: {
+            type: Boolean,
+            default: false
         },
         icon: {
             type: String,

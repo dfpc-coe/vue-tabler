@@ -10,6 +10,7 @@
         <div class='col-12'>
             <input
                 :disabled='disabled'
+                :autofocus='autofocus'
                 :value='modelValue'
                 type='range'
                 class='form-range'
@@ -34,6 +35,10 @@ export default {
         modelValue: {
             type: Number,
             required: true
+        },
+        autofocus: {
+            type: Boolean,
+            default: false
         },
         min: {
             type: Number,

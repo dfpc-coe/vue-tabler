@@ -3,6 +3,7 @@
         :label='label'
         :options='Array.from(timezones)'
         :description='description'
+        :autofocus='autofocus'
         :disabled='disabled'
         :required='required'
         :default='inverse.has(modelValue) ? inverse.get(modelValue) : "No TimeZone"'
@@ -449,6 +450,10 @@ export default {
         modelValue: {
             type: String,
             required: true
+        },
+        autofocus: {
+            type: Boolean,
+            default: false
         },
         description: {
             type: String,
