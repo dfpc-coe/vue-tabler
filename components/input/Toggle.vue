@@ -12,6 +12,8 @@
                     :autofocus='autofocus'
                     class='form-check-input'
                     type='checkbox'
+                    @keyup.enter='$emit("submit")'
+                    @blur='$emit("blur")'
                 >
             </label>
         </TablerLabel>
@@ -53,6 +55,8 @@ export default {
         }
     },
     emits: [
+        'blur',
+        'submit',
         'update:modelValue'
     ],
     data: function() {

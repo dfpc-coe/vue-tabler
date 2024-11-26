@@ -43,6 +43,7 @@
                         class='form-control'
                         :placeholder='placeholder||label||""'
                         @keyup.enter='$emit("submit")'
+                        @blur='$emit("blur")'
                     >
                     <span
                         v-if='loading'
@@ -75,6 +76,7 @@
                     class='form-control'
                     :placeholder='placeholder||label||""'
                     @keyup.enter='$emit("submit")'
+                    @blur='$emit("blur")'
                 />
                 <div
                     v-if='errorstr'
@@ -150,7 +152,7 @@ export default {
         placeholder: String,
         error: String,
     },
-    emits: ['submit', 'update:modelValue'],
+    emits: ['blur', 'submit', 'update:modelValue'],
     data: function() {
         return {
             help: false,

@@ -8,6 +8,8 @@
         :required='required'
         :default='inverse.has(modelValue) ? inverse.get(modelValue) : "No TimeZone"'
         @change='$emit("update:modelValue", map.get($event.target.value).tzCode)'
+        @submit='$emit("submit")'
+        @blur='$emit("blur")'
     />
 </template>
 
@@ -472,6 +474,8 @@ export default {
         },
     },
     emits: [
+        'submit',
+        'blur',
         'update:modelValue'
     ],
     data: function() {

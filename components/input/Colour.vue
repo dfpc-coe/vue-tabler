@@ -22,6 +22,7 @@
                         :value='color'
                         type='radio'
                         class='form-colorinput-input'
+                        @blur='$emit("blur")'
                     >
                     <span
                         class='form-colorinput-color bg-dark rounded'
@@ -71,7 +72,7 @@ export default {
         label: String,
     },
     emits: [
-        'update:modelValue'
+        'blur', 'update:modelValue'
     ],
     data: function() {
         return {

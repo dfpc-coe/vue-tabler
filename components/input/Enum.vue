@@ -14,6 +14,7 @@
                 :autofocus='autofocus'
                 :disabled='disabled'
                 class='form-select'
+                @blur='$emit("blur")'
             >
                 <option
                     v-for='option in options'
@@ -66,6 +67,7 @@ export default {
         label: String,
     },
     emits: [
+        'blur',
         'update:modelValue'
     ],
     data: function() {

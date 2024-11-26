@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.60.0
+
+- :rocket: Bubble up Blur Event
+
 ### v3.59.0
 
 - :rocket: Pass `autofocus` through on input components

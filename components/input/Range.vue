@@ -18,6 +18,8 @@
                 :max='max'
                 :step='step'
                 @input='event => current = event.target.value'
+                @keyup.enter='$emit("submit")'
+                @blur='$emit("blur")'
             >
         </div>
     </div>
@@ -67,6 +69,8 @@ export default {
         label: String,
     },
     emits: [
+        'blur',
+        'submit',
         'update:modelValue'
     ],
     data: function() {
