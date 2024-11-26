@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.60.1
+
+- :rocket: Manually call focus
+
 ### v3.60.0
 
 - :rocket: Bubble up Blur Event
