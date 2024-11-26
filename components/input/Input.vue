@@ -32,6 +32,7 @@
                         />
                     </span>
                     <input
+                        ref='text-input'
                         v-model='current'
                         :disabled='disabled'
                         :autocomplete='autocomplete'
@@ -63,6 +64,7 @@
             </template>
             <template v-else>
                 <textarea
+                    ref='text-input'
                     v-model='current'
                     :disabled='disabled'
                     :autofocus='autofocus'
@@ -158,6 +160,11 @@ export default {
             help: false,
             internal_error: '',
             current: this.modelValue === undefined ? '' : this.modelValue
+        }
+    },
+    mounted: function() {
+        if (this.autofocus) {
+            this.$refs['text-input'].focus();
         }
     },
     computed: {
