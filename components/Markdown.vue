@@ -1,5 +1,8 @@
 <template>
-    <div v-html='html' />
+    <div
+        :style='autowrap ? `white-space: pre-wrap;` : ``'
+        v-html='html'
+    />
 </template>
 
 <script>
@@ -11,6 +14,10 @@ export default {
         markdown: {
             type: String,
             required: true
+        },
+        autowrap: {
+            type: Boolean,
+            default: true
         }
     },
     computed: {

@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.60.2
+
+- :rocket: Add `AutoWrap` option to Markdown
+
 ### v3.60.1
 
 - :rocket: Manually call focus
