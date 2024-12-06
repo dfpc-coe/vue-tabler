@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.61.0
+
+- :rocket: Automatically Expand TablerInput on newlines
+
 ### v3.60.2
 
 - :rocket: Add `AutoWrap` option to Markdown

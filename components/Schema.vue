@@ -24,6 +24,7 @@
                         :label='key'
                         :disabled='disabled'
                         :required='s.properties[key].required || false'
+                        :rows='data[key].split("\n").length'
                         :description='s.properties[key].description || ""'
                     />
                 </template>
@@ -83,7 +84,7 @@
                             </div>
                         </div>
 
-                        <GenericSchema
+                        <TablerSchema
                             v-model='data[key][i]'
                             :schema='s.properties[key].items'
                             :disabled='disabled'
