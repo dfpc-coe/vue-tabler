@@ -24,7 +24,7 @@
                         :label='key'
                         :disabled='disabled'
                         :required='s.properties[key].required || false'
-                        :rows='data[key].split("\n").length'
+                        :rows='data[key] ? data[key].split("\n").length : 1'
                         :description='s.properties[key].description || ""'
                     />
                 </template>

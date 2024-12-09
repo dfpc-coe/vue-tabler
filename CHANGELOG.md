@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.61.1
+
+- :bug: Ensure Data Key exists in Schema
+
 ### v3.61.0
 
 - :rocket: Automatically Expand TablerInput on newlines
