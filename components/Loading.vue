@@ -13,7 +13,7 @@
                 />
                 <div
                     v-if='desc && desc.length'
-                    class='mx-3 align-self-center'
+                    class='mx-3 align-self-center user-select-none'
                     v-text='desc'
                 />
             </div>
@@ -29,7 +29,7 @@
             <template v-if='desc && desc.length'>
                 <div class='d-flex justify-content-center my-4'>
                     <div
-                        class=''
+                        class='user-select-none'
                         v-text='desc'
                     />
                 </div>

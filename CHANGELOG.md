@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.62.1
+
+- :rocket: Update text selection on loading
+
 ### v3.62.0
 
 - :tada: Allow custom sizes of dropdown
