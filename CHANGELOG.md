@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.62.0
+
+- :tada: Allow custom sizes of dropdown
+
 ### v3.61.1
 
 - :bug: Ensure Data Key exists in Schema

@@ -16,7 +16,10 @@
             </slot>
         </div>
         <ul
-            class='dropdown-menu w-100'
+            class='dropdown-menu'
+            :style='{
+                "width": width
+            }'
             :aria-labelledby='id'
         >
             <slot name='dropdown'>
@@ -35,6 +38,12 @@ export default {
     name: 'TablerDropdown',
     components: {
         IconSettings
+    },
+    props: {
+        width: {
+            type: Number,
+            default: 200
+        }
     },
     data: function() {
         return {
