@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.63.0
+
+- :rocket: Include Icon Slot
+
 ### v3.62.1
 
 - :rocket: Update text selection on loading

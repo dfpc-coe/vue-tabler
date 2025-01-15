@@ -12,7 +12,7 @@
             <template v-if='!rows || rows <= 1'>
                 <div class='input-icon'>
                     <span
-                        v-if='icon'
+                        v-if='icon || $slots.icon'
                         class='input-icon-addon'
                     >
                         <IconSearch
@@ -21,14 +21,18 @@
                             :stroke='1'
                         />
                         <IconLock
-                            v-if='icon === "lock"'
+                            v-else-if='icon === "lock"'
                             :size='20'
                             :stroke='1'
                         />
                         <IconUser
-                            v-if='icon === "user"'
+                            v-else-if='icon === "user"'
                             :size='20'
                             :stroke='1'
+                        />
+                        <slot
+                            v-else-if='$slots.icon'
+                            name='icon'
                         />
                     </span>
                     <input
@@ -162,11 +166,6 @@ export default {
             current: this.modelValue === undefined ? '' : this.modelValue
         }
     },
-    mounted: function() {
-        if (this.autofocus) {
-            this.$refs['text-input'].focus();
-        }
-    },
     computed: {
         errorstr: function() {
             if (this.error) return this.error;
@@ -213,6 +212,11 @@ export default {
                 if (this.current === this.modelValue) return;
                 this.$emit('update:modelValue', this.current);
             }
+        }
+    },
+    mounted: function() {
+        if (this.autofocus) {
+            this.$refs['text-input'].focus();
         }
     }
 }
