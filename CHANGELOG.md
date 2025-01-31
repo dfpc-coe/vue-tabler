@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.64.0
+
+- :tada: Map TablerIconButton Enter actions to Click
+
 ### v3.63.0
 
 - :rocket: Include Icon Slot
