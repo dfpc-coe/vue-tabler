@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.65.0
+
+- :rocket: Remove `ms-auto` from TablerPager top level
+
 ### v3.64.0
 
 - :tada: Map TablerIconButton Enter actions to Click

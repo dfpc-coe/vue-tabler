@@ -1,5 +1,5 @@
 <template>
-    <div class='pagination m-0 ms-auto'>
+    <div class='pagination m-0'>
         <div>
             <template v-if='parseInt(total) <= parseInt(limit)'>
                 <button
