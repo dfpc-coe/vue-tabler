@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.66.3
+
+- :rocket: Update Alignment
+
 ### v3.66.2
 
 - :bug: Refresh Icon

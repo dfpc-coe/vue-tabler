@@ -9,10 +9,11 @@
         />
         <div
             v-else
+            class='d-flex align-items-center justify-content-center'
             style='{
-            height: 32px;
-            width: 32px;
-        }'
+                height: 32px;
+                width: 32px;
+            }'
         >
             <div
                 class='spinner-border text-secondary'
