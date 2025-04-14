@@ -10,7 +10,7 @@
         <div
             v-else
             class='d-flex align-items-center justify-content-center'
-            style='{
+            :style='{
                 height: 32px;
                 width: 32px;
             }'
