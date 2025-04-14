@@ -12,6 +12,10 @@
 
 ### v3.66.4
 
+- :tada: Make size configurable
+
+### v3.66.4
+
 - :bug: Vertical Alignment
 
 ### v3.66.3

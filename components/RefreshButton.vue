@@ -4,15 +4,15 @@
     >
         <IconRefresh
             v-if='!props.loading'
-            :size='32'
+            :size='props.size'
             stroke='1'
         />
         <div
             v-else
             class='d-flex align-items-center justify-content-center'
             :style='{
-                height: 32px;
-                width: 32px;
+                "height": `${props.size}px`,
+                "width": `${props.size}px`
             }'
         >
             <div
@@ -38,6 +38,10 @@ const props = defineProps({
     loading: {
         type: Boolean,
         default: false
+    },
+    size: {
+        type: Number,
+        default: 32
     }
 })
 </script>
