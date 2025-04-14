@@ -7,7 +7,7 @@
             :size='32'
             stroke='1'
         />
-        <div 
+        <div
             v-else
             style='{
             height: 32px;
@@ -24,6 +24,9 @@
 
 <script setup>
 import { defineProps } from 'vue'
+import {
+    IconRefresh
+} from '@tabler/icons-vue';
 import IconButton from './IconButton.vue';
 
 const props = defineProps({

@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.66.2
+
+- :bug: Refresh Icon
+
 ### v3.66.1
 
 - :bug: Fix props check
