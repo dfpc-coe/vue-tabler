@@ -10,7 +10,7 @@
 
 ## Version History
 
-### v3.66.4
+### v3.66.5
 
 - :tada: Make size configurable
 
