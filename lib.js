@@ -9,6 +9,7 @@ export { default as TablerInput } from './components/input/Input.vue'
 export { default as TablerEnum } from './components/input/Enum.vue';
 
 export { default as TablerButton } from './components/Button.vue'
+export { default as TablerRefreshButton } from './components/RefreshButton.vue'
 export { default as TablerIconButton } from './components/IconButton.vue'
 export { default as TablerDropdown } from './components/Dropdown.vue'
 export { default as TablerPager } from './components/Pager.vue'
