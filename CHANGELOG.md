@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.66.1
+
+- :bug: Fix props check
+
 ### v3.66.0
 
 - :rocket: Add `ButtonIcon` component

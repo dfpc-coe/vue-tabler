@@ -3,7 +3,7 @@
         :title='title'
     >
         <IconRefresh
-            v-if='!props.refreshing'
+            v-if='!props.loading'
             :size='32'
             stroke='1'
         />
@@ -26,12 +26,12 @@
 import { defineProps } from 'vue'
 import IconButton from './IconButton.vue';
 
-defineProps({
+const props = defineProps({
     title: {
         type: String,
         default: 'Refresh'
     },
-    refreshing: {
+    loading: {
         type: Boolean,
         default: false
     }
