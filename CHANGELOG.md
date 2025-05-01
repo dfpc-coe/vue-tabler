@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.68.0
+
+- :bug: Version Mismatch
+
 ### v3.67.1
 
 - :bug: Disable Show by default
