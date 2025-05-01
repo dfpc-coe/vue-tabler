@@ -2,7 +2,6 @@
     <div class='dropdown'>
         <div
             :id='id'
-            class="nav-link px-0"
             data-bs-toggle="dropdown"
             data-bs-auto-close="outside"
             aria-expanded="false"

@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.68.2
+
+- :bug: Remove Nav Link
+
 ### v3.68.1
 
 - :bug: Return to div
