@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.67.0
+
+- :tada: Dropdown Card
+
 ### v3.66.5
 
 - :tada: Make size configurable

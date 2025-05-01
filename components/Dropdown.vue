@@ -16,7 +16,7 @@
             </slot>
         </div>
         <ul
-            class='dropdown-menu'
+            class='dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card show'
             :style='{
                 "width": width
             }'
