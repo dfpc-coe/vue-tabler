@@ -3,10 +3,10 @@
         <div
             :id='id'
             data-bs-toggle="dropdown"
-            data-bs-auto-close="outside"
+            :data-bs-auto-close="autoclose"
             aria-expanded="false"
             @click.stop.prevent=''
-       > 
+       >
             <slot>
                 <IconSettings
                     :size='32'
@@ -43,6 +43,10 @@ export default {
         width: {
             type: Number,
             default: 200
+        },
+        autoClose: {
+            type: String,
+            default: 'true'
         }
     },
     data: function() {

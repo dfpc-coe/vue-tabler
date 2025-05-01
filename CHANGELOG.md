@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.68.3
+
+- :rocket: Add Bootstrap Dropdown Data
+
 ### v3.68.2
 
 - :bug: Remove Nav Link
