@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.67.1
+
+- :bug: Disable Show by default
+
 ### v3.67.0
 
 - :tada: Dropdown Card

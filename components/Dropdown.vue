@@ -1,12 +1,13 @@
 <template>
     <div class='dropdown'>
-        <div
+        <a
             :id='id'
-            type='button'
-            data-bs-toggle='dropdown'
-            aria-expanded='false'
+            class="nav-link px-0"
+            data-bs-toggle="dropdown"
+            data-bs-auto-close="outside"
+            aria-expanded="false"
             @click.stop.prevent=''
-        >
+       > 
             <slot>
                 <IconSettings
                     :size='32'
@@ -14,9 +15,9 @@
                     class='cursor-pointer'
                 />
             </slot>
-        </div>
+        </a>
         <ul
-            class='dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card show'
+            class='dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card'
             :style='{
                 "width": width
             }'
