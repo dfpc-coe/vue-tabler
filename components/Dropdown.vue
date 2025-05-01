@@ -1,6 +1,6 @@
 <template>
     <div class='dropdown'>
-        <a
+        <div
             :id='id'
             class="nav-link px-0"
             data-bs-toggle="dropdown"
@@ -15,7 +15,7 @@
                     class='cursor-pointer'
                 />
             </slot>
-        </a>
+        </div>
         <ul
             class='dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card'
             :style='{

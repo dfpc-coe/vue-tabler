@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.68.1
+
+- :bug: Return to div
+
 ### v3.68.0
 
 - :bug: Version Mismatch
