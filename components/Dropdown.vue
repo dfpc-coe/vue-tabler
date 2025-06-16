@@ -2,11 +2,11 @@
     <div class='dropdown'>
         <div
             :id='id'
-            data-bs-toggle="dropdown"
-            :data-bs-auto-close="autoclose"
-            aria-expanded="false"
+            data-bs-toggle='dropdown'
+            :data-bs-auto-close='props.autoclose'
+            aria-expanded='false'
             @click.stop.prevent=''
-       >
+        >
             <slot>
                 <IconSettings
                     :size='32'
@@ -44,7 +44,7 @@ export default {
             type: Number,
             default: 200
         },
-        autoClose: {
+        autoclose: {
             type: String,
             default: 'true'
         }

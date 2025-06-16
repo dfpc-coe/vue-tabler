@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.68.4
+
+- :bug: Fix autoclose case
+
 ### v3.68.3
 
 - :rocket: Add Bootstrap Dropdown Data
