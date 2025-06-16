@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.68.5
+
+- :bug: Migrate to Setup for `Dropdown`
+
 ### v3.68.4
 
 - :bug: Fix autoclose case

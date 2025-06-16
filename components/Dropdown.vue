@@ -29,30 +29,22 @@
     </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue';
 import {
     IconSettings
 } from '@tabler/icons-vue';
 
-export default {
-    name: 'TablerDropdown',
-    components: {
-        IconSettings
+const props = defineProps({
+    width: {
+        type: Number,
+        default: 200
     },
-    props: {
-        width: {
-            type: Number,
-            default: 200
-        },
-        autoclose: {
-            type: String,
-            default: 'true'
-        }
-    },
-    data: function() {
-        return {
-            id: 'tabler-dropdown-' + Math.random().toString(36).substr(2, 9) + '-' + Date.now().toString(36)
-        }
+    autoclose: {
+        type: String,
+        default: 'true'
     }
-}
+});
+
+const id = ref('tabler-dropdown-' + Math.random().toString(36).substr(2, 9) + '-' + Date.now().toString(36));
 </script>
