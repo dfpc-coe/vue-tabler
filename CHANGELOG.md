@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.69.0
+
+- :rocket: Move to dropdown for label descriptions
+
 ### v3.68.5
 
 - :bug: Migrate to Setup for `Dropdown`

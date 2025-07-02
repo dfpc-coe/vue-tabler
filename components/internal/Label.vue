@@ -1,22 +1,33 @@
 <template>
     <div class='col-12 d-flex my-1'>
         <span
-            v-if='description'
+            v-if='props.description'
             class='align-self-center'
         >
-            <IconInfoSquare
-                :size='20'
-                :stroke='1'
-                class='cursor-pointer'
-                @click='help = true'
-            />
-            <Help
-                v-if='help'
-                :label='label || placeholder'
-                :description='description'
-                @click='help = false'
-            />
-        </span>
+            <Dropdown>
+                <template #default>
+                    <IconInfoSquare
+                        :size='20'
+                        :stroke='1'
+                        class='cursor-pointer'
+                        @click='help = true'
+                    />
+                </template>
+                <template #dropdown>
+                    <div class='card'>
+                        <div class='card-header'>
+                            <div
+                                class='card-title'
+                                v-text='props.label'
+                            />
+                        </div>
+                        <div
+                            class='card-body'
+                            v-text='props.description'
+                        />
+                    </div>
+                </template>
+            </dropdown></span>
         <div class='align-self-center'>
             <div
                 v-if='label'
@@ -24,7 +35,7 @@
             >
                 <span v-text='label' />
                 <span
-                    v-if='required'
+                    v-if='props.required'
                     class='text-red mx-1'
                 >*</span>
             </div>
@@ -35,36 +46,25 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import {
     IconInfoSquare
 } from '@tabler/icons-vue';
-import Help from '../Help.vue';
 
-export default {
-    name: 'TablerInternalLabel',
-    components: {
-        Help,
-        IconInfoSquare
+import Dropdown from '../Dropdown.vue';
+
+const props = defineProps({
+    required: {
+        type: Boolean,
+        default: false,
     },
-    props: {
-        required: {
-            type: Boolean,
-            default: false,
-        },
-        description: {
-            type: String,
-            default: '',
-        },
-        label: {
-            type: String,
-            required: true
-        }
+    description: {
+        type: String,
+        default: '',
     },
-    data: function() {
-        return {
-            help: false,
-        }
+    label: {
+        type: String,
+        required: true
     }
-}
+});
 </script>
