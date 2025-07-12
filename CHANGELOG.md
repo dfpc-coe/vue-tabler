@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.70.0
+
+- :rocket: Add Menu DisplayType option to TablerDelete
+
 ### v3.69.0
 
 - :rocket: Move to dropdown for label descriptions

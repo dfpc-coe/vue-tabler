@@ -8,6 +8,18 @@
                 <span v-text='label' />
             </div>
         </template>
+        <template v-else-if='displaytype === "menu"'>
+            <div
+                class='cursor-pointer col-12 d-flex align-items-center px-2 py-2'
+                @click.stop.prevent='modal = true'
+            >
+                <IconTrash
+                    :size='32'
+                    stroke='1'
+                />
+                <span class='mx-2' v-text='label'/>
+            </div>
+        </template>
         <template v-else>
             <TablerIconButton
                 title='Delete'
@@ -17,7 +29,7 @@
                     :size='size'
                     :stroke='1'
                 />
-            </tablericonbutton>
+            </TablerIconButton>
         </template>
 
         <TablerModal v-if='modal'>
