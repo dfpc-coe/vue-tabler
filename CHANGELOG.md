@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.72.1
+
+- :bug: User error not committing the file
+
 ### v3.72.0
 
 - :rocket: Add seperate File Input
