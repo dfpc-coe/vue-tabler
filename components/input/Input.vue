@@ -41,6 +41,7 @@
                         :disabled='disabled'
                         :autocomplete='autocomplete'
                         :autofocus='autofocus'
+                        :accept='accept'
                         :type='computed_type'
                         :class='{
                             "is-invalid": errorstr
@@ -137,6 +138,9 @@ export default {
         disabled: {
             type: Boolean,
             default: false,
+        },
+        accept: {
+            type: String,
         },
         description: {
             type: String,

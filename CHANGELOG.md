@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.71.0
+
+- :rocket: Map Accept Value
+
 ### v3.70.0
 
 - :rocket: Add Menu DisplayType option to TablerDelete

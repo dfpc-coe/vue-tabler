@@ -27,13 +27,14 @@
                         />
                     </div>
                 </template>
-            </dropdown></span>
+            </dropdown>
+        </span>
         <div class='align-self-center'>
             <div
                 v-if='label'
                 class='px-2'
             >
-                <span v-text='label' />
+                <span class='user-select-none' v-text='label' />
                 <span
                     v-if='props.required'
                     class='text-red mx-1'
