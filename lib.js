@@ -6,6 +6,7 @@ export { default as TablerColour } from './components/input/Colour.vue'
 export { default as TablerSelect } from './components/input/Select.vue'
 export { default as TablerToggle } from './components/input/Toggle.vue'
 export { default as TablerInput } from './components/input/Input.vue'
+export { default as TablerFileInput } from './components/input/FileInput.vue'
 export { default as TablerEnum } from './components/input/Enum.vue';
 
 export { default as TablerButton } from './components/Button.vue'

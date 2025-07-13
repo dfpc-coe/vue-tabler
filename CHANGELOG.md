@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.72.0
+
+- :rocket: Add seperate File Input
+
 ### v3.71.0
 
 - :rocket: Map Accept Value
