@@ -1,27 +1,29 @@
 <template>
-    <div
-        ref='modal'
-        class='modal modal-blur fade show'
-        tabindex='-1'
-        style='display: block;'
-        aria-modal='true'
-        role='dialog'
-    >
+    <teleport to='body'>
         <div
-            class='modal-dialog modal-dialog-centered'
-            role='document'
-            :class='{
-                "modal-sm": size === "sm",
-                "modal-md": size === "md",
-                "modal-lg": size === "lg",
-                "modal-xl": size === "xl",
-            }'
+            ref='modal'
+            class='modal modal-blur fade show'
+            tabindex='-1'
+            style='display: block;'
+            aria-modal='true'
+            role='dialog'
         >
-            <div class='modal-content'>
-                <slot />
+            <div
+                class='modal-dialog modal-dialog-centered'
+                role='document'
+                :class='{
+                    "modal-sm": size === "sm",
+                    "modal-md": size === "md",
+                    "modal-lg": size === "lg",
+                    "modal-xl": size === "xl",
+                }'
+            >
+                <div class='modal-content'>
+                    <slot />
+                </div>
             </div>
         </div>
-    </div>
+    </teleport>
 </template>
 
 <script>

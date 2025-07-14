@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.75.0
+
+- :tada: Teleport `TablerModal` to body by default
+
 ### v3.74.0
 
 - :tada: Introduce TS Linting
