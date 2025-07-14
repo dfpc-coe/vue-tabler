@@ -24,7 +24,6 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
 import {
     IconRefresh
 } from '@tabler/icons-vue';

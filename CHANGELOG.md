@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.74.0
+
+- :tada: Introduce TS Linting
+
 ### v3.73.0
 
 - :tada: Add `InlineAlert` component

@@ -53,7 +53,7 @@ export default {
 
                 let res = `${this.months[date.getUTCMonth()]} ${date.getUTCDate()}${suffix}`;
                 if (date.getFullYear() !== new Date().getFullYear()) {
-                    res + ` ${date.getFullYear()}`;
+                    res = res + ` ${date.getFullYear()}`;
                 }
 
                 res = res + `, ${String(date.getUTCHours()).padStart(2, '0')}:${String(date.getMinutes()).padEnd(2, '0')}`;

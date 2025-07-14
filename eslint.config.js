@@ -1,9 +1,11 @@
 import js from "@eslint/js";
 import globals from "globals"
 import eslintPluginVue from 'eslint-plugin-vue'
+import ts from 'typescript-eslint';
 
 export default [
     js.configs.recommended,
+    ...ts.configs.recommended,
     ...eslintPluginVue.configs['flat/recommended'],
     {   
         languageOptions: {

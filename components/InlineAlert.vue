@@ -55,8 +55,8 @@
 </template>
 
 <script setup lang='ts'>
-import { withDefaults } from 'vue'
 import {
+    IconCheck,
     IconQuestionMark,
     IconInfoCircle,
     IconExclamationCircle,
@@ -64,10 +64,10 @@ import {
 } from '@tabler/icons-vue';
 
 const props = withDefaults(defineProps<{
-    severity: string // info, danger, warning, success
+    severity?: string // info, danger, warning, success
     title: string
     description?: string
-    dismissable: boolean
+    dismissable?: boolean
 }>(), {
     severity: 'info',
     dismissable: false,

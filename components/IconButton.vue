@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { useId, defineProps, useTemplateRef } from 'vue'
+import { useId, useTemplateRef } from 'vue'
 
 const iconid = useId();
 
