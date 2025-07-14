@@ -1,5 +1,4 @@
 // Inputs
-export { default as TablerAlert } from './components/Alert.vue'
 export { default as TablerTimeZone } from './components/input/TimeZone.vue'
 export { default as TablerRange } from './components/input/Range.vue'
 export { default as TablerColour } from './components/input/Colour.vue'
@@ -9,6 +8,8 @@ export { default as TablerInput } from './components/input/Input.vue'
 export { default as TablerFileInput } from './components/input/FileInput.vue'
 export { default as TablerEnum } from './components/input/Enum.vue';
 
+export { default as TablerAlert } from './components/Alert.vue'
+export { default as TablerInlineAlert } from './components/InlineAlert.vue'
 export { default as TablerButton } from './components/Button.vue'
 export { default as TablerRefreshButton } from './components/RefreshButton.vue'
 export { default as TablerIconButton } from './components/IconButton.vue'

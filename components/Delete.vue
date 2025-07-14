@@ -17,7 +17,10 @@
                     :size='32'
                     stroke='1'
                 />
-                <span class='mx-2' v-text='label'/>
+                <span
+                    class='mx-2'
+                    v-text='label'
+                />
             </div>
         </template>
         <template v-else>

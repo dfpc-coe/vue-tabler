@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.73.0
+
+- :tada: Add `InlineAlert` component
+
 ### v3.72.1
 
 - :bug: User error not committing the file

@@ -11,7 +11,6 @@
         <div class='col-12'>
             <input
                 ref='text-input'
-                @change='$emit("change", $event)'
                 :disabled='disabled'
                 :autofocus='autofocus'
                 :accept='accept'
@@ -21,8 +20,9 @@
                 }'
                 class='form-control'
                 :placeholder='placeholder||label||""'
+                @change='$emit("change", $event)'
                 @blur='$emit("blur")'
-            />
+            >
             <span
                 v-if='loading'
                 class='input-icon-addon'
