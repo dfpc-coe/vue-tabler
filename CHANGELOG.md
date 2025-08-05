@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.76.0
+
+- :tada: Add focus event on Input component
+
 ### v3.75.0
 
 - :tada: Teleport `TablerModal` to body by default

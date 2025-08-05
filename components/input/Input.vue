@@ -48,6 +48,7 @@
                         class='form-control'
                         :placeholder='placeholder||label||""'
                         @keyup.enter='$emit("submit")'
+                        @focus='$emit("focus")'
                         @blur='$emit("blur")'
                     >
                     <span
@@ -82,6 +83,7 @@
                     class='form-control'
                     :placeholder='placeholder||label||""'
                     @keyup.enter='$emit("submit")'
+                    @focus='$emit("focus")'
                     @blur='$emit("blur")'
                 />
                 <div
@@ -158,7 +160,7 @@ export default {
         placeholder: String,
         error: String,
     },
-    emits: ['blur', 'submit', 'update:modelValue'],
+    emits: ['blur', 'focus', 'submit', 'update:modelValue'],
     data: function() {
         return {
             help: false,
