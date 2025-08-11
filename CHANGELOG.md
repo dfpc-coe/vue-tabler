@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.77.0
+
+- :tada: Allow changing the position of TablerDropdown
+
 ### v3.76.0
 
 - :tada: Add focus event on Input component
