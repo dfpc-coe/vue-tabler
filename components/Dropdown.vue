@@ -78,7 +78,7 @@ const dropdownClasses = computed(() => {
 });
 
 const menuClasses = computed(() => {
-    const baseClasses = 'dropdown-menu dropdown-menu-arrow dropdown-menu-card';
+    const baseClasses = 'dropdown-menu dropdown-menu-card';
     
     switch (props.position) {
         case 'bottom-start':
@@ -86,7 +86,7 @@ const menuClasses = computed(() => {
             return `${baseClasses} dropdown-menu-start`;
         case 'bottom-end':
         case 'top-end':
-            return `${baseClasses} dropdown-menu-end`;
+            return `${baseClasses} dropdown-menu-end dropdown-menu-arrow`;
         default: // bottom, top, left, right
             return baseClasses;
     }
