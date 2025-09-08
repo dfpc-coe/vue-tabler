@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.78.0
+
+- :rocket: Allow setting `disabled` prop on TablerButton
+
 ### v3.77.0
 
 - :tada: Allow changing the position of TablerDropdown
