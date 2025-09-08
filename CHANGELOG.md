@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.78.1
+
+- :bug: Fix disabled state on button
+
 ### v3.78.0
 
 - :rocket: Allow setting `disabled` prop on TablerButton

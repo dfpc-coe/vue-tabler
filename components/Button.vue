@@ -10,6 +10,6 @@
 
 <script setup>
 const props = defineProps<{
-    disabled?: boolean
+    disabled: Boolean
 }>()
 </script>
