@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-const props = defineProps<{
+    const props = defineProps({
     disabled: Boolean
-}>()
+    })
 </script>
