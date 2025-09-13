@@ -15,9 +15,6 @@
         <IconChevronDown
             size="24"
             stroke="1.5"
-            :style='{
-                color: "var(--tblr-border-color)"
-            }'
             class='arrow'
             :class="{ 'expanded': isExpanded }"
         />
@@ -57,11 +54,12 @@ function toggle() {
 }
 
 .hover-expandable:hover {
-    border-color: var(--tblr-primary-rgb);
+    border-color: var(--tblr-muted);
+}
 
-    .arrow {
-        color: var(--tblr-primary-rgb);
-    }
+.hover-expandable:hover .arrow-container {
+    color: var(--tablr-primary-rgb);
+    border-color: var(--tblr-primary-rgb);
 }
 
 .expandable-content-wrapper {
@@ -71,30 +69,28 @@ function toggle() {
 }
 
 .arrow-container {
-    background-color: var(--tblr-primary-rgb);
+    border: 1px solid var(--tblr-border-color);
+    border-radius: 50%;
+    background-color: var(--tblr-border-color);
+    color: var(--tblr-body-color);
     position: absolute;
-    bottom: -10px;
+    bottom: -12px;
     left: 50%;
     transform: translateX(-50%);
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
 }
 
-.arrow.expanded {
-    animation: flip 0.3s linear 1;
+.arrow {
+    transition: transform 0.3s ease-out;
 }
 
-@keyframes flip {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(180deg);
-    }
+.arrow.expanded {
+    transform: rotate(180deg);
 }
 </style>
 
