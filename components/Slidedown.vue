@@ -1,5 +1,8 @@
 <template>
-    <div class="hover-expandable rounded position-relative px-2 py-2">
+    <div
+        class="hover-expandable rounded position-relative px-2 py-2"
+        :class="{ 'is-expanded': isExpanded }"
+    >
 
     <div class='mb-2'>
         <slot/>
@@ -53,13 +56,16 @@ function toggle() {
     transition: border-color 0.2s ease;
 }
 
-.hover-expandable:hover {
-    border-color: var(--tblr-muted);
+.hover-expandable:not(.is-expanded):hover {
+    border: 1px solid color-mix(in srgb, var(--tblr-border-color), white 25%);
 }
 
-.hover-expandable:hover .arrow-container {
-    color: var(--tablr-primary-rgb);
+.hover-expandable:not(.is-expanded):hover .arrow-container {
     border-color: var(--tblr-primary-rgb);
+}
+
+.hover-expandable:not(.is-expanded):hover .arrow {
+    color: var(--tblr-secondary-color, white);
 }
 
 .expandable-content-wrapper {
@@ -83,14 +89,16 @@ function toggle() {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .arrow {
-    transition: transform 0.3s ease-out;
+    transition: transform 0.3s ease-out, color 0.2s ease;
 }
 
 .arrow.expanded {
     transform: rotate(180deg);
 }
 </style>
+
 
