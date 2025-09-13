@@ -106,7 +106,8 @@
     </div>
 </template>
 
-<script>
+<script setup>
+import { ref, watch, onMounted } from 'vue'
 import TablerInput from './input/Input.vue';
 import TablerToggle from './input/Toggle.vue';
 import TablerEnum from './input/Enum.vue';
@@ -116,83 +117,63 @@ import {
     IconTrash,
 } from '@tabler/icons-vue';
 
-export default {
-    name: 'TablerSchema',
-    components: {
-        IconPlus,
-        IconTrash,
-        TablerInput,
-        TablerToggle,
-        TablerEnum,
-        TablerLoading
+const props = defineProps({
+    modelValue: {
+        type: Object,
+        required: true
     },
-    props: {
-        modelValue: {
-            type: Object,
-            required: true
-        },
-        schema: {
-            type: Object,
-            required: true
-        },
-        disabled: {
-            type: Boolean,
-            default: false
-        }
+    schema: {
+        type: Object,
+        required: true
     },
-    emits: [
-        'update:modelValue'
-    ],
-    data: function() {
-        return {
-            loading: true,
-            s: {},
-            data: {},
-        };
-    },
-    watch: {
-        data: {
-            deep: true,
-            handler: function() {
-                this.$emit('update:modelValue', this.data);
-            }
-        },
-    },
-    mounted: async function() {
-        this.loading = true;
-        this.data = JSON.parse(JSON.stringify(this.modelValue));
-        this.s = JSON.parse(JSON.stringify(this.schema));
+    disabled: {
+        type: Boolean,
+        default: false
+    }
+})
 
-        if (this.s.type === 'object' && this.s.properties) {
-            for (const req of (this.s.required || [])) {
-                this.s.properties[req].required = true;
-            }
+const emit = defineEmits(['update:modelValue'])
 
-            for (const key in this.s.properties) {
-                if (!this.data[key] && this.s.properties[key].type === 'array') {
-                    this.data[key] = [];
-                }
-            }
+const loading = ref(true)
+const s = ref({})
+const data = ref({})
+
+const push = (key) => {
+    if (!props.schema.properties[key].items) data.value[key].push('');
+    if (props.schema.properties[key].items.type === 'object') {
+        data.value[key].push({});
+    } else if (props.schema.properties[key].items.type === 'array') {
+        data.value[key].push([]);
+    } else if (props.schema.properties[key].items.type === 'boolean') {
+        data.value[key].push(false);
+    } else {
+        data.value[key].push('');
+    }
+}
+
+// Watch for data changes
+watch(data, () => {
+    emit('update:modelValue', data.value);
+}, { deep: true })
+
+// Mounted lifecycle
+onMounted(async () => {
+    loading.value = true;
+    data.value = JSON.parse(JSON.stringify(props.modelValue));
+    s.value = JSON.parse(JSON.stringify(props.schema));
+
+    if (s.value.type === 'object' && s.value.properties) {
+        for (const req of (s.value.required || [])) {
+            s.value.properties[req].required = true;
         }
 
-        this.loading = false;
-    },
-    methods: {
-        remove: function(key, arr, i) {
-            this.data[key].splice(i, 1)
-        },
-        push: function(key) {
-            if (!this.schema.properties[key].items) this.data[key].push('');
-            if (this.schema.properties[key].items.type === 'object') {
-                this.data[key].push({});
-            } else if (this.schema.properties[key].items.type === 'array') {
-                this.data[key].push([]);
-            } else if (this.schema.properties[key].items.type === 'boolean') {
-                this.data[key].push(false);
-            } else {
-                this.data[key].push('');
+        for (const key in s.value.properties) {
+            if (!data.value[key] && s.value.properties[key].type === 'array') {
+                data.value[key] = [];
             }
         }
     }
-}
+
+    loading.value = false;
+})
 </script>
