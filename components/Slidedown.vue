@@ -1,29 +1,34 @@
 <template>
     <div
-        class="hover-expandable rounded position-relative px-2 py-2"
-        :class="{ 'is-expanded': isExpanded }"
+        class='hover-expandable rounded position-relative px-2 py-2'
+        :class='{ &apos;is-expanded&apos;: isExpanded }'
     >
+        <div class='mb-2'>
+            <slot />
+        </div>
 
-    <div class='mb-2'>
-        <slot/>
+        <div
+            ref='contentWrapperRef'
+            class='expandable-content-wrapper'
+        >
+            <div class='expandable-content-inner p-3'>
+                <slot name='expanded' />
+            </div>
+        </div>
+
+        <div
+            class='arrow-container'
+            title='Toggle content'
+            @click='toggle'
+        >
+            <IconChevronDown
+                size='24'
+                stroke='1.5'
+                class='arrow'
+                :class='{ &apos;expanded&apos;: isExpanded }'
+            />
+        </div>
     </div>
-
-    <div class="expandable-content-wrapper" ref="contentWrapperRef">
-      <div class="expandable-content-inner p-3">
-        <slot name="expanded"></slot>
-      </div>
-    </div>
-
-    <div class="arrow-container" @click="toggle" title="Toggle content">
-        <IconChevronDown
-            size="24"
-            stroke="1.5"
-            class='arrow'
-            :class="{ 'expanded': isExpanded }"
-        />
-    </div>
-
-  </div>
 </template>
 
 <script setup>

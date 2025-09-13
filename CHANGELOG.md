@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.79.1
+
+- :rocket: Fix a bunch of lints the new setup syntax uncovered
+
 ### v3.79.0
 
 - :tada: Migrate all components to `<script setup>`
