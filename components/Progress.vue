@@ -7,14 +7,11 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'TablerProgress',
-    props: {
-        percent: {
-            type: Number,
-            default: 1
-        }
+<script setup>
+defineProps({
+    percent: {
+        type: Number,
+        default: 1
     }
-}
+})
 </script>

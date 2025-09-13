@@ -5,30 +5,27 @@
     />
 </template>
 
-<script>
-import showdown from 'showdown';
+<script setup>
+import { computed } from 'vue'
+import showdown from 'showdown'
 
-export default {
-    name: 'TablerMarkdown',
-    props: {
-        markdown: {
-            type: String,
-            required: true
-        },
-        autowrap: {
-            type: Boolean,
-            default: true
-        }
+const props = defineProps({
+    markdown: {
+        type: String,
+        required: true
     },
-    computed: {
-        html: function() {
-            const converter = new showdown.Converter({
-                tables: true,
-                tasklists: true,
-                emoji: true
-            });
-            return converter.makeHtml(this.markdown);
-        }
+    autowrap: {
+        type: Boolean,
+        default: true
     }
-}
+})
+
+const html = computed(() => {
+    const converter = new showdown.Converter({
+        tables: true,
+        tasklists: true,
+        emoji: true
+    })
+    return converter.makeHtml(props.markdown)
+})
 </script>

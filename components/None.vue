@@ -35,7 +35,7 @@
             :class='{
                 "my-4": !compact
             }'
-            @click='$emit("create")'
+            @click='emit("create")'
         >
             <div class='btn btn-primary'>
                 <span>Create <span v-text='label' /></span>
@@ -44,32 +44,27 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import {
     IconNotesOff
 } from '@tabler/icons-vue'
 
-export default {
-    name: 'TablerNone',
-    components: {
-        IconNotesOff
+defineProps({
+    label: {
+        type: String,
+        default: 'Items'
     },
-    props: {
-        label: {
-            type: String,
-            default: 'Items'
-        },
-        compact: {
-            type: Boolean,
-            default: false
-        },
-        create: {
-            type: Boolean,
-            default: true
-        },
+    compact: {
+        type: Boolean,
+        default: false
     },
-    emits: [
-        'create'
-    ]
-}
+    create: {
+        type: Boolean,
+        default: true
+    },
+})
+
+const emit = defineEmits([
+    'create'
+])
 </script>
