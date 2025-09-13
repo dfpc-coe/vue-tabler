@@ -10,6 +10,11 @@
 
 ## Version History
 
+### v3.79.2
+
+- :bug: Fix `ref` bug on inputs
+- :rocket: Further improved Slidedown CSS
+
 ### v3.79.1
 
 - :rocket: Fix a bunch of lints the new setup syntax uncovered

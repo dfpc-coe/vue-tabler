@@ -1,7 +1,11 @@
 <template>
+
+    <span v-text='isExpanded ? "Collapse" : "Expand"' />
     <div
         class='hover-expandable rounded position-relative px-2 py-2'
-        :class='{ &apos;is-expanded&apos;: isExpanded }'
+        :class='{
+            "expanded": isExpanded
+        }'
     >
         <div class='mb-2'>
             <slot />
@@ -25,7 +29,9 @@
                 size='24'
                 stroke='1.5'
                 class='arrow'
-                :class='{ &apos;expanded&apos;: isExpanded }'
+                :class='{
+                    "expanded": isExpanded
+                }'
             />
         </div>
     </div>
@@ -42,16 +48,17 @@ const isExpanded = ref(false);
 const contentWrapperRef = ref(null);
 
 function toggle() {
-  isExpanded.value = !isExpanded.value;
-  const el = contentWrapperRef.value;
+    isExpanded.value = !isExpanded.value;
 
-  if (el) {
-    if (isExpanded.value) {
-      el.style.maxHeight = el.scrollHeight + 'px';
-    } else {
-      el.style.maxHeight = null;
+    const el = contentWrapperRef.value;
+
+    if (el) {
+        if (isExpanded.value) {
+            el.style.maxHeight = el.scrollHeight + 'px';
+        } else {
+            el.style.maxHeight = null;
+        }
     }
-  }
 };
 </script>
 
@@ -61,15 +68,15 @@ function toggle() {
     transition: border-color 0.2s ease;
 }
 
-.hover-expandable:not(.is-expanded):hover {
-    border: 1px solid color-mix(in srgb, var(--tblr-border-color), white 25%);
+.hover-expandable:not(.expanded):hover {
+    border: 1px solid color-mix(in srgb, var(--tblr-border-color), white 10%);
 }
 
-.hover-expandable:not(.is-expanded):hover .arrow-container {
-    border-color: var(--tblr-primary-rgb);
+.hover-expandable:not(.expanded):hover .arrow-container {
+    border-color: color-mix(in srgb, var(--tblr-border-color), white 25%);
 }
 
-.hover-expandable:not(.is-expanded):hover .arrow {
+.hover-expandable:not(.expanded):hover .arrow {
     color: var(--tblr-secondary-color, white);
 }
 
@@ -95,6 +102,10 @@ function toggle() {
     justify-content: center;
     cursor: pointer;
     transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.arrow-container:hover {
+    border-color: var(--tblr-primary-rgb) !important;
 }
 
 .arrow {

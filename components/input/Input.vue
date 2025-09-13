@@ -36,7 +36,7 @@
                         />
                     </span>
                     <input
-                        ref='text-input'
+                        ref='textInput'
                         v-model='current'
                         :disabled='disabled'
                         :autocomplete='autocomplete'
@@ -69,7 +69,7 @@
             </template>
             <template v-else>
                 <textarea
-                    ref='text-input'
+                    ref='textInput'
                     v-model='current'
                     :disabled='disabled'
                     :autofocus='autofocus'

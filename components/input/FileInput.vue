@@ -10,7 +10,7 @@
         </TablerLabel>
         <div class='col-12'>
             <input
-                ref='text-input'
+                ref='textInput'
                 :disabled='disabled'
                 :autofocus='autofocus'
                 :accept='accept'
