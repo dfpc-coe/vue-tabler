@@ -1,11 +1,11 @@
 <template>
     <div
         class='hover-expandable rounded position-relative px-2 py-2'
-        @click='(props.clickAnywhereExpand && !isExpanded) ? toggle() : null'
         :class='{
             "expanded": isExpanded,
-             "cursor-pointer": props.clickAnywhereExpand && !isExpanded
+            "cursor-pointer": props.clickAnywhereExpand && !isExpanded
         }'
+        @click='(props.clickAnywhereExpand && !isExpanded) ? toggle() : null'
     >
         <div class='mb-2'>
             <slot />
