@@ -61,42 +61,32 @@
     </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue'
 import {
     IconAlertTriangle,
     IconChevronRight,
     IconChevronDown,
 } from '@tabler/icons-vue'
 
-export default {
-    name: 'TablerAlert',
-    props: {
-        title: {
-            type: String,
-            default: 'Generic Error'
-        },
-        err: {
-            type: Error,
-            default: new Error('Something is amiss')
-        },
-        compact: {
-            type: Boolean,
-            default: false
-        },
-        advanced: {
-            type: Boolean,
-            default: true
-        },
+defineProps({
+    title: {
+        type: String,
+        default: 'Generic Error'
     },
-    data: function() {
-        return {
-            open: false
-        }
+    err: {
+        type: Error,
+        default: new Error('Something is amiss')
     },
-    components: {
-        IconAlertTriangle,
-        IconChevronRight,
-        IconChevronDown,
-    }
-}
+    compact: {
+        type: Boolean,
+        default: false
+    },
+    advanced: {
+        type: Boolean,
+        default: true
+    },
+})
+
+const open = ref(false)
 </script>

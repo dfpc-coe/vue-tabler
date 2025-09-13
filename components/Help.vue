@@ -34,32 +34,25 @@
     </Modal>
 </template>
 
-<script>
-import Modal from './Modal.vue';
+<script setup>
+import Modal from './Modal.vue'
 
-export default {
-    name: 'TablerHelp',
-    components: {
-        Modal,
+defineProps({
+    label: {
+        type: String,
+        default: 'Help'
     },
-    props: {
-        label: {
-            type: String,
-            require: false,
-            default: 'Help'
-        },
-        description: {
-            type: String,
-            require: true
-        }
-    },
-    emits: [
-        'close'
-    ],
-    methods: {
-        close: function() {
-            this.$emit('close');
-        }
+    description: {
+        type: String,
+        required: true
     }
+})
+
+const emit = defineEmits([
+    'close'
+])
+
+const close = () => {
+    emit('close')
 }
 </script>
