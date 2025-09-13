@@ -10,6 +10,11 @@
 
 ## Version History
 
+### v3.79.0
+
+- :tada: Migrate all components to `<script setup>`
+- :tada: Add `TablerSlidedown` component
+
 ### v3.78.2
 
 - :bug: Fix disabled state on button
