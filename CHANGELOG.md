@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.79.3
+
+- :bug: Remove Debug Code
+
 ### v3.79.2
 
 - :bug: Fix `ref` bug on inputs

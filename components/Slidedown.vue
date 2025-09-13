@@ -1,6 +1,4 @@
 <template>
-
-    <span v-text='isExpanded ? "Collapse" : "Expand"' />
     <div
         class='hover-expandable rounded position-relative px-2 py-2'
         :class='{
