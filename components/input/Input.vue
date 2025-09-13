@@ -96,130 +96,131 @@
     </div>
 </template>
 
-<script>
-import TablerLabel from '../internal/Label.vue';
+<script setup>
+import { ref, computed, watch, onMounted } from 'vue'
+import TablerLabel from '../internal/Label.vue'
 import {
     IconUser,
     IconLock,
     IconSearch
-} from '@tabler/icons-vue';
+} from '@tabler/icons-vue'
 
-export default {
-    name: 'TablerInput',
-    components: {
-        IconUser,
-        IconLock,
-        IconSearch,
-        TablerLabel
+const props = defineProps({
+    modelValue: {
+        type: [String, Number],
+        required: true
     },
-    props: {
-        modelValue: {
-            type: [String, Number],
-            required: true
-        },
-        autocomplete: {
-            type: String,
-            default: 'on'
-        },
-        autofocus: {
-            type: Boolean,
-            default: false
-        },
-        icon: {
-            type: String,
-        },
-        loading: {
-            type: Boolean,
-            default: false
-        },
-        required: {
-            type: Boolean,
-            default: false,
-        },
-        disabled: {
-            type: Boolean,
-            default: false,
-        },
-        description: {
-            type: String,
-            default: '',
-        },
-        rows: {
-            type: Number,
-            default: 1
-        },
-        wrap: {
-            type: String,
-            default: 'soft'
-        },
-        type: {
-            type: String,
-            default: 'text'
-        },
-        label: String,
-        placeholder: String,
-        error: String,
+    autocomplete: {
+        type: String,
+        default: 'on'
     },
-    emits: ['blur', 'focus', 'submit', 'update:modelValue'],
-    data: function() {
-        return {
-            help: false,
-            internal_error: '',
-            current: this.modelValue === undefined ? '' : this.modelValue
-        }
+    autofocus: {
+        type: Boolean,
+        default: false
     },
-    computed: {
-        errorstr: function() {
-            if (this.error) return this.error;
-            return this.internal_error;
-        },
-        computed_type: function() {
-            if (this.type === 'integer') return 'number';
-            return this.type;
-        }
+    icon: {
+        type: String,
+        default: ''
     },
-    watch: {
-        modelValue: function() {
-            if (this.current !== String(this.modelValue)) {
-                this.current = String(this.modelValue);
-            }
-        },
-        current: function() {
-            if (typeof this.modelValue === 'number' || this.type === 'number') {
-                const current = Number(this.current);
+    loading: {
+        type: Boolean,
+        default: false
+    },
+    required: {
+        type: Boolean,
+        default: false,
+    },
+    disabled: {
+        type: Boolean,
+        default: false,
+    },
+    description: {
+        type: String,
+        default: '',
+    },
+    rows: {
+        type: Number,
+        default: 1
+    },
+    wrap: {
+        type: String,
+        default: 'soft'
+    },
+    type: {
+        type: String,
+        default: 'text'
+    },
+    label: {
+        type: String,
+        default: ''
+    },
+    placeholder: {
+        type: String,
+        default: ''
+    },
+    error: {
+        type: String,
+        default: ''
+    },
+})
 
-                if (isNaN(current)) {
-                    this.internal_error = 'Must be a number!';
-                } else if (current === this.modelValue) {
-                    this.internal_error = '';
-                    return;
-                } else {
-                    this.internal_error = '';
-                    this.$emit('update:modelValue', current);
-                }
-            } else if (this.type === 'integer') {
-                const current = parseInt(this.current);
+const emit = defineEmits(['blur', 'focus', 'submit', 'update:modelValue'])
 
-                if (isNaN(current)) {
-                    this.internal_error = 'Must be an integer!';
-                } else if (current === this.modelValue) {
-                    this.internal_error = '';
-                    return;
-                } else {
-                    this.internal_error = '';
-                    this.$emit('update:modelValue', current);
-                }
-            } else {
-                this.internal_error = '';
-                if (this.current === this.modelValue) return;
-                this.$emit('update:modelValue', this.current);
-            }
-        }
-    },
-    mounted: function() {
-        if (this.autofocus) {
-            this.$refs['text-input'].focus();
-        }
+const textInput = ref(null)
+const internal_error = ref('')
+const current = ref(props.modelValue === undefined ? '' : props.modelValue)
+
+const errorstr = computed(() => {
+    if (props.error) return props.error
+    return internal_error.value
+})
+
+const computed_type = computed(() => {
+    if (props.type === 'integer') return 'number'
+    return props.type
+})
+
+watch(() => props.modelValue, (newValue) => {
+    if (current.value !== String(newValue)) {
+        current.value = String(newValue)
     }
-}
+})
+
+watch(current, (newValue) => {
+    if (typeof props.modelValue === 'number' || props.type === 'number') {
+        const currentNum = Number(newValue)
+
+        if (isNaN(currentNum)) {
+            internal_error.value = 'Must be a number!'
+        } else if (currentNum === props.modelValue) {
+            internal_error.value = ''
+            return
+        } else {
+            internal_error.value = ''
+            emit('update:modelValue', currentNum)
+        }
+    } else if (props.type === 'integer') {
+        const currentInt = parseInt(newValue)
+
+        if (isNaN(currentInt)) {
+            internal_error.value = 'Must be an integer!'
+        } else if (currentInt === props.modelValue) {
+            internal_error.value = ''
+            return
+        } else {
+            internal_error.value = ''
+            emit('update:modelValue', currentInt)
+        }
+    } else {
+        internal_error.value = ''
+        if (newValue === props.modelValue) return
+        emit('update:modelValue', newValue)
+    }
+})
+
+onMounted(() => {
+    if (props.autofocus) {
+        textInput.value.focus()
+    }
+})
 </script>

@@ -6,7 +6,7 @@
         <li class='breadcrumb-item'>
             <a
                 class='cursor-pointer'
-                @click='$router.push("/")'
+                @click='router.push("/")'
             >Home</a>
         </li>
         <li
@@ -24,41 +24,43 @@
             <a
                 v-else-if='normalize'
                 class='cursor-pointer'
-                @click='$router.push("/" + crumbs.splice(0, crumb_it + 1).join("/").toLowerCase())'
+                @click='router.push("/" + crumbs.splice(0, crumb_it + 1).join("/").toLowerCase())'
                 v-text='crumb'
             />
             <a
                 v-else
                 class='cursor-pointer'
-                @click='$router.push("/" + crumbs.splice(0, crumb_it + 1).join("/"))'
+                @click='router.push("/" + crumbs.splice(0, crumb_it + 1).join("/"))'
                 v-text='crumb'
             />
         </li>
     </ol>
 </template>
 
-<script>
-export default {
-    name: 'BreadCrumb',
-    props: {
-        normalize: {
-            type: Boolean,
-            default: true,
-            description: 'Perform Title Casing on URL Components'
+<script setup>
+import { computed } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+
+const props = defineProps({
+    normalize: {
+        type: Boolean,
+        default: true,
+        description: 'Perform Title Casing on URL Components'
+    }
+})
+
+const router = useRouter()
+const route = useRoute()
+
+const crumbs = computed(() => {
+    return route.path.split('/').filter((crumb) => {
+        return crumb.length
+    }).map((crumb) => {
+        if (props.normalize) {
+            return `${crumb[0].toUpperCase()}${crumb.slice(1, crumb.length)}`
+        } else {
+            return `${crumb[0]}${crumb.slice(1, crumb.length)}`
         }
-    },
-    data: function() {
-        return {
-            crumbs: this.$route.path.split('/').filter((crumb) => {
-                return crumb.length;
-            }).map((crumb) => {
-                if (this.normalize) {
-                    return `${crumb[0].toUpperCase()}${crumb.slice(1, crumb.length)}`;
-                } else {
-                    return `${crumb[0]}${crumb.slice(1, crumb.length)}`;
-                }
-            })
-        }
-    },
-}
+    })
+})
 </script>

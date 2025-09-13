@@ -38,18 +38,15 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'TablerLoading',
-    props: {
-        inline: {
-            type: Boolean,
-            default: false
-        },
-        desc: {
-            type: String,
-            default: 'Loading...'
-        }
+<script setup>
+defineProps({
+    inline: {
+        type: Boolean,
+        default: false
+    },
+    desc: {
+        type: String,
+        default: 'Loading...'
     }
-}
+})
 </script>

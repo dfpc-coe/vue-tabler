@@ -28,42 +28,30 @@
     </Modal>
 </template>
 
-<script>
-import Modal from './Modal.vue';
-import Alert from './Alert.vue';
+<script setup>
+import Modal from './Modal.vue'
+import Alert from './Alert.vue'
 
-export default {
-    name: 'TablerErr',
-    components: {
-        Alert,
-        Modal
+defineProps({
+    err: {
+        type: Error,
+        required: true
     },
-    props: {
-        err: {
-            type: Error,
-            required: true
-        },
-        title: {
-            type: String,
-            default: 'Website Error'
-        },
-        trace: {
-            type: Boolean,
-            default: true
-        }
+    title: {
+        type: String,
+        default: 'Website Error'
     },
-    emits: [
-        'close'
-    ],
-    data: function() {
-        return {
-            open: false
-        }
-    },
-    methods: {
-        close: function() {
-            this.$emit('close');
-        },
+    trace: {
+        type: Boolean,
+        default: true
     }
+})
+
+const emit = defineEmits([
+    'close'
+])
+
+const close = () => {
+    emit('close')
 }
 </script>
