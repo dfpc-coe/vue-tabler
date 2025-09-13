@@ -26,20 +26,22 @@
     </teleport>
 </template>
 
-<script>
-export default {
-    name: 'TablerModal',
-    props: {
-        size: {
-            // sm, md, lg, xl
-            type: String,
-            default: 'sm'
-        }
-    },
-    mounted: function() {
-        this.$nextTick(() => {
-            this.$refs.modal.focus();
-        })
+<script setup>
+import { ref, onMounted, nextTick } from 'vue'
+
+defineProps({
+    size: {
+        // sm, md, lg, xl
+        type: String,
+        default: 'sm'
     }
-}
+})
+
+const modal = ref(null)
+
+onMounted(() => {
+    nextTick(() => {
+        modal.value.focus()
+    })
+})
 </script>

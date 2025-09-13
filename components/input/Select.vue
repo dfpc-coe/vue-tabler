@@ -23,41 +23,41 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'TablerSelect',
-    props: {
-        modelValue: {
-            type: String,
-            required: true,
-        },
-        default: {
-            type: String,
-            required: false
-        },
-        options: {
-            type: Array,
-            required: true
-        },
+<script setup>
+import { ref, watch, onMounted } from 'vue'
+
+const props = defineProps({
+    modelValue: {
+        type: String,
+        required: true,
     },
-    emits: [
-        'update:modelValue'
-    ],
-    data: function() {
-        return {
-            current: ''
-        }
+    default: {
+        type: String,
+        default: ''
     },
-    watch: {
-        current: function() {
-            if (this.modelValue !== this.current) {
-                this.$emit('update:modelValue', this.current);
-            }
-        }
+    options: {
+        type: Array,
+        required: true
     },
-    mounted: function() {
-        if (!this.modelValue && this.default) this.current = this.default
-        else this.current = this.modelValue;
-    },
-}
+})
+
+const emit = defineEmits([
+    'update:modelValue'
+])
+
+const current = ref('')
+
+watch(current, (newValue) => {
+    if (props.modelValue !== newValue) {
+        emit('update:modelValue', newValue)
+    }
+})
+
+onMounted(() => {
+    if (!props.modelValue && props.default) {
+        current.value = props.default
+    } else {
+        current.value = props.modelValue
+    }
+})
 </script>

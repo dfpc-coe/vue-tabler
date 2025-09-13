@@ -20,61 +20,55 @@
     </div>
 </template>
 
-<script>
-import TablerLabel from '../internal/Label.vue';
+<script setup>
+import { ref, watch, onMounted } from 'vue'
+import TablerLabel from '../internal/Label.vue'
 
-export default {
-    name: 'TablerToggle',
-    components: {
-        TablerLabel
+const props = defineProps({
+    modelValue: {
+        type: Boolean,
+        required: true
     },
-    props: {
-        modelValue: {
-            type: Boolean,
-            required: true
-        },
-        autofocus: {
-            type: Boolean,
-            default: false
-        },
-        disabled: {
-            type: Boolean,
-            default: false
-        },
-        required: {
-            type: Boolean,
-            default: false
-        },
-        description: {
-            type: String,
-            default: ''
-        },
-        label: {
-            type: String,
-            default: ''
-        }
+    autofocus: {
+        type: Boolean,
+        default: false
     },
-    emits: [
-        'blur',
-        'submit',
-        'update:modelValue'
-    ],
-    data: function() {
-        return {
-            current: this.modelValue
-        }
+    disabled: {
+        type: Boolean,
+        default: false
     },
-    watch: {
-        modelValue: function() {
-            this.current = this.modelValue;
-        },
-        current: function() {
-            if (this.current === this.modelValue) return;
-            this.$emit('update:modelValue', this.current);
-        }
+    required: {
+        type: Boolean,
+        default: false
     },
-    mounted: function() {
-        this.current = this.modelValue;
+    description: {
+        type: String,
+        default: ''
+    },
+    label: {
+        type: String,
+        default: ''
     }
-}
+})
+
+const emit = defineEmits([
+    'blur',
+    'submit',
+    'update:modelValue'
+])
+
+const current = ref(props.modelValue)
+
+watch(() => props.modelValue, (newValue) => {
+    current.value = newValue
+})
+
+watch(current, (newValue) => {
+    if (newValue === props.modelValue) return
+    emit('update:modelValue', newValue)
+})
+
+onMounted(() => {
+    current.value = props.modelValue
+})
 </script>

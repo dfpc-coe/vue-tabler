@@ -25,65 +25,59 @@
     </div>
 </template>
 
-<script>
-import TablerLabel from '../internal/Label.vue';
+<script setup>
+import { ref, watch } from 'vue'
+import TablerLabel from '../internal/Label.vue'
 
-export default {
-    name: 'TablerRange',
-    components: {
-        TablerLabel
+const props = defineProps({
+    modelValue: {
+        type: Number,
+        required: true
     },
-    props: {
-        modelValue: {
-            type: Number,
-            required: true
-        },
-        autofocus: {
-            type: Boolean,
-            default: false
-        },
-        min: {
-            type: Number,
-            default: 0
-        },
-        max: {
-            type: Number,
-            default: 10
-        },
-        step: {
-            type: Number,
-            default: 1
-        },
-        required: {
-            type: Boolean,
-            default: false,
-        },
-        disabled: {
-            type: Boolean,
-            default: false,
-        },
-        description: {
-            type: String,
-            default: '',
-        },
-        label: String,
+    autofocus: {
+        type: Boolean,
+        default: false
     },
-    emits: [
-        'blur',
-        'submit',
-        'update:modelValue'
-    ],
-    data: function() {
-        return {
-            help: false,
-            current: this.modelValue
-        }
+    min: {
+        type: Number,
+        default: 0
     },
-    watch: {
-        current: function() {
-            if (this.current === this.modelValue) return;
-            this.$emit('update:modelValue', Number(this.current));
-        }
-    }
-}
+    max: {
+        type: Number,
+        default: 10
+    },
+    step: {
+        type: Number,
+        default: 1
+    },
+    required: {
+        type: Boolean,
+        default: false,
+    },
+    disabled: {
+        type: Boolean,
+        default: false,
+    },
+    description: {
+        type: String,
+        default: '',
+    },
+    label: {
+        type: String,
+        default: ''
+    },
+})
+
+const emit = defineEmits([
+    'blur',
+    'submit',
+    'update:modelValue'
+])
+
+const current = ref(props.modelValue)
+
+watch(current, (newValue) => {
+    if (newValue === props.modelValue) return
+    emit('update:modelValue', Number(newValue))
+})
 </script>
