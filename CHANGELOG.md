@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.80.0
+
+- :rocket: Add `clickAnywhereExpand` prop to TablerSlidedown
+
 ### v3.79.3
 
 - :bug: Remove Debug Code

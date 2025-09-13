@@ -1,8 +1,10 @@
 <template>
     <div
         class='hover-expandable rounded position-relative px-2 py-2'
+        @click='(props.clickAnywhereExpand && !isExpanded) ? toggle() : null'
         :class='{
-            "expanded": isExpanded
+            "expanded": isExpanded,
+             "cursor-pointer": props.clickAnywhereExpand && !isExpanded
         }'
     >
         <div class='mb-2'>
@@ -21,7 +23,7 @@
         <div
             class='arrow-container'
             title='Toggle content'
-            @click='toggle'
+            @click.stop='toggle'
         >
             <IconChevronDown
                 size='24'
@@ -44,6 +46,13 @@ import {
 const isExpanded = ref(false);
 
 const contentWrapperRef = ref(null);
+
+const props = defineProps({
+    clickAnywhereExpand: {
+        type: Boolean,
+        default: false
+    }
+});
 
 function toggle() {
     isExpanded.value = !isExpanded.value;
