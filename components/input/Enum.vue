@@ -27,70 +27,64 @@
     </div>
 </template>
 
-<script>
-import TablerLabel from '../internal/Label.vue';
+<script setup>
+import { ref, watch } from 'vue'
+import TablerLabel from '../internal/Label.vue'
 
-export default {
-    name: 'TablerEnum',
-    components: {
-        TablerLabel
+const props = defineProps({
+    modelValue: {
+        type: String,
+        required: true
     },
-    props: {
-        modelValue: {
-            type: String,
-            required: true
-        },
-        autofocus: {
-            type: Boolean,
-            default: false
-        },
-        default: {
-            type: String,
-            required: false
-        },
-        required: {
-            type: Boolean,
-            required: false
-        },
-        description: {
-            type: String,
-            required: false
-        },
-        options: {
-            type: Array,
-            required: true
-        },
-        disabled: {
-            type: Boolean,
-            default: false,
-        },
-        label: String,
+    autofocus: {
+        type: Boolean,
+        default: false
     },
-    emits: [
-        'blur',
-        'update:modelValue'
-    ],
-    data: function() {
-        const data = {
-            current: ''
-        }
+    default: {
+        type: String,
+        default: ''
+    },
+    required: {
+        type: Boolean,
+        default: false
+    },
+    description: {
+        type: String,
+        default: ''
+    },
+    options: {
+        type: Array,
+        required: true
+    },
+    disabled: {
+        type: Boolean,
+        default: false,
+    },
+    label: {
+        type: String,
+        default: ''
+    },
+})
 
-        if (!this.modelValue && this.default) {
-            data.current = this.default
-        } else {
-            data.current = this.modelValue;
-        }
+const emit = defineEmits([
+    'blur',
+    'update:modelValue'
+])
 
-        return data;
-    },
-    watch: {
-        modelValue: function() {
-            this.current = this.modelValue;
-        },
-        current: function() {
-            if (this.current === this.modelValue) return;
-            this.$emit('update:modelValue', this.current);
-        }
-    }
+// Initialize current value
+const current = ref('')
+if (!props.modelValue && props.default) {
+    current.value = props.default
+} else {
+    current.value = props.modelValue
 }
+
+watch(() => props.modelValue, (newValue) => {
+    current.value = newValue
+})
+
+watch(current, (newValue) => {
+    if (newValue === props.modelValue) return
+    emit('update:modelValue', newValue)
+})
 </script>

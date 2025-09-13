@@ -7,13 +7,13 @@
         :disabled='disabled'
         :required='required'
         :default='inverse.has(modelValue) ? inverse.get(modelValue) : "No TimeZone"'
-        @change='$emit("update:modelValue", map.get($event.target.value).tzCode)'
-        @submit='$emit("submit")'
-        @blur='$emit("blur")'
+        @update:model-value='emit("update:modelValue", map.get($event).tzCode)'
+        @submit='emit("submit")'
+        @blur='emit("blur")'
     />
 </template>
 
-<script>
+<script setup>
 import TablerEnum from './Enum.vue'
 
 const tzs = [
@@ -443,57 +443,48 @@ const tzs = [
     { label:"Pacific/Kiritimati (GMT+14:00)", "tzCode":"Pacific/Kiritimati", }
 ]
 
-export default {
-    name: 'TablerTimeZone',
-    components: {
-        TablerEnum
+defineProps({
+    modelValue: {
+        type: String,
+        required: true
     },
-    props: {
-        modelValue: {
-            type: String,
-            required: true
-        },
-        autofocus: {
-            type: Boolean,
-            default: false
-        },
-        description: {
-            type: String,
-            default: ''
-        },
-        required: {
-            type: Boolean
-        },
-        disabled: {
-            type: Boolean,
-            default: false
-        },
-        label: {
-            type: String,
-            default: 'Default Timezone'
-        },
+    autofocus: {
+        type: Boolean,
+        default: false
     },
-    emits: [
-        'submit',
-        'blur',
-        'update:modelValue'
-    ],
-    data: function() {
-        const map = new Map();
-        const inverse = new Map();
+    description: {
+        type: String,
+        default: ''
+    },
+    required: {
+        type: Boolean,
+        default: false
+    },
+    disabled: {
+        type: Boolean,
+        default: false
+    },
+    label: {
+        type: String,
+        default: 'Default Timezone'
+    },
+})
 
-        map.set('No TimeZone', { tzCode: '' });
-        for (const tz of tzs) {
-            map.set(tz.label, tz);
-            inverse.set(tz.tzCode, tz.label);
-        }
+const emit = defineEmits([
+    'submit',
+    'blur',
+    'update:modelValue'
+])
 
-        return {
-            map,
-            inverse,
-            internal: this.modelValue,
-            timezones: ['No TimeZone'].concat(tzs.map((tz) => tz.label))
-        }
-    }
+// Create maps for timezone conversion
+const map = new Map()
+const inverse = new Map()
+
+map.set('No TimeZone', { tzCode: '' })
+for (const tz of tzs) {
+    map.set(tz.label, tz)
+    inverse.set(tz.tzCode, tz.label)
 }
+
+const timezones = ['No TimeZone'].concat(tzs.map((tz) => tz.label))
 </script>

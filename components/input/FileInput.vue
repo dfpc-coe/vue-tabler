@@ -41,63 +41,66 @@
     </div>
 </template>
 
-<script>
-import TablerLabel from '../internal/Label.vue';
+<script setup>
+import { ref, computed, onMounted } from 'vue'
+import TablerLabel from '../internal/Label.vue'
 
-export default {
-    name: 'TablerFileInput',
-    components: {
-        TablerLabel
+const props = defineProps({
+    modelValue: {
+        type: [String, Number],
+        required: true
     },
-    props: {
-        modelValue: {
-            type: [String, Number],
-            required: true
-        },
-        autofocus: {
-            type: Boolean,
-            default: false
-        },
-        loading: {
-            type: Boolean,
-            default: false
-        },
-        required: {
-            type: Boolean,
-            default: false,
-        },
-        disabled: {
-            type: Boolean,
-            default: false,
-        },
-        accept: {
-            type: String,
-        },
-        description: {
-            type: String,
-            default: '',
-        },
-        label: String,
-        placeholder: String,
-        error: String,
+    autofocus: {
+        type: Boolean,
+        default: false
     },
-    emits: ['blur', 'change'],
-    data: function() {
-        return {
-            help: false,
-            internal_error: '',
-        }
+    loading: {
+        type: Boolean,
+        default: false
     },
-    computed: {
-        errorstr: function() {
-            if (this.error) return this.error;
-            return this.internal_error;
-        },
+    required: {
+        type: Boolean,
+        default: false,
     },
-    mounted: function() {
-        if (this.autofocus) {
-            this.$refs['text-input'].focus();
-        }
+    disabled: {
+        type: Boolean,
+        default: false,
+    },
+    accept: {
+        type: String,
+        default: ''
+    },
+    description: {
+        type: String,
+        default: '',
+    },
+    label: {
+        type: String,
+        default: ''
+    },
+    placeholder: {
+        type: String,
+        default: ''
+    },
+    error: {
+        type: String,
+        default: ''
+    },
+})
+
+defineEmits(['blur', 'change'])
+
+const textInput = ref(null)
+const internal_error = ref('')
+
+const errorstr = computed(() => {
+    if (props.error) return props.error
+    return internal_error.value
+})
+
+onMounted(() => {
+    if (props.autofocus) {
+        textInput.value.focus()
     }
-}
+})
 </script>
