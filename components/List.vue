@@ -65,83 +65,76 @@
     </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed, watch, onMounted } from 'vue'
 import TablerInput from './input/Input.vue';
 import {
     IconSettings
 } from '@tabler/icons-vue';
 
-export default {
-    name: 'TablerList',
-    components: {
-        IconSettings,
-        TablerInput
+const props = defineProps({
+    url: String,
+    listkey: String,
+    namekey: String,
+    initial: Object,
+    label: {
+        type: String,
+        default: ''
     },
-    props: {
-        url: String,
-        listkey: String,
-        namekey: String,
-        initial: Object,
-        label: {
-            type: String,
-            default: ''
-        },
-        required: {
-            type: Boolean,
-            default: false
-        },
-        disabled: {
-            type: Boolean,
-            default: false
-        },
-        limit: {
-            type: Number,
-            default: 10
-        },
+    required: {
+        type: Boolean,
+        default: false
     },
-    emits: [
-        'selected'
-    ],
-    data: function() {
-        return {
-            ele: null,
-            isMounted: false,
-            filter: '',
-            list: {}
-        }
+    disabled: {
+        type: Boolean,
+        default: false
     },
-    computed: {
-        buttonHeight() {
-            if(!this.isMounted) return 100;
-            const buttonDOM = this.$refs.button
-            return buttonDOM ? buttonDOM.offsetWidth : 100;
-        },
+    limit: {
+        type: Number,
+        default: 10
     },
-    watch: {
-        ele: function() {
-            this.filter = '';
-        },
-        filter: async function() {
-            await this.fetchList();
-        }
-    },
-    mounted: async function() {
-        if (this.initial && this.initial[this.namekey]) this.ele = this.initial;
-        await this.fetchList();
-        this.isMounted = true;
-    },
-    methods: {
-        select: function(ele) {
-            this.ele = ele;
-            this.filter = ele[this.namekey];
-            this.$emit("selected", ele)
-        },
-        fetchList: async function() {
-            const url = window.stdurl(this.url);
-            url.searchParams.append('filter', this.filter);
-            url.searchParams.append('limit', this.limit);
-            this.list = await window.std(url);
-        }
-    }
+})
+
+const emit = defineEmits(['selected'])
+
+const ele = ref(null)
+const isMounted = ref(false)
+const filter = ref('')
+const list = ref({})
+const button = ref(null)
+
+const buttonHeight = computed(() => {
+    if(!isMounted.value) return 100;
+    const buttonDOM = button.value
+    return buttonDOM ? buttonDOM.offsetWidth : 100;
+})
+
+const select = (selectedEle) => {
+    ele.value = selectedEle;
+    filter.value = selectedEle[props.namekey];
+    emit("selected", selectedEle)
 }
+
+const fetchList = async () => {
+    const url = window.stdurl(props.url);
+    url.searchParams.append('filter', filter.value);
+    url.searchParams.append('limit', props.limit);
+    list.value = await window.std(url);
+}
+
+// Watchers
+watch(ele, () => {
+    filter.value = '';
+})
+
+watch(filter, async () => {
+    await fetchList();
+})
+
+// Mounted lifecycle
+onMounted(async () => {
+    if (props.initial && props.initial[props.namekey]) ele.value = props.initial;
+    await fetchList();
+    isMounted.value = true;
+})
 </script>

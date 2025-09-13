@@ -1,14 +1,14 @@
 <template>
     <div>
-        <template v-if='displaytype === "button"'>
+        <template v-if='props.displaytype === "button"'>
             <div
                 class='btn btn-outline-danger'
                 @click.stop.prevent='modal = true'
             >
-                <span v-text='label' />
+                <span v-text='props.label' />
             </div>
         </template>
-        <template v-else-if='displaytype === "menu"'>
+        <template v-else-if='props.displaytype === "menu"'>
             <div
                 class='cursor-pointer col-12 d-flex align-items-center px-2 py-2'
                 @click.stop.prevent='modal = true'
@@ -19,7 +19,7 @@
                 />
                 <span
                     class='mx-2'
-                    v-text='label'
+                    v-text='props.label'
                 />
             </div>
         </template>
@@ -29,7 +29,7 @@
                 @click.stop.prevent='modal = true'
             >
                 <IconTrash
-                    :size='size'
+                    :size='props.size'
                     :stroke='1'
                 />
             </TablerIconButton>
@@ -52,7 +52,7 @@
             <div class='modal-footer'>
                 <div
                     class='btn btn-danger'
-                    @click='$emit("delete")'
+                    @click='deleting'
                 >
                     <TablerLoading
                         v-if='loading'
@@ -60,11 +60,11 @@
                     />
                     <template v-else>
                         <IconTrash
-                            :size='32'
+                            :size='props.size'
                             :stroke='1'
                         /><span
                             class='mx-2'
-                            v-text='label'
+                            v-text='props.label'
                         />
                     </template>
                 </div>
@@ -73,7 +73,8 @@
     </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue'
 import TablerModal from './Modal.vue';
 import TablerIconButton from './IconButton.vue';
 import TablerLoading from './Loading.vue';
@@ -81,42 +82,28 @@ import {
     IconTrash
 } from '@tabler/icons-vue';
 
-export default {
-    name: 'TablerDelete',
-    components: {
-        IconTrash,
-        TablerLoading,
-        TablerIconButton,
-        TablerModal
+const props = defineProps({
+    label: {
+        type: String,
+        default: 'Delete'
     },
-    props: {
-        label: {
-            type: String,
-            default: 'Delete'
-        },
-        size: {
-            type: Number,
-            default: 32
-        },
-        displaytype: {
-            type: String,
-            default: 'button' // Or icon
-        }
+    size: {
+        type: Number,
+        default: 32
     },
-    emits: [
-        'delete'
-    ],
-    data: function() {
-        return {
-            loading: false,
-            modal: false
-        }
-    },
-    methods: {
-        deleting: function() {
-            this.loading = true;
-            this.$emit('delete')
-        }
+    displaytype: {
+        type: String,
+        default: 'button' // Or icon
     }
+})
+
+const emit = defineEmits(['delete'])
+
+const loading = ref(false)
+const modal = ref(false)
+
+const deleting = () => {
+    loading.value = true;
+    emit('delete')
 }
 </script>

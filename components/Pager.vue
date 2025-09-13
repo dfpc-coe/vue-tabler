@@ -55,98 +55,105 @@
     </div>
 </template>
 
-<script>
+<script setup>
+import { ref, watch } from 'vue'
 import {
     IconHome
 } from '@tabler/icons-vue';
 
-export default {
-    name: 'TablerPager',
-    components: {
-        IconHome
+const props = defineProps({
+    total: {
+        type: Number
     },
-    props: {
-        total: {
-            type: Number
-        },
-        page: {
-            type: Number
-        },
-        limit: {
-            type: Number
-        }
+    page: {
+        type: Number
     },
-    emits: [
-        'page'
-    ],
-    data: function() {
-        return this.create();
-    },
-    watch: {
-        page: function() {
-            this.current = this.page;
-        },
-        total: function() {
-            const set = this.create();
-
-            this.spread = set.spread;
-            this.middle = set.middle;
-            this.current = set.current;
-            this.end = set.end;
-        },
-        limit: function() {
-            const set = this.create();
-
-            this.spread = set.spread;
-            this.middle = set.middle;
-            this.current = set.current;
-            this.end = set.end;
-        },
-        current: function() {
-            if (this.end < 5) return; // All buttons are shown already
-
-            let start;
-            if (this.current <= 3) {
-                start = 0;
-            } else if (this.current >= this.end - 4) {
-                start = this.end - this.spread - 2;
-            } else {
-                start = this.current - 3;
-            }
-
-            this.middle = this.middle.map((ele, i) => {
-                return start + i + 1;
-            });
-        }
-    },
-    methods: {
-        create: function() {
-            const end = Math.ceil(parseInt(this.total) / parseInt(this.limit));
-            let spread; //Number of pages in between home button and last page
-            if (end <= 2) {
-                spread = 0;
-            } else if (end >= 7) {
-                spread = 5;
-            } else {
-                spread = end - 2;
-            }
-
-            // Array containing middle page number
-            let middleAr = new Array(spread).fill(1, 0, spread).map((ele, i) => {
-                return 1 + i;
-            });
-
-            return {
-                spread: spread,
-                middle: middleAr,
-                current: this.page || 0,
-                end: end
-            };
-        },
-        changePage: function(page) {
-            this.current = page;
-            this.$emit('page', this.current);
-        }
+    limit: {
+        type: Number
     }
+})
+
+const emit = defineEmits(['page'])
+
+const spread = ref(0)
+const middle = ref([])
+const current = ref(0)
+const end = ref(0)
+
+const create = () => {
+    const endValue = Math.ceil(parseInt(props.total) / parseInt(props.limit));
+    let spreadValue; //Number of pages in between home button and last page
+    if (endValue <= 2) {
+        spreadValue = 0;
+    } else if (endValue >= 7) {
+        spreadValue = 5;
+    } else {
+        spreadValue = endValue - 2;
+    }
+
+    // Array containing middle page number
+    let middleAr = new Array(spreadValue).fill(1, 0, spreadValue).map((ele, i) => {
+        return 1 + i;
+    });
+
+    return {
+        spread: spreadValue,
+        middle: middleAr,
+        current: props.page || 0,
+        end: endValue
+    };
 }
+
+const changePage = (page) => {
+    current.value = page;
+    emit('page', current.value);
+}
+
+// Initialize values
+const initialValues = create();
+spread.value = initialValues.spread;
+middle.value = initialValues.middle;
+current.value = initialValues.current;
+end.value = initialValues.end;
+
+// Watch for page changes
+watch(() => props.page, () => {
+    current.value = props.page;
+})
+
+// Watch for total changes
+watch(() => props.total, () => {
+    const set = create();
+    spread.value = set.spread;
+    middle.value = set.middle;
+    current.value = set.current;
+    end.value = set.end;
+})
+
+// Watch for limit changes
+watch(() => props.limit, () => {
+    const set = create();
+    spread.value = set.spread;
+    middle.value = set.middle;
+    current.value = set.current;
+    end.value = set.end;
+})
+
+// Watch for current changes
+watch(current, () => {
+    if (end.value < 5) return; // All buttons are shown already
+
+    let start;
+    if (current.value <= 3) {
+        start = 0;
+    } else if (current.value >= end.value - 4) {
+        start = end.value - spread.value - 2;
+    } else {
+        start = current.value - 3;
+    }
+
+    middle.value = middle.value.map((ele, i) => {
+        return start + i + 1;
+    });
+})
 </script>
