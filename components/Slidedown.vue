@@ -2,12 +2,16 @@
     <div
         class='hover-expandable rounded position-relative px-2 py-2'
         :class='{
-            "expanded": isExpanded,
+            "expanded mb-3": isExpanded,
             "cursor-pointer": props.clickAnywhereExpand && !isExpanded
         }'
         @click='(props.clickAnywhereExpand && !isExpanded) ? toggle() : null'
     >
-        <div class='mb-2'>
+        <div
+            :class='{
+                "mb-2": props.arrow
+            }'
+        >
             <slot />
         </div>
 
@@ -21,6 +25,7 @@
         </div>
 
         <div
+            v-if='props.arrow || isExpanded'
             class='arrow-container'
             title='Toggle content'
             @click.stop='toggle'
@@ -48,6 +53,10 @@ const isExpanded = ref(false);
 const contentWrapperRef = ref(null);
 
 const props = defineProps({
+    arrow: {
+        type: Boolean,
+        default: true
+    },
     clickAnywhereExpand: {
         type: Boolean,
         default: false

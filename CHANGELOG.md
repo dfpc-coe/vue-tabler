@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.82.0
+
+- :rocket: Arrow customization for TablerSlidedown
+
 ### v3.81.0
 
 - :rocket: Add visual indicator on hover to TablerIconButton
