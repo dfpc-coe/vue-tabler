@@ -10,6 +10,11 @@
 
 ## Version History
 
+### v3.81.0
+
+- :rocket: Add visual indicator on hover to TablerIconButton
+- :tada: Support Disabled State for TablerIconButton & TablerDelete
+
 ### v3.80.0
 
 - :rocket: Add `clickAnywhereExpand` prop to TablerSlidedown

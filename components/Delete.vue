@@ -1,17 +1,21 @@
 <template>
     <div>
         <template v-if='props.displaytype === "button"'>
-            <div
+            <button
                 class='btn btn-outline-danger'
-                @click.stop.prevent='modal = true'
+                :disabled='props.disabled'
+                @click.stop.prevent='props.disabled ? undefined : modal = true'
             >
                 <span v-text='props.label' />
-            </div>
+            </button>
         </template>
         <template v-else-if='props.displaytype === "menu"'>
             <div
-                class='cursor-pointer col-12 d-flex align-items-center px-2 py-2'
-                @click.stop.prevent='modal = true'
+                class='col-12 d-flex align-items-center px-2 py-2'
+                :class='{
+                    "cursor-pointer": !props.disabled,
+                }'
+                @click.stop.prevent='props.disabled ? undefined : modal = true'
             >
                 <IconTrash
                     :size='32'
@@ -26,7 +30,8 @@
         <template v-else>
             <TablerIconButton
                 title='Delete'
-                @click.stop.prevent='modal = true'
+                :disabled='props.disabled'
+                @click.stop.prevent='props.disabled ? undefined : modal = true'
             >
                 <IconTrash
                     :size='props.size'
@@ -90,6 +95,10 @@ const props = defineProps({
     size: {
         type: Number,
         default: 32
+    },
+    disabled: {
+        type: Boolean,
+        default: false
     },
     displaytype: {
         type: String,
