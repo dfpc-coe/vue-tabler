@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.83.1
+
+- :arrow_up: Update Core Deps
+
 ### v3.83.0
 
 - :tada: Password Fields can be unhidden
