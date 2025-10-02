@@ -10,6 +10,11 @@
 
 ## Version History
 
+### v3.83.0
+
+- :tada: Password Fields can be unhidden
+- :rocket: Icon=Search input fields get a `clear` button
+
 ### v3.82.0
 
 - :rocket: Arrow customization for TablerSlidedown

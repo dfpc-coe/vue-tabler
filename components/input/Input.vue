@@ -10,10 +10,10 @@
         </TablerLabel>
         <div class='col-12'>
             <template v-if='!rows || rows <= 1'>
-                <div class='input-icon'>
+                <div class='input-group input-group-flat'>
                     <span
                         v-if='icon || $slots.icon'
-                        class='input-icon-addon'
+                        class='input-group-text'
                     >
                         <IconSearch
                             v-if='icon === "search"'
@@ -53,12 +53,63 @@
                     >
                     <span
                         v-if='loading'
-                        class='input-icon-addon'
+                        class='input-group-text'
                     >
                         <div
                             class='spinner-border spinner-border-sm text-secondary'
                             role='status'
                         />
+                    </span>
+                    <span
+                        v-else-if='type === &apos;password&apos;'
+                        class='input-group-text'
+                        @click='passwordVisible = !passwordVisible'
+                    >
+                        <a
+                            v-if='!passwordVisible'
+                            href='#'
+                            class='link-secondary'
+                            data-bs-toggle='tooltip'
+                            aria-label='Show Password'
+                            data-bs-original-title='Show Password'
+                        >
+                            <IconEye
+                                :size='20'
+                                :stroke='1'
+                            />
+                        </a>
+                        <a
+                            v-else
+                            href='#'
+                            class='link-secondary'
+                            data-bs-toggle='tooltip'
+                            aria-label='Show Password'
+                            data-bs-original-title='Show Password'
+                        >
+                            <IconEyeOff
+                                :size='20'
+                                :stroke='1'
+                            />
+                        </a>
+                    </span>
+                    <span
+                        v-else-if='icon === "search" && current.length'
+                        class='input-group-text'
+                        @click='current = ""'
+                    >
+                        <a
+                            v-if='!passwordVisible'
+                            href='#'
+                            class='link-secondary'
+                            data-bs-toggle='tooltip'
+                            aria-label='Clear'
+                            data-bs-original-title='Clear'
+                        >
+                            <IconCircleXFilled
+                                :size='20'
+                                :stroke='1'
+                            />
+                        </a>
                     </span>
                     <div
                         v-if='errorstr'
@@ -101,8 +152,11 @@ import { ref, computed, watch, onMounted } from 'vue'
 import TablerLabel from '../internal/Label.vue'
 import {
     IconUser,
+    IconCircleXFilled,
     IconLock,
-    IconSearch
+    IconSearch,
+    IconEye,
+    IconEyeOff
 } from '@tabler/icons-vue'
 
 const props = defineProps({
@@ -170,12 +224,15 @@ const textInput = ref(null)
 const internal_error = ref('')
 const current = ref(props.modelValue === undefined ? '' : props.modelValue)
 
+const passwordVisible = ref(false);
+
 const errorstr = computed(() => {
     if (props.error) return props.error
     return internal_error.value
 })
 
 const computed_type = computed(() => {
+    if (props.type === 'password' && passwordVisible.value) return 'text';
     if (props.type === 'integer') return 'number'
     return props.type
 })
