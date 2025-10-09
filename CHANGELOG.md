@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.83.2
+
+- :rocket: Avoid Ugly Autofill background in Firefox
+
 ### v3.83.1
 
 - :arrow_up: Update Core Deps

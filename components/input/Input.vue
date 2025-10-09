@@ -281,3 +281,12 @@ onMounted(() => {
     }
 })
 </script>
+
+<style scoped>
+input:autofill {
+    transition:
+        background-color calc(infinity * 1s) step-end,
+        background-image calc(infinity * 1s) step-end allow-discrete,
+        color calc(infinity * 1s) step-end;
+}
+</style>
