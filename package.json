@@ -3,7 +3,11 @@
     "type": "module",
     "version": "3.83.2",
     "lib": "lib.js",
+    "main": "lib.js",
     "module": "lib.js",
+    "exports": {
+        ".": "./lib.js"
+    },
     "description": "Tabler UI components for Vue3",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",

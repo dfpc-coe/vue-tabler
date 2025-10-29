@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.83.3
+
+- :rocket: Additional Exports Options in Package.json
+
 ### v3.83.2
 
 - :rocket: Avoid Ugly Autofill background in Firefox
