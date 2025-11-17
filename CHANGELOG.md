@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.84.0
+
+- :rocket: Add Modal Fade Animation
+
 ### v3.83.3
 
 - :rocket: Additional Exports Options in Package.json
