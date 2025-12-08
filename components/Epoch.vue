@@ -45,16 +45,16 @@ const display = computed(() => {
             .replace('T', ' ')
             .replace(/:[0-9]+\.[0-9]+[A-Z]/, '')
     } else if (props.format === 'Human') {
-        const day = String(date.getUTCDate())
+        const day = String(date.getDate())
         let suf = suffix[day.slice(day.length - 1)] || 'th'
         if (['11', '12', '13'].includes(day)) suf = 'th'
 
-        let res = `${months[date.getUTCMonth()]} ${date.getUTCDate()}${suf}`
+        let res = `${months[date.getMonth()]} ${date.getDate()}${suf}`
         if (date.getFullYear() !== new Date().getFullYear()) {
             res = res + ` ${date.getFullYear()}`
         }
 
-        res = res + `, ${String(date.getUTCHours()).padStart(2, '0')}:${String(date.getMinutes()).padEnd(2, '0')}`
+        res = res + `, ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
 
         return res
     } else {

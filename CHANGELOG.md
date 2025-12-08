@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.85.0
+
+- :rocket: Show time in localtime by default in Epoch Component
+
 ### v3.84.0
 
 - :rocket: Add Modal Fade Animation
