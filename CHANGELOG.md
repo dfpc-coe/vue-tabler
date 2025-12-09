@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.86.0
+
+- :rocket: Allow disabling Fade Transition on Modal
+
 ### v3.85.0
 
 - :rocket: Show time in localtime by default in Epoch Component

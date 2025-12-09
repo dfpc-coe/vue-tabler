@@ -1,9 +1,14 @@
 <template>
     <teleport to='body'>
-        <Transition name='modal-fade' appear>
+        <Transition
+            :name='fade ? "modal-fade" : ""'
+            :appear='fade'
+            :css='fade'
+        >
             <div
                 ref='modal'
-                class='modal modal-blur fade show'
+                class='modal modal-blur show'
+                :class='{ "fade": fade }'
                 tabindex='-1'
                 style='display: block;'
                 aria-modal='true'
@@ -36,6 +41,10 @@ defineProps({
         // sm, md, lg, xl
         type: String,
         default: 'sm'
+    },
+    fade: {
+        type: Boolean,
+        default: true
     }
 })
 
