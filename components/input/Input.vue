@@ -277,7 +277,9 @@ watch(current, (newValue) => {
 
 onMounted(() => {
     if (props.autofocus) {
-        textInput.value.focus()
+        setTimeout(() => {
+            if (textInput.value) textInput.value.focus()
+        }, 50)
     }
 })
 </script>
