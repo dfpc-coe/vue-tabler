@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.87.1
+
+- :rocket: Add npm Trusted Publisher
+
 ### v3.87.0
 
 - :rocket: Improvements to AutoFocus on Input
