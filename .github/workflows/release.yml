@@ -22,9 +22,6 @@ jobs:
       - name: Update npm
         run: npm install -g npm@latest
 
-      - name: Set Version
-        run: npm version ${{ github.ref_name }} --no-git-tag-version
-
       - name: npm install
         run: npm install
 
