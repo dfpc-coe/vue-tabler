@@ -13,19 +13,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
 
-      - name: Get tag
-        id: tag
-        uses: dawidd6/action-get-tag@v1
-
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: 22
-          registry-url: https://registry.npmjs.org/
+
+      - name: Update npm
+        run: npm install -g npm@latest
+
+      - name: Set Version
+        run: npm version ${{ github.ref_name }} --no-git-tag-version
 
       - name: npm install
         run: npm install
 
       - name: npm publish
-        run: npm publish
+        run: npm publish --provenance --access public
