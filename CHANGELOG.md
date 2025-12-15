@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.87.4
+
+- :rocket: Continue iterating on adding npm Trusted Publisher
+
 ### v3.87.3
 
 - :rocket: Add npm Trusted Publisher
