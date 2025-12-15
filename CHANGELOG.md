@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v3.87.0
+
+- :rocket: Improvements to AutoFocus on Input
+
 ### v3.86.0
 
 - :rocket: Allow disabling Fade Transition on Modal
