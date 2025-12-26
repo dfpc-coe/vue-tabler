@@ -76,6 +76,7 @@ export interface ListProps {
     url?: string;
     listkey?: string;
     namekey?: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     initial?: Record<string, any>;
     label?: string;
     required?: boolean;
@@ -91,12 +92,15 @@ const props = withDefaults(defineProps<ListProps>(), {
 });
 
 const emit = defineEmits<{
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (e: 'selected', ele: any): void
 }>()
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const ele = ref<any>(null)
 const isMounted = ref(false)
 const filter = ref('')
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const list = ref<any>({})
 const button = ref<HTMLElement | null>(null)
 
@@ -106,6 +110,7 @@ const buttonHeight = computed(() => {
     return buttonDOM ? buttonDOM.offsetWidth : 100;
 })
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const select = (selectedEle: any) => {
     ele.value = selectedEle;
     if (props.namekey) {
@@ -116,11 +121,11 @@ const select = (selectedEle: any) => {
 
 const fetchList = async () => {
     if (!props.url) return;
-    // @ts-ignore
+    // @ts-expect-error: Global window function
     const url = window.stdurl(props.url);
     url.searchParams.append('filter', filter.value);
     url.searchParams.append('limit', String(props.limit));
-    // @ts-ignore
+    // @ts-expect-error: Global window function
     list.value = await window.std(url);
 }
 

@@ -452,7 +452,7 @@ const tzs = [
     { label:"Pacific/Kiritimati (GMT+14:00)", "tzCode":"Pacific/Kiritimati", }
 ]
 
-const props = withDefaults(defineProps<TimeZoneProps>(), {
+withDefaults(defineProps<TimeZoneProps>(), {
     autofocus: false,
     description: '',
     required: false,

@@ -118,7 +118,9 @@ import {
 } from '@tabler/icons-vue';
 
 export interface SchemaProps {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     modelValue: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     schema: any;
     disabled?: boolean;
 }
@@ -128,11 +130,14 @@ const props = withDefaults(defineProps<SchemaProps>(), {
 });
 
 const emit = defineEmits<{
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (e: 'update:modelValue', value: any): void;
 }>();
 
 const loading = ref(true);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const s = ref<any>({});
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const data = ref<any>({});
 
 const push = (key: string) => {
