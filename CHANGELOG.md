@@ -10,6 +10,11 @@
 
 ## Version History
 
+### v4.0.0
+
+- :rocket: Migrate to Typescript
+- :rocket: Remove Hardcoded `No` prefix from TablerNone
+
 ### v3.87.4
 
 - :rocket: Continue iterating on adding npm Trusted Publisher
