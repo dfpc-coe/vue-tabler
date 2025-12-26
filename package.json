@@ -2,16 +2,16 @@
     "name": "@tak-ps/vue-tabler",
     "type": "module",
     "version": "3.87.4",
-    "lib": "lib.js",
-    "main": "lib.js",
-    "module": "lib.js",
+    "lib": "lib.ts",
+    "main": "lib.ts",
+    "module": "lib.ts",
     "exports": {
-        ".": "./lib.js"
+        ".": "./lib.ts"
     },
     "description": "Tabler UI components for Vue3",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "lint": "eslint lib.js components/"
+        "lint": "eslint lib.ts components/"
     },
     "repository": {
         "type": "git",

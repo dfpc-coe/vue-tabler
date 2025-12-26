@@ -25,7 +25,7 @@
             }'
         >
             <div class='user-select-none'>
-                No <span v-text='label' />
+                <span v-text='label' />
             </div>
         </div>
 
