@@ -2,21 +2,19 @@
     <span v-text='display' />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 
-const props = defineProps({
-    date: {
-        type: [Number, String],
-        required: true
-    },
-    format: {
-        type: String,
-        default: 'Human'
-    }
-})
+export interface EpochProps {
+    date: number | string;
+    format?: string;
+}
 
-const suffix = {
+const props = withDefaults(defineProps<EpochProps>(), {
+    format: 'Human'
+});
+
+const suffix: Record<string, string> = {
     1: 'st',
     2: 'nd',
     3: 'rd'

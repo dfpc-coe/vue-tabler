@@ -8,8 +8,10 @@
     </button>
 </template>
 
-<script setup>
-    const props = defineProps({
-    disabled: Boolean
-    })
+<script setup lang="ts">
+export interface ButtonProps {
+    disabled?: boolean;
+}
+
+const props = defineProps<ButtonProps>();
 </script>

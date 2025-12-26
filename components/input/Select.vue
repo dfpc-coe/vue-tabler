@@ -23,27 +23,22 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, watch, onMounted } from 'vue'
 
-const props = defineProps({
-    modelValue: {
-        type: String,
-        required: true,
-    },
-    default: {
-        type: String,
-        default: ''
-    },
-    options: {
-        type: Array,
-        required: true
-    },
-})
+export interface SelectProps {
+    modelValue: string;
+    default?: string;
+    options: string[];
+}
 
-const emit = defineEmits([
-    'update:modelValue'
-])
+const props = withDefaults(defineProps<SelectProps>(), {
+    default: ''
+});
+
+const emit = defineEmits<{
+    (e: 'update:modelValue', value: string): void;
+}>();
 
 const current = ref('')
 

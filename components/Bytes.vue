@@ -2,18 +2,18 @@
     <span v-text='display' />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 
-const props = defineProps({
-    bytes: {
-        type: Number,
-        required: true
-    }
-})
+export interface BytesProps {
+    bytes: number;
+}
+
+const props = defineProps<BytesProps>();
 
 const display = computed(() => {
     const i = props.bytes == 0 ? 0 : Math.floor(Math.log(props.bytes) / Math.log(1024))
+    // @ts-ignore
     return (props.bytes / Math.pow(1024, i)).toFixed(2) * 1 + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i]
 })
 </script>

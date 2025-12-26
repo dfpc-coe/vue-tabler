@@ -13,8 +13,17 @@
     />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import TablerEnum from './Enum.vue'
+
+export interface TimeZoneProps {
+    modelValue: string;
+    autofocus?: boolean;
+    description?: string;
+    required?: boolean;
+    disabled?: boolean;
+    label?: string;
+}
 
 const tzs = [
     { label:"Pacific/Midway (GMT-11:00)", "tzCode":"Pacific/Midway", },
@@ -443,38 +452,19 @@ const tzs = [
     { label:"Pacific/Kiritimati (GMT+14:00)", "tzCode":"Pacific/Kiritimati", }
 ]
 
-defineProps({
-    modelValue: {
-        type: String,
-        required: true
-    },
-    autofocus: {
-        type: Boolean,
-        default: false
-    },
-    description: {
-        type: String,
-        default: ''
-    },
-    required: {
-        type: Boolean,
-        default: false
-    },
-    disabled: {
-        type: Boolean,
-        default: false
-    },
-    label: {
-        type: String,
-        default: 'Default Timezone'
-    },
-})
+const props = withDefaults(defineProps<TimeZoneProps>(), {
+    autofocus: false,
+    description: '',
+    required: false,
+    disabled: false,
+    label: 'Default Timezone'
+});
 
-const emit = defineEmits([
-    'submit',
-    'blur',
-    'update:modelValue'
-])
+const emit = defineEmits<{
+    (e: 'submit'): void;
+    (e: 'blur'): void;
+    (e: 'update:modelValue', value: string): void;
+}>();
 
 // Create maps for timezone conversion
 const map = new Map()

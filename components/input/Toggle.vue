@@ -20,42 +20,32 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, watch, onMounted } from 'vue'
 import TablerLabel from '../internal/Label.vue'
 
-const props = defineProps({
-    modelValue: {
-        type: Boolean,
-        required: true
-    },
-    autofocus: {
-        type: Boolean,
-        default: false
-    },
-    disabled: {
-        type: Boolean,
-        default: false
-    },
-    required: {
-        type: Boolean,
-        default: false
-    },
-    description: {
-        type: String,
-        default: ''
-    },
-    label: {
-        type: String,
-        default: ''
-    }
-})
+export interface ToggleProps {
+    modelValue: boolean;
+    autofocus?: boolean;
+    disabled?: boolean;
+    required?: boolean;
+    description?: string;
+    label?: string;
+}
 
-const emit = defineEmits([
-    'blur',
-    'submit',
-    'update:modelValue'
-])
+const props = withDefaults(defineProps<ToggleProps>(), {
+    autofocus: false,
+    disabled: false,
+    required: false,
+    description: '',
+    label: ''
+});
+
+const emit = defineEmits<{
+    (e: 'blur'): void;
+    (e: 'submit'): void;
+    (e: 'update:modelValue', value: boolean): void;
+}>();
 
 const current = ref(props.modelValue)
 

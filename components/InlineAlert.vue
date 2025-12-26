@@ -63,12 +63,14 @@ import {
     IconAlertTriangle
 } from '@tabler/icons-vue';
 
-const props = withDefaults(defineProps<{
-    severity?: string // info, danger, warning, success
-    title: string
-    description?: string
-    dismissable?: boolean
-}>(), {
+export interface InlineAlertProps {
+    severity?: 'info' | 'danger' | 'warning' | 'success';
+    title: string;
+    description?: string;
+    dismissable?: boolean;
+}
+
+const props = withDefaults(defineProps<InlineAlertProps>(), {
     severity: 'info',
     dismissable: false,
 });

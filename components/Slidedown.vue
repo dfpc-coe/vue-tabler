@@ -42,26 +42,25 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import {
     IconChevronDown
 } from '@tabler/icons-vue';
 
+export interface SlidedownProps {
+    arrow?: boolean;
+    clickAnywhereExpand?: boolean;
+}
+
+const props = withDefaults(defineProps<SlidedownProps>(), {
+    arrow: true,
+    clickAnywhereExpand: false
+});
+
 const isExpanded = ref(false);
 
-const contentWrapperRef = ref(null);
-
-const props = defineProps({
-    arrow: {
-        type: Boolean,
-        default: true
-    },
-    clickAnywhereExpand: {
-        type: Boolean,
-        default: false
-    }
-});
+const contentWrapperRef = ref<HTMLElement | null>(null);
 
 function toggle() {
     isExpanded.value = !isExpanded.value;
@@ -72,7 +71,7 @@ function toggle() {
         if (isExpanded.value) {
             el.style.maxHeight = el.scrollHeight + 'px';
         } else {
-            el.style.maxHeight = null;
+            el.style.maxHeight = null; // Reset to CSS default (0)
         }
     }
 };

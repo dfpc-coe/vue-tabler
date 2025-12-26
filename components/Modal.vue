@@ -33,26 +33,24 @@
     </teleport>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted, nextTick } from 'vue'
 
-defineProps({
-    size: {
-        // sm, md, lg, xl
-        type: String,
-        default: 'sm'
-    },
-    fade: {
-        type: Boolean,
-        default: true
-    }
-})
+export interface ModalProps {
+    size?: 'sm' | 'md' | 'lg' | 'xl';
+    fade?: boolean;
+}
 
-const modal = ref(null)
+withDefaults(defineProps<ModalProps>(), {
+    size: 'sm',
+    fade: true
+});
+
+const modal = ref<HTMLElement | null>(null)
 
 onMounted(() => {
     nextTick(() => {
-        modal.value.focus()
+        modal.value?.focus()
     })
 })
 </script>

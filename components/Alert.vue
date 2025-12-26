@@ -61,7 +61,7 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import {
     IconAlertTriangle,
@@ -69,24 +69,19 @@ import {
     IconChevronDown,
 } from '@tabler/icons-vue'
 
-defineProps({
-    title: {
-        type: String,
-        default: 'Generic Error'
-    },
-    err: {
-        type: Error,
-        default: new Error('Something is amiss')
-    },
-    compact: {
-        type: Boolean,
-        default: false
-    },
-    advanced: {
-        type: Boolean,
-        default: true
-    },
-})
+export interface AlertProps {
+    title?: string;
+    err?: Error & { body?: string };
+    compact?: boolean;
+    advanced?: boolean;
+}
+
+withDefaults(defineProps<AlertProps>(), {
+    title: 'Generic Error',
+    err: () => new Error('Something is amiss'),
+    compact: false,
+    advanced: true
+});
 
 const open = ref(false)
 </script>

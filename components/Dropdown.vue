@@ -29,33 +29,22 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from 'vue';
 import {
     IconSettings
 } from '@tabler/icons-vue';
 
-const props = defineProps({
-    width: {
-        type: Number,
-        default: 200
-    },
-    autoclose: {
-        type: String,
-        default: 'true'
-    },
-    position: {
-        type: String,
-        default: 'bottom-end',
-        validator: (value) => {
-            const validPositions = [
-                'bottom', 'bottom-start', 'bottom-end',
-                'top', 'top-start', 'top-end',
-                'left', 'right'
-            ];
-            return validPositions.includes(value);
-        }
-    }
+export interface DropdownProps {
+    width?: number | string;
+    autoclose?: string;
+    position?: 'bottom' | 'bottom-start' | 'bottom-end' | 'top' | 'top-start' | 'top-end' | 'left' | 'right';
+}
+
+const props = withDefaults(defineProps<DropdownProps>(), {
+    width: 200,
+    autoclose: 'true',
+    position: 'bottom-end'
 });
 
 const id = ref('tabler-dropdown-' + Math.random().toString(36).substr(2, 9) + '-' + Date.now().toString(36));

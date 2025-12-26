@@ -25,54 +25,38 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, watch } from 'vue'
 import TablerLabel from '../internal/Label.vue'
 
-const props = defineProps({
-    modelValue: {
-        type: Number,
-        required: true
-    },
-    autofocus: {
-        type: Boolean,
-        default: false
-    },
-    min: {
-        type: Number,
-        default: 0
-    },
-    max: {
-        type: Number,
-        default: 10
-    },
-    step: {
-        type: Number,
-        default: 1
-    },
-    required: {
-        type: Boolean,
-        default: false,
-    },
-    disabled: {
-        type: Boolean,
-        default: false,
-    },
-    description: {
-        type: String,
-        default: '',
-    },
-    label: {
-        type: String,
-        default: ''
-    },
-})
+export interface RangeProps {
+    modelValue: number;
+    autofocus?: boolean;
+    min?: number;
+    max?: number;
+    step?: number;
+    required?: boolean;
+    disabled?: boolean;
+    description?: string;
+    label?: string;
+}
 
-const emit = defineEmits([
-    'blur',
-    'submit',
-    'update:modelValue'
-])
+const props = withDefaults(defineProps<RangeProps>(), {
+    autofocus: false,
+    min: 0,
+    max: 10,
+    step: 1,
+    required: false,
+    disabled: false,
+    description: '',
+    label: ''
+});
+
+const emit = defineEmits<{
+    (e: 'blur'): void;
+    (e: 'submit'): void;
+    (e: 'update:modelValue', value: number): void;
+}>();
 
 const current = ref(props.modelValue)
 

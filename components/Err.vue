@@ -28,28 +28,24 @@
     </Modal>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import Modal from './Modal.vue'
 import Alert from './Alert.vue'
 
-defineProps({
-    err: {
-        type: Error,
-        required: true
-    },
-    title: {
-        type: String,
-        default: 'Website Error'
-    },
-    trace: {
-        type: Boolean,
-        default: true
-    }
-})
+export interface ErrProps {
+    err: Error;
+    title?: string;
+    trace?: boolean;
+}
 
-const emit = defineEmits([
-    'close'
-])
+withDefaults(defineProps<ErrProps>(), {
+    title: 'Website Error',
+    trace: true
+});
+
+const emit = defineEmits<{
+    (e: 'close'): void
+}>()
 
 const close = () => {
     emit('close')

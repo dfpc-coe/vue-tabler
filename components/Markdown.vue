@@ -5,20 +5,18 @@
     />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 import showdown from 'showdown'
 
-const props = defineProps({
-    markdown: {
-        type: String,
-        required: true
-    },
-    autowrap: {
-        type: Boolean,
-        default: true
-    }
-})
+export interface MarkdownProps {
+    markdown: string;
+    autowrap?: boolean;
+}
+
+const props = withDefaults(defineProps<MarkdownProps>(), {
+    autowrap: true
+});
 
 const html = computed(() => {
     const converter = new showdown.Converter({

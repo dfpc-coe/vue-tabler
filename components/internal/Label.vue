@@ -50,25 +50,21 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {
     IconInfoSquare
 } from '@tabler/icons-vue';
 
 import Dropdown from '../Dropdown.vue';
 
-const props = defineProps({
-    required: {
-        type: Boolean,
-        default: false,
-    },
-    description: {
-        type: String,
-        default: '',
-    },
-    label: {
-        type: String,
-        required: true
-    }
+export interface LabelProps {
+    required?: boolean;
+    description?: string;
+    label: string;
+}
+
+const props = withDefaults(defineProps<LabelProps>(), {
+    required: false,
+    description: '',
 });
 </script>

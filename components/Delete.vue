@@ -78,7 +78,7 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import TablerModal from './Modal.vue';
 import TablerIconButton from './IconButton.vue';
@@ -87,26 +87,23 @@ import {
     IconTrash
 } from '@tabler/icons-vue';
 
-const props = defineProps({
-    label: {
-        type: String,
-        default: 'Delete'
-    },
-    size: {
-        type: Number,
-        default: 32
-    },
-    disabled: {
-        type: Boolean,
-        default: false
-    },
-    displaytype: {
-        type: String,
-        default: 'button' // Or icon
-    }
-})
+export interface DeleteProps {
+    label?: string;
+    size?: number;
+    disabled?: boolean;
+    displaytype?: 'button' | 'icon' | 'menu';
+}
 
-const emit = defineEmits(['delete'])
+const props = withDefaults(defineProps<DeleteProps>(), {
+    label: 'Delete',
+    size: 32,
+    disabled: false,
+    displaytype: 'button'
+});
+
+const emit = defineEmits<{
+    (e: 'delete'): void
+}>()
 
 const loading = ref(false)
 const modal = ref(false)

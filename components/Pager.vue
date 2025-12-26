@@ -1,7 +1,7 @@
 <template>
     <div class='pagination m-0'>
         <div>
-            <template v-if='parseInt(total) <= parseInt(limit)'>
+            <template v-if='total <= limit'>
                 <button
                     class='btn mx-1'
                     @click='changePage(0)'
@@ -30,7 +30,7 @@
                     <span class=''> ... </span>
                 </template>
 
-                <template v-if='parseInt(total) / parseInt(limit) > 2'>
+                <template v-if='total / limit > 2'>
                     <button
                         v-for='i in middle'
                         :key='i'
@@ -55,33 +55,31 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, watch } from 'vue'
 import {
     IconHome
 } from '@tabler/icons-vue';
 
-const props = defineProps({
-    total: {
-        type: Number
-    },
-    page: {
-        type: Number
-    },
-    limit: {
-        type: Number
-    }
-})
+export interface PagerProps {
+    total: number;
+    page: number;
+    limit: number;
+}
 
-const emit = defineEmits(['page'])
+const props = defineProps<PagerProps>();
+
+const emit = defineEmits<{
+    (e: 'page', page: number): void
+}>()
 
 const spread = ref(0)
-const middle = ref([])
+const middle = ref<number[]>([])
 const current = ref(0)
 const end = ref(0)
 
 const create = () => {
-    const endValue = Math.ceil(parseInt(props.total) / parseInt(props.limit));
+    const endValue = Math.ceil(props.total / props.limit);
     let spreadValue; //Number of pages in between home button and last page
     if (endValue <= 2) {
         spreadValue = 0;
@@ -104,7 +102,7 @@ const create = () => {
     };
 }
 
-const changePage = (page) => {
+const changePage = (page: number) => {
     current.value = page;
     emit('page', current.value);
 }
@@ -143,7 +141,7 @@ watch(() => props.limit, () => {
 watch(current, () => {
     if (end.value < 5) return; // All buttons are shown already
 
-    let start;
+    let start: number;
     if (current.value <= 3) {
         start = 0;
     } else if (current.value >= end.value - 4) {

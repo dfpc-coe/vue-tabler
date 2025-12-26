@@ -38,15 +38,14 @@
     </div>
 </template>
 
-<script setup>
-defineProps({
-    inline: {
-        type: Boolean,
-        default: false
-    },
-    desc: {
-        type: String,
-        default: 'Loading...'
-    }
-})
+<script setup lang="ts">
+export interface LoadingProps {
+    inline?: boolean;
+    desc?: string;
+}
+
+withDefaults(defineProps<LoadingProps>(), {
+    inline: false,
+    desc: 'Loading...'
+});
 </script>

@@ -36,48 +36,37 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, watch, onMounted } from 'vue'
 import TablerLabel from '../internal/Label.vue'
 
-const props = defineProps({
-    modelValue: {
-        type: String,
-        required: true
-    },
-    autofocus: {
-        type: Boolean,
-        default: false
-    },
-    default: {
-        type: String,
-        default: ''
-    },
-    required: {
-        type: Boolean,
-        default: false
-    },
-    description: {
-        type: String,
-        default: ''
-    },
-    disabled: {
-        type: Boolean,
-        default: false,
-    },
-    label: {
-        type: String,
-        default: ''
-    },
-})
+export interface ColourProps {
+    modelValue: string;
+    autofocus?: boolean;
+    default?: string;
+    required?: boolean;
+    description?: string;
+    disabled?: boolean;
+    label?: string;
+}
 
-const emit = defineEmits([
-    'blur', 'update:modelValue'
-])
+const props = withDefaults(defineProps<ColourProps>(), {
+    autofocus: false,
+    default: '',
+    required: false,
+    description: '',
+    disabled: false,
+    label: ''
+});
 
-const current = ref('')
+const emit = defineEmits<{
+    (e: 'blur'): void;
+    (e: 'update:modelValue', value: string): void;
+}>();
 
-const invertColours = {
+const current = ref<string>('')
+
+const invertColours: Record<string, string> = {
     '#1d273b': 'dark',
     '#ffffff': 'white',
     '#206bc4': 'blue',
@@ -91,7 +80,7 @@ const invertColours = {
     '#74b816': 'lime'
 }
 
-const colours = {
+const colours: Record<string, string> = {
     dark: '#1d273b',
     white: '#ffffff',
     blue: '#206bc4',

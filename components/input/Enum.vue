@@ -27,52 +27,37 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, watch } from 'vue'
 import TablerLabel from '../internal/Label.vue'
 
-const props = defineProps({
-    modelValue: {
-        type: String,
-        required: true
-    },
-    autofocus: {
-        type: Boolean,
-        default: false
-    },
-    default: {
-        type: String,
-        default: ''
-    },
-    required: {
-        type: Boolean,
-        default: false
-    },
-    description: {
-        type: String,
-        default: ''
-    },
-    options: {
-        type: Array,
-        required: true
-    },
-    disabled: {
-        type: Boolean,
-        default: false,
-    },
-    label: {
-        type: String,
-        default: ''
-    },
-})
+export interface EnumProps {
+    modelValue: string;
+    autofocus?: boolean;
+    default?: string;
+    required?: boolean;
+    description?: string;
+    options: string[];
+    disabled?: boolean;
+    label?: string;
+}
 
-const emit = defineEmits([
-    'blur',
-    'update:modelValue'
-])
+const props = withDefaults(defineProps<EnumProps>(), {
+    autofocus: false,
+    default: '',
+    required: false,
+    description: '',
+    disabled: false,
+    label: ''
+});
+
+const emit = defineEmits<{
+    (e: 'blur'): void;
+    (e: 'update:modelValue', value: string): void;
+}>();
 
 // Initialize current value
-const current = ref('')
+const current = ref<string>('')
 if (!props.modelValue && props.default) {
     current.value = props.default
 } else {

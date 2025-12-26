@@ -37,17 +37,17 @@
     </ol>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 
-const props = defineProps({
-    normalize: {
-        type: Boolean,
-        default: true,
-        description: 'Perform Title Casing on URL Components'
-    }
-})
+export interface BreadCrumbProps {
+    normalize?: boolean;
+}
+
+const props = withDefaults(defineProps<BreadCrumbProps>(), {
+    normalize: true
+});
 
 const router = useRouter()
 const route = useRoute()

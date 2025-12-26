@@ -7,11 +7,12 @@
     </div>
 </template>
 
-<script setup>
-defineProps({
-    percent: {
-        type: Number,
-        default: 1
-    }
-})
+<script setup lang="ts">
+export interface ProgressProps {
+    percent?: number;
+}
+
+withDefaults(defineProps<ProgressProps>(), {
+    percent: 1
+});
 </script>

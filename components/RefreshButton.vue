@@ -23,24 +23,21 @@
     </IconButton>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {
     IconRefresh
 } from '@tabler/icons-vue';
 import IconButton from './IconButton.vue';
 
-const props = defineProps({
-    title: {
-        type: String,
-        default: 'Refresh'
-    },
-    loading: {
-        type: Boolean,
-        default: false
-    },
-    size: {
-        type: Number,
-        default: 32
-    }
-})
+export interface RefreshButtonProps {
+    title?: string;
+    loading?: boolean;
+    size?: number;
+}
+
+const props = withDefaults(defineProps<RefreshButtonProps>(), {
+    title: 'Refresh',
+    loading: false,
+    size: 32
+});
 </script>

@@ -44,27 +44,24 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {
     IconNotesOff
 } from '@tabler/icons-vue'
 
-defineProps({
-    label: {
-        type: String,
-        default: 'Items'
-    },
-    compact: {
-        type: Boolean,
-        default: false
-    },
-    create: {
-        type: Boolean,
-        default: true
-    },
-})
+export interface NoneProps {
+    label?: string;
+    compact?: boolean;
+    create?: boolean;
+}
 
-const emit = defineEmits([
-    'create'
-])
+withDefaults(defineProps<NoneProps>(), {
+    label: 'Items',
+    compact: false,
+    create: true
+});
+
+const emit = defineEmits<{
+    (e: 'create'): void
+}>()
 </script>

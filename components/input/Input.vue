@@ -147,82 +147,60 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue'
 import TablerLabel from '../internal/Label.vue'
 import {
-    IconUser,
-    IconCircleXFilled,
-    IconLock,
-    IconSearch,
     IconEye,
-    IconEyeOff
-} from '@tabler/icons-vue'
+    IconEyeOff,
+    IconSearch,
+    IconLock,
+    IconUser
+} from '@tabler/icons-vue';
 
-const props = defineProps({
-    modelValue: {
-        type: [String, Number],
-        required: true
-    },
-    autocomplete: {
-        type: String,
-        default: 'on'
-    },
-    autofocus: {
-        type: Boolean,
-        default: false
-    },
-    icon: {
-        type: String,
-        default: ''
-    },
-    loading: {
-        type: Boolean,
-        default: false
-    },
-    required: {
-        type: Boolean,
-        default: false,
-    },
-    disabled: {
-        type: Boolean,
-        default: false,
-    },
-    description: {
-        type: String,
-        default: '',
-    },
-    rows: {
-        type: Number,
-        default: 1
-    },
-    wrap: {
-        type: String,
-        default: 'soft'
-    },
-    type: {
-        type: String,
-        default: 'text'
-    },
-    label: {
-        type: String,
-        default: ''
-    },
-    placeholder: {
-        type: String,
-        default: ''
-    },
-    error: {
-        type: String,
-        default: ''
-    },
-})
+export interface InputProps {
+    modelValue?: string | number;
+    autofocus?: boolean;
+    loading?: boolean;
+    required?: boolean;
+    disabled?: boolean;
+    autocomplete?: string;
+    description?: string;
+    icon?: string;
+    rows?: number;
+    wrap?: string;
+    type?: string;
+    label?: string;
+    placeholder?: string;
+    error?: string;
+}
 
-const emit = defineEmits(['blur', 'focus', 'submit', 'update:modelValue'])
+const props = withDefaults(defineProps<InputProps>(), {
+    autofocus: false,
+    loading: false,
+    required: false,
+    disabled: false,
+    autocomplete: 'off',
+    description: '',
+    icon: '',
+    rows: 1,
+    wrap: 'soft',
+    type: 'text',
+    label: '',
+    placeholder: '',
+    error: ''
+});
 
-const textInput = ref(null)
+const emit = defineEmits<{
+    (e: 'blur'): void;
+    (e: 'focus'): void;
+    (e: 'submit'): void;
+    (e: 'update:modelValue', value: string | number): void;
+}>();
+
+const textInput = ref<HTMLInputElement | HTMLTextAreaElement | null>(null)
 const internal_error = ref('')
-const current = ref(props.modelValue === undefined ? '' : props.modelValue)
+const current = ref<string>(props.modelValue === undefined ? '' : String(props.modelValue))
 
 const passwordVisible = ref(false);
 

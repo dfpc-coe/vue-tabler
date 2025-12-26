@@ -106,7 +106,7 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, watch, onMounted } from 'vue'
 import TablerInput from './input/Input.vue';
 import TablerToggle from './input/Toggle.vue';
@@ -117,28 +117,25 @@ import {
     IconTrash,
 } from '@tabler/icons-vue';
 
-const props = defineProps({
-    modelValue: {
-        type: Object,
-        required: true
-    },
-    schema: {
-        type: Object,
-        required: true
-    },
-    disabled: {
-        type: Boolean,
-        default: false
-    }
-})
+export interface SchemaProps {
+    modelValue: any;
+    schema: any;
+    disabled?: boolean;
+}
 
-const emit = defineEmits(['update:modelValue'])
+const props = withDefaults(defineProps<SchemaProps>(), {
+    disabled: false
+});
 
-const loading = ref(true)
-const s = ref({})
-const data = ref({})
+const emit = defineEmits<{
+    (e: 'update:modelValue', value: any): void;
+}>();
 
-const push = (key) => {
+const loading = ref(true);
+const s = ref<any>({});
+const data = ref<any>({});
+
+const push = (key: string) => {
     if (!props.schema.properties[key].items) data.value[key].push('');
     if (props.schema.properties[key].items.type === 'object') {
         data.value[key].push({});

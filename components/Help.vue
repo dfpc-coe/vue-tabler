@@ -34,23 +34,21 @@
     </Modal>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import Modal from './Modal.vue'
 
-defineProps({
-    label: {
-        type: String,
-        default: 'Help'
-    },
-    description: {
-        type: String,
-        required: true
-    }
-})
+export interface HelpProps {
+    label?: string;
+    description: string;
+}
 
-const emit = defineEmits([
-    'close'
-])
+withDefaults(defineProps<HelpProps>(), {
+    label: 'Help'
+});
+
+const emit = defineEmits<{
+    (e: 'close'): void
+}>()
 
 const close = () => {
     emit('close')

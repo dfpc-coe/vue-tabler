@@ -16,27 +16,23 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useId, useTemplateRef } from 'vue'
 
 const iconid = useId();
 
-const icon = useTemplateRef(iconid);
+const icon = useTemplateRef<HTMLElement>(iconid);
 
-const props = defineProps({
-    title: {
-        type: String,
-        required: true
-    },
-    hover: {
-        type: Boolean,
-        default: true
-    },
-    disabled: {
-        type: Boolean,
-        default: false
-    }
-})
+export interface IconButtonProps {
+    title: string;
+    hover?: boolean;
+    disabled?: boolean;
+}
+
+const props = withDefaults(defineProps<IconButtonProps>(), {
+    hover: true,
+    disabled: false
+});
 </script>
 
 <style scoped>

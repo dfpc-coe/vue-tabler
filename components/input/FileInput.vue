@@ -41,56 +41,41 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import TablerLabel from '../internal/Label.vue'
 
-const props = defineProps({
-    modelValue: {
-        type: [String, Number],
-        required: true
-    },
-    autofocus: {
-        type: Boolean,
-        default: false
-    },
-    loading: {
-        type: Boolean,
-        default: false
-    },
-    required: {
-        type: Boolean,
-        default: false,
-    },
-    disabled: {
-        type: Boolean,
-        default: false,
-    },
-    accept: {
-        type: String,
-        default: ''
-    },
-    description: {
-        type: String,
-        default: '',
-    },
-    label: {
-        type: String,
-        default: ''
-    },
-    placeholder: {
-        type: String,
-        default: ''
-    },
-    error: {
-        type: String,
-        default: ''
-    },
-})
+export interface FileInputProps {
+    modelValue: string | number;
+    autofocus?: boolean;
+    loading?: boolean;
+    required?: boolean;
+    disabled?: boolean;
+    accept?: string;
+    description?: string;
+    label?: string;
+    placeholder?: string;
+    error?: string;
+}
 
-defineEmits(['blur', 'change'])
+const props = withDefaults(defineProps<FileInputProps>(), {
+    autofocus: false,
+    loading: false,
+    required: false,
+    disabled: false,
+    accept: '',
+    description: '',
+    label: '',
+    placeholder: '',
+    error: ''
+});
 
-const textInput = ref(null)
+defineEmits<{
+    (e: 'blur'): void;
+    (e: 'change', event: Event): void;
+}>();
+
+const textInput = ref<HTMLInputElement | null>(null)
 const internal_error = ref('')
 
 const errorstr = computed(() => {
@@ -99,7 +84,7 @@ const errorstr = computed(() => {
 })
 
 onMounted(() => {
-    if (props.autofocus) {
+    if (props.autofocus && textInput.value) {
         textInput.value.focus()
     }
 })

@@ -2,25 +2,20 @@
     <span v-text='display' />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 
-const props = defineProps({
-    format: {
-        type: String,
-        default: 'Human'
-    },
-    start: {
-        type: [Number, String],
-        required: true
-    },
-    end: {
-        type: [Number, String],
-        required: true
-    },
-})
+export interface EpochRangeProps {
+    format?: string;
+    start: number | string;
+    end: number | string;
+}
 
-const suffix = {
+const props = withDefaults(defineProps<EpochRangeProps>(), {
+    format: 'Human'
+});
+
+const suffix: Record<string, string> = {
     1: 'st',
     2: 'nd',
     3: 'rd'
