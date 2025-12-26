@@ -56,7 +56,7 @@ export interface NoneProps {
 }
 
 withDefaults(defineProps<NoneProps>(), {
-    label: 'Items',
+    label: 'No Items',
     compact: false,
     create: true
 });
