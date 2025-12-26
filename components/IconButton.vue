@@ -10,7 +10,7 @@
             "custom-hover": props.hover,
         }'
         class='rounded'
-        @keyup.enter='icon.click()'
+        @keyup.enter='icon?.click()'
     >
         <slot />
     </div>

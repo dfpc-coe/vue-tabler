@@ -17,7 +17,7 @@
                 :min='min'
                 :max='max'
                 :step='step'
-                @input='event => current = event.target.value'
+                @input='event => current = Number((event.target as HTMLInputElement).value)'
                 @keyup.enter='$emit("submit")'
                 @blur='$emit("blur")'
             >

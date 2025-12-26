@@ -8,7 +8,7 @@
                 >
                     <IconHome
                         :size='32'
-                        :stroke='1'
+                        stroke='1'
                         class='icon'
                     />Home
                 </button>
@@ -21,7 +21,7 @@
                 >
                     <IconHome
                         :size='32'
-                        :stroke='1'
+                        stroke='1'
                         class='icon'
                     />Home
                 </button>

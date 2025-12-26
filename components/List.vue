@@ -19,7 +19,7 @@
         >
             <div class='d-flex mx-2'>
                 <span
-                    v-if='ele'
+                    v-if='ele && namekey'
                     style='padding-top: 6px;'
                     v-text='ele[namekey]'
                 />
@@ -31,7 +31,7 @@
                 <div class='ms-auto'>
                     <IconSettings
                         :size='32'
-                        :stroke='1'
+                        stroke='1'
                         style='margin-top: 4px;'
                     />
                 </div>
@@ -51,11 +51,12 @@
                     placeholder='Name'
                 />
                 <div
-                    v-for='ele in list[listkey]'
+                    v-for='ele in (listkey ? list[listkey] : [])'
                     :key='ele.id'
                     @click='select(ele)'
                 >
                     <div
+                        v-if='namekey'
                         class='d-flex align-items-center my-1 cursor-pointer'
                         v-text='ele[namekey]'
                     />

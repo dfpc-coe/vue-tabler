@@ -11,6 +11,7 @@
     "description": "Tabler UI components for Vue3",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
+        "check": "vue-tsc --noEmit",
         "lint": "eslint lib.ts components/"
     },
     "repository": {
@@ -29,12 +30,16 @@
         "typescript-eslint": "^8.36.0",
         "vue": "^3.5.12"
     },
+    "peerDependencies": {
+        "vue-router": "^4.0.0"
+    },
     "devDependencies": {
         "@babel/eslint-parser": "^7.22.15",
         "@typescript-eslint/parser": "^8.8.1",
         "@vue/cli-plugin-babel": "^5.0.8",
         "eslint": "^9.12.0",
         "eslint-plugin-vue": "^10.0.0",
-        "globals": "^16.3.0"
+        "globals": "^16.3.0",
+        "vue-tsc": "^3.2.1"
     }
 }

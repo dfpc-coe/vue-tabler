@@ -71,7 +71,7 @@ function toggle() {
         if (isExpanded.value) {
             el.style.maxHeight = el.scrollHeight + 'px';
         } else {
-            el.style.maxHeight = null; // Reset to CSS default (0)
+            el.style.maxHeight = ''; // Reset to CSS default (0)
         }
     }
 };

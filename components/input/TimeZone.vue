@@ -6,7 +6,7 @@
         :autofocus='autofocus'
         :disabled='disabled'
         :required='required'
-        :default='inverse.has(modelValue) ? inverse.get(modelValue) : "No TimeZone"'
+        :model-value='inverse.has(modelValue) ? inverse.get(modelValue) : "No TimeZone"'
         @update:model-value='emit("update:modelValue", map.get($event).tzCode)'
         @submit='emit("submit")'
         @blur='emit("blur")'

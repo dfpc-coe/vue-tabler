@@ -9,12 +9,12 @@
             <IconNotesOff
                 v-if='compact'
                 :size='32'
-                :stroke='1'
+                stroke='1'
             />
             <IconNotesOff
                 v-else
                 :size='48'
-                :stroke='1'
+                stroke='1'
             />
         </div>
 

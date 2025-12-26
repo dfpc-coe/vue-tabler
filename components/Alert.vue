@@ -9,12 +9,12 @@
             <IconAlertTriangle
                 v-if='compact'
                 :size='32'
-                :stroke='1'
+                stroke='1'
             />
             <IconAlertTriangle
                 v-else
                 :size='48'
-                :stroke='1'
+                stroke='1'
             />
         </div>
 
@@ -40,13 +40,13 @@
                     <IconChevronRight
                         v-if='!open'
                         :size='24'
-                        :stroke='1'
+                        stroke='1'
                         class='cursor-pointer'
                     />
                     <IconChevronDown
                         v-else
                         :size='24'
-                        :stroke='1'
+                        stroke='1'
                         class='cursor-pointer'
                     />
                     <span>Advanced</span>

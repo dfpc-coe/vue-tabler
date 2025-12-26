@@ -35,7 +35,7 @@
             >
                 <IconTrash
                     :size='props.size'
-                    :stroke='1'
+                    stroke='1'
                 />
             </TablerIconButton>
         </template>
@@ -66,7 +66,7 @@
                     <template v-else>
                         <IconTrash
                             :size='props.size'
-                            :stroke='1'
+                            stroke='1'
                         /><span
                             class='mx-2'
                             v-text='props.label'

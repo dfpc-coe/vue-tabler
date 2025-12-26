@@ -7,6 +7,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+// @ts-expect-error: showdown types not available
 import showdown from 'showdown'
 
 export interface MarkdownProps {

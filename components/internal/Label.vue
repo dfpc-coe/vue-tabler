@@ -8,9 +8,8 @@
                 <template #default>
                     <IconInfoSquare
                         :size='20'
-                        :stroke='1'
+                        stroke='1'
                         class='cursor-pointer'
-                        @click='help = true'
                     />
                 </template>
                 <template #dropdown>

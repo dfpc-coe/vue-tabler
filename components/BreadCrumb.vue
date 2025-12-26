@@ -53,9 +53,9 @@ const router = useRouter()
 const route = useRoute()
 
 const crumbs = computed(() => {
-    return route.path.split('/').filter((crumb) => {
+    return route.path.split('/').filter((crumb: string) => {
         return crumb.length
-    }).map((crumb) => {
+    }).map((crumb: string) => {
         if (props.normalize) {
             return `${crumb[0].toUpperCase()}${crumb.slice(1, crumb.length)}`
         } else {

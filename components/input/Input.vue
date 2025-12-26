@@ -18,17 +18,17 @@
                         <IconSearch
                             v-if='icon === "search"'
                             :size='20'
-                            :stroke='1'
+                            stroke='1'
                         />
                         <IconLock
                             v-else-if='icon === "lock"'
                             :size='20'
-                            :stroke='1'
+                            stroke='1'
                         />
                         <IconUser
                             v-else-if='icon === "user"'
                             :size='20'
-                            :stroke='1'
+                            stroke='1'
                         />
                         <slot
                             v-else-if='$slots.icon'
@@ -75,7 +75,7 @@
                         >
                             <IconEye
                                 :size='20'
-                                :stroke='1'
+                                stroke='1'
                             />
                         </a>
                         <a
@@ -88,7 +88,7 @@
                         >
                             <IconEyeOff
                                 :size='20'
-                                :stroke='1'
+                                stroke='1'
                             />
                         </a>
                     </span>
@@ -239,7 +239,7 @@ watch(current, (newValue) => {
 
         if (isNaN(currentInt)) {
             internal_error.value = 'Must be an integer!'
-        } else if (currentInt === props.modelValue) {
+        } else if (currentInt === Number(props.modelValue)) {
             internal_error.value = ''
             return
         } else {

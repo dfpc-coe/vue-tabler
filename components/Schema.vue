@@ -57,7 +57,7 @@
                             <IconPlus
                                 v-if='!disabled'
                                 :size='32'
-                                :stroke='1'
+                                stroke='1'
                                 class='cursor-pointer'
                                 @click='push(key)'
                             />
@@ -71,13 +71,13 @@
                     >
                         <div class='d-flex'>
                             <div class='mx-2 my-2'>
-                                Entry <span v-text='i + 1' />
+                                Entry <span v-text='Number(i) + 1' />
                             </div>
                             <div class='ms-auto mx-2 my-2'>
                                 <IconTrash
                                     v-if='!disabled'
                                     :size='32'
-                                    :stroke='1'
+                                    stroke='1'
                                     class='cursor-pointer'
                                     @click='data[key].splice(i, 1)'
                                 />

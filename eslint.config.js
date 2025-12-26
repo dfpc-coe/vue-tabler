@@ -1,23 +1,24 @@
-import js from "@eslint/js";
-import globals from "globals"
-import eslintPluginVue from 'eslint-plugin-vue'
+import globals from 'globals';
+import js from '@eslint/js';
+import eslintPluginVue from 'eslint-plugin-vue';
 import ts from 'typescript-eslint';
 
-export default [
+export default ts.config(
     js.configs.recommended,
     ...ts.configs.recommended,
     ...eslintPluginVue.configs['flat/recommended'],
-    {   
+    {
         languageOptions: {
-            globals: {
-                ...globals.browser,
-            },
+            sourceType: 'module',
             parserOptions: {
                 parser: '@typescript-eslint/parser'
+            },
+            globals: {
+                ...globals.browser
             }
         },
         rules: {
-            "vue/html-indent": ["error", 4], 
+            "vue/html-indent": ["error", 4],
             "vue/html-quotes": ["error", "single", { "avoidEscape": false } ],
             "vue/multi-word-component-names": 1,
             "vue/no-multiple-template-root": 0,
@@ -25,4 +26,4 @@ export default [
             "vue/require-v-for-key": 0
         }
     }
-]
+)
