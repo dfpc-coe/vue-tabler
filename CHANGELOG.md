@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.1.0
+
+- :rocket: Add delete confirmation to TablerDelete
+
 ### v4.0.0
 
 - :rocket: Migrate to Typescript

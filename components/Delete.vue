@@ -4,7 +4,7 @@
             <button
                 class='btn btn-outline-danger'
                 :disabled='props.disabled'
-                @click.stop.prevent='props.disabled ? undefined : modal = true'
+                @click.stop.prevent='openModal'
             >
                 <span v-text='props.label' />
             </button>
@@ -15,7 +15,7 @@
                 :class='{
                     "cursor-pointer": !props.disabled,
                 }'
-                @click.stop.prevent='props.disabled ? undefined : modal = true'
+                @click.stop.prevent='openModal'
             >
                 <IconTrash
                     :size='32'
@@ -31,7 +31,7 @@
             <TablerIconButton
                 title='Delete'
                 :disabled='props.disabled'
-                @click.stop.prevent='props.disabled ? undefined : modal = true'
+                @click.stop.prevent='openModal'
             >
                 <IconTrash
                     :size='props.size'
@@ -52,12 +52,25 @@
                 Deletion Confirmation
             </div>
             <div class='modal-body text-center py-4'>
-                Are you sure you wish to perform this deletion?
+                <div>Are you sure you wish to perform this deletion?</div>
+                <div
+                    v-if='props.match'
+                    class='mt-3'
+                >
+                    <div class='mb-2'>
+                        Type <span class='fw-bold'>{{ props.match }}</span> to confirm
+                    </div>
+                    <TablerInput
+                        v-model='matchInput'
+                        :placeholder='props.match'
+                    />
+                </div>
             </div>
             <div class='modal-footer'>
                 <div
                     class='btn btn-danger'
-                    @click='deleting'
+                    :class='{ "disabled": props.match && matchInput !== props.match }'
+                    @click='(props.match && matchInput !== props.match) ? undefined : deleting()'
                 >
                     <TablerLoading
                         v-if='loading'
@@ -83,6 +96,7 @@ import { ref } from 'vue'
 import TablerModal from './Modal.vue';
 import TablerIconButton from './IconButton.vue';
 import TablerLoading from './Loading.vue';
+import TablerInput from './input/Input.vue';
 import {
     IconTrash
 } from '@tabler/icons-vue';
@@ -92,6 +106,7 @@ export interface DeleteProps {
     size?: number;
     disabled?: boolean;
     displaytype?: 'button' | 'icon' | 'menu';
+    match?: string;
 }
 
 const props = withDefaults(defineProps<DeleteProps>(), {
@@ -107,6 +122,13 @@ const emit = defineEmits<{
 
 const loading = ref(false)
 const modal = ref(false)
+const matchInput = ref('')
+
+const openModal = () => {
+    if (props.disabled) return;
+    matchInput.value = '';
+    modal.value = true;
+}
 
 const deleting = () => {
     loading.value = true;
