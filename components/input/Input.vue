@@ -107,7 +107,7 @@
                         >
                             <IconCircleXFilled
                                 :size='20'
-                                :stroke='1'
+                                stroke='1'
                             />
                         </a>
                     </span>
@@ -153,6 +153,7 @@ import TablerLabel from '../internal/Label.vue'
 import {
     IconEye,
     IconEyeOff,
+    IconCircleXFilled,
     IconSearch,
     IconLock,
     IconUser

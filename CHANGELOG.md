@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.1.1
+
+- :bug: Add missing component
+
 ### v4.1.0
 
 - :rocket: Add delete confirmation to TablerDelete
