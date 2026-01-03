@@ -24,9 +24,10 @@
                 "mb-4 mt-2": !compact
             }'
         >
-            <div class='user-select-none'>
-                <span v-text='label' />
-            </div>
+            <div
+                class='user-select-none'
+                v-text='label'
+            >
         </div>
 
         <div
