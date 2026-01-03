@@ -25,7 +25,7 @@
             }'
         >
             <div class='user-select-none'>
-                <span v-text='label' />
+                No <span v-text='label' />
             </div>
         </div>
 
@@ -56,7 +56,7 @@ export interface NoneProps {
 }
 
 withDefaults(defineProps<NoneProps>(), {
-    label: 'No Items',
+    label: 'Items',
     compact: false,
     create: true
 });
