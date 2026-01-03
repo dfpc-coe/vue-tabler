@@ -148,18 +148,16 @@ import {
     IconPlus,
 } from '@tabler/icons-vue';
 import BuilderEdit from './SchemaBuilderEdit.vue';
-import {
-    TablerNone,
-    TablerInput,
-    TablerEnum,
-    TablerToggle,
-    TablerDelete
-} from '@tak-ps/vue-tabler';
+import TablerNone from './None.vue';
+import TablerInput from './input/Input.vue';
+import TablerEnum from './input/Enum.vue';
+import TablerToggle from './input/Toggle.vue';
+import TablerDelete from './Delete.vue';
 
 interface SchemaProperty {
     name: string;
     type: string;
-    required?: boolean;
+    required: boolean;
     description?: string;
     enum?: string[];
     _id?: string;

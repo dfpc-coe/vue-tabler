@@ -117,16 +117,14 @@ import {
     IconPlus,
     IconTrash
 } from '@tabler/icons-vue';
-import {
-    TablerModal,
-    TablerInput,
-    TablerToggle
-} from '@tak-ps/vue-tabler';
+import TablerModal from './Modal.vue';
+import TablerInput from './input/Input.vue';
+import TablerToggle from './input/Toggle.vue';
 
 interface SchemaProperty {
     name: string;
     type: string;
-    required?: boolean;
+    required: boolean;
     description?: string;
     enum?: string[];
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

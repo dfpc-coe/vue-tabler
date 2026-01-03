@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.2.1
+
+- :rocket: Fix lints and checks
+
 ### v4.2.0
 
 - :tada: Add JSON Schema Component

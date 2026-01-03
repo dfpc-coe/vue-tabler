@@ -27,19 +27,19 @@
             <div
                 class='user-select-none'
                 v-text='label'
-            >
-        </div>
+            />
 
-        <div
-            v-if='create'
-            class='d-flex justify-content-center my-4'
-            :class='{
-                "my-4": !compact
-            }'
-            @click='emit("create")'
-        >
-            <div class='btn btn-primary'>
-                <span>Create <span v-text='label' /></span>
+            <div
+                v-if='create'
+                class='d-flex justify-content-center my-4'
+                :class='{
+                    "my-4": !compact
+                }'
+                @click='emit("create")'
+            >
+                <div class='btn btn-primary'>
+                    <span>Create <span v-text='label' /></span>
+                </div>
             </div>
         </div>
     </div>
