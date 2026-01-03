@@ -24,9 +24,10 @@
                 "mb-4 mt-2": !compact
             }'
         >
-            <div class='user-select-none'>
-                No <span v-text='label' />
-            </div>
+            <div
+                class='user-select-none'
+                v-text='label'
+            >
         </div>
 
         <div
@@ -56,7 +57,7 @@ export interface NoneProps {
 }
 
 withDefaults(defineProps<NoneProps>(), {
-    label: 'Items',
+    label: 'No Items',
     compact: false,
     create: true
 });
