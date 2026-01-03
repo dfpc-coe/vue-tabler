@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.2.0
+
+- :tada: Add JSON Schema Component
+
 ### v4.1.1
 
 - :bug: Add missing component
