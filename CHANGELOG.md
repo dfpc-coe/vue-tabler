@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.3.0
+
+- :rocket: If breadcrumb context is not in the vue-router, call Window.Location
+
 ### v4.2.1
 
 - :rocket: Fix lints and checks

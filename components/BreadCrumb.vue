@@ -6,7 +6,7 @@
         <li class='breadcrumb-item'>
             <a
                 class='cursor-pointer'
-                @click='router.push("/")'
+                @click='navigate("/")'
             >Home</a>
         </li>
         <li
@@ -22,15 +22,9 @@
                 v-text='crumb'
             />
             <a
-                v-else-if='normalize'
-                class='cursor-pointer'
-                @click='router.push("/" + crumbs.splice(0, crumb_it + 1).join("/").toLowerCase())'
-                v-text='crumb'
-            />
-            <a
                 v-else
                 class='cursor-pointer'
-                @click='router.push("/" + crumbs.splice(0, crumb_it + 1).join("/"))'
+                @click='navigate(resolvePath(crumb_it))'
                 v-text='crumb'
             />
         </li>
@@ -51,6 +45,29 @@ const props = withDefaults(defineProps<BreadCrumbProps>(), {
 
 const router = useRouter()
 const route = useRoute()
+
+const navigate = (url: string) => {
+    try {
+        const resolved = router.resolve(url);
+        if (resolved.matched.length > 0) {
+            router.push(url);
+        } else {
+            window.location.href = url;
+        }
+    } catch (e) {
+        window.location.href = url;
+    }
+}
+
+const resolvePath = (index: number) => {
+    const rawCrumbs = route.path.split('/').filter((c) => c.length);
+    const subset = rawCrumbs.slice(0, index + 1);
+    let path = '/' + subset.join('/');
+    if (props.normalize) {
+        path = path.toLowerCase();
+    }
+    return path;
+}
 
 const crumbs = computed(() => {
     return route.path.split('/').filter((crumb: string) => {
