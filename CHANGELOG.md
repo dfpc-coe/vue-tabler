@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.3.1
+
+- :rocket: Include Lost Detection
+
 ### v4.3.0
 
 - :rocket: If breadcrumb context is not in the vue-router, call Window.Location

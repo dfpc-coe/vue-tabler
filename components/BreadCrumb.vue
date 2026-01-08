@@ -47,9 +47,11 @@ const router = useRouter()
 const route = useRoute()
 
 const navigate = (url: string) => {
+
     try {
         const resolved = router.resolve(url);
-        if (resolved.matched.length > 0) {
+
+        if (resolved.matched.length > 0 && resolved.matched[0].name !== 'lost') {
             router.push(url);
         } else {
             window.location.href = url;
