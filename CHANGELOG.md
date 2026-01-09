@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.4.1
+
+- :arrow_up: Update Core Deps
+
 ### v4.4.0
 
 - :rocket: Allow overriding Create text in TablerNone
