@@ -38,7 +38,7 @@
                 @click='emit("create")'
             >
                 <div class='btn btn-primary'>
-                    <span>Create <span v-text='label' /></span>
+                    <span>Create <span v-text='typeof create === "string" ? create : "Item"' /></span>
                 </div>
             </div>
         </div>
@@ -53,7 +53,7 @@ import {
 export interface NoneProps {
     label?: string;
     compact?: boolean;
-    create?: boolean;
+    create?: boolean | string;
 }
 
 withDefaults(defineProps<NoneProps>(), {

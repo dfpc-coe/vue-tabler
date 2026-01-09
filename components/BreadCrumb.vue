@@ -56,7 +56,7 @@ const navigate = (url: string) => {
         } else {
             window.location.href = url;
         }
-    } catch (e) {
+    } catch {
         window.location.href = url;
     }
 }

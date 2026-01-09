@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.4.0
+
+- :rocket: Allow overriding Create text in TablerNone
+
 ### v4.3.1
 
 - :rocket: Include Lost Detection
