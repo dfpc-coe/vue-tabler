@@ -158,23 +158,53 @@ watch(data, () => {
     emit('update:modelValue', data.value);
 }, { deep: true })
 
-// Mounted lifecycle
-onMounted(async () => {
-    loading.value = true;
-    data.value = JSON.parse(JSON.stringify(props.modelValue));
+const updateSchema = () => {
     s.value = JSON.parse(JSON.stringify(props.schema));
-
     if (s.value.type === 'object' && s.value.properties) {
         for (const req of (s.value.required || [])) {
             s.value.properties[req].required = true;
         }
+    }
+}
 
+const updateDataDefaults = () => {
+    if (s.value.type === 'object' && s.value.properties) {
         for (const key in s.value.properties) {
-            if (!data.value[key] && s.value.properties[key].type === 'array') {
+            if (data.value[key] !== undefined) continue;
+
+            const type = s.value.properties[key].type;
+
+            if (type === 'array') {
                 data.value[key] = [];
+            } else if (type === 'boolean') {
+                data.value[key] = false;
+            } else if (type === 'object') {
+                data.value[key] = {};
+            } else {
+                data.value[key] = '';
             }
         }
     }
+}
+
+watch(() => props.schema, () => {
+    updateSchema();
+    updateDataDefaults();
+}, { deep: true });
+
+watch(() => props.modelValue, () => {
+    if (JSON.stringify(props.modelValue) !== JSON.stringify(data.value)) {
+        data.value = JSON.parse(JSON.stringify(props.modelValue));
+        updateDataDefaults();
+    }
+}, { deep: true });
+
+// Mounted lifecycle
+onMounted(async () => {
+    loading.value = true;
+    data.value = JSON.parse(JSON.stringify(props.modelValue));
+    updateSchema();
+    updateDataDefaults();
 
     loading.value = false;
 })

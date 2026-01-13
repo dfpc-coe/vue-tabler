@@ -217,8 +217,9 @@ const computed_type = computed(() => {
 })
 
 watch(() => props.modelValue, (newValue) => {
-    if (current.value !== String(newValue)) {
-        current.value = String(newValue)
+    const n = newValue === undefined ? '' : String(newValue);
+    if (current.value !== n) {
+        current.value = n;
     }
 })
 
