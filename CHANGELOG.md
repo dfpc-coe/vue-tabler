@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.5.1
+
+- :arrow_up: Update Core Deps
+
 ### v4.5.0
 
 - :rocket: Improve prop lifestyle in TablerSchema
