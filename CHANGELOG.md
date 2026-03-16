@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.8.0
+
+- :rocket: Allow setting button colour via prop
+
 ### v4.7.0
 
 - :arrow_up: Remove Babel

@@ -7,8 +7,9 @@
         :class='{
             "cursor-pointer": props.disabled === false,
             "cursor-default disabled": props.disabled === true,
-            "custom-hover": props.hover,
+            "custom-hover": props.hover && !props.color,
         }'
+        :style='iconButtonStyle'
         class='rounded'
         @keyup.enter='icon?.click()'
     >
@@ -17,13 +18,14 @@
 </template>
 
 <script setup lang="ts">
-import { useId, useTemplateRef } from 'vue'
+import { computed, useId, useTemplateRef } from 'vue'
 
 const iconid = useId();
 
 const icon = useTemplateRef<HTMLElement>(iconid);
 
 export interface IconButtonProps {
+    color?: string;
     title: string;
     hover?: boolean;
     disabled?: boolean;
@@ -32,6 +34,12 @@ export interface IconButtonProps {
 const props = withDefaults(defineProps<IconButtonProps>(), {
     hover: true,
     disabled: false
+});
+
+const iconButtonStyle = computed(() => {
+    return {
+        backgroundColor: props.color
+    };
 });
 </script>
 
