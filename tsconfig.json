@@ -22,7 +22,8 @@
     "include": [
         "lib.ts",
         "components/**/*.vue",
-        "components/**/*.ts"
+        "components/**/*.ts",
+        "test/**/*.ts"
     ],
     "exclude": [
         "node_modules"
