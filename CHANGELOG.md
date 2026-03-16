@@ -10,6 +10,12 @@
 
 ## Version History
 
+### v4.7.0
+
+- :arrow_up: Remove Babel
+- :bug: Fix paging bugs in TablerPager
+- :white_check_mark: Add tests for TablerPager
+
 ### v4.6.0
 
 - :arrow_up: Update VueRouter Peer Dependency
