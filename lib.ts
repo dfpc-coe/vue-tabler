@@ -10,6 +10,7 @@ export { default as TablerEnum } from './components/input/Enum.vue';
 
 export { default as TablerAlert } from './components/Alert.vue'
 export { default as TablerInlineAlert } from './components/InlineAlert.vue'
+export { default as TablerBadge } from './components/Badge.vue'
 export { default as TablerButton } from './components/Button.vue'
 export { default as TablerRefreshButton } from './components/RefreshButton.vue'
 export { default as TablerIconButton } from './components/IconButton.vue'

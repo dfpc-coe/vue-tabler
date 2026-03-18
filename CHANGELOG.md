@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.9.0
+
+- :tada: Introduce Tabler Badge
+
 ### v4.8.0
 
 - :rocket: Allow setting button colour via prop
