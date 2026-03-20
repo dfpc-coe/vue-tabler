@@ -116,27 +116,44 @@
                         class='invalid-feedback'
                         v-text='errorstr'
                     />
+
+                    <span
+                        v-if='$slots.end'
+                        class='input-group-text tabler-input-end'
+                    >
+                        <slot name='end' />
+                    </span>
                 </div>
             </template>
             <template v-else>
-                <textarea
-                    ref='textInput'
-                    v-model='current'
-                    :disabled='disabled'
-                    :autofocus='autofocus'
-                    :autocomplete='autocomplete'
-                    :wrap='wrap'
-                    :rows='rows'
-                    :type='computed_type'
-                    :class='{
-                        "is-invalid": errorstr
-                    }'
-                    class='form-control'
-                    :placeholder='placeholder||label||""'
-                    @keyup.enter='$emit("submit")'
-                    @focus='$emit("focus")'
-                    @blur='$emit("blur")'
-                />
+                <div class='position-relative'>
+                    <textarea
+                        ref='textInput'
+                        v-model='current'
+                        :disabled='disabled'
+                        :autofocus='autofocus'
+                        :autocomplete='autocomplete'
+                        :wrap='wrap'
+                        :rows='rows'
+                        :type='computed_type'
+                        :class='{
+                            "is-invalid": errorstr,
+                            "tabler-input-with-end": $slots.end
+                        }'
+                        class='form-control'
+                        :placeholder='placeholder||label||""'
+                        @keyup.enter='$emit("submit")'
+                        @focus='$emit("focus")'
+                        @blur='$emit("blur")'
+                    />
+
+                    <div
+                        v-if='$slots.end'
+                        class='tabler-input-textarea-end tabler-input-end'
+                    >
+                        <slot name='end' />
+                    </div>
+                </div>
                 <div
                     v-if='errorstr'
                     class='invalid-feedback'
@@ -270,5 +287,29 @@ input:autofill {
         background-color calc(infinity * 1s) step-end,
         background-image calc(infinity * 1s) step-end allow-discrete,
         color calc(infinity * 1s) step-end;
+}
+
+.tabler-input-with-end {
+    padding-right: 3rem;
+}
+
+.tabler-input-end {
+    color: var(--tblr-white);
+    opacity: 1;
+}
+
+.tabler-input-end :deep(a),
+.tabler-input-end :deep(svg) {
+    color: inherit;
+    opacity: 1;
+}
+
+.tabler-input-textarea-end {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    z-index: 2;
+    display: flex;
+    align-items: center;
 }
 </style>
