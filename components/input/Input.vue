@@ -10,7 +10,12 @@
         </TablerLabel>
         <div class='col-12'>
             <template v-if='!rows || rows <= 1'>
-                <div class='input-group input-group-flat'>
+                <div
+                    class='input-group input-group-flat'
+                    :class='{
+                        "tabler-input-group-invalid": errorstr && hasEndAdornment
+                    }'
+                >
                     <span
                         v-if='icon || $slots.icon'
                         class='input-group-text'
@@ -43,7 +48,8 @@
                         :autofocus='autofocus'
                         :type='computed_type'
                         :class='{
-                            "is-invalid": errorstr
+                            "is-invalid": errorstr,
+                            "tabler-input-with-end": hasEndAdornment
                         }'
                         class='form-control'
                         :placeholder='placeholder||label||""'
@@ -83,8 +89,8 @@
                             href='#'
                             class='link-secondary'
                             data-bs-toggle='tooltip'
-                            aria-label='Show Password'
-                            data-bs-original-title='Show Password'
+                            aria-label='Hide Password'
+                            data-bs-original-title='Hide Password'
                         >
                             <IconEyeOff
                                 :size='20'
@@ -98,7 +104,6 @@
                         @click='current = ""'
                     >
                         <a
-                            v-if='!passwordVisible'
                             href='#'
                             class='link-secondary'
                             data-bs-toggle='tooltip'
@@ -111,19 +116,27 @@
                             />
                         </a>
                     </span>
-                    <div
-                        v-if='errorstr'
-                        class='invalid-feedback'
-                        v-text='errorstr'
-                    />
-
                     <span
-                        v-if='$slots.end'
-                        class='input-group-text tabler-input-end'
+                        v-if='hasEndAdornment'
+                        :class='errorstr ? "tabler-input-error-end" : "tabler-input-end"'
+                        class='input-group-text'
                     >
-                        <slot name='end' />
+                        <IconAlertCircle
+                            v-if='errorstr'
+                            :size='20'
+                            stroke='1.5'
+                        />
+                        <slot
+                            v-else
+                            name='end'
+                        />
                     </span>
                 </div>
+                <div
+                    v-if='errorstr'
+                    class='invalid-feedback d-block'
+                    v-text='errorstr'
+                />
             </template>
             <template v-else>
                 <div class='position-relative'>
@@ -138,7 +151,7 @@
                         :type='computed_type'
                         :class='{
                             "is-invalid": errorstr,
-                            "tabler-input-with-end": $slots.end
+                            "tabler-input-with-end": hasEndAdornment
                         }'
                         class='form-control'
                         :placeholder='placeholder||label||""'
@@ -148,15 +161,24 @@
                     />
 
                     <div
-                        v-if='$slots.end'
-                        class='tabler-input-textarea-end tabler-input-end'
+                        v-if='hasEndAdornment'
+                        :class='errorstr ? "tabler-input-error-end" : "tabler-input-end"'
+                        class='tabler-input-textarea-end'
                     >
-                        <slot name='end' />
+                        <IconAlertCircle
+                            v-if='errorstr'
+                            :size='20'
+                            stroke='1.5'
+                        />
+                        <slot
+                            v-else
+                            name='end'
+                        />
                     </div>
                 </div>
                 <div
                     v-if='errorstr'
-                    class='invalid-feedback'
+                    class='invalid-feedback d-block'
                     v-text='errorstr'
                 />
             </template>
@@ -165,9 +187,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted } from 'vue'
+import { ref, computed, watch, onMounted, useSlots } from 'vue'
 import TablerLabel from '../internal/Label.vue'
 import {
+    IconAlertCircle,
     IconEye,
     IconEyeOff,
     IconCircleXFilled,
@@ -209,6 +232,8 @@ const props = withDefaults(defineProps<InputProps>(), {
     error: ''
 });
 
+const slots = useSlots();
+
 const emit = defineEmits<{
     (e: 'blur'): void;
     (e: 'focus'): void;
@@ -225,6 +250,10 @@ const passwordVisible = ref(false);
 const errorstr = computed(() => {
     if (props.error) return props.error
     return internal_error.value
+})
+
+const hasEndAdornment = computed(() => {
+    return Boolean(errorstr.value || !!slots.end)
 })
 
 const computed_type = computed(() => {
@@ -293,13 +322,54 @@ input:autofill {
     padding-right: 3rem;
 }
 
+.tabler-input-with-end.is-invalid {
+    background-image: none;
+    padding-right: 3rem;
+}
+
+.tabler-input-group-invalid > .form-control.is-invalid {
+    border-right: 0;
+}
+
+.tabler-input-group-invalid:focus-within {
+    border-radius: var(--tblr-border-radius);
+    box-shadow: var(--tblr-shadow-input), 0 0 0 0.25rem rgba(var(--tblr-danger-rgb), 0.25);
+}
+
+.tabler-input-group-invalid:focus-within > .form-control.is-invalid {
+    border-color: var(--tblr-form-invalid-border-color, var(--tblr-danger));
+    box-shadow: none;
+}
+
+.tabler-input-group-invalid > .form-control.is-invalid:focus {
+    border-color: var(--tblr-form-invalid-border-color, var(--tblr-danger)) !important;
+    box-shadow: none !important;
+    outline: 0;
+}
+
+.tabler-input-group-invalid > .input-group-text:last-child {
+    border-color: var(--tblr-form-invalid-border-color, var(--tblr-danger)) !important;
+    border-left: 0;
+}
+
+.tabler-input-group-invalid:focus-within > .input-group-text:last-child {
+    border-color: var(--tblr-form-invalid-border-color, var(--tblr-danger)) !important;
+}
+
 .tabler-input-end {
     color: var(--tblr-white);
     opacity: 1;
 }
 
+.tabler-input-error-end {
+    color: var(--tblr-form-invalid-border-color, var(--tblr-danger)) !important;
+    opacity: 1;
+}
+
 .tabler-input-end :deep(a),
-.tabler-input-end :deep(svg) {
+.tabler-input-end :deep(svg),
+.tabler-input-error-end :deep(a),
+.tabler-input-error-end :deep(svg) {
     color: inherit;
     opacity: 1;
 }

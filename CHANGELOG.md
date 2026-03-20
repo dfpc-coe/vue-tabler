@@ -10,6 +10,12 @@
 
 ## Version History
 
+### v4.10.0
+
+- :rocket: Improve Blur styling of TablerInput component
+- :rocket: Improve Error styling of TablerInput component
+- :rocket: Imrpove Error Blur styling of TablerInput component
+
 ### v4.9.0
 
 - :tada: Introduce Tabler Badge
