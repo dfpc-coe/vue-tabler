@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.10.1
+
+- :arrow_up: Update Core Deps
+
 ### v4.10.0
 
 - :rocket: Improve Blur styling of TablerInput component
