@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.11.0
+
+- :rocket: Improved Dropdown Style
+
 ### v4.10.1
 
 - :arrow_up: Update Core Deps
