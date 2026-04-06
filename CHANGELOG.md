@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.11.2
+
+- :bug: TS@6 Compatibility
+
 ### v4.11.1
 
 - :arrow_up: Move typescript-eslint to dev deps
