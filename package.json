@@ -27,11 +27,10 @@
     "homepage": "https://github.com/tak-ps/vue-tabler#readme",
     "dependencies": {
         "@tabler/icons-vue": "^3.0.0",
-        "showdown": "^2.1.0",
-        "typescript-eslint": "^8.36.0",
-        "vue": "^3.5.12"
+        "showdown": "^2.1.0"
     },
     "peerDependencies": {
+        "vue": "^3.5.12",
         "vue-router": "^5.0.0"
     },
     "devDependencies": {
@@ -43,9 +42,11 @@
         "eslint-plugin-vue": "^10.0.0",
         "globals": "^17.0.0",
         "jsdom": "^29.0.0",
-        "typescript": "^5.9.3",
+        "typescript": "^6.0.0",
+        "typescript-eslint": "^8.36.0",
         "vite": "^8.0.0",
         "vitest": "^4.1.0",
+        "vue": "^3.5.12",
         "vue-tsc": "^3.2.1"
     }
 }

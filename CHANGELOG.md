@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.11.1
+
+- :arrow_up: Move typescript-eslint to dev deps
+
 ### v4.11.0
 
 - :rocket: Improved Dropdown Style
