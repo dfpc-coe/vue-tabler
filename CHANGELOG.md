@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.11.3
+
+- :bug: GH Actions Updates
+
 ### v4.11.2
 
 - :bug: TS@6 Compatibility
