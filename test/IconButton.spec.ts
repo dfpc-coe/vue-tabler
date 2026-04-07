@@ -45,15 +45,20 @@ describe('TablerIconButton', () => {
         expect(wrapper.get('div').classes()).not.toContain('custom-hover')
     })
 
-    it('uses CloudTAK light hover colors in light mode and inverted colors in dark mode', () => {
+    it('uses theme-derived hover colors and borders instead of fixed values', () => {
+        expect(iconButtonSource).toContain('transition: background-color 0.15s ease, border-color 0.15s ease;')
+        expect(iconButtonSource).toContain('border: 1px solid transparent;')
+
         expect(iconButtonSource).toContain("[data-bs-theme='light'] .custom-hover:not(.disabled):hover,")
-        expect(iconButtonSource).toContain("[data-bs-theme='light'] .custom-hover:not(.disabled):focus-visible {")
-        expect(iconButtonSource).toContain('background-color: var(--cloudtak-light, rgba(var(--tblr-primary-rgb), 0.08));')
-        expect(iconButtonSource).toContain('color: var(--tblr-body-color);')
+        expect(iconButtonSource).toContain("[data-bs-theme='light'] .custom-hover:not(.disabled):focus-visible,")
+        expect(iconButtonSource).toContain("[data-bs-theme='light'] .custom-hover:not(.disabled):focus-within {")
+        expect(iconButtonSource).toContain('border-color: color-mix(in srgb, var(--tblr-body-color) 18%, transparent);')
+        expect(iconButtonSource).toContain('background: color-mix(in srgb, var(--tblr-body-color) 8%, transparent);')
 
         expect(iconButtonSource).toContain("[data-bs-theme='dark'] .custom-hover:not(.disabled):hover,")
-        expect(iconButtonSource).toContain("[data-bs-theme='dark'] .custom-hover:not(.disabled):focus-visible {")
-        expect(iconButtonSource).toContain('background-color: var(--tblr-light);')
-        expect(iconButtonSource).toContain('color: var(--tblr-dark);')
+        expect(iconButtonSource).toContain("[data-bs-theme='dark'] .custom-hover:not(.disabled):focus-visible,")
+        expect(iconButtonSource).toContain("[data-bs-theme='dark'] .custom-hover:not(.disabled):focus-within {")
+        expect(iconButtonSource).toContain('border-color: color-mix(in srgb, var(--tblr-light) 30%, transparent);')
+        expect(iconButtonSource).toContain('background: color-mix(in srgb, var(--tblr-light) 12%, transparent);')
     })
 })

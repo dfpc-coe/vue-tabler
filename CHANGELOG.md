@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.12.1
+
+- :rocket: Additional Light mode improvements
+
 ### v4.12.0
 
 - :rocket: Light mode support for TablerIconButton and TablerInput
