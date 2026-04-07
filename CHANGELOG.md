@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.12.0
+
+- :rocket: Light mode support for TablerIconButton and TablerInput
+
 ### v4.11.3
 
 - :bug: GH Actions Updates
