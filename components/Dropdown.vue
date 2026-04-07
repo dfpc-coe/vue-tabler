@@ -84,20 +84,40 @@ const menuClasses = computed(() => {
 
 <style scoped>
 .tabler-dropdown__menu {
-    --tblr-body-color: rgba(255, 255, 255, 0.92);
-    --tblr-body-bg: rgba(20, 20, 25, 0.96);
-    --tblr-border-color: rgba(255, 255, 255, 0.15);
-    --tblr-dropdown-bg: rgba(20, 20, 25, 0.96);
-    --tblr-dropdown-border-color: rgba(255, 255, 255, 0.25);
-    --tblr-dropdown-link-hover-bg: rgba(255, 255, 255, 0.1);
-    --tblr-dropdown-link-active-bg: rgba(var(--tblr-primary-rgb), 0.25);
-    --tblr-dropdown-link-active-color: var(--tblr-primary);
+    --tabler-dropdown-color: rgba(255, 255, 255, 0.92);
+    --tabler-dropdown-bg: rgba(20, 20, 25, 0.96);
+    --tabler-dropdown-border-color: rgba(255, 255, 255, 0.25);
+    --tabler-dropdown-hover-bg: rgba(255, 255, 255, 0.1);
+    --tabler-dropdown-active-bg: rgba(var(--tblr-primary-rgb), 0.25);
+    --tabler-dropdown-active-color: var(--tblr-primary);
+    --tabler-dropdown-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.35);
     margin-block: 0.25rem;
     padding: 0.25rem 0;
     overflow: hidden;
-    border-color: var(--tblr-dropdown-border-color);
-    background: var(--tblr-dropdown-bg);
+    color: var(--tabler-dropdown-color);
+    border-color: var(--tabler-dropdown-border-color);
+    background: var(--tabler-dropdown-bg);
     backdrop-filter: blur(8px);
+    box-shadow: var(--tabler-dropdown-shadow);
+}
+
+[data-bs-theme='light'] .tabler-dropdown__menu {
+    --tabler-dropdown-color: var(--tblr-body-color);
+    --tabler-dropdown-bg: rgba(255, 255, 255, 0.96);
+    --tabler-dropdown-border-color: rgba(var(--tblr-primary-rgb), 0.15);
+    --tabler-dropdown-hover-bg: rgba(var(--tblr-primary-rgb), 0.08);
+    --tabler-dropdown-active-bg: rgba(var(--tblr-primary-rgb), 0.16);
+    --tabler-dropdown-shadow: 0 0.5rem 1rem rgba(15, 23, 42, 0.08);
+}
+
+[data-bs-theme='light'] .tabler-dropdown__menu :deep(.dropdown-item),
+[data-bs-theme='light'] .tabler-dropdown__menu :deep(.tabler-dropdown__item),
+[data-bs-theme='light'] .tabler-dropdown__menu :deep(.text-white) {
+    color: var(--tblr-body-color) !important;
+}
+
+[data-bs-theme='light'] .tabler-dropdown__menu :deep(.text-white-50) {
+    color: var(--tblr-secondary-color) !important;
 }
 
 .tabler-dropdown__menu.dropdown-menu-arrow::before,
@@ -109,22 +129,29 @@ const menuClasses = computed(() => {
 .tabler-dropdown__menu :deep(.tabler-dropdown__item) {
     cursor: pointer;
     color: inherit;
-    transition: background 0.1s ease;
+    transition: background 0.1s ease, color 0.1s ease;
 }
 
 .tabler-dropdown__menu :deep(.dropdown-item:hover),
 .tabler-dropdown__menu :deep(.tabler-dropdown__item:hover) {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--tabler-dropdown-hover-bg);
 }
 
 .tabler-dropdown__menu :deep(.dropdown-item.active),
 .tabler-dropdown__menu :deep(.dropdown-item:active),
 .tabler-dropdown__menu :deep(.tabler-dropdown__item--active) {
-    background: rgba(var(--tblr-primary-rgb), 0.25);
-    color: var(--tblr-primary);
+    background: var(--tabler-dropdown-active-bg);
+    color: var(--tabler-dropdown-active-color);
+}
+
+.tabler-dropdown__menu :deep(.dropdown-item.active .text-white),
+.tabler-dropdown__menu :deep(.dropdown-item:active .text-white),
+.tabler-dropdown__menu :deep(.tabler-dropdown__item--active .text-white) {
+    color: var(--tabler-dropdown-active-color) !important;
 }
 
 .tabler-dropdown__menu :deep(.dropdown-item.active .text-white-50),
+.tabler-dropdown__menu :deep(.dropdown-item:active .text-white-50),
 .tabler-dropdown__menu :deep(.tabler-dropdown__item--active .text-white-50) {
     color: rgba(var(--tblr-primary-rgb), 0.7) !important;
 }

@@ -318,6 +318,29 @@ input:autofill {
         color calc(infinity * 1s) step-end;
 }
 
+.input-group :deep(.form-control),
+.position-relative > .form-control,
+.input-group :deep(.input-group-text) {
+    border-color: var(--tblr-border-color);
+}
+
+.input-group :deep(.form-control),
+.position-relative > .form-control {
+    color: var(--tblr-body-color);
+    background-color: var(--tabler-input-bg, var(--tblr-bg-forms, var(--tblr-bg-surface, var(--tblr-body-bg))));
+}
+
+.input-group :deep(.form-control)::placeholder,
+.position-relative > .form-control::placeholder {
+    color: var(--tblr-secondary-color);
+    opacity: 1;
+}
+
+.input-group :deep(.input-group-text) {
+    color: var(--tblr-body-color);
+    background-color: var(--tabler-input-bg, var(--tblr-bg-forms, var(--tblr-bg-surface, var(--tblr-body-bg))));
+}
+
 .tabler-input-with-end {
     padding-right: 3rem;
 }
@@ -357,7 +380,7 @@ input:autofill {
 }
 
 .tabler-input-end {
-    color: var(--tblr-white);
+    color: var(--tblr-body-color);
     opacity: 1;
 }
 

@@ -48,7 +48,19 @@ const iconButtonStyle = computed(() => {
     color: var(--tblr-gray-500);
 }
 
-.custom-hover:not(.disabled):hover {
-    background-color: var(--tblr-border-color);
+.custom-hover:not(.disabled) {
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+[data-bs-theme='light'] .custom-hover:not(.disabled):hover,
+[data-bs-theme='light'] .custom-hover:not(.disabled):focus-visible {
+    background-color: var(--cloudtak-light, rgba(var(--tblr-primary-rgb), 0.08));
+    color: var(--tblr-body-color);
+}
+
+[data-bs-theme='dark'] .custom-hover:not(.disabled):hover,
+[data-bs-theme='dark'] .custom-hover:not(.disabled):focus-visible {
+    background-color: var(--tblr-light);
+    color: var(--tblr-dark);
 }
 </style>
