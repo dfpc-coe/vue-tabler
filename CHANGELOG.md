@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.13.0
+
+- :tada: Add PillGroup Component
+
 ### v4.12.1
 
 - :rocket: Additional Light mode improvements
