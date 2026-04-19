@@ -3,7 +3,8 @@
         class='hover-expandable rounded position-relative px-2 py-2'
         :class='{
             "expanded mb-3": isExpanded,
-            "cursor-pointer": props.clickAnywhereExpand && !isExpanded
+            "cursor-pointer": props.clickAnywhereExpand && !isExpanded,
+            "no-border": !props.border
         }'
         @click='(props.clickAnywhereExpand && !isExpanded) ? toggle() : null'
     >
@@ -50,11 +51,13 @@ import {
 
 export interface SlidedownProps {
     arrow?: boolean;
+    border?: boolean;
     clickAnywhereExpand?: boolean;
 }
 
 const props = withDefaults(defineProps<SlidedownProps>(), {
     arrow: true,
+    border: true,
     clickAnywhereExpand: false
 });
 
@@ -83,8 +86,16 @@ function toggle() {
     transition: border-color 0.2s ease;
 }
 
+.hover-expandable.no-border {
+    border: none;
+}
+
 .hover-expandable:not(.expanded):hover {
     border: 1px solid color-mix(in srgb, var(--tblr-border-color), white 10%);
+}
+
+.hover-expandable.no-border:not(.expanded):hover {
+    border: none;
 }
 
 .hover-expandable:not(.expanded):hover .arrow-container {
