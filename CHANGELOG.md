@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.15.0 - 2026-04-20
+
+- :rocket: Click anywhere collapse
+
 ### v4.14.0 - 2026-04-19
 
 - :rocket: Add ability to turn off border

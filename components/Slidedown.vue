@@ -3,10 +3,10 @@
         class='hover-expandable rounded position-relative px-2 py-2'
         :class='{
             "expanded mb-3": isExpanded,
-            "cursor-pointer": props.clickAnywhereExpand && !isExpanded,
+            "cursor-pointer": props.clickAnywhereExpand || props.clickAnywhereCollapse,
             "no-border": !props.border
         }'
-        @click='(props.clickAnywhereExpand && !isExpanded) ? toggle() : null'
+        @click='handleClick'
     >
         <div
             :class='{
@@ -53,12 +53,14 @@ export interface SlidedownProps {
     arrow?: boolean;
     border?: boolean;
     clickAnywhereExpand?: boolean;
+    clickAnywhereCollapse?: boolean;
 }
 
 const props = withDefaults(defineProps<SlidedownProps>(), {
     arrow: true,
     border: true,
-    clickAnywhereExpand: false
+    clickAnywhereExpand: false,
+    clickAnywhereCollapse: false
 });
 
 const isExpanded = ref(false);
@@ -76,6 +78,19 @@ function toggle() {
         } else {
             el.style.maxHeight = ''; // Reset to CSS default (0)
         }
+    }
+}
+
+function handleClick(event: MouseEvent) {
+    // Don't handle clicks from the expanded content wrapper
+    const el = contentWrapperRef.value;
+    if (el && el === event.target) return;
+    if (el && el.contains(event.target as Node)) return;
+    
+    if (props.clickAnywhereExpand) {
+        toggle();
+    } else if (props.clickAnywhereCollapse && isExpanded.value) {
+        toggle();
     }
 };
 </script>
