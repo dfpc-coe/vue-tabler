@@ -56,6 +56,7 @@ import { TablerButton, TablerAlert } from '@tak-ps/vue-tabler';
 | Component | Description |
 |-----------|-------------|
 | **TablerAlert** | Display important messages and feedback. |
+| **TablerBorder** | Bordered card section with optional label and header slot. |
 | **TablerBreadCrumb** | Navigation aid indicating the current page's location. |
 | **TablerButton** | Standard action buttons with various styles. |
 | **TablerBytes** | Utility to format byte values into human-readable strings. |

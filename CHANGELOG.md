@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.16.0 - 2026-04-23
+
+- :tada: Add Tabler Border Component
+
 ### v4.15.0 - 2026-04-20
 
 - :rocket: Click anywhere collapse
