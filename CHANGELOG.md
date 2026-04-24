@@ -9,6 +9,11 @@
 - :tada: when adding new features
 
 ## Version History
+
+### v4.20.0
+
+- :bug: Fix hover state
+
 ### v4.19.1
 
 - :bug: Fix `TablerBorder` `tools` slot not appearing on hover when scoped CSS selector matched the wrong element
