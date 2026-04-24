@@ -10,6 +10,14 @@
 
 ## Version History
 
+### v4.16.1
+
+- :rocket: Update Core Deps
+
+### v4.16.0
+
+- :tada: Add `TablerBorder` component for bordered card sections
+
 ### v4.16.0 - 2026-04-23
 
 - :tada: Add Tabler Border Component

@@ -9,14 +9,16 @@
             }'
         >
             <div
-                v-if='label || $slots.header'
+                v-if='label || $slots.label || $slots.header'
                 class='d-flex align-items-center justify-content-between'
             >
-                <p
-                    v-if='label'
-                    class='text-uppercase small mb-0'
-                    v-text='label'
-                />
+                <slot name='label'>
+                    <p
+                        v-if='label'
+                        class='text-uppercase small mb-0'
+                        v-text='label'
+                    />
+                </slot>
                 <slot name='header' />
             </div>
             <slot />
