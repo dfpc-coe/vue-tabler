@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.17.0
+
+- :rocket: `TablerBorder` now supports `background`, `editable`, `editing`, `editAriaLabel` props plus `actions` and `editor` slots and an `edit` event for inline edit container patterns
+
 ### v4.16.1
 
 - :rocket: Update Core Deps
