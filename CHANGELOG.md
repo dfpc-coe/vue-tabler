@@ -9,7 +9,13 @@
 - :tada: when adding new features
 
 ## Version History
+### v4.19.1
 
+- :bug: Fix `TablerBorder` `tools` slot not appearing on hover when scoped CSS selector matched the wrong element
+
+### v4.19.0
+
+- :rocket: Simplify `TablerBorder` to expose a generic `tools` slot for hover-revealed actions; remove edit-specific props and slots
 ### v4.17.0
 
 - :rocket: `TablerBorder` now supports `background`, `editable`, `editing`, `editAriaLabel` props plus `actions` and `editor` slots and an `edit` event for inline edit container patterns
