@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.23.0
+
+- :pencil2: Add GH Release system
+
 ### v4.22.0
 
 - :rocket: Migrate to more modern `marked` instead of `showdown`
