@@ -97,6 +97,7 @@ This library relies on the following core dependencies:
 - [Vue 3](https://vuejs.org/)
 - [@tabler/icons-vue](https://www.npmjs.com/package/@tabler/icons-vue)
 - [marked](https://www.npmjs.com/package/marked) (for Markdown rendering)
+- [DOMPurify](https://www.npmjs.com/package/dompurify) (for HTML sanitization)
 
 ## 📄 License
 
