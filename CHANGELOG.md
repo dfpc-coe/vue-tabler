@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.23.1
+
+- :bug: Add sanitize helper fn
+
 ### v4.23.0
 
 - :pencil2: Add GH Release system

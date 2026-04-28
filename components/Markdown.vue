@@ -9,8 +9,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import DOMPurify from 'dompurify'
 import { marked } from 'marked'
-import { sanitizeHtml } from './sanitize'
 
 export interface MarkdownProps {
     markdown: string;
@@ -20,6 +20,14 @@ export interface MarkdownProps {
 const props = withDefaults(defineProps<MarkdownProps>(), {
     autowrap: true
 });
+
+function sanitizeHtml(html: string): string {
+    return DOMPurify.sanitize(html, {
+        USE_PROFILES: {
+            html: true
+        }
+    })
+}
 
 const html = computed(() => {
     const rendered = marked.parse(props.markdown, {
