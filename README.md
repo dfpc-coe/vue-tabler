@@ -96,7 +96,7 @@ import { TablerButton, TablerAlert } from '@tak-ps/vue-tabler';
 This library relies on the following core dependencies:
 - [Vue 3](https://vuejs.org/)
 - [@tabler/icons-vue](https://www.npmjs.com/package/@tabler/icons-vue)
-- [showdown](https://www.npmjs.com/package/showdown) (for Markdown rendering)
+- [marked](https://www.npmjs.com/package/marked) (for Markdown rendering)
 
 ## 📄 License
 

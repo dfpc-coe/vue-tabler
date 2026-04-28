@@ -7,8 +7,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-// @ts-expect-error: showdown types not available
-import showdown from 'showdown'
+import { marked } from 'marked'
 
 export interface MarkdownProps {
     markdown: string;
@@ -20,11 +19,9 @@ const props = withDefaults(defineProps<MarkdownProps>(), {
 });
 
 const html = computed(() => {
-    const converter = new showdown.Converter({
-        tables: true,
-        tasklists: true,
-        emoji: true
+    return marked.parse(props.markdown, {
+        async: false,
+        gfm: true
     })
-    return converter.makeHtml(props.markdown)
 })
 </script>

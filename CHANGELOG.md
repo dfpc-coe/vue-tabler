@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.21.0
+
+- :rocket: Migrate to more modern `marked` instead of `showdown`
+
 ### v4.20.0
 
 - :bug: Fix hover state
