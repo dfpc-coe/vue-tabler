@@ -10,7 +10,7 @@
 
 ## Version History
 
-### v4.21.0
+### v4.22.0
 
 - :rocket: Migrate to more modern `marked` instead of `showdown`
 
