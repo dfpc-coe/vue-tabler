@@ -6,31 +6,33 @@
             role='alert'
         >
             <div class='alert-icon'>
-                <IconInfoCircle
-                    v-if='props.severity === "info"'
-                    :size='24'
-                    stroke='1'
-                />
-                <IconExclamationCircle
-                    v-else-if='props.severity === "danger"'
-                    :size='24'
-                    stroke='1'
-                />
-                <IconAlertTriangle
-                    v-else-if='props.severity === "warning"'
-                    :size='24'
-                    stroke='1'
-                />
-                <IconCheck
-                    v-else-if='props.severity === "success"'
-                    :size='24'
-                    stroke='1'
-                />
-                <IconQuestionMark
-                    v-else
-                    :size='24'
-                    stroke='1'
-                />
+                <slot name='icon'>
+                    <IconInfoCircle
+                        v-if='props.severity === "info"'
+                        :size='24'
+                        stroke='1'
+                    />
+                    <IconExclamationCircle
+                        v-else-if='props.severity === "danger"'
+                        :size='24'
+                        stroke='1'
+                    />
+                    <IconAlertTriangle
+                        v-else-if='props.severity === "warning"'
+                        :size='24'
+                        stroke='1'
+                    />
+                    <IconCheck
+                        v-else-if='props.severity === "success"'
+                        :size='24'
+                        stroke='1'
+                    />
+                    <IconQuestionMark
+                        v-else
+                        :size='24'
+                        stroke='1'
+                    />
+                </slot>
             </div>
 
             <div>
@@ -72,6 +74,7 @@ export interface InlineAlertProps {
 
 const props = withDefaults(defineProps<InlineAlertProps>(), {
     severity: 'info',
+    description: undefined,
     dismissable: false,
 });
 </script>

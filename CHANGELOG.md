@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.24.0
+
+- :tada: Add `icon` slot to `TablerInlineAlert`
+
 ### v4.23.1
 
 - :bug: Add sanitize helper fn
