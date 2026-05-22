@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.25.0
+
+- :rocket: Update Core Deps
+
 ### v4.24.0
 
 - :tada: Add `icon` slot to `TablerInlineAlert`
