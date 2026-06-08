@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.26.1
+
+- :bug: Fix Lint Errors
+
 ### v4.26.0
 
 - :rocket: Smarter Dropdown Positioning

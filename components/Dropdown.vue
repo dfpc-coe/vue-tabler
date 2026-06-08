@@ -2,14 +2,14 @@
     <div ref='triggerRef' class='tabler-dropdown d-inline-flex'>
         <div
             :id='id'
-            :aria-expanded='String(isOpen)'
+            :aria-expanded='isOpen'
             aria-haspopup='true'
             @click.stop='toggle'
         >
             <slot>
                 <IconSettings
                     :size='32'
-                    :stroke='1'
+                    stroke='1'
                     class='cursor-pointer'
                 />
             </slot>
@@ -82,8 +82,8 @@ function calcPosition() {
     const vh = window.innerHeight;
     const gap = 4;
 
-    let top = 0;
-    let left = 0;
+    let top: number;
+    let left: number;
 
     switch (props.position) {
         case 'bottom':
@@ -152,7 +152,7 @@ async function toggle() {
 }
 
 function onMenuClick() {
-    if (props.autoclose === 'true' || props.autoclose === true) {
+    if (props.autoclose === 'true') {
         isOpen.value = false;
     }
 }
