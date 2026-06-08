@@ -4,6 +4,7 @@
             :id='id'
             data-bs-toggle='dropdown'
             :data-bs-auto-close='props.autoclose'
+            :data-bs-strategy='props.strategy'
             aria-expanded='false'
             @click.stop.prevent=''
         >
@@ -39,12 +40,14 @@ export interface DropdownProps {
     width?: number | string;
     autoclose?: string;
     position?: 'bottom' | 'bottom-start' | 'bottom-end' | 'top' | 'top-start' | 'top-end' | 'left' | 'right';
+    strategy?: 'absolute' | 'fixed';
 }
 
 const props = withDefaults(defineProps<DropdownProps>(), {
     width: 200,
     autoclose: 'true',
-    position: 'bottom-end'
+    position: 'bottom-end',
+    strategy: 'absolute'
 });
 
 const id = ref('tabler-dropdown-' + Math.random().toString(36).substr(2, 9) + '-' + Date.now().toString(36));
