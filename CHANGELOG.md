@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.25.1
+
+- :rocket: Allow Dropdown strategy to be specified via prop
+
 ### v4.25.0
 
 - :rocket: Update Core Deps
