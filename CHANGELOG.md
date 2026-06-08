@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.26.0
+
+- :rocket: Smarter Dropdown Positioning
+
 ### v4.25.1
 
 - :rocket: Allow Dropdown strategy to be specified via prop
