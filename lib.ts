@@ -34,3 +34,4 @@ export { default as TablerDelete } from './components/Delete.vue';
 export { default as TablerPillGroup } from './components/PillGroup.vue';
 export { default as TablerSchema } from './components/Schema.vue';
 export { default as TablerSchemaBuilder } from './components/SchemaBuilder.vue';
+export { default as TablerUploadLogo } from './components/TablerUploadLogo.vue';

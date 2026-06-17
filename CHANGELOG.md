@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.27.0
+
+- :tada: Introduce `TablerUploadLogo` component
+
 ### v4.26.1
 
 - :bug: Fix Lint Errors
