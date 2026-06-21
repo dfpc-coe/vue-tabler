@@ -13,13 +13,25 @@ import { computed } from 'vue';
 export interface BadgeProps {
     backgroundColor?: string;
     borderColor?: string;
+    borderStyle?: string;
+    borderWidth?: string;
     textColor?: string;
+    hoverBackgroundColor?: string;
+    hoverBorderColor?: string;
+    hoverBorderStyle?: string;
+    hoverTextColor?: string;
 }
 
 const props = withDefaults(defineProps<BadgeProps>(), {
     backgroundColor: 'rgba(34, 197, 94, 0.2)',
     borderColor: undefined,
+    borderStyle: 'solid',
+    borderWidth: '1px',
     textColor: '#ffffff',
+    hoverBackgroundColor: undefined,
+    hoverBorderColor: undefined,
+    hoverBorderStyle: undefined,
+    hoverTextColor: undefined,
 });
 
 type ParsedColor = {
@@ -121,16 +133,33 @@ const resolvedBorderColor = computed(() => {
 
 const badgeStyle = computed(() => {
     return {
-        backgroundColor: props.backgroundColor,
-        borderColor: resolvedBorderColor.value,
-        color: props.textColor,
+        '--badge-bg': props.backgroundColor,
+        '--badge-border': resolvedBorderColor.value,
+        '--badge-border-style': props.borderStyle,
+        '--badge-border-width': props.borderWidth,
+        '--badge-text': props.textColor,
+        '--badge-hover-bg': props.hoverBackgroundColor ?? props.backgroundColor,
+        '--badge-hover-border': props.hoverBorderColor ?? resolvedBorderColor.value,
+        '--badge-hover-border-style': props.hoverBorderStyle ?? props.borderStyle,
+        '--badge-hover-text': props.hoverTextColor ?? props.textColor,
     };
 });
 </script>
 
 <style scoped>
 .tabler-badge {
-    border-style: solid;
-    border-width: 1px;
+    background-color: var(--badge-bg);
+    border-color: var(--badge-border);
+    border-style: var(--badge-border-style);
+    border-width: var(--badge-border-width);
+    color: var(--badge-text);
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.tabler-badge:hover {
+    background-color: var(--badge-hover-bg);
+    border-color: var(--badge-hover-border);
+    border-style: var(--badge-hover-border-style);
+    color: var(--badge-hover-text);
 }
 </style>
