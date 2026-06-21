@@ -10,7 +10,7 @@
 
 ## Version History
 
-### v4.28.0
+### v4.29.0
 
 - :rocket: Introduce additional TablerBadge props including hover
 
