@@ -133,11 +133,11 @@ const resolvedBorderColor = computed(() => {
 
 const badgeStyle = computed(() => {
     return {
-        '--badge-bg': props.backgroundColor,
-        '--badge-border': resolvedBorderColor.value,
-        '--badge-border-style': props.borderStyle,
-        '--badge-border-width': props.borderWidth,
-        '--badge-text': props.textColor,
+        backgroundColor: props.backgroundColor,
+        borderColor: resolvedBorderColor.value,
+        borderStyle: props.borderStyle,
+        borderWidth: props.borderWidth,
+        color: props.textColor,
         '--badge-hover-bg': props.hoverBackgroundColor ?? props.backgroundColor,
         '--badge-hover-border': props.hoverBorderColor ?? resolvedBorderColor.value,
         '--badge-hover-border-style': props.hoverBorderStyle ?? props.borderStyle,
@@ -148,18 +148,13 @@ const badgeStyle = computed(() => {
 
 <style scoped>
 .tabler-badge {
-    background-color: var(--badge-bg);
-    border-color: var(--badge-border);
-    border-style: var(--badge-border-style);
-    border-width: var(--badge-border-width);
-    color: var(--badge-text);
     transition: background-color 0.15s, border-color 0.15s, color 0.15s;
 }
 
 .tabler-badge:hover {
-    background-color: var(--badge-hover-bg);
-    border-color: var(--badge-hover-border);
-    border-style: var(--badge-hover-border-style);
-    color: var(--badge-hover-text);
+    background-color: var(--badge-hover-bg) !important;
+    border-color: var(--badge-hover-border) !important;
+    border-style: var(--badge-hover-border-style) !important;
+    color: var(--badge-hover-text) !important;
 }
 </style>
