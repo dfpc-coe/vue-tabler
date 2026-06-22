@@ -13,17 +13,16 @@
                     />
                 </template>
                 <template #dropdown>
-                    <div class='card'>
-                        <div class='card-header'>
-                            <div
-                                class='card-title'
-                                v-text='props.label'
-                            />
+                    <div
+                        class='py-1'
+                        style='min-width: 300px;'
+                    >
+                        <div class='px-3 pt-2 pb-1 fw-bold'>
+                            {{props.label}}
                         </div>
-                        <div
-                            class='card-body'
-                            v-text='props.description'
-                        />
+                    </div>
+                    <div class='px-3 pb-2'>
+                        {{props.description}}
                     </div>
                 </template>
             </dropdown>

@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.29.2
+
+- :bug: Upstream styling of label dropdowns
+
 ### v4.29.1
 
 - :bug: Fix tests
