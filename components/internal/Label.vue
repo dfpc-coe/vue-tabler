@@ -20,10 +20,7 @@
                                 v-text='props.label'
                             />
                         </div>
-                        <div
-                            class='card-body'
-                            v-text='props.description'
-                        />
+                        <div v-text='props.description' />
                     </div>
                 </template>
             </dropdown>
