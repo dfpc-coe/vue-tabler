@@ -341,6 +341,32 @@ input:autofill {
     background-color: var(--tabler-input-bg, var(--tblr-bg-forms, var(--tblr-bg-surface, var(--tblr-body-bg))));
 }
 
+/*
+ * Tabler's input-group-flat strips the seam borders from the .form-control but
+ * not from the .input-group-text spans (icon, clear button, end adornment), so
+ * their inner borders survive as dividers - and get repainted blue by
+ * `.input-group-flat:focus-within .input-group-text` on focus. Drop every
+ * inner-facing span border, keeping only the group's outer outline.
+ */
+.input-group :deep(.input-group-text:not(:last-child)) {
+    border-right: 0;
+}
+
+.input-group :deep(.input-group-text:not(:first-child)) {
+    border-left: 0;
+}
+
+/*
+ * The .form-control also carries the standard 1px input drop shadow
+ * (--tblr-shadow-input) which the spans lack, leaving a faint horizontal line
+ * that starts only where the input does. A flat group should be flat - remove
+ * it inside the group entirely.
+ */
+.input-group :deep(.form-control),
+.input-group :deep(.input-group-text) {
+    box-shadow: none;
+}
+
 .tabler-input-with-end {
     padding-right: 3rem;
 }
