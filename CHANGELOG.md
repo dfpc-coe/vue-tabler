@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v4.29.3
+
+- :bug: Fix incorrect border when using pre or post icons in TablerInput
+
 ### v4.29.2
 
 - :bug: Upstream styling of label dropdowns
