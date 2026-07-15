@@ -10,6 +10,10 @@
 
 ## Version History
 
+### v5.0.0
+
+- :rocket: Remove `TablerList` as it used an outdated `window.std` requirement for fetching data
+
 ### v4.29.3
 
 - :bug: Fix incorrect border when using pre or post icons in TablerInput
