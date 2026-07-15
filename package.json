@@ -1,7 +1,7 @@
 {
     "name": "@tak-ps/vue-tabler",
     "type": "module",
-    "version": "4.29.3",
+    "version": "5.0.0",
     "lib": "lib.ts",
     "main": "lib.ts",
     "module": "lib.ts",
