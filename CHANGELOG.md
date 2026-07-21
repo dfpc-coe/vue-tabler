@@ -10,6 +10,17 @@
 
 ## Version History
 
+### Pending
+
+### v5.1.0
+
+- :bug: TablerSlidedown: `clickAnywhereExpand` no longer collapses an expanded slidedown - collapse is explicit via the arrow control (or opt-in via `clickAnywhereCollapse`)
+
+### v5.0.1
+
+- :bug: TablerSlidedown: reset wrapper scroll on expand so content focused while collapsed (ie autofocused inputs) cannot leave the top of the expanded content cut off
+- :bug: TablerSlidedown: release the measured max-height once the expand transition completes so content that grows after expansion (async lists etc.) is not clipped
+
 ### v5.0.0
 
 - :rocket: Remove `TablerList` as it used an outdated `window.std` requirement for fetching data

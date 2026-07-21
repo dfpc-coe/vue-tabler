@@ -74,8 +74,33 @@ function toggle() {
 
     if (el) {
         if (isExpanded.value) {
+            // The wrapper is overflow: hidden but can still be scrolled
+            // programmatically (ie by a browser focus() scrolling an input in
+            // the collapsed content into view) which would leave the top of
+            // the expanded content cut off
+            el.scrollTop = 0;
+
             el.style.maxHeight = el.scrollHeight + 'px';
+
+            const release = (event: TransitionEvent) => {
+                if (event.target !== el) return;
+                el.removeEventListener('transitionend', release);
+
+                if (isExpanded.value) {
+                    // Release the measured height so content that grows after
+                    // expansion (async lists etc.) is not clipped
+                    el.style.maxHeight = 'none';
+                    el.scrollTop = 0;
+                }
+            };
+
+            el.addEventListener('transitionend', release);
         } else {
+            // Re-fix the current height so the collapse can animate from it
+            // even if the max-height was released after expansion
+            el.style.maxHeight = el.scrollHeight + 'px';
+            void el.offsetHeight;
+
             el.style.maxHeight = ''; // Reset to CSS default (0)
         }
     }
@@ -87,7 +112,7 @@ function handleClick(event: MouseEvent) {
     if (el && el === event.target) return;
     if (el && el.contains(event.target as Node)) return;
     
-    if (props.clickAnywhereExpand) {
+    if (props.clickAnywhereExpand && !isExpanded.value) {
         toggle();
     } else if (props.clickAnywhereCollapse && isExpanded.value) {
         toggle();
