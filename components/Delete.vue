@@ -29,7 +29,7 @@
         </template>
         <template v-else>
             <TablerIconButton
-                title='Delete'
+                :title='props.title'
                 :disabled='props.disabled'
                 @click.stop.prevent='openModal'
             >
@@ -103,6 +103,7 @@ import {
 
 export interface DeleteProps {
     label?: string;
+    title?: string;
     size?: number;
     disabled?: boolean;
     displaytype?: 'button' | 'icon' | 'menu';
@@ -111,6 +112,7 @@ export interface DeleteProps {
 
 const props = withDefaults(defineProps<DeleteProps>(), {
     label: 'Delete',
+    title: 'Delete',
     size: 32,
     disabled: false,
     displaytype: 'button'

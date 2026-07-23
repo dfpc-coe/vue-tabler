@@ -12,6 +12,10 @@
 
 ### Pending
 
+### v5.2.0
+
+- :rocket: Allow setting custom Delete title
+
 ### v5.1.0
 
 - :bug: TablerSlidedown: `clickAnywhereExpand` no longer collapses an expanded slidedown - collapse is explicit via the arrow control (or opt-in via `clickAnywhereCollapse`)

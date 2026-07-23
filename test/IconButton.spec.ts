@@ -5,16 +5,6 @@ import { mount } from '@vue/test-utils'
 import IconButton from '../components/IconButton.vue'
 import iconButtonSource from '../components/IconButton.vue?raw'
 
-const global = {
-    directives: {
-        tooltip: {
-            mounted() {
-                return undefined
-            },
-        },
-    },
-}
-
 describe('TablerIconButton', () => {
     it('adds hover styling when no explicit color is provided', () => {
         const wrapper = mount(IconButton, {
@@ -24,10 +14,23 @@ describe('TablerIconButton', () => {
             slots: {
                 default: 'X',
             },
-            global,
         })
 
         expect(wrapper.get('div').classes()).toContain('custom-hover')
+    })
+
+    it('exposes the title as a native tooltip and accessible name', () => {
+        const wrapper = mount(IconButton, {
+            props: {
+                title: 'Toggle Panel',
+            },
+            slots: {
+                default: 'X',
+            },
+        })
+
+        expect(wrapper.get('div').attributes('title')).toBe('Toggle Panel')
+        expect(wrapper.get('div').attributes('aria-label')).toBe('Toggle Panel')
     })
 
     it('skips hover styling when a custom color is provided', () => {
@@ -39,7 +42,6 @@ describe('TablerIconButton', () => {
             slots: {
                 default: 'X',
             },
-            global,
         })
 
         expect(wrapper.get('div').classes()).not.toContain('custom-hover')

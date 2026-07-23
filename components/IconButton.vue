@@ -1,7 +1,8 @@
 <template>
     <div
         :ref='iconid'
-        v-tooltip='props.title'
+        :title='props.title'
+        :aria-label='props.title'
         tabindex='0'
         role='button'
         :class='{
