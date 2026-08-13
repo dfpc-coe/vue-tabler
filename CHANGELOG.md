@@ -12,6 +12,10 @@
 
 ### Pending
 
+### v5.2.1
+
+- :bug: Ensure Input Error border is shown consistently
+
 ### v5.2.0
 
 - :rocket: Allow setting custom Delete title

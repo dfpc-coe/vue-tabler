@@ -324,6 +324,17 @@ input:autofill {
     border-color: var(--tblr-border-color);
 }
 
+/*
+ * The border-color reset above outranks Tabler's own .form-control.is-invalid
+ * rule (the scoped attribute selector adds specificity), so restore the
+ * invalid border at the same scope or the red outline only ever appears on
+ * the end adornment span
+ */
+.input-group :deep(.form-control.is-invalid),
+.position-relative > .form-control.is-invalid {
+    border-color: var(--tblr-form-invalid-border-color, var(--tblr-danger));
+}
+
 .input-group :deep(.form-control),
 .position-relative > .form-control {
     color: var(--tblr-body-color);
