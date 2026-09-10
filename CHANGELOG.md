@@ -12,6 +12,10 @@
 
 ### Pending
 
+### v5.3.0
+
+- :arrow_up: Update all Core Deps
+
 ### v5.2.1
 
 - :bug: Ensure Input Error border is shown consistently
