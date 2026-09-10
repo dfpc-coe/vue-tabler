@@ -12,6 +12,14 @@
 
 ### Pending
 
+### v5.4.0
+
+- :tada: Add a Multiple Choice field to `TablerSchemaBuilder`, built as an array of enum strings and rendered by `TablerSchema` as a checkbox group via the new `TablerMultiEnum` input
+- :rocket: Use human readable field type names in `TablerSchemaBuilder` (Text, Dropdown, Toggle, Number, Whole Number) instead of raw JSON Schema types, with a matching icon per type
+- :bug: Shift a `TablerDropdown` menu up to stay within the viewport instead of shrinking it into a scrolling panel when the trigger sits near the bottom of the screen
+- :tada: Add an `advanced` scoped slot to `TablerAlert` and `TablerError` to customize how the error body is rendered
+- :rocket: Wrap long lines in the `TablerAlert` Advanced body
+
 ### v5.3.0
 
 - :arrow_up: Update all Core Deps

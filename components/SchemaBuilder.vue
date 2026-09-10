@@ -27,55 +27,18 @@
                     >
                         <div class='m-1 text-center'>
                             <div
-                                class='opt cursor-pointer py-1'
-                                @click='create({
-                                    "name": "",
-                                    "type": "string",
-                                    "required": false,
-                                })'
+                                v-for='option in SCHEMA_TYPES'
+                                :key='option.label'
+                                class='opt cursor-pointer py-1 d-flex align-items-center justify-content-center'
+                                @click='add(option)'
                             >
-                                String
-                            </div>
-                            <div
-                                class='opt cursor-pointer py-1'
-                                @click='create({
-                                    "name": "",
-                                    "type": "string",
-                                    "enum": [],
-                                    "required": false,
-                                })'
-                            >
-                                Enum
-                            </div>
-                            <div
-                                class='opt cursor-pointer py-1'
-                                @click='create({
-                                    "name": "",
-                                    "type": "boolean",
-                                    "required": false,
-                                })'
-                            >
-                                Boolean
-                            </div>
-                            <div
-                                class='opt cursor-pointer py-1'
-                                @click='create({
-                                    "name": "",
-                                    "type": "number",
-                                    "required": false,
-                                })'
-                            >
-                                Number
-                            </div>
-                            <div
-                                class='opt cursor-pointer py-1'
-                                @click='create({
-                                    "name": "",
-                                    "type": "integer",
-                                    "required": false,
-                                })'
-                            >
-                                Integer
+                                <component
+                                    :is='option.icon'
+                                    :size='20'
+                                    stroke='1'
+                                    class='me-2'
+                                />
+                                <span v-text='option.label' />
                             </div>
                         </div>
                     </ul>
@@ -104,8 +67,17 @@
                         />
                     </div>
                     <div class='overlay' />
+                    <TablerMultiEnum
+                        v-if='isMultiEnum(prop)'
+                        :model-value='input[prop.name] || []'
+                        :label='prop.name'
+                        :disabled='true'
+                        :required='prop.required || false'
+                        :description='prop.description || ""'
+                        :options='enumValues(prop) || []'
+                    />
                     <TablerEnum
-                        v-if='prop.enum'
+                        v-else-if='prop.enum'
                         :model-value='input[prop.name]'
                         :label='prop.name'
                         :disabled='true'
@@ -148,9 +120,12 @@ import {
     IconPlus,
 } from '@tabler/icons-vue';
 import BuilderEdit from './SchemaBuilderEdit.vue';
+import { SCHEMA_TYPES, isMultiEnum, enumValues, schemaTemplate } from './schema-types';
+import type { SchemaTypeOption } from './schema-types';
 import TablerNone from './None.vue';
 import TablerInput from './input/Input.vue';
 import TablerEnum from './input/Enum.vue';
+import TablerMultiEnum from './input/MultiEnum.vue';
 import TablerToggle from './input/Toggle.vue';
 import TablerDelete from './Delete.vue';
 
@@ -230,6 +205,14 @@ onMounted(() => {
         });
     }
 });
+
+function add(option: SchemaTypeOption) {
+    create({
+        name: '',
+        required: false,
+        ...schemaTemplate(option),
+    } as SchemaProperty);
+}
 
 function create(prop: SchemaProperty) {
     prop._id = Math.random().toString(36).substring(7);

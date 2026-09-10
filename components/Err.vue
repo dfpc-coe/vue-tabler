@@ -11,7 +11,17 @@
         <Alert
             :title='title'
             :err='err'
-        />
+        >
+            <template
+                v-if='$slots.advanced'
+                #advanced='slotProps'
+            >
+                <slot
+                    name='advanced'
+                    v-bind='slotProps'
+                />
+            </template>
+        </Alert>
 
         <div class='modal-footer'>
             <div class='w-100'>
@@ -42,6 +52,10 @@ withDefaults(defineProps<ErrProps>(), {
     title: 'Website Error',
     trace: true
 });
+
+defineSlots<{
+    advanced?: (props: { body: string }) => unknown;
+}>()
 
 const emit = defineEmits<{
     (e: 'close'): void

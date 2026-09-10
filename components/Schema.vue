@@ -7,7 +7,17 @@
                 :key='key'
                 class='py-2 floating-input'
             >
-                <template v-if='s.properties[key].enum'>
+                <template v-if='s.properties[key].type === "array" && s.properties[key].items && s.properties[key].items.enum'>
+                    <TablerMultiEnum
+                        v-model='data[key]'
+                        :label='key'
+                        :disabled='disabled'
+                        :required='s.properties[key].required || false'
+                        :description='s.properties[key].description || ""'
+                        :options='s.properties[key].items.enum'
+                    />
+                </template>
+                <template v-else-if='s.properties[key].enum'>
                     <TablerEnum
                         v-model='data[key]'
                         :label='key'
@@ -111,6 +121,7 @@ import { ref, watch, onMounted } from 'vue'
 import TablerInput from './input/Input.vue';
 import TablerToggle from './input/Toggle.vue';
 import TablerEnum from './input/Enum.vue';
+import TablerMultiEnum from './input/MultiEnum.vue';
 import TablerLoading from './Loading.vue';
 import {
     IconPlus,

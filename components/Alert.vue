@@ -51,18 +51,24 @@
                     />
                     <span>Advanced</span>
                 </div>
-                <pre
+                <slot
                     v-if='open'
-                    class='my-3'
-                    v-text='err.body || err.stack'
-                />
+                    name='advanced'
+                    :body='body'
+                >
+                    <pre
+                        class='my-3'
+                        style='white-space: pre-wrap; word-break: break-word;'
+                        v-text='body'
+                    />
+                </slot>
             </div>
         </template>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import {
     IconAlertTriangle,
     IconChevronRight,
@@ -71,17 +77,26 @@ import {
 
 export interface AlertProps {
     title?: string;
-    err?: Error & { body?: string };
+    err?: Error & { body?: string | Record<string, unknown> };
     compact?: boolean;
     advanced?: boolean;
 }
 
-withDefaults(defineProps<AlertProps>(), {
+const props = withDefaults(defineProps<AlertProps>(), {
     title: 'Generic Error',
     err: () => new Error('Something is amiss'),
     compact: false,
     advanced: true
 });
 
+defineSlots<{
+    advanced?: (props: { body: string }) => unknown;
+}>()
+
 const open = ref(false)
+
+const body = computed<string>(() => {
+    const raw = props.err.body || props.err.stack || '';
+    return typeof raw === 'string' ? raw : JSON.stringify(raw, null, 4);
+})
 </script>

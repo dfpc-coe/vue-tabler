@@ -119,11 +119,11 @@ function calcPosition() {
             left = t.right - m.width;
     }
 
-    // Keep within viewport
+    // Keep within viewport - shift the menu rather than shrink it, so only a
+    // menu taller than the viewport itself ends up scrolling
     left = Math.max(gap, Math.min(left, vw - m.width - gap));
-    top  = Math.max(gap, Math.min(top,  vh - gap));
+    top  = Math.max(gap, Math.min(top,  vh - m.height - gap));
 
-    // Constrain height to available space below the computed top
     const maxHeight = Math.max(100, vh - top - gap);
 
     floatingStyle.value = {

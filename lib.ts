@@ -7,6 +7,7 @@ export { default as TablerToggle } from './components/input/Toggle.vue'
 export { default as TablerInput } from './components/input/Input.vue'
 export { default as TablerFileInput } from './components/input/FileInput.vue'
 export { default as TablerEnum } from './components/input/Enum.vue';
+export { default as TablerMultiEnum } from './components/input/MultiEnum.vue';
 
 export { default as TablerAlert } from './components/Alert.vue'
 export { default as TablerBorder } from './components/Border.vue'
