@@ -12,6 +12,13 @@
 
 ### Pending
 
+### v5.5.0
+
+- :tada: Render an array of objects in `TablerSchema` as a table with a row editor modal, CSV import and clear, matching the CloudTAK Layer Environment form
+- :rocket: Seed missing `TablerSchema` values from the JSON Schema `default` and leave numbers without a default unset instead of an empty string
+- :rocket: Add a `step` prop to `TablerInput`, set to `1` for integer and `any` for number fields by `TablerSchema`
+- :bug: Fix `TablerSchema` self reference for nested arrays and crash when adding to an array without `items`
+
 ### v5.4.0
 
 - :tada: Add a Multiple Choice field to `TablerSchemaBuilder`, built as an array of enum strings and rendered by `TablerSchema` as a checkbox group via the new `TablerMultiEnum` input

@@ -47,6 +47,7 @@
                         :autocomplete='autocomplete'
                         :autofocus='autofocus'
                         :type='computed_type'
+                        :step='step'
                         :class='{
                             "is-invalid": errorstr,
                             "tabler-input-with-end": hasEndAdornment
@@ -211,6 +212,7 @@ export interface InputProps {
     rows?: number;
     wrap?: string;
     type?: string;
+    step?: number | string;
     label?: string;
     placeholder?: string;
     error?: string;
@@ -227,6 +229,7 @@ const props = withDefaults(defineProps<InputProps>(), {
     rows: 1,
     wrap: 'soft',
     type: 'text',
+    step: undefined,
     label: '',
     placeholder: '',
     error: ''

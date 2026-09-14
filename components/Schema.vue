@@ -7,7 +7,7 @@
                 :key='key'
                 class='py-2 floating-input'
             >
-                <template v-if='s.properties[key].type === "array" && s.properties[key].items && s.properties[key].items.enum'>
+                <template v-if='isMultiEnum(s.properties[key])'>
                     <TablerMultiEnum
                         v-model='data[key]'
                         :label='key'
@@ -42,6 +42,7 @@
                     <TablerInput
                         v-model='data[key]'
                         :type='s.properties[key].type'
+                        :step='s.properties[key].type === "integer" ? 1 : "any"'
                         :label='key'
                         :disabled='disabled'
                         :required='s.properties[key].required || false'
@@ -55,6 +56,86 @@
                         :disabled='disabled'
                         :required='s.properties[key].required || false'
                         :description='s.properties[key].description || ""'
+                    />
+                </template>
+                <template v-else-if='isObjectTable(s.properties[key])'>
+                    <div class='d-flex align-items-center'>
+                        <label
+                            class='form-label mb-0'
+                            v-text='key'
+                        />
+                        <span
+                            v-if='s.properties[key].required'
+                            class='text-red mx-1'
+                        >*</span>
+                        <div
+                            v-if='!disabled'
+                            class='ms-auto d-flex'
+                        >
+                            <TablerIconButton
+                                title='Clear Table'
+                                @click='data[key].splice(0, data[key].length)'
+                            >
+                                <IconTrash
+                                    :size='32'
+                                    stroke='1'
+                                />
+                            </TablerIconButton>
+                            <TablerIconButton
+                                title='Import CSV'
+                                @click='openImport(key)'
+                            >
+                                <IconDatabaseImport
+                                    :size='32'
+                                    stroke='1'
+                                />
+                            </TablerIconButton>
+                            <TablerIconButton
+                                title='Add Row'
+                                @click='openRow(key)'
+                            >
+                                <IconPlus
+                                    :size='32'
+                                    stroke='1'
+                                />
+                            </TablerIconButton>
+                        </div>
+                    </div>
+
+                    <div
+                        v-if='data[key] && data[key].length'
+                        class='table-responsive'
+                    >
+                        <table class='table table-hover card-table table-vcenter border rounded cursor-pointer'>
+                            <thead>
+                                <tr>
+                                    <th
+                                        v-for='col in columns(key)'
+                                        :key='col'
+                                        v-text='col'
+                                    />
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    v-for='(row, i) in data[key]'
+                                    :key='i'
+                                    @click='openRow(key, Number(i))'
+                                >
+                                    <td
+                                        v-for='col in columns(key)'
+                                        :key='col'
+                                        v-text='row[col]'
+                                    />
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <TablerNone
+                        v-else
+                        :label='key'
+                        :create='!disabled'
+                        @create='openRow(key)'
                     />
                 </template>
                 <template v-else-if='s.properties[key].type === "array"'>
@@ -113,20 +194,91 @@
                 </template>
             </div>
         </template>
+
+        <TablerModal v-if='edit.shown'>
+            <button
+                type='button'
+                class='btn-close'
+                aria-label='Close'
+                @click='edit.shown = false'
+            />
+            <div class='modal-status bg-yellow' />
+            <div class='modal-header'>
+                <span class='modal-title'>Row Editor</span>
+                <div class='ms-auto'>
+                    <TablerDelete
+                        v-if='!disabled && edit.index !== null'
+                        displaytype='icon'
+                        @delete='removeRow'
+                    />
+                </div>
+            </div>
+            <div class='modal-body py-4'>
+                <TablerSchema
+                    v-model='edit.row'
+                    :schema='s.properties[edit.key].items'
+                    :disabled='disabled'
+                />
+
+                <button
+                    v-if='!disabled'
+                    class='btn btn-primary w-100 mt-4'
+                    @click='saveRow'
+                >
+                    Done
+                </button>
+            </div>
+        </TablerModal>
+
+        <TablerModal v-if='csv.shown'>
+            <button
+                type='button'
+                class='btn-close'
+                aria-label='Close'
+                @click='csv.shown = false'
+            />
+            <div class='modal-status bg-yellow' />
+            <div class='modal-header'>
+                <span class='modal-title'>Import CSV</span>
+            </div>
+            <div class='modal-body py-4'>
+                <TablerInput
+                    v-model='csv.text'
+                    label='CSV'
+                    :rows='10'
+                    :description='"Rows of " + columns(csv.key).join(", ") + " separated by commas or tabs"'
+                />
+
+                <button
+                    class='btn btn-primary w-100 mt-4'
+                    @click='importCSV'
+                >
+                    Import
+                </button>
+            </div>
+        </TablerModal>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted } from 'vue'
+import { ref, reactive, watch, onMounted } from 'vue'
 import TablerInput from './input/Input.vue';
 import TablerToggle from './input/Toggle.vue';
 import TablerEnum from './input/Enum.vue';
 import TablerMultiEnum from './input/MultiEnum.vue';
 import TablerLoading from './Loading.vue';
+import TablerModal from './Modal.vue';
+import TablerDelete from './Delete.vue';
+import TablerNone from './None.vue';
+import TablerIconButton from './IconButton.vue';
+import { isMultiEnum } from './schema-types';
 import {
     IconPlus,
     IconTrash,
+    IconDatabaseImport,
 } from '@tabler/icons-vue';
+
+defineOptions({ name: 'TablerSchema' });
 
 export interface SchemaProps {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -151,17 +303,103 @@ const s = ref<any>({});
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const data = ref<any>({});
 
+const edit = reactive<{
+    shown: boolean;
+    key: string;
+    index: number | null;
+    row: Record<string, unknown>;
+}>({
+    shown: false,
+    key: '',
+    index: null,
+    row: {}
+});
+
+const csv = reactive({
+    shown: false,
+    key: '',
+    text: ''
+});
+
+/** An array of objects with known properties is rendered as a table with a row editor */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isObjectTable = (prop: any): boolean => {
+    return prop.type === 'array'
+        && prop.items
+        && prop.items.type === 'object'
+        && !!prop.items.properties;
+}
+
+const columns = (key: string): string[] => {
+    const prop = s.value.properties[key];
+    if (!prop || !isObjectTable(prop)) return [];
+    return Object.keys(prop.items.properties);
+}
+
 const push = (key: string) => {
-    if (!props.schema.properties[key].items) data.value[key].push('');
-    if (props.schema.properties[key].items.type === 'object') {
+    const items = props.schema.properties[key].items;
+
+    if (!items || items.type === 'string') {
+        data.value[key].push('');
+    } else if (items.type === 'object') {
         data.value[key].push({});
-    } else if (props.schema.properties[key].items.type === 'array') {
+    } else if (items.type === 'array') {
         data.value[key].push([]);
-    } else if (props.schema.properties[key].items.type === 'boolean') {
+    } else if (items.type === 'boolean') {
         data.value[key].push(false);
     } else {
         data.value[key].push('');
     }
+}
+
+const openRow = (key: string, index?: number) => {
+    edit.key = key;
+    edit.index = index ?? null;
+    edit.row = index === undefined ? {} : JSON.parse(JSON.stringify(data.value[key][index]));
+    edit.shown = true;
+}
+
+const saveRow = () => {
+    const row = JSON.parse(JSON.stringify(edit.row));
+
+    if (edit.index === null) {
+        data.value[edit.key].push(row);
+    } else {
+        data.value[edit.key][edit.index] = row;
+    }
+
+    edit.shown = false;
+}
+
+const removeRow = () => {
+    if (edit.index !== null) {
+        data.value[edit.key].splice(edit.index, 1);
+    }
+
+    edit.shown = false;
+}
+
+const openImport = (key: string) => {
+    csv.key = key;
+    csv.text = '';
+    csv.shown = true;
+}
+
+const importCSV = () => {
+    const headers = columns(csv.key);
+    const lines = csv.text.split('\n').filter((line) => line.trim().length);
+    const delimiter = lines.length && lines[0].includes(',') ? ',' : '\t';
+
+    for (const line of lines) {
+        const cells = line.split(delimiter);
+        const row: Record<string, string> = {};
+        for (let i = 0; i < headers.length; i++) {
+            row[headers[i]] = (cells[i] ?? '').trim();
+        }
+        data.value[csv.key].push(row);
+    }
+
+    csv.shown = false;
 }
 
 // Watch for data changes
@@ -173,24 +411,29 @@ const updateSchema = () => {
     s.value = JSON.parse(JSON.stringify(props.schema));
     if (s.value.type === 'object' && s.value.properties) {
         for (const req of (s.value.required || [])) {
-            s.value.properties[req].required = true;
+            if (s.value.properties[req]) s.value.properties[req].required = true;
         }
     }
 }
 
+/** Seed missing keys from the schema default, falling back to an empty value of the right shape */
 const updateDataDefaults = () => {
     if (s.value.type === 'object' && s.value.properties) {
         for (const key in s.value.properties) {
             if (data.value[key] !== undefined) continue;
 
-            const type = s.value.properties[key].type;
+            const prop = s.value.properties[key];
 
-            if (type === 'array') {
+            if (prop.default !== undefined) {
+                data.value[key] = JSON.parse(JSON.stringify(prop.default));
+            } else if (prop.type === 'array') {
                 data.value[key] = [];
-            } else if (type === 'boolean') {
+            } else if (prop.type === 'boolean') {
                 data.value[key] = false;
-            } else if (type === 'object') {
+            } else if (prop.type === 'object') {
                 data.value[key] = {};
+            } else if (prop.type === 'number' || prop.type === 'integer') {
+                continue;
             } else {
                 data.value[key] = '';
             }
