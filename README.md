@@ -10,6 +10,9 @@
   <a href="https://github.com/tak-ps/vue-tabler/blob/main/LICENSE">
     <img src="https://img.shields.io/npm/l/@tak-ps/vue-tabler.svg" alt="License">
   </a>
+  <a href="https://codecov.io/gh/dfpc-coe/vue-tabler">
+    <img src="https://codecov.io/gh/dfpc-coe/vue-tabler/graph/badge.svg" alt="Coverage">
+  </a>
 </p>
 
 <p align="center">

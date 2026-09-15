@@ -3,7 +3,7 @@
         <TablerLoading v-if='loading' />
         <template v-else>
             <div
-                v-for='key in Object.keys(s.properties)'
+                v-for='key in visibleKeys'
                 :key='key'
                 class='py-2 floating-input'
             >
@@ -138,6 +138,46 @@
                         @create='openRow(key)'
                     />
                 </template>
+                <template v-else-if='isUnion(s.properties[key])'>
+                    <TablerEnum
+                        :model-value='variantLabels(key)[variant[key] || 0]'
+                        :label='key'
+                        :disabled='disabled'
+                        :required='s.properties[key].required || false'
+                        :description='s.properties[key].description || ""'
+                        :options='variantLabels(key)'
+                        @update:model-value='selectVariant(key, $event)'
+                    />
+
+                    <div class='border rounded my-2 py-2 mx-2 px-2'>
+                        <TablerSchema
+                            :key='variant[key] || 0'
+                            v-model='data[key]'
+                            :schema='unionVariants(s.properties[key])[variant[key] || 0]'
+                            :disabled='disabled'
+                        />
+                    </div>
+                </template>
+                <template v-else-if='isObject(s.properties[key])'>
+                    <div class='d-flex align-items-center'>
+                        <label
+                            class='form-label mb-0'
+                            v-text='key'
+                        />
+                        <span
+                            v-if='s.properties[key].required'
+                            class='text-red mx-1'
+                        >*</span>
+                    </div>
+
+                    <div class='border rounded my-2 py-2 mx-2 px-2'>
+                        <TablerSchema
+                            v-model='data[key]'
+                            :schema='s.properties[key]'
+                            :disabled='disabled'
+                        />
+                    </div>
+                </template>
                 <template v-else-if='s.properties[key].type === "array"'>
                     <div class='d-flex'>
                         <label
@@ -261,7 +301,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, watch, onMounted } from 'vue'
+import { ref, reactive, computed, watch, onMounted } from 'vue'
 import TablerInput from './input/Input.vue';
 import TablerToggle from './input/Toggle.vue';
 import TablerEnum from './input/Enum.vue';
@@ -320,6 +360,103 @@ const csv = reactive({
     key: '',
     text: ''
 });
+
+/** Selected union variant index per property key */
+const variant = reactive<Record<string, number>>({});
+
+/** Properties with a fixed const value are seeded but never rendered */
+const visibleKeys = computed<string[]>(() => {
+    if (!s.value.properties) return [];
+    return Object.keys(s.value.properties).filter((key) => s.value.properties[key].const === undefined);
+});
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isObject = (prop: any): boolean => {
+    return prop.type === 'object' && !!prop.properties;
+}
+
+/** The object members of an anyOf/oneOf, ignoring a null member used to mark a nullable value */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const unionVariants = (prop: any): any[] => {
+    const members = prop.oneOf || prop.anyOf;
+    if (!Array.isArray(members)) return [];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return members.filter((m: any) => m && m.type !== 'null');
+}
+
+/** A choice between two or more object shapes, rendered with a variant picker */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isUnion = (prop: any): boolean => {
+    const variants = unionVariants(prop);
+    return variants.length >= 2 && variants.every((v) => isObject(v));
+}
+
+const variantLabels = (key: string): string[] => {
+    const labels: string[] = [];
+
+    unionVariants(s.value.properties[key]).forEach((v, i) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const discriminator = Object.values(v.properties as Record<string, any>).find((p) => p.const !== undefined);
+        let label = v.title || (discriminator ? String(discriminator.const) : `Option ${i + 1}`);
+        if (labels.includes(label)) label = `${label} (${i + 1})`;
+        labels.push(label);
+    });
+
+    return labels;
+}
+
+/** Pick the variant a stored value belongs to by discriminator, then by required keys */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const detectVariant = (prop: any, value: any): number => {
+    const variants = unionVariants(prop);
+    if (!value || typeof value !== 'object') return 0;
+
+    for (let i = 0; i < variants.length; i++) {
+        for (const [k, p] of Object.entries(variants[i].properties)) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            if ((p as any).const !== undefined && value[k] === (p as any).const) return i;
+        }
+    }
+
+    for (let i = 0; i < variants.length; i++) {
+        const required: string[] = variants[i].required || [];
+        if (required.length && required.every((k) => value[k] !== undefined)) return i;
+    }
+
+    return 0;
+}
+
+/** A fresh value for a variant holding only its const properties, the nested form seeds the rest */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const seedVariant = (prop: any, index: number): Record<string, unknown> => {
+    const seed: Record<string, unknown> = {};
+    const v = unionVariants(prop)[index];
+    if (!v) return seed;
+
+    for (const [k, p] of Object.entries(v.properties)) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        if ((p as any).const !== undefined) seed[k] = (p as any).const;
+    }
+
+    return seed;
+}
+
+const selectVariant = (key: string, label: string) => {
+    const index = variantLabels(key).indexOf(label);
+    if (index === -1 || index === variant[key]) return;
+
+    variant[key] = index;
+    data.value[key] = seedVariant(s.value.properties[key], index);
+}
+
+const resolveVariants = () => {
+    if (!s.value.properties) return;
+
+    for (const key in s.value.properties) {
+        const prop = s.value.properties[key];
+        if (isUnion(prop)) variant[key] = detectVariant(prop, data.value[key]);
+    }
+}
 
 /** An array of objects with known properties is rendered as a table with a row editor */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -424,8 +561,12 @@ const updateDataDefaults = () => {
 
             const prop = s.value.properties[key];
 
-            if (prop.default !== undefined) {
+            if (prop.const !== undefined) {
+                data.value[key] = JSON.parse(JSON.stringify(prop.const));
+            } else if (prop.default !== undefined) {
                 data.value[key] = JSON.parse(JSON.stringify(prop.default));
+            } else if (isUnion(prop)) {
+                data.value[key] = seedVariant(prop, 0);
             } else if (prop.type === 'array') {
                 data.value[key] = [];
             } else if (prop.type === 'boolean') {
@@ -444,12 +585,14 @@ const updateDataDefaults = () => {
 watch(() => props.schema, () => {
     updateSchema();
     updateDataDefaults();
+    resolveVariants();
 }, { deep: true });
 
 watch(() => props.modelValue, () => {
     if (JSON.stringify(props.modelValue) !== JSON.stringify(data.value)) {
         data.value = JSON.parse(JSON.stringify(props.modelValue));
         updateDataDefaults();
+        resolveVariants();
     }
 }, { deep: true });
 
@@ -459,6 +602,7 @@ onMounted(async () => {
     data.value = JSON.parse(JSON.stringify(props.modelValue));
     updateSchema();
     updateDataDefaults();
+    resolveVariants();
 
     loading.value = false;
 })

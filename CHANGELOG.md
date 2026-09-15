@@ -12,6 +12,13 @@
 
 ### Pending
 
+### v5.6.0 - 2026-09-15
+
+- :white_check_mark: Add `TablerSchema` tests for editing every primitive input type and for default, const and nested default seeding across model and schema changes
+- :white_check_mark: Collect v8 test coverage with `npm run test:coverage` and upload it to Codecov from the Test workflow
+- :tada: Render a `type: object` property in `TablerSchema` as a nested form instead of a raw textarea
+- :tada: Render an `anyOf`/`oneOf` of object shapes in `TablerSchema` with a variant picker, seeding `const` discriminators and resetting the value when the variant changes
+
 ### v5.5.0
 
 - :tada: Render an array of objects in `TablerSchema` as a table with a row editor modal, CSV import and clear, matching the CloudTAK Layer Environment form
