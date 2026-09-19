@@ -12,6 +12,8 @@
 
 ### Pending
 
+### v5.7.0 - 2026-09-18
+
 - :tada: Add `TablerMarkdownEditor`, a WYSIWYG Markdown editor built on Tiptap with a formatting toolbar & table editing. It is `v-model`'d with a Markdown string, emits `submit` on `Ctrl/Cmd+Enter` and is exported as an async component so ProseMirror is only loaded when an editor is first rendered
 - :rocket: `TablerMarkdownEditor` never reports a change for a document that was only opened or was edited back to where it started, keeps bare URLs, `&`, `<`, `>` & intraword `_` readable as plain text and escapes a `|` typed into a table cell
 - :tada: Add a `breaks` prop to `TablerMarkdown` to keep single line breaks inside of paragraphs without rendering the newlines between blocks as `autowrap` does
