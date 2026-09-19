@@ -30,6 +30,7 @@ export { default as TablerBytes } from './components/Bytes.vue';
 export { default as TablerEpoch } from './components/Epoch.vue';
 export { default as TablerEpochRange } from './components/EpochRange.vue';
 export { default as TablerMarkdown } from './components/Markdown.vue';
+export { TablerMarkdownEditor } from './components/MarkdownEditorAsync';
 export { default as TablerDelete } from './components/Delete.vue';
 export { default as TablerPillGroup } from './components/PillGroup.vue';
 export { default as TablerSchema } from './components/Schema.vue';

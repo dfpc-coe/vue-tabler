@@ -1,7 +1,9 @@
 <template>
     <!-- eslint-disable vue/no-v-html -->
     <div
-        :style='autowrap ? `white-space: pre-wrap;` : ``'
+        class='tabler-markdown'
+        :class='{ "tabler-markdown--breaks": breaks }'
+        :style='autowrap && !breaks ? `white-space: pre-wrap;` : ``'
         v-html='html'
     />
     <!-- eslint-enable vue/no-v-html -->
@@ -15,10 +17,16 @@ import { marked } from 'marked'
 export interface MarkdownProps {
     markdown: string;
     autowrap?: boolean;
+    /**
+     * Keep single line breaks inside of paragraphs - unlike `autowrap` the newlines Markdown
+     * puts between blocks aren't rendered so tables & lists don't gain blank lines
+     */
+    breaks?: boolean;
 }
 
 const props = withDefaults(defineProps<MarkdownProps>(), {
-    autowrap: true
+    autowrap: true,
+    breaks: false
 });
 
 function sanitizeHtml(html: string): string {
@@ -38,3 +46,5 @@ const html = computed(() => {
     return sanitizeHtml(rendered)
 })
 </script>
+
+<style src='./internal/markdown.css' />

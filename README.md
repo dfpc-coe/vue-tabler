@@ -74,6 +74,7 @@ import { TablerButton, TablerAlert } from '@tak-ps/vue-tabler';
 | **TablerList** | Display data in list format. |
 | **TablerLoading** | Loading indicators and spinners. |
 | **TablerMarkdown** | Render markdown content safely. |
+| **TablerMarkdownEditor** | WYSIWYG Markdown editor with table editing, styled the same as `TablerMarkdown`. Loaded on first render. |
 | **TablerModal** | Dialog boxes for user interaction. |
 | **TablerNone** | Placeholder component for empty states. |
 | **TablerPager** | Pagination controls for lists and tables. |
@@ -100,6 +101,7 @@ This library relies on the following core dependencies:
 - [Vue 3](https://vuejs.org/)
 - [@tabler/icons-vue](https://www.npmjs.com/package/@tabler/icons-vue)
 - [marked](https://www.npmjs.com/package/marked) (for Markdown rendering)
+- [Tiptap](https://www.npmjs.com/package/@tiptap/vue-3) (for Markdown editing)
 - [DOMPurify](https://www.npmjs.com/package/dompurify) (for HTML sanitization)
 
 ## 📄 License

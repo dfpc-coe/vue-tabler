@@ -1,0 +1,60 @@
+/* Shared by TablerMarkdown & TablerMarkdownEditor so Markdown looks the same read as it does edited */
+
+.tabler-markdown {
+    word-break: break-word;
+}
+
+.tabler-markdown > :first-child {
+    margin-top: 0;
+}
+
+.tabler-markdown > :last-child {
+    margin-bottom: 0;
+}
+
+/* Line breaks are kept inside of paragraphs only - kept on the container they would
+ * also render the newlines Markdown puts between block elements & table rows */
+.tabler-markdown--breaks {
+    white-space: normal;
+}
+
+.tabler-markdown--breaks p {
+    white-space: pre-wrap;
+}
+
+.tabler-markdown table {
+    width: 100%;
+    margin-bottom: 1rem;
+    border-collapse: collapse;
+    font-size: 0.8125rem;
+}
+
+.tabler-markdown th,
+.tabler-markdown td {
+    padding: 4px 8px;
+    border: 1px solid var(--tblr-border-color);
+    vertical-align: top;
+    text-align: left;
+}
+
+.tabler-markdown th {
+    font-weight: 600;
+    white-space: nowrap;
+    background-color: var(--tblr-bg-surface-secondary, rgba(0, 0, 0, 0.1));
+}
+
+/* Timestamps & short identifiers stay on a single line, the last column takes the text */
+.tabler-markdown td:not(:last-child) {
+    white-space: nowrap;
+}
+
+/* The editor wraps the content of a cell in a paragraph */
+.tabler-markdown th > p,
+.tabler-markdown td > p {
+    margin: 0;
+}
+
+.tabler-markdown th:not(:last-child) > p,
+.tabler-markdown td:not(:last-child) > p {
+    white-space: nowrap;
+}
