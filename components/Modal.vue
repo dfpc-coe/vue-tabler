@@ -13,6 +13,8 @@
                 style='display: block;'
                 aria-modal='true'
                 role='dialog'
+                @mousedown='pressed = $event.target'
+                @click.self='clickAway'
             >
                 <div
                     class='modal-dialog modal-dialog-centered'
@@ -39,14 +41,26 @@ import { ref, onMounted, nextTick } from 'vue'
 export interface ModalProps {
     size?: 'sm' | 'md' | 'lg' | 'xl';
     fade?: boolean;
+    dismissable?: boolean;
 }
 
-withDefaults(defineProps<ModalProps>(), {
+const props = withDefaults(defineProps<ModalProps>(), {
     size: 'sm',
-    fade: true
+    fade: true,
+    dismissable: false
 });
 
+const emit = defineEmits<{
+    (e: 'close'): void
+}>()
+
 const modal = ref<HTMLElement | null>(null)
+const pressed = ref<EventTarget | null>(null)
+
+// Ignore drags that start inside the dialog and end on the backdrop
+const clickAway = () => {
+    if (props.dismissable && pressed.value === modal.value) emit('close')
+}
 
 onMounted(() => {
     nextTick(() => {

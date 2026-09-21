@@ -12,6 +12,11 @@
 
 ### Pending
 
+### v5.8.0 - 2026-09-21
+
+- :tada: Add a `dismissable` prop to `TablerModal`, off by default, that emits `close` when the backdrop is clicked
+- :white_check_mark: Add `TablerModal` tests
+
 ### v5.7.0 - 2026-09-18
 
 - :tada: Add `TablerMarkdownEditor`, a WYSIWYG Markdown editor built on Tiptap with a formatting toolbar & table editing. It is `v-model`'d with a Markdown string, emits `submit` on `Ctrl/Cmd+Enter` and is exported as an async component so ProseMirror is only loaded when an editor is first rendered
