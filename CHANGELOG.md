@@ -12,6 +12,11 @@
 
 ### Pending
 
+### v5.9.0 - 2026-10-13
+
+- :bug: `TablerSchema` renders an array of strings, numbers or booleans as a list of inline inputs with add & remove controls - previously each entry was an empty `Entry N` box as the item schema has no properties to recurse into
+- :white_check_mark: Add `TablerSchema` primitive list tests
+
 ### v5.8.0 - 2026-09-21
 
 - :tada: Add a `dismissable` prop to `TablerModal`, off by default, that emits `close` when the backdrop is clicked

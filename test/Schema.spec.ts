@@ -385,6 +385,103 @@ describe('TablerSchema editing primitives', () => {
     })
 })
 
+describe('TablerSchema primitive lists', () => {
+    it('renders an array of strings as one text input per entry', async () => {
+        const wrapper = mount(Schema, {
+            props: {
+                modelValue: { Agencies: ['BVFD', 'KCCAMB'] },
+                schema: {
+                    type: 'object',
+                    properties: {
+                        Agencies: { type: 'array', items: { type: 'string' }, description: 'Agency codes' },
+                    },
+                },
+            },
+        })
+
+        await flushPromises()
+
+        const inputs = wrapper.findAll('input[type="text"]')
+        expect(inputs.map((i) => (i.element as HTMLInputElement).value)).toEqual(['BVFD', 'KCCAMB'])
+        expect(wrapper.text()).toContain('Agency codes')
+
+        await inputs[1].setValue('CWVFD')
+        await flushPromises()
+        expect(lastEmitted(wrapper).Agencies).toEqual(['BVFD', 'CWVFD'])
+    })
+
+    it('adds and removes entries', async () => {
+        const wrapper = mount(Schema, {
+            props: {
+                modelValue: {},
+                schema: {
+                    type: 'object',
+                    properties: {
+                        Agencies: { type: 'array', items: { type: 'string' } },
+                    },
+                },
+            },
+        })
+
+        await flushPromises()
+        expect(wrapper.findAll('input[type="text"]').length).toBe(0)
+
+        await wrapper.find('[title="Add Entry"]').trigger('click')
+        await flushPromises()
+        expect(wrapper.findAll('input[type="text"]').length).toBe(1)
+
+        await wrapper.find('input[type="text"]').setValue('SFD')
+        await flushPromises()
+        expect(lastEmitted(wrapper).Agencies).toEqual(['SFD'])
+
+        await wrapper.find('[title="Remove Entry"]').trigger('click')
+        await flushPromises()
+        expect(lastEmitted(wrapper).Agencies).toEqual([])
+    })
+
+    it('emits typed values for number and boolean lists', async () => {
+        const wrapper = mount(Schema, {
+            props: {
+                modelValue: { Ports: [80], Flags: [false] },
+                schema: {
+                    type: 'object',
+                    properties: {
+                        Ports: { type: 'array', items: { type: 'integer' } },
+                        Flags: { type: 'array', items: { type: 'boolean' } },
+                    },
+                },
+            },
+        })
+
+        await flushPromises()
+
+        await wrapper.find('input[type="number"]').setValue('443')
+        await wrapper.find('.form-switch input').setValue(true)
+        await flushPromises()
+
+        const data = lastEmitted(wrapper)
+        expect(data.Ports).toEqual([443])
+        expect(data.Flags).toEqual([true])
+    })
+
+    it('leaves enum arrays to the multi enum control', async () => {
+        const wrapper = mount(Schema, {
+            props: {
+                modelValue: {},
+                schema: {
+                    type: 'object',
+                    properties: {
+                        Roles: { type: 'array', uniqueItems: true, items: { type: 'string', enum: ['admin', 'user'] } },
+                    },
+                },
+            },
+        })
+
+        await flushPromises()
+        expect(wrapper.find('[title="Add Entry"]').exists()).toBe(false)
+    })
+})
+
 const DEFAULT_SCHEMA = {
     type: 'object',
     properties: {

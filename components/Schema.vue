@@ -178,6 +178,78 @@
                         />
                     </div>
                 </template>
+                <template v-else-if='isPrimitiveList(s.properties[key])'>
+                    <div class='d-flex align-items-center'>
+                        <label
+                            class='form-label mb-0'
+                            v-text='key'
+                        />
+                        <span
+                            v-if='s.properties[key].required'
+                            class='text-red mx-1'
+                        >*</span>
+                        <div
+                            v-if='!disabled'
+                            class='ms-auto d-flex'
+                        >
+                            <TablerIconButton
+                                title='Add Entry'
+                                @click='push(key)'
+                            >
+                                <IconPlus
+                                    :size='32'
+                                    stroke='1'
+                                />
+                            </TablerIconButton>
+                        </div>
+                    </div>
+                    <div
+                        v-if='s.properties[key].description'
+                        class='text-muted small mb-1'
+                        v-text='s.properties[key].description'
+                    />
+
+                    <div
+                        v-for='(entry, i) of data[key]'
+                        :key='i'
+                        class='d-flex align-items-center my-1'
+                    >
+                        <div class='flex-grow-1'>
+                            <TablerToggle
+                                v-if='s.properties[key].items.type === "boolean"'
+                                v-model='data[key][i]'
+                                :label='`${key} ${Number(i) + 1}`'
+                                :disabled='disabled'
+                            />
+                            <TablerInput
+                                v-else
+                                v-model='data[key][i]'
+                                :type='s.properties[key].items.type === "string" ? "text" : s.properties[key].items.type'
+                                :step='s.properties[key].items.type === "integer" ? 1 : "any"'
+                                :placeholder='`${key} ${Number(i) + 1}`'
+                                :disabled='disabled'
+                            />
+                        </div>
+                        <TablerIconButton
+                            v-if='!disabled'
+                            title='Remove Entry'
+                            class='ms-2'
+                            @click='data[key].splice(i, 1)'
+                        >
+                            <IconTrash
+                                :size='32'
+                                stroke='1'
+                            />
+                        </TablerIconButton>
+                    </div>
+
+                    <TablerNone
+                        v-if='!data[key].length'
+                        :label='key'
+                        :create='!disabled'
+                        @create='push(key)'
+                    />
+                </template>
                 <template v-else-if='s.properties[key].type === "array"'>
                     <div class='d-flex'>
                         <label
@@ -465,6 +537,15 @@ const isObjectTable = (prop: any): boolean => {
         && prop.items
         && prop.items.type === 'object'
         && !!prop.items.properties;
+}
+
+/** An array of strings, numbers or booleans is rendered as a list of inline inputs */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isPrimitiveList = (prop: any): boolean => {
+    return prop.type === 'array'
+        && prop.items
+        && !prop.items.enum
+        && ['string', 'number', 'integer', 'boolean'].includes(prop.items.type);
 }
 
 const columns = (key: string): string[] => {
