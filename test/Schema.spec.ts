@@ -612,4 +612,36 @@ describe('TablerSchema applying default values', () => {
         expect((wrapper.find('select').element as HTMLSelectElement).value).toBe('Team Account')
         expect(lastEmitted(wrapper)).toEqual({ Source: { Mode: 'Team', TeamId: 't', Verbose: true } })
     })
+
+    it('renders a property with an @widget hint through its slot and takes the slot update', async () => {
+        const wrapper = mount(Schema, {
+            props: {
+                modelValue: {},
+                schema: {
+                    type: 'object',
+                    properties: {
+                        Type: { type: 'string', default: 'a-f-G', '@widget': 'type' },
+                        Icon: { type: 'string', '@widget': 'icon' },
+                    },
+                },
+            },
+            slots: {
+                'widget-type': `<template #widget-type='{ field, modelValue, update }'>
+                    <button class='widget' :data-field='field' @click='update("a-h-G")'>{{ modelValue }}</button>
+                </template>`,
+            },
+        })
+
+        await flushPromises()
+
+        const widget = wrapper.get('button.widget')
+        expect(widget.attributes('data-field')).toBe('Type')
+        expect(widget.text()).toBe('a-f-G')
+        expect(wrapper.findAll('input').length).toBe(1)
+
+        await widget.trigger('click')
+        await flushPromises()
+
+        expect(lastEmitted(wrapper)).toEqual({ Type: 'a-h-G', Icon: '' })
+    })
 })

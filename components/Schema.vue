@@ -7,7 +7,17 @@
                 :key='key'
                 class='py-2 floating-input'
             >
-                <template v-if='isMultiEnum(s.properties[key])'>
+                <template v-if='widgetSlot(key)'>
+                    <slot
+                        :name='widgetSlot(key)'
+                        :field='key'
+                        :property='s.properties[key]'
+                        :model-value='data[key]'
+                        :disabled='disabled'
+                        :update='(value: unknown) => data[key] = value'
+                    />
+                </template>
+                <template v-else-if='isMultiEnum(s.properties[key])'>
                     <TablerMultiEnum
                         v-model='data[key]'
                         :label='key'
@@ -373,7 +383,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, watch, onMounted } from 'vue'
+import { ref, reactive, computed, watch, onMounted, useSlots } from 'vue'
 import TablerInput from './input/Input.vue';
 import TablerToggle from './input/Toggle.vue';
 import TablerEnum from './input/Enum.vue';
@@ -409,6 +419,8 @@ const emit = defineEmits<{
     (e: 'update:modelValue', value: any): void;
 }>();
 
+const slots = useSlots();
+
 const loading = ref(true);
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const s = ref<any>({});
@@ -435,6 +447,14 @@ const csv = reactive({
 
 /** Selected union variant index per property key */
 const variant = reactive<Record<string, number>>({});
+
+/** Name of the `widget-<name>` slot a property's `@widget` hint is rendered with, when the parent provides one */
+const widgetSlot = (key: string): string | undefined => {
+    const widget = s.value.properties[key]['@widget'];
+    if (typeof widget !== 'string') return;
+    const name = `widget-${widget}`;
+    return slots[name] ? name : undefined;
+}
 
 /** Properties with a fixed const value are seeded but never rendered */
 const visibleKeys = computed<string[]>(() => {

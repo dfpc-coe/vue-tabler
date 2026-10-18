@@ -12,6 +12,10 @@
 
 ### Pending
 
+### v5.10.0 - 2026-10-18
+
+- :tada: `TablerSchema` renders a property carrying an `@widget` hint through a `widget-<name>` scoped slot (`field`, `property`, `modelValue`, `disabled`, `update`) when the parent provides one, falling back to the input implied by the property type otherwise
+
 ### v5.9.0 - 2026-10-13
 
 - :bug: `TablerSchema` renders an array of strings, numbers or booleans as a list of inline inputs with add & remove controls - previously each entry was an empty `Entry N` box as the item schema has no properties to recurse into
