@@ -19,7 +19,7 @@ describe('TablerBadge', () => {
 
         expect(badge.style.backgroundColor).toBe('rgba(34, 197, 94, 0.2)')
         expect(badge.style.borderColor).toBe('rgba(27, 158, 75, 0.2)')
-        expect(badge.style.color).toBe('rgb(255, 255, 255)')
+        expect(badge.style.color).toBe('var(--tblr-body-color)')
     })
 
     it('derives a darker border color from the provided background color', () => {

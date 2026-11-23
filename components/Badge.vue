@@ -27,7 +27,7 @@ const props = withDefaults(defineProps<BadgeProps>(), {
     borderColor: undefined,
     borderStyle: 'solid',
     borderWidth: '1px',
-    textColor: '#ffffff',
+    textColor: 'var(--tblr-body-color)',
     hoverBackgroundColor: undefined,
     hoverBorderColor: undefined,
     hoverBorderStyle: undefined,

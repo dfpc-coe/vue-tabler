@@ -63,4 +63,31 @@ describe('TablerIconButton', () => {
         expect(iconButtonSource).toContain('border-color: color-mix(in srgb, var(--tblr-light) 30%, transparent);')
         expect(iconButtonSource).toContain('background: color-mix(in srgb, var(--tblr-light) 12%, transparent);')
     })
+
+    it('omits aria-pressed unless used as a toggle', () => {
+        const plain = mount(IconButton, { props: { title: 'Toggle Panel' } })
+        expect(plain.get('div').attributes('aria-pressed')).toBeUndefined()
+
+        const off = mount(IconButton, { props: { title: 'Toggle Panel', active: false } })
+        expect(off.get('div').attributes('aria-pressed')).toBe('false')
+        expect(off.get('div').classes()).toContain('custom-hover')
+        expect(off.get('div').classes()).not.toContain('icon-button-active')
+    })
+
+    it('fills with the primary color when active', () => {
+        const wrapper = mount(IconButton, { props: { title: 'Toggle Panel', active: true } })
+
+        expect(wrapper.get('div').attributes('aria-pressed')).toBe('true')
+        expect(wrapper.get('div').classes()).toContain('icon-button-active')
+        expect(wrapper.get('div').classes()).not.toContain('custom-hover')
+        expect(iconButtonSource).toContain('background: var(--tblr-primary);')
+    })
+
+    it('draws a button outline when bordered', () => {
+        const wrapper = mount(IconButton, { props: { title: 'Toggle Panel', bordered: true } })
+
+        expect(wrapper.get('div').classes()).toContain('icon-button-bordered')
+        expect(wrapper.get('div').classes()).toContain('custom-hover')
+        expect(iconButtonSource).toContain('border: var(--tblr-border-width) solid var(--tblr-border-color);')
+    })
 })

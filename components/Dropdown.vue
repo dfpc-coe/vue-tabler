@@ -22,6 +22,7 @@
                 :style='floatingStyle'
                 :aria-labelledby='id'
                 @click='onMenuClick'
+                @keydown='onMenuKeydown'
             >
                 <slot name='dropdown'>
                     Dropdown Content
@@ -166,6 +167,15 @@ function onOutsideClick(e: MouseEvent) {
 
 function onEscape(e: KeyboardEvent) {
     if (e.key === 'Escape') isOpen.value = false;
+}
+
+function onMenuKeydown(e: KeyboardEvent) {
+    if (e.key === 'Escape') {
+        e.stopPropagation();
+        isOpen.value = false;
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+        e.stopPropagation();
+    }
 }
 
 onMounted(() => {

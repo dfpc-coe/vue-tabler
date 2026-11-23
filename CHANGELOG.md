@@ -12,6 +12,12 @@
 
 ### Pending
 
+### v5.11.0 - 2026-11-23
+
+- :tada: `TablerIconButton` gains a `bordered` prop that draws it as an outlined button and an `active` prop that fills it with the primary color and sets `aria-pressed` for use as a toggle
+- :bug: `TablerDropdown` handles `Escape` and arrow keys on the teleported menu and stops them propagating so Bootstrap's `.dropdown-menu` keydown handler never runs against a menu without a `data-bs-toggle` trigger (previously threw `this._element is undefined` when pressing `Escape` inside a dropdown input)
+- :bug: `TablerBadge` text now defaults to `var(--tblr-body-color)` instead of white so badges stay legible in light mode
+
 ### v5.10.0 - 2026-10-18
 
 - :tada: `TablerSchema` renders a property carrying an `@widget` hint through a `widget-<name>` scoped slot (`field`, `property`, `modelValue`, `disabled`, `update`) when the parent provides one, falling back to the input implied by the property type otherwise
