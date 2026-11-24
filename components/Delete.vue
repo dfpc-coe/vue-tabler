@@ -27,7 +27,7 @@
                 />
             </div>
         </template>
-        <template v-else>
+        <template v-else-if='props.displaytype === "icon"'>
             <TablerIconButton
                 :title='props.title'
                 :disabled='props.disabled'
@@ -40,12 +40,12 @@
             </TablerIconButton>
         </template>
 
-        <TablerModal v-if='modal'>
+        <TablerModal v-if='open'>
             <button
                 type='button'
                 class='btn-close'
                 aria-label='Close'
-                @click='modal = false'
+                @click='open = false'
             />
             <div class='modal-status bg-red' />
             <div class='modal-header text-center py-4'>
@@ -92,7 +92,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import TablerModal from './Modal.vue';
 import TablerIconButton from './IconButton.vue';
 import TablerLoading from './Loading.vue';
@@ -106,7 +106,7 @@ export interface DeleteProps {
     title?: string;
     size?: number;
     disabled?: boolean;
-    displaytype?: 'button' | 'icon' | 'menu';
+    displaytype?: 'button' | 'icon' | 'menu' | 'none';
     match?: string;
 }
 
@@ -122,14 +122,19 @@ const emit = defineEmits<{
     (e: 'delete'): void
 }>()
 
+const open = defineModel<boolean>('open', { default: false })
+
 const loading = ref(false)
-const modal = ref(false)
 const matchInput = ref('')
+
+watch(open, () => {
+    loading.value = false;
+    matchInput.value = '';
+})
 
 const openModal = () => {
     if (props.disabled) return;
-    matchInput.value = '';
-    modal.value = true;
+    open.value = true;
 }
 
 const deleting = () => {

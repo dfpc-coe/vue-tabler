@@ -12,6 +12,13 @@
 
 ### Pending
 
+### v5.12.0 - 2026-11-23
+
+- :tada: `TablerDelete` gains an `open` model (`v-model:open`) and a `displaytype='none'` mode that renders no trigger, so the confirmation can be opened from elsewhere and closed by the parent once its delete completes
+- :bug: `TablerDelete` resets its loading state and `match` input whenever the confirmation closes - previously a reopened confirmation kept its spinner
+- :pencil2: A `TablerDelete` inside a `TablerDropdown` never emits `delete`, as the click on the teleported confirmation closes the menu and unmounts it first - use a plain menu item with `displaytype='none'` and `v-model:open` instead
+- :white_check_mark: Add `TablerDelete` tests
+
 ### v5.11.0 - 2026-11-23
 
 - :tada: `TablerIconButton` gains a `bordered` prop that draws it as an outlined button and an `active` prop that fills it with the primary color and sets `aria-pressed` for use as a toggle
