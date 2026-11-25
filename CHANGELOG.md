@@ -12,6 +12,11 @@
 
 ### Pending
 
+### v5.13.0 - 2026-11-25
+
+- :tada: Add `TablerConfirm`, a non-destructive counterpart to `TablerDelete` with the same `displaytype` modes and `open` model, plus `heading` & `description` props and a default slot for the confirmation body
+- :white_check_mark: Add `TablerConfirm` tests
+
 ### v5.12.0 - 2026-11-23
 
 - :tada: `TablerDelete` gains an `open` model (`v-model:open`) and a `displaytype='none'` mode that renders no trigger, so the confirmation can be opened from elsewhere and closed by the parent once its delete completes

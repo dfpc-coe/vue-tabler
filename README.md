@@ -63,6 +63,7 @@ import { TablerButton, TablerAlert } from '@tak-ps/vue-tabler';
 | **TablerBreadCrumb** | Navigation aid indicating the current page's location. |
 | **TablerButton** | Standard action buttons with various styles. |
 | **TablerBytes** | Utility to format byte values into human-readable strings. |
+| **TablerConfirm** | Button/action that asks for confirmation in a modal before emitting `confirm`. |
 | **TablerDelete** | Specialized button/action for delete operations. |
 | **TablerDropdown** | Toggleable menus for actions or navigation. |
 | **TablerEpoch** | Display formatted dates and times. |
