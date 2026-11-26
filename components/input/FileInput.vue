@@ -46,7 +46,7 @@ import { ref, computed, onMounted } from 'vue'
 import TablerLabel from '../internal/Label.vue'
 
 export interface FileInputProps {
-    modelValue: string | number;
+    modelValue?: string | number;
     autofocus?: boolean;
     loading?: boolean;
     required?: boolean;

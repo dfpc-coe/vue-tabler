@@ -138,6 +138,7 @@ const openModal = () => {
 }
 
 const deleting = () => {
+    if (loading.value) return;
     loading.value = true;
     emit('delete')
 }

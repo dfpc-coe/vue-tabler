@@ -3,8 +3,9 @@
         :ref='iconid'
         :title='props.title'
         :aria-label='props.title'
-        tabindex='0'
+        :tabindex='props.disabled ? -1 : 0'
         role='button'
+        :aria-disabled='props.disabled || undefined'
         :aria-pressed='props.active'
         :class='{
             "cursor-pointer": props.disabled === false,
@@ -15,6 +16,7 @@
         }'
         :style='iconButtonStyle'
         class='rounded'
+        @click.capture='guard'
         @keyup.enter='icon?.click()'
     >
         <slot />
@@ -43,6 +45,12 @@ const props = withDefaults(defineProps<IconButtonProps>(), {
     bordered: false,
     active: undefined
 });
+
+const guard = (event: MouseEvent) => {
+    if (!props.disabled) return;
+    event.stopImmediatePropagation();
+    event.preventDefault();
+}
 
 const iconButtonStyle = computed(() => {
     return {

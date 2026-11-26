@@ -4,6 +4,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { parseEpoch } from './internal/epoch'
 
 export interface EpochRangeProps {
     format?: string;
@@ -37,10 +38,13 @@ const months = [
 ]
 
 const display = computed(() => {
-    if (props.format === 'ISO') {
-        const start = new Date(props.start)
-        const end = new Date(props.end)
+    const start = parseEpoch(props.start)
+    const end = parseEpoch(props.end)
 
+    if (props.format !== 'ISO' && props.format !== 'Human') return 'Invalid Format'
+    if (!start || !end) return 'Invalid Date'
+
+    if (props.format === 'ISO') {
         const start_dt = start.toISOString().replace(/[A-Z].*/, '');
         const end_dt = end.toISOString().replace(/[A-Z].*/, '');
         if (start_dt === end_dt) {
@@ -48,10 +52,7 @@ const display = computed(() => {
         } else {
             return `${start.toISOString().replace(/[A-Z]/, ' ').replace(/:[0-9]+\.[0-9]+[A-Z]/, '')} - ${end.toISOString().replace(/[A-Z]/, ' ').replace(/:[0-9]+\.[0-9]+[A-Z]/, '')}`;
         }
-    } else if (props.format === 'Human') {
-        const start = new Date(props.start)
-        const end = new Date(props.end)
-
+    } else {
         const start_day = String(start.getDate());
         let start_day_suffix = suffix[start_day.slice(start_day.length - 1)] || 'th';
         if (['11', '12', '13'].includes(start_day)) start_day_suffix = 'th';
@@ -79,8 +80,6 @@ const display = computed(() => {
         } else {
             return `${start_month} ${start.getFullYear()}, ${start_time} - ${end_month} ${end.getFullYear()}, ${end_time}`;
         }
-    } else {
-        return 'Invalid Format'
     }
 })
 </script>

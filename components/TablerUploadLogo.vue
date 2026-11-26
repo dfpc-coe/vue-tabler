@@ -1,9 +1,8 @@
 <template>
     <div class='mb-3'>
-        <TablerInput
+        <TablerFileInput
             :id='props.inputId || "logoUpload"'
             :label='props.label || "Upload PNG/SVG Logo"'
-            type='file'
             accept='image/png, image/svg+xml'
             :disabled='props.disabled'
             :error='error'
@@ -25,7 +24,7 @@
 
 <script setup lang='ts'>
 import { ref, watch } from 'vue';
-import TablerInput from './input/Input.vue';
+import TablerFileInput from './input/FileInput.vue';
 
 const emit = defineEmits(['update:modelValue', 'file-name']);
 
@@ -52,11 +51,7 @@ function onFileChange(event: Event) {
 
     error.value = '';
 
-    if (!target.files || target.files.length === 0) {
-        throw new Error('Could not read file from input');
-    }
-
-    const file = target.files[0];
+    const file = target.files ? target.files[0] : undefined;
     if (!file) return;
 
     emit('file-name', file.name);

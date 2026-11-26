@@ -1,6 +1,7 @@
 <template>
     <IconButton
         :title='title'
+        :disabled='props.loading'
     >
         <IconRefresh
             v-if='!props.loading'

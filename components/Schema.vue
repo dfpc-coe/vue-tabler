@@ -22,7 +22,7 @@
                         v-model='data[key]'
                         :label='key'
                         :disabled='disabled'
-                        :required='s.properties[key].required || false'
+                        :required='isRequired(key)'
                         :description='s.properties[key].description || ""'
                         :options='s.properties[key].items.enum'
                     />
@@ -32,7 +32,7 @@
                         v-model='data[key]'
                         :label='key'
                         :disabled='disabled'
-                        :required='s.properties[key].required || false'
+                        :required='isRequired(key)'
                         :description='s.properties[key].description || ""'
                         :options='s.properties[key].enum'
                         :default='s.properties[key].default'
@@ -43,8 +43,8 @@
                         v-model='data[key]'
                         :label='key'
                         :disabled='disabled'
-                        :required='s.properties[key].required || false'
-                        :rows='data[key] ? data[key].split("\n").length : 1'
+                        :required='isRequired(key)'
+                        :rows='rows(key)'
                         :description='s.properties[key].description || ""'
                     />
                 </template>
@@ -55,7 +55,7 @@
                         :step='s.properties[key].type === "integer" ? 1 : "any"'
                         :label='key'
                         :disabled='disabled'
-                        :required='s.properties[key].required || false'
+                        :required='isRequired(key)'
                         :description='s.properties[key].description || ""'
                     />
                 </template>
@@ -64,7 +64,7 @@
                         v-model='data[key]'
                         :label='key'
                         :disabled='disabled'
-                        :required='s.properties[key].required || false'
+                        :required='isRequired(key)'
                         :description='s.properties[key].description || ""'
                     />
                 </template>
@@ -75,7 +75,7 @@
                             v-text='key'
                         />
                         <span
-                            v-if='s.properties[key].required'
+                            v-if='isRequired(key)'
                             class='text-red mx-1'
                         >*</span>
                         <div
@@ -120,7 +120,7 @@
                             <thead>
                                 <tr>
                                     <th
-                                        v-for='col in columns(key)'
+                                        v-for='col in tables[key]'
                                         :key='col'
                                         v-text='col'
                                     />
@@ -133,7 +133,7 @@
                                     @click='openRow(key, Number(i))'
                                 >
                                     <td
-                                        v-for='col in columns(key)'
+                                        v-for='col in tables[key]'
                                         :key='col'
                                         v-text='row[col]'
                                     />
@@ -148,14 +148,14 @@
                         @create='openRow(key)'
                     />
                 </template>
-                <template v-else-if='isUnion(s.properties[key])'>
+                <template v-else-if='unions[key]'>
                     <TablerEnum
-                        :model-value='variantLabels(key)[variant[key] || 0]'
+                        :model-value='unions[key].labels[variant[key] || 0]'
                         :label='key'
                         :disabled='disabled'
-                        :required='s.properties[key].required || false'
+                        :required='isRequired(key)'
                         :description='s.properties[key].description || ""'
-                        :options='variantLabels(key)'
+                        :options='unions[key].labels'
                         @update:model-value='selectVariant(key, $event)'
                     />
 
@@ -163,9 +163,19 @@
                         <TablerSchema
                             :key='variant[key] || 0'
                             v-model='data[key]'
-                            :schema='unionVariants(s.properties[key])[variant[key] || 0]'
+                            :schema='unions[key].variants[variant[key] || 0]'
                             :disabled='disabled'
-                        />
+                        >
+                            <template
+                                v-for='name in widgetSlots()'
+                                #[name]='slotProps'
+                            >
+                                <slot
+                                    :name='name'
+                                    v-bind='slotProps'
+                                />
+                            </template>
+                        </TablerSchema>
                     </div>
                 </template>
                 <template v-else-if='isObject(s.properties[key])'>
@@ -175,7 +185,7 @@
                             v-text='key'
                         />
                         <span
-                            v-if='s.properties[key].required'
+                            v-if='isRequired(key)'
                             class='text-red mx-1'
                         >*</span>
                     </div>
@@ -185,7 +195,17 @@
                             v-model='data[key]'
                             :schema='s.properties[key]'
                             :disabled='disabled'
-                        />
+                        >
+                            <template
+                                v-for='name in widgetSlots()'
+                                #[name]='slotProps'
+                            >
+                                <slot
+                                    :name='name'
+                                    v-bind='slotProps'
+                                />
+                            </template>
+                        </TablerSchema>
                     </div>
                 </template>
                 <template v-else-if='isPrimitiveList(s.properties[key])'>
@@ -195,7 +215,7 @@
                             v-text='key'
                         />
                         <span
-                            v-if='s.properties[key].required'
+                            v-if='isRequired(key)'
                             class='text-red mx-1'
                         >*</span>
                         <div
@@ -301,7 +321,17 @@
                             v-model='data[key][i]'
                             :schema='s.properties[key].items'
                             :disabled='disabled'
-                        />
+                        >
+                            <template
+                                v-for='name in widgetSlots()'
+                                #[name]='slotProps'
+                            >
+                                <slot
+                                    :name='name'
+                                    v-bind='slotProps'
+                                />
+                            </template>
+                        </TablerSchema>
                     </div>
                 </template>
                 <template v-else>
@@ -340,7 +370,17 @@
                     v-model='edit.row'
                     :schema='s.properties[edit.key].items'
                     :disabled='disabled'
-                />
+                >
+                    <template
+                        v-for='name in widgetSlots()'
+                        #[name]='slotProps'
+                    >
+                        <slot
+                            :name='name'
+                            v-bind='slotProps'
+                        />
+                    </template>
+                </TablerSchema>
 
                 <button
                     v-if='!disabled'
@@ -368,7 +408,7 @@
                     v-model='csv.text'
                     label='CSV'
                     :rows='10'
-                    :description='"Rows of " + columns(csv.key).join(", ") + " separated by commas or tabs"'
+                    :description='"Rows of " + (tables[csv.key] || []).join(", ") + " separated by commas or tabs"'
                 />
 
                 <button
@@ -383,7 +423,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, watch, onMounted, useSlots } from 'vue'
+import { ref, reactive, computed, watch, onMounted, toRaw } from 'vue'
 import TablerInput from './input/Input.vue';
 import TablerToggle from './input/Toggle.vue';
 import TablerEnum from './input/Enum.vue';
@@ -419,11 +459,11 @@ const emit = defineEmits<{
     (e: 'update:modelValue', value: any): void;
 }>();
 
-const slots = useSlots();
+const slots = defineSlots<Record<string, (props: Record<string, unknown>) => unknown>>();
 
 const loading = ref(true);
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const s = ref<any>({});
+const s = computed<any>(() => props.schema || {});
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const data = ref<any>({});
 
@@ -448,6 +488,25 @@ const csv = reactive({
 /** Selected union variant index per property key */
 const variant = reactive<Record<string, number>>({});
 
+/** String properties that held a line break when loaded stay a textarea while they are edited */
+const multiline = reactive<Record<string, boolean>>({});
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const clone = (value: any) => JSON.parse(JSON.stringify(value));
+
+const requiredKeys = computed<Set<string>>(() => {
+    return new Set(Array.isArray(s.value.required) ? s.value.required : []);
+});
+
+const isRequired = (key: string): boolean => {
+    return requiredKeys.value.has(key) || s.value.properties[key].required === true;
+}
+
+/** Names of the `widget-<name>` slots the parent provides, passed on to nested forms */
+const widgetSlots = (): string[] => {
+    return Object.keys(slots).filter((name) => name.startsWith('widget-'));
+}
+
 /** Name of the `widget-<name>` slot a property's `@widget` hint is rendered with, when the parent provides one */
 const widgetSlot = (key: string): string | undefined => {
     const widget = s.value.properties[key]['@widget'];
@@ -461,6 +520,12 @@ const visibleKeys = computed<string[]>(() => {
     if (!s.value.properties) return [];
     return Object.keys(s.value.properties).filter((key) => s.value.properties[key].const === undefined);
 });
+
+const rows = (key: string): number => {
+    const value = data.value[key];
+    const lines = typeof value === 'string' ? value.split('\n').length : 1;
+    return multiline[key] ? Math.max(2, lines) : lines;
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isObject = (prop: any): boolean => {
@@ -483,10 +548,11 @@ const isUnion = (prop: any): boolean => {
     return variants.length >= 2 && variants.every((v) => isObject(v));
 }
 
-const variantLabels = (key: string): string[] => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const variantLabels = (variants: any[]): string[] => {
     const labels: string[] = [];
 
-    unionVariants(s.value.properties[key]).forEach((v, i) => {
+    variants.forEach((v, i) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const discriminator = Object.values(v.properties as Record<string, any>).find((p) => p.const !== undefined);
         let label = v.title || (discriminator ? String(discriminator.const) : `Option ${i + 1}`);
@@ -497,10 +563,26 @@ const variantLabels = (key: string): string[] => {
     return labels;
 }
 
+/** Variants and picker labels of every union property */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const unions = computed<Record<string, { variants: any[]; labels: string[] }>>(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const res: Record<string, { variants: any[]; labels: string[] }> = {};
+
+    for (const key in (s.value.properties || {})) {
+        const prop = s.value.properties[key];
+        if (!isUnion(prop)) continue;
+
+        const variants = unionVariants(prop);
+        res[key] = { variants, labels: variantLabels(variants) };
+    }
+
+    return res;
+});
+
 /** Pick the variant a stored value belongs to by discriminator, then by required keys */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const detectVariant = (prop: any, value: any): number => {
-    const variants = unionVariants(prop);
+const detectVariant = (variants: any[], value: any): number => {
     if (!value || typeof value !== 'object') return 0;
 
     for (let i = 0; i < variants.length; i++) {
@@ -511,7 +593,7 @@ const detectVariant = (prop: any, value: any): number => {
     }
 
     for (let i = 0; i < variants.length; i++) {
-        const required: string[] = variants[i].required || [];
+        const required: string[] = Array.isArray(variants[i].required) ? variants[i].required : [];
         if (required.length && required.every((k) => value[k] !== undefined)) return i;
     }
 
@@ -534,7 +616,7 @@ const seedVariant = (prop: any, index: number): Record<string, unknown> => {
 }
 
 const selectVariant = (key: string, label: string) => {
-    const index = variantLabels(key).indexOf(label);
+    const index = unions.value[key].labels.indexOf(label);
     if (index === -1 || index === variant[key]) return;
 
     variant[key] = index;
@@ -542,11 +624,15 @@ const selectVariant = (key: string, label: string) => {
 }
 
 const resolveVariants = () => {
-    if (!s.value.properties) return;
+    for (const key in unions.value) {
+        variant[key] = detectVariant(unions.value[key].variants, data.value[key]);
+    }
+}
 
-    for (const key in s.value.properties) {
-        const prop = s.value.properties[key];
-        if (isUnion(prop)) variant[key] = detectVariant(prop, data.value[key]);
+const resolveMultiline = () => {
+    for (const key in (s.value.properties || {})) {
+        const value = data.value[key];
+        if (typeof value === 'string' && value.includes('\n')) multiline[key] = true;
     }
 }
 
@@ -568,14 +654,20 @@ const isPrimitiveList = (prop: any): boolean => {
         && ['string', 'number', 'integer', 'boolean'].includes(prop.items.type);
 }
 
-const columns = (key: string): string[] => {
-    const prop = s.value.properties[key];
-    if (!prop || !isObjectTable(prop)) return [];
-    return Object.keys(prop.items.properties);
-}
+/** Column names of every object table property */
+const tables = computed<Record<string, string[]>>(() => {
+    const res: Record<string, string[]> = {};
+
+    for (const key in (s.value.properties || {})) {
+        const prop = s.value.properties[key];
+        if (isObjectTable(prop)) res[key] = Object.keys(prop.items.properties);
+    }
+
+    return res;
+});
 
 const push = (key: string) => {
-    const items = props.schema.properties[key].items;
+    const items = s.value.properties[key].items;
 
     if (!items || items.type === 'string') {
         data.value[key].push('');
@@ -585,6 +677,8 @@ const push = (key: string) => {
         data.value[key].push([]);
     } else if (items.type === 'boolean') {
         data.value[key].push(false);
+    } else if (items.type === 'number' || items.type === 'integer') {
+        data.value[key].push(0);
     } else {
         data.value[key].push('');
     }
@@ -593,12 +687,12 @@ const push = (key: string) => {
 const openRow = (key: string, index?: number) => {
     edit.key = key;
     edit.index = index ?? null;
-    edit.row = index === undefined ? {} : JSON.parse(JSON.stringify(data.value[key][index]));
+    edit.row = index === undefined ? {} : clone(data.value[key][index]);
     edit.shown = true;
 }
 
 const saveRow = () => {
-    const row = JSON.parse(JSON.stringify(edit.row));
+    const row = clone(edit.row);
 
     if (edit.index === null) {
         data.value[edit.key].push(row);
@@ -623,16 +717,28 @@ const openImport = (key: string) => {
     csv.shown = true;
 }
 
+const parseCell = (cell: string, type: unknown): string | number | boolean => {
+    if (type === 'boolean') return /^(true|yes|1)$/i.test(cell);
+
+    if ((type === 'number' || type === 'integer') && cell.length) {
+        const num = Number(cell);
+        if (Number.isFinite(num)) return num;
+    }
+
+    return cell;
+}
+
 const importCSV = () => {
-    const headers = columns(csv.key);
+    const headers = tables.value[csv.key] || [];
+    const columns = s.value.properties[csv.key].items.properties;
     const lines = csv.text.split('\n').filter((line) => line.trim().length);
     const delimiter = lines.length && lines[0].includes(',') ? ',' : '\t';
 
     for (const line of lines) {
         const cells = line.split(delimiter);
-        const row: Record<string, string> = {};
+        const row: Record<string, string | number | boolean> = {};
         for (let i = 0; i < headers.length; i++) {
-            row[headers[i]] = (cells[i] ?? '').trim();
+            row[headers[i]] = parseCell((cells[i] ?? '').trim(), columns[headers[i]].type);
         }
         data.value[csv.key].push(row);
     }
@@ -640,32 +746,31 @@ const importCSV = () => {
     csv.shown = false;
 }
 
-// Watch for data changes
-watch(data, () => {
-    emit('update:modelValue', data.value);
-}, { deep: true })
-
-const updateSchema = () => {
-    s.value = JSON.parse(JSON.stringify(props.schema));
-    if (s.value.type === 'object' && s.value.properties) {
-        for (const req of (s.value.required || [])) {
-            if (s.value.properties[req]) s.value.properties[req].required = true;
-        }
-    }
-}
-
 /** Seed missing keys from the schema default, falling back to an empty value of the right shape */
 const updateDataDefaults = () => {
     if (s.value.type === 'object' && s.value.properties) {
         for (const key in s.value.properties) {
-            if (data.value[key] !== undefined) continue;
-
             const prop = s.value.properties[key];
+            const current = data.value[key];
+
+            if (current === null) {
+                if (isUnion(prop)) {
+                    data.value[key] = seedVariant(prop, 0);
+                } else if (prop.type === 'array') {
+                    data.value[key] = [];
+                } else if (prop.type === 'object') {
+                    data.value[key] = {};
+                }
+
+                continue;
+            }
+
+            if (current !== undefined) continue;
 
             if (prop.const !== undefined) {
-                data.value[key] = JSON.parse(JSON.stringify(prop.const));
+                data.value[key] = clone(prop.const);
             } else if (prop.default !== undefined) {
-                data.value[key] = JSON.parse(JSON.stringify(prop.default));
+                data.value[key] = clone(prop.default);
             } else if (isUnion(prop)) {
                 data.value[key] = seedVariant(prop, 0);
             } else if (prop.type === 'array') {
@@ -683,28 +788,33 @@ const updateDataDefaults = () => {
     }
 }
 
-watch(() => props.schema, () => {
-    updateSchema();
+const resolve = () => {
     updateDataDefaults();
     resolveVariants();
+    resolveMultiline();
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const load = (value: any) => {
+    data.value = value && typeof value === 'object' ? clone(value) : {};
+    resolve();
+}
+
+watch(data, () => {
+    emit('update:modelValue', data.value);
+}, { deep: true })
+
+watch(() => props.schema, resolve, { deep: true });
+
+watch(() => props.modelValue, (value) => {
+    if (toRaw(value) === toRaw(data.value)) return;
+    if (JSON.stringify(value) === JSON.stringify(data.value)) return;
+
+    load(value);
 }, { deep: true });
 
-watch(() => props.modelValue, () => {
-    if (JSON.stringify(props.modelValue) !== JSON.stringify(data.value)) {
-        data.value = JSON.parse(JSON.stringify(props.modelValue));
-        updateDataDefaults();
-        resolveVariants();
-    }
-}, { deep: true });
-
-// Mounted lifecycle
-onMounted(async () => {
-    loading.value = true;
-    data.value = JSON.parse(JSON.stringify(props.modelValue));
-    updateSchema();
-    updateDataDefaults();
-    resolveVariants();
-
+onMounted(() => {
+    load(props.modelValue);
     loading.value = false;
 })
 </script>

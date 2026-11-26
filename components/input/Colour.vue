@@ -66,20 +66,6 @@ const emit = defineEmits<{
 
 const current = ref<string>('')
 
-const invertColours: Record<string, string> = {
-    '#1d273b': 'dark',
-    '#ffffff': 'white',
-    '#206bc4': 'blue',
-    '#4299e1': 'azure',
-    '#4263eb': 'indigo',
-    '#ae3ec9': 'purple',
-    '#d6336c': 'pink',
-    '#d63939': 'red',
-    '#f76707': 'orange',
-    '#f59f00': 'yellow',
-    '#74b816': 'lime'
-}
-
 const colours: Record<string, string> = {
     dark: '#1d273b',
     white: '#ffffff',
@@ -94,20 +80,28 @@ const colours: Record<string, string> = {
     lime: '#74b816'
 }
 
+const invertColours: Record<string, string> = Object.fromEntries(
+    Object.entries(colours).map(([name, hex]) => [hex, name])
+)
+
+const nameOf = (hex?: string): string => {
+    return invertColours[String(hex || '').toLowerCase()] || ''
+}
+
 watch(() => props.modelValue, (newValue) => {
-    current.value = invertColours[newValue]
+    current.value = nameOf(newValue)
 })
 
 watch(current, (newValue) => {
-    if (colours[newValue] === props.modelValue) return
+    if (!colours[newValue] || colours[newValue] === String(props.modelValue || '').toLowerCase()) return
     emit('update:modelValue', colours[newValue])
 })
 
 onMounted(() => {
     if (!props.modelValue && props.default) {
-        current.value = invertColours[props.default]
+        current.value = nameOf(props.default)
     } else {
-        current.value = invertColours[props.modelValue]
+        current.value = nameOf(props.modelValue)
     }
 })
 </script>

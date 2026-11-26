@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, nextTick, onMounted, onBeforeUnmount } from 'vue';
+import { ref, computed, watch, nextTick, useId, onBeforeUnmount } from 'vue';
 import {
     IconSettings
 } from '@tabler/icons-vue';
@@ -50,7 +50,7 @@ const props = withDefaults(defineProps<DropdownProps>(), {
     position: 'bottom-end',
 });
 
-const id = ref('tabler-dropdown-' + Math.random().toString(36).substr(2, 9) + '-' + Date.now().toString(36));
+const id = `tabler-dropdown-${useId()}`;
 const isOpen = ref(false);
 const triggerRef = ref<HTMLElement | null>(null);
 const menuRef = ref<HTMLElement | null>(null);
@@ -178,14 +178,37 @@ function onMenuKeydown(e: KeyboardEvent) {
     }
 }
 
-onMounted(() => {
+let frame = 0;
+
+function reposition(event?: Event) {
+    if (event && event.target instanceof Node && menuRef.value?.contains(event.target)) return;
+
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(calcPosition);
+}
+
+function listen() {
     document.addEventListener('click', onOutsideClick, true);
     document.addEventListener('keydown', onEscape);
+    window.addEventListener('scroll', reposition, { capture: true, passive: true });
+    window.addEventListener('resize', reposition);
+}
+
+function unlisten() {
+    cancelAnimationFrame(frame);
+    document.removeEventListener('click', onOutsideClick, true);
+    document.removeEventListener('keydown', onEscape);
+    window.removeEventListener('scroll', reposition, { capture: true });
+    window.removeEventListener('resize', reposition);
+}
+
+watch(isOpen, (open) => {
+    if (open) listen();
+    else unlisten();
 });
 
 onBeforeUnmount(() => {
-    document.removeEventListener('click', onOutsideClick, true);
-    document.removeEventListener('keydown', onEscape);
+    unlisten();
     isOpen.value = false;
 });
 </script>

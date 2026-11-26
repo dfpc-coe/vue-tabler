@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import TablerLabel from '../internal/Label.vue'
 
 export interface EnumProps {
@@ -71,5 +71,9 @@ watch(() => props.modelValue, (newValue) => {
 watch(current, (newValue) => {
     if (newValue === props.modelValue) return
     emit('update:modelValue', newValue)
+})
+
+onMounted(() => {
+    if (current.value !== props.modelValue) emit('update:modelValue', current.value)
 })
 </script>

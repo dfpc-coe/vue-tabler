@@ -4,6 +4,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { parseEpoch } from './internal/epoch'
 
 export interface EpochProps {
     date: number | string;
@@ -36,7 +37,8 @@ const months = [
 ]
 
 const display = computed(() => {
-    const date = new Date(props.date)
+    const date = parseEpoch(props.date)
+    if (!date) return 'Invalid Date'
 
     if (props.format === 'ISO') {
         return date.toISOString()

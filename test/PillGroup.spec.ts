@@ -147,3 +147,27 @@ describe('TablerPillGroup', () => {
         expect(labels[1].text()).toContain('Beta ON')
     })
 })
+
+describe('TablerPillGroup radio groups', () => {
+    it('gives each group a radio group of its own', () => {
+        const wrapper = mount({
+            components: { PillGroup },
+            data: () => ({ options: baseOptions }),
+            template: `<div>
+                <PillGroup class='first' model-value='a' :options='options' />
+                <PillGroup class='second' model-value='a' :options='options' />
+            </div>`,
+        }, { attachTo: document.body })
+
+        const first = wrapper.findAll('.first input')
+        const second = wrapper.findAll('.second input')
+
+        expect(first[0].attributes('name')).not.toBe(second[0].attributes('name'))
+
+        ;(second[1].element as HTMLInputElement).click()
+
+        expect((first[0].element as HTMLInputElement).checked).toBe(true)
+
+        wrapper.unmount()
+    })
+})

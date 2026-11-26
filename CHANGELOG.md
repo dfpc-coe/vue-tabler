@@ -12,6 +12,40 @@
 
 ### Pending
 
+### v6.0.0 - 2026-11-26
+
+- :rocket: `TablerSchema` passes `widget-<name>` slots on to nested object, union, object list and row editor forms, so an `@widget` hint is honoured at any depth
+- :rocket: `TablerSchema` CSV import converts `number`, `integer` and `boolean` columns to their schema type instead of storing every cell as a string
+- :rocket: `TablerSchema` keeps a string property that held a line break when loaded as a textarea of at least 2 rows while it is edited
+- :bug: `TablerSchema` reads `required` from the schema's `required` array without cloning and mutating the schema, and no longer throws when `modelValue` is `null` or `undefined`
+- :bug: `TablerSchema` replaces a `null` array, object or union value with an empty value of the right shape - previously only `undefined` keys were seeded
+- :bug: `TablerSchema` adds `0` rather than an empty string when appending to a `number` or `integer` list
+- :rocket: `TablerSchemaBuilder` reloads when `modelValue` is replaced by the parent - previously the schema was only read on mount
+- :rocket: `TablerSchemaBuilder` keeps top-level schema keys it does not edit (`title`, `description`, `additionalProperties`, etc) instead of dropping them on the first change
+- :bug: `TablerSchemaBuilder` rejects a field name already used by another field, which previously overwrote the earlier property
+- :bug: `TablerSchemaBuilder` gives its type menu a unique id and scopes its `.opt:hover` style so it no longer leaks into the host app
+- :rocket: `TablerInput` accepts a `null` `modelValue` and renders it as an empty input
+- :bug: `TablerInput` emits `undefined` when a `number` or `integer` input is cleared - previously an empty input emitted `0`
+- :bug: `TablerInput` with `type='integer'` reports `Must be an integer!` for decimals and trailing text instead of silently truncating them
+- :bug: A multiline `TablerInput` emits `submit` on `Ctrl+Enter` or `Cmd+Enter` only, so `Enter` can add a line break without submitting
+- :bug: `TablerInput` password toggle and search clear no longer follow their `href='#'` link
+- :bug: `TablerEnum` emits its `default` on mount when `modelValue` is empty, so the model matches the option shown
+- :bug: `TablerRange` emits on every input that differs from `modelValue` - previously dragging back to a value the parent had since changed emitted nothing
+- :bug: `TablerColour` matches hex values case-insensitively and no longer emits `undefined` for a colour outside the palette
+- :bug: `TablerTimeZone` corrects `America/Anguilla` and `Pacific/Guam`, and adds `UTC`
+- :bug: `TablerFileInput` `modelValue` is now optional
+- :bug: `TablerUploadLogo` uses `TablerFileInput` and no longer throws when the file picker is cancelled
+- :rocket: `TablerDropdown` repositions its teleported menu on scroll and resize while open, attaches its document listeners only while open, and uses `useId()` for a stable id
+- :bug: A disabled `TablerIconButton` swallows clicks, leaves the tab order and sets `aria-disabled`
+- :bug: `TablerRefreshButton` is disabled while `loading`
+- :bug: `TablerDelete` emits `delete` once per confirmation, ignoring further clicks while loading
+- :bug: `TablerNone` emits `create` only when the button is clicked, not the row around it
+- :bug: `TablerPillGroup` defaults `name` to a per-instance value so two groups without a `name` no longer share one radio group
+- :bug: `TablerBytes` adds `PB`, clamps larger values to it and renders `0 B` for negative, fractional or non-finite input instead of `undefined`
+- :bug: `TablerEpoch` & `TablerEpochRange` read numeric strings as epoch milliseconds and render `Invalid Date` rather than throwing on an unparseable date
+- :bug: `TablerSlidedown` hover border uses `--tblr-primary` - the `--tblr-primary-rgb` triplet was not a valid colour
+- :white_check_mark: Add `TablerBreadCrumb`, `TablerInput`, `TablerUploadLogo`, display component and input component tests, and extend the `TablerSchema`, `TablerSchemaBuilder`, `TablerDropdown`, `TablerDelete`, `TablerIconButton` & `TablerPillGroup` tests
+
 ### v5.14.0 - 2026-11-25
 
 - :tada: `TablerModal` gains a `swipeable` prop that anchors it to the bottom of the screen and lets it be dragged down by a grabber, or any slotted element marked `data-modal-swipe`. The `height` model (`v-model:height`) follows the drag as a fraction of the full height and is exposed to slotted content as `--tblr-modal-sheet`. A slow release leaves the modal where it is, while a flick keeps its momentum and springs on to `minHeight` (default `0.5`) or back to full height. Below full height the backdrop blur is dropped and the page behind the modal can be interacted with. Below `minHeight` the modal fades in proportion to its height, and on release slides away before `close` is emitted

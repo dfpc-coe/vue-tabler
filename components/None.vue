@@ -35,9 +35,11 @@
                 :class='{
                     "my-4": !compact
                 }'
-                @click='emit("create")'
             >
-                <div class='btn btn-primary'>
+                <div
+                    class='btn btn-primary'
+                    @click='emit("create")'
+                >
                     <span>Create <span v-text='typeof create === "string" ? create : "Item"' /></span>
                 </div>
             </div>

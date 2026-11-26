@@ -11,7 +11,7 @@
                 :id='inputId(option, i)'
                 type='radio'
                 class='btn-check'
-                :name='name'
+                :name='groupName'
                 autocomplete='off'
                 :checked='modelValue === option.value'
                 :disabled='disabled || option.disabled'
@@ -58,7 +58,7 @@ export interface PillGroupProps {
 }
 
 const props = withDefaults(defineProps<PillGroupProps>(), {
-    name: 'pill-group',
+    name: undefined,
     rounded: true,
     fullWidth: true,
     size: 'sm',
@@ -70,8 +70,10 @@ const emit = defineEmits<{
     (e: 'update:modelValue', value: string): void;
 }>();
 
+const groupName = computed(() => props.name || `pill-group-${uid}`);
+
 function inputId(option: PillGroupOption, index: number): string {
-    return `${props.name}-${uid}-${option.value}-${index}`;
+    return `${props.name || 'pill-group'}-${uid}-${option.value}-${index}`;
 }
 
 const groupClasses = computed(() => {

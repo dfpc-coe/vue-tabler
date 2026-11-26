@@ -91,3 +91,34 @@ describe('TablerIconButton', () => {
         expect(iconButtonSource).toContain('border: var(--tblr-border-width) solid var(--tblr-border-color);')
     })
 })
+
+describe('TablerIconButton disabled', () => {
+    it('passes clicks and Enter through while enabled', async () => {
+        let clicks = 0
+        const wrapper = mount(IconButton, { props: { title: 'Go' }, attrs: { onClick: () => clicks++ } })
+
+        await wrapper.trigger('click')
+        await wrapper.trigger('keyup.enter')
+
+        expect(clicks).toBe(2)
+        expect(wrapper.attributes('tabindex')).toBe('0')
+        expect(wrapper.attributes('aria-disabled')).toBeUndefined()
+    })
+
+    it('swallows clicks and Enter while disabled', async () => {
+        let clicks = 0
+        const wrapper = mount(IconButton, {
+            props: { title: 'Go', disabled: true },
+            attrs: { onClick: () => clicks++ },
+            slots: { default: '<i class="inner" />' },
+        })
+
+        await wrapper.trigger('click')
+        await wrapper.trigger('keyup.enter')
+        await wrapper.find('.inner').trigger('click')
+
+        expect(clicks).toBe(0)
+        expect(wrapper.attributes('tabindex')).toBe('-1')
+        expect(wrapper.attributes('aria-disabled')).toBe('true')
+    })
+})

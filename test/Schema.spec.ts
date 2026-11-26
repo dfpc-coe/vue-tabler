@@ -645,3 +645,298 @@ describe('TablerSchema applying default values', () => {
         expect(lastEmitted(wrapper)).toEqual({ Type: 'a-h-G', Icon: '' })
     })
 })
+
+describe('TablerSchema required properties', () => {
+    it('renders a required nested object that has a required list of its own', async () => {
+        const wrapper = mount(Schema, {
+            props: {
+                modelValue: {},
+                schema: {
+                    type: 'object',
+                    required: ['Auth'],
+                    properties: {
+                        Auth: {
+                            type: 'object',
+                            required: ['User'],
+                            properties: { User: { type: 'string' }, Note: { type: 'string' } },
+                        },
+                    },
+                },
+            },
+        })
+
+        await flushPromises()
+
+        expect(wrapper.findAll('input')).toHaveLength(2)
+        expect(wrapper.findAll('.text-red')).toHaveLength(2)
+        expect(lastEmitted(wrapper)).toEqual({ Auth: { User: '', Note: '' } })
+    })
+
+    it('does not mark an optional nested object as required for its own required list', async () => {
+        const wrapper = mount(Schema, {
+            props: {
+                modelValue: {},
+                schema: {
+                    type: 'object',
+                    properties: {
+                        Auth: { type: 'object', required: ['User'], properties: { User: { type: 'string' } } },
+                    },
+                },
+            },
+        })
+
+        await flushPromises()
+
+        expect(wrapper.findAll('.text-red')).toHaveLength(1)
+    })
+
+    it('leaves the schema it was given untouched', async () => {
+        const schema = {
+            type: 'object',
+            required: ['Name'],
+            properties: { Name: { type: 'string' } },
+        }
+        const copy = JSON.parse(JSON.stringify(schema))
+
+        mount(Schema, { props: { modelValue: {}, schema } })
+        await flushPromises()
+
+        expect(schema).toEqual(copy)
+    })
+})
+
+describe('TablerSchema empty values', () => {
+    it('renders null arrays, objects and strings without a value', async () => {
+        const wrapper = mount(Schema, {
+            props: {
+                modelValue: { List: null, Auth: null, Name: null, Count: null },
+                schema: {
+                    type: 'object',
+                    properties: {
+                        List: { type: 'array', items: { type: 'string' } },
+                        Auth: { type: 'object', properties: { User: { type: 'string' } } },
+                        Name: { type: 'string' },
+                        Count: { type: 'integer' },
+                    },
+                },
+            },
+        })
+
+        await flushPromises()
+
+        expect(wrapper.findAll('input').map((i) => (i.element as HTMLInputElement).value)).toEqual(['', '', ''])
+        expect(lastEmitted(wrapper)).toEqual({ List: [], Auth: { User: '' }, Name: null, Count: null })
+    })
+
+    it('renders without a model value', async () => {
+        const wrapper = mount(Schema, {
+            props: {
+                modelValue: undefined,
+                schema: { type: 'object', properties: { Name: { type: 'string', default: 'Fred' } } },
+            },
+        })
+
+        await flushPromises()
+
+        expect(lastEmitted(wrapper)).toEqual({ Name: 'Fred' })
+
+        await wrapper.setProps({ modelValue: null })
+        await flushPromises()
+
+        expect(lastEmitted(wrapper)).toEqual({ Name: 'Fred' })
+    })
+
+    it('drops a number from the value when its input is cleared', async () => {
+        const wrapper = mount(Schema, {
+            props: {
+                modelValue: { Count: 5 },
+                schema: { type: 'object', properties: { Count: { type: 'integer' } } },
+            },
+        })
+
+        await flushPromises()
+        await wrapper.find('input').setValue('')
+        await flushPromises()
+
+        expect(JSON.parse(JSON.stringify(lastEmitted(wrapper)))).toEqual({})
+        expect((wrapper.find('input').element as HTMLInputElement).value).toBe('')
+    })
+
+    it('adds a number list entry as a number', async () => {
+        const wrapper = mount(Schema, {
+            props: {
+                modelValue: {},
+                schema: { type: 'object', properties: { Ports: { type: 'array', items: { type: 'integer' } } } },
+            },
+        })
+
+        await flushPromises()
+        await wrapper.find('[title="Add Entry"]').trigger('click')
+        await flushPromises()
+
+        expect(lastEmitted(wrapper)).toEqual({ Ports: [0] })
+    })
+})
+
+describe('TablerSchema editing in place', () => {
+    it('keeps a multi line string in its textarea when it is edited down to one line', async () => {
+        const wrapper = mount(Schema, {
+            attachTo: document.body,
+            props: {
+                modelValue: { Note: 'one\ntwo' },
+                schema: { type: 'object', properties: { Note: { type: 'string' } } },
+            },
+        })
+
+        await flushPromises()
+
+        const textarea = wrapper.find('textarea')
+        ;(textarea.element as HTMLTextAreaElement).focus()
+        await textarea.setValue('one')
+        await flushPromises()
+
+        expect(wrapper.find('textarea').element).toBe(textarea.element)
+        expect(document.activeElement).toBe(textarea.element)
+        expect(lastEmitted(wrapper)).toEqual({ Note: 'one' })
+
+        wrapper.unmount()
+    })
+
+    it('does not reload when the parent hands back the value it emitted', async () => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const wrapper: any = mount(Schema, {
+            attachTo: document.body,
+            props: {
+                modelValue: { Auth: { User: 'a' } },
+                schema: {
+                    type: 'object',
+                    properties: { Auth: { type: 'object', properties: { User: { type: 'string' } } } },
+                },
+                'onUpdate:modelValue': (value: unknown) => wrapper.setProps({ modelValue: value }),
+            },
+        })
+
+        await flushPromises()
+
+        const input = wrapper.find('input')
+        ;(input.element as HTMLInputElement).focus()
+
+        for (const text of ['ab', 'abc', 'abcd']) {
+            await input.setValue(text)
+            await flushPromises()
+        }
+
+        expect(wrapper.find('input').element).toBe(input.element)
+        expect(document.activeElement).toBe(input.element)
+        expect(lastEmitted(wrapper)).toEqual({ Auth: { User: 'abcd' } })
+
+        wrapper.unmount()
+    })
+
+    it('imports CSV cells as the type of their column', async () => {
+        const wrapper = mount(Schema, {
+            attachTo: document.body,
+            props: {
+                modelValue: {},
+                schema: {
+                    type: 'object',
+                    properties: {
+                        Rows: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    Name: { type: 'string' },
+                                    Port: { type: 'integer' },
+                                    Secure: { type: 'boolean' },
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        })
+
+        await flushPromises()
+        await wrapper.find('[title="Import CSV"]').trigger('click')
+        await flushPromises()
+
+        const textarea = document.body.querySelector('.modal-body textarea') as HTMLTextAreaElement
+        textarea.value = 'a,80,true\nb,x,no'
+        textarea.dispatchEvent(new Event('input'))
+        await flushPromises()
+
+        ;(document.body.querySelector('.modal-body .btn-primary') as HTMLElement).click()
+        await flushPromises()
+
+        expect(lastEmitted(wrapper)).toEqual({
+            Rows: [
+                { Name: 'a', Port: 80, Secure: true },
+                { Name: 'b', Port: 'x', Secure: false },
+            ],
+        })
+    })
+})
+
+describe('TablerSchema nested widgets', () => {
+    const WIDGET = `<template #widget-type='{ field, update }'>
+        <button class='widget' :data-field='field' @click='update("picked")' />
+    </template>`
+
+    it('renders @widget hints of nested objects and unions through the slot', async () => {
+        const wrapper = mount(Schema, {
+            props: {
+                modelValue: {},
+                schema: {
+                    type: 'object',
+                    properties: {
+                        Top: { type: 'string', '@widget': 'type' },
+                        Style: { type: 'object', properties: { Inner: { type: 'string', '@widget': 'type' } } },
+                        Source: {
+                            anyOf: [
+                                { type: 'object', properties: { Mode: { const: 'a' }, Deep: { type: 'string', '@widget': 'type' } } },
+                                { type: 'object', properties: { Mode: { const: 'b' } } },
+                            ],
+                        },
+                    },
+                },
+            },
+            slots: { 'widget-type': WIDGET },
+        })
+
+        await flushPromises()
+
+        const widgets = wrapper.findAll('button.widget')
+        expect(widgets.map((w) => w.attributes('data-field'))).toEqual(['Top', 'Inner', 'Deep'])
+
+        await widgets[1].trigger('click')
+        await flushPromises()
+
+        expect((lastEmitted(wrapper).Style as Record<string, unknown>).Inner).toBe('picked')
+    })
+
+    it('renders @widget hints inside of the row editor', async () => {
+        const wrapper = mount(Schema, {
+            attachTo: document.body,
+            props: {
+                modelValue: {},
+                schema: {
+                    type: 'object',
+                    properties: {
+                        Rows: {
+                            type: 'array',
+                            items: { type: 'object', properties: { Kind: { type: 'string', '@widget': 'type' } } },
+                        },
+                    },
+                },
+            },
+            slots: { 'widget-type': WIDGET },
+        })
+
+        await flushPromises()
+        await wrapper.find('[title="Add Row"]').trigger('click')
+        await flushPromises()
+
+        expect(document.body.querySelector('.modal-body button.widget')?.getAttribute('data-field')).toBe('Kind')
+    })
+})

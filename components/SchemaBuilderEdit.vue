@@ -26,6 +26,7 @@
                     v-model='edit.name'
                     label='Field Name'
                     :required='true'
+                    :error='duplicate ? "A field with this name already exists" : ""'
                 />
                 <TablerToggle
                     v-model='edit.required'
@@ -79,7 +80,7 @@
         <div class='modal-footer'>
             <button
                 class='btn btn-primary'
-                :disabled='!edit.name.length'
+                :disabled='!edit.name.length || duplicate'
                 @click='$emit("done", edit)'
             >
                 Save
@@ -111,7 +112,9 @@ interface SchemaProperty {
 }
 
 const props = defineProps<{
-    prop: SchemaProperty
+    prop: SchemaProperty;
+    /** Names of the other fields, which this one can't share */
+    names?: string[];
 }>();
 
 defineEmits<{
@@ -121,6 +124,8 @@ defineEmits<{
 
 const edit = ref<SchemaProperty>(JSON.parse(JSON.stringify(props.prop)));
 const newEnum = ref('');
+
+const duplicate = computed<boolean>(() => (props.names || []).includes(edit.value.name));
 
 /** Live option list of a Dropdown or Multiple Choice element */
 const options = computed<string[] | undefined>(() => enumValues(edit.value));

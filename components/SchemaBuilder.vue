@@ -9,7 +9,7 @@
             <div class='ms-auto btn-list'>
                 <div class='dropdown'>
                     <div
-                        id='dropdownMenuButton1'
+                        :id='menuId'
                         class='dropdown-toggle'
                         type='button'
                         data-bs-toggle='dropdown'
@@ -23,7 +23,7 @@
                     </div>
                     <ul
                         class='dropdown-menu'
-                        aria-labelledby='dropdownMenuButton1'
+                        :aria-labelledby='menuId'
                     >
                         <div class='m-1 text-center'>
                             <div
@@ -108,6 +108,7 @@
         <BuilderEdit
             v-if='modal'
             :prop='modal'
+            :names='otherNames'
             @close='modal = null'
             @done='save($event)'
         />
@@ -115,7 +116,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue';
+import { ref, computed, watch, toRaw, useId } from 'vue';
 import {
     IconPlus,
 } from '@tabler/icons-vue';
@@ -145,6 +146,8 @@ interface JSONSchema {
     required: string[];
     additionalProperties: boolean;
     properties: Record<string, SchemaProperty>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [key: string]: any;
 }
 
 const props = withDefaults(defineProps<{
@@ -169,16 +172,27 @@ const editIdx = ref<number | null>(null);
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const input = ref<Record<string, any>>({});
 const schema = ref<SchemaProperty[]>([]);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const extra = ref<Record<string, any>>({});
 
-const computedSchema = computed<JSONSchema>(() => {
+const menuId = useId();
+
+const otherNames = computed<string[]>(() => {
+    return schema.value.filter((_, i) => i !== editIdx.value).map((prop) => prop.name);
+});
+
+const uid = (): string => Math.random().toString(36).substring(7);
+
+function build(list: SchemaProperty[]): JSONSchema {
     const res: JSONSchema = {
+        additionalProperties: false,
+        ...JSON.parse(JSON.stringify(extra.value)),
         type: 'object',
         required: [],
-        additionalProperties: false,
         properties: {}
     }
 
-    for (const prop of JSON.parse(JSON.stringify(schema.value))) {
+    for (const prop of JSON.parse(JSON.stringify(list))) {
         const name = prop.name;
         delete prop.name;
         delete prop._id;
@@ -189,22 +203,45 @@ const computedSchema = computed<JSONSchema>(() => {
     }
 
     return res;
-});
+}
+
+const computedSchema = computed<JSONSchema>(() => build(schema.value));
+
+let emitted: JSONSchema | undefined;
+let loaded: JSONSchema | undefined;
 
 watch(computedSchema, (val) => {
+    if (val === loaded) return;
+
+    emitted = val;
     emit('update:modelValue', val);
 });
 
-onMounted(() => {
-    for (const prop in props.modelValue.properties) {
-        schema.value.push({
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function load(value: Record<string, any>) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { type, properties, required, ...rest } = value || {};
+    const list: SchemaProperty[] = [];
+
+    for (const prop in (properties || {})) {
+        list.push({
             name: prop,
-            required: (props.modelValue.required || []).includes(prop),
-            ...props.modelValue.properties[prop],
-            _id: Math.random().toString(36).substring(7)
+            required: (required || []).includes(prop),
+            ...properties[prop],
+            _id: uid()
         });
     }
-});
+
+    extra.value = rest;
+    schema.value = list;
+    loaded = computedSchema.value;
+}
+
+watch(() => props.modelValue, (value) => {
+    if (emitted && toRaw(value) === emitted) return;
+
+    load(JSON.parse(JSON.stringify(value || {})));
+}, { deep: true, immediate: true });
 
 function add(option: SchemaTypeOption) {
     create({
@@ -215,7 +252,7 @@ function add(option: SchemaTypeOption) {
 }
 
 function create(prop: SchemaProperty) {
-    prop._id = Math.random().toString(36).substring(7);
+    prop._id = uid();
     editIdx.value = null;
     modal.value = prop;
 }
@@ -235,7 +272,7 @@ function remove(i: number) {
 }
 </script>
 
-<style>
+<style scoped>
 .opt:hover {
   font-weight: 900;
 }

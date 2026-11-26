@@ -1,7 +1,7 @@
 <template>
     <TablerEnum
         :label='label'
-        :options='Array.from(timezones)'
+        :options='timezones'
         :description='description'
         :autofocus='autofocus'
         :disabled='disabled'
@@ -116,7 +116,7 @@ const tzs = [
     { label:"America/Rio_Branco (GMT-05:00)", "tzCode":"America/Rio_Branco", },
     { label:"America/Thunder_Bay (GMT-05:00)", "tzCode":"America/Thunder_Bay", },
     { label:"America/Toronto (GMT-05:00)", "tzCode":"America/Toronto", },
-    { label:"America/AnguillaSandy Hill (GMT-04:00)", "tzCode":"America/AnguillaSandy Hill", },
+    { label:"America/Anguilla (GMT-04:00)", "tzCode":"America/Anguilla", },
     { label:"America/Antigua (GMT-04:00)", "tzCode":"America/Antigua", },
     { label:"America/Aruba (GMT-04:00)", "tzCode":"America/Aruba", },
     { label:"America/Asuncion (GMT-04:00)", "tzCode":"America/Asuncion", },
@@ -190,6 +190,7 @@ const tzs = [
     { label:"America/Scoresbysund (GMT-01:00)", "tzCode":"America/Scoresbysund", },
     { label:"Atlantic/Azores (GMT-01:00)", "tzCode":"Atlantic/Azores", },
     { label:"Atlantic/Cape_Verde (GMT-01:00)", "tzCode":"Atlantic/Cape_Verde", },
+    { label:"UTC (GMT+00:00)", "tzCode":"UTC", },
     { label:"Africa/Abidjan (GMT+00:00)", "tzCode":"Africa/Abidjan", },
     { label:"Africa/Accra (GMT+00:00)", "tzCode":"Africa/Accra", },
     { label:"Africa/Bamako (GMT+00:00)", "tzCode":"Africa/Bamako", },
@@ -417,7 +418,7 @@ const tzs = [
     { label:"Australia/Melbourne (GMT+10:00)", "tzCode":"Australia/Melbourne", },
     { label:"Australia/Sydney (GMT+10:00)", "tzCode":"Australia/Sydney", },
     { label:"Pacific/Chuuk (GMT+10:00)", "tzCode":"Pacific/Chuuk", },
-    { label:"Pacific/GuamVillage (GMT+10:00)", "tzCode":"Pacific/GuamVillage", },
+    { label:"Pacific/Guam (GMT+10:00)", "tzCode":"Pacific/Guam", },
     { label:"Pacific/Port_Moresby (GMT+10:00)", "tzCode":"Pacific/Port_Moresby", },
     { label:"Pacific/Saipan (GMT+10:00)", "tzCode":"Pacific/Saipan", },
     { label:"Australia/Lord_Howe (GMT+10:30)", "tzCode":"Australia/Lord_Howe", },

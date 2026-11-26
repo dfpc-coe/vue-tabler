@@ -171,7 +171,7 @@ function handleClick(event: MouseEvent) {
 }
 
 .arrow-container:hover {
-    border-color: var(--tblr-primary-rgb) !important;
+    border-color: var(--tblr-primary) !important;
 }
 
 .arrow {

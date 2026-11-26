@@ -70,7 +70,7 @@
                     <span
                         v-else-if='type === &apos;password&apos;'
                         class='input-group-text'
-                        @click='passwordVisible = !passwordVisible'
+                        @click.prevent='passwordVisible = !passwordVisible'
                     >
                         <a
                             v-if='!passwordVisible'
@@ -102,7 +102,7 @@
                     <span
                         v-else-if='icon === "search" && current.length'
                         class='input-group-text'
-                        @click='current = ""'
+                        @click.prevent='current = ""'
                     >
                         <a
                             href='#'
@@ -156,7 +156,7 @@
                         }'
                         class='form-control'
                         :placeholder='placeholder||label||""'
-                        @keyup.enter='$emit("submit")'
+                        @keydown.enter='submitMultiline'
                         @focus='$emit("focus")'
                         @blur='$emit("blur")'
                     />
@@ -201,7 +201,7 @@ import {
 } from '@tabler/icons-vue';
 
 export interface InputProps {
-    modelValue?: string | number;
+    modelValue?: string | number | null;
     autofocus?: boolean;
     loading?: boolean;
     required?: boolean;
@@ -241,12 +241,16 @@ const emit = defineEmits<{
     (e: 'blur'): void;
     (e: 'focus'): void;
     (e: 'submit'): void;
-    (e: 'update:modelValue', value: string | number): void;
+    (e: 'update:modelValue', value: string | number | undefined): void;
 }>();
+
+const toText = (value: string | number | null | undefined): string => {
+    return value === undefined || value === null ? '' : String(value)
+}
 
 const textInput = ref<HTMLInputElement | HTMLTextAreaElement | null>(null)
 const internal_error = ref('')
-const current = ref<string>(props.modelValue === undefined ? '' : String(props.modelValue))
+const current = ref<string>(toText(props.modelValue))
 
 const passwordVisible = ref(false);
 
@@ -266,36 +270,37 @@ const computed_type = computed(() => {
 })
 
 watch(() => props.modelValue, (newValue) => {
-    const n = newValue === undefined ? '' : String(newValue);
+    const n = toText(newValue);
     if (current.value !== n) {
         current.value = n;
     }
 })
 
-watch(current, (newValue) => {
-    if (typeof props.modelValue === 'number' || props.type === 'number') {
+const submitMultiline = (event: KeyboardEvent) => {
+    if (event.metaKey || event.ctrlKey) emit('submit')
+}
+
+watch(current, (raw) => {
+    // v-model hands a number input's value back as a number
+    const newValue = toText(raw)
+    const integer = props.type === 'integer'
+
+    if (integer || props.type === 'number' || typeof props.modelValue === 'number') {
+        internal_error.value = ''
+
+        if (!newValue.trim().length) {
+            if (toText(props.modelValue) !== '') emit('update:modelValue', undefined)
+            return
+        }
+
         const currentNum = Number(newValue)
 
         if (isNaN(currentNum)) {
-            internal_error.value = 'Must be a number!'
-        } else if (currentNum === props.modelValue) {
-            internal_error.value = ''
-            return
-        } else {
-            internal_error.value = ''
-            emit('update:modelValue', currentNum)
-        }
-    } else if (props.type === 'integer') {
-        const currentInt = parseInt(newValue)
-
-        if (isNaN(currentInt)) {
+            internal_error.value = integer ? 'Must be an integer!' : 'Must be a number!'
+        } else if (integer && !Number.isInteger(currentNum)) {
             internal_error.value = 'Must be an integer!'
-        } else if (currentInt === Number(props.modelValue)) {
-            internal_error.value = ''
-            return
-        } else {
-            internal_error.value = ''
-            emit('update:modelValue', currentInt)
+        } else if (currentNum !== props.modelValue) {
+            emit('update:modelValue', currentNum)
         }
     } else {
         internal_error.value = ''

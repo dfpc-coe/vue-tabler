@@ -17,7 +17,7 @@
                 :min='min'
                 :max='max'
                 :step='step'
-                @input='event => current = Number((event.target as HTMLInputElement).value)'
+                @input='update'
                 @keyup.enter='$emit("submit")'
                 @blur='$emit("blur")'
             >
@@ -26,7 +26,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
 import TablerLabel from '../internal/Label.vue'
 
 export interface RangeProps {
@@ -58,10 +57,8 @@ const emit = defineEmits<{
     (e: 'update:modelValue', value: number): void;
 }>();
 
-const current = ref(props.modelValue)
-
-watch(current, (newValue) => {
-    if (newValue === props.modelValue) return
-    emit('update:modelValue', Number(newValue))
-})
+const update = (event: Event) => {
+    const value = Number((event.target as HTMLInputElement).value)
+    if (value !== props.modelValue) emit('update:modelValue', value)
+}
 </script>

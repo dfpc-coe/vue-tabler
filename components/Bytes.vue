@@ -11,9 +11,11 @@ export interface BytesProps {
 
 const props = defineProps<BytesProps>();
 
+const UNITS = ['B', 'kB', 'MB', 'GB', 'TB', 'PB'];
+
 const display = computed(() => {
-    const i = props.bytes == 0 ? 0 : Math.floor(Math.log(props.bytes) / Math.log(1024))
-    // @ts-expect-error: Type checking for array indexing
-    return (props.bytes / Math.pow(1024, i)).toFixed(2) * 1 + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i]
+    const bytes = Number.isFinite(props.bytes) && props.bytes > 0 ? props.bytes : 0
+    const i = bytes < 1 ? 0 : Math.min(UNITS.length - 1, Math.floor(Math.log(bytes) / Math.log(1024)))
+    return Number((bytes / Math.pow(1024, i)).toFixed(2)) + ' ' + UNITS[i]
 })
 </script>
