@@ -12,6 +12,11 @@
 
 ### Pending
 
+### v5.14.0 - 2026-11-25
+
+- :tada: `TablerModal` gains a `swipeable` prop that anchors it to the bottom of the screen and lets it be dragged down by a grabber, or any slotted element marked `data-modal-swipe`. The `height` model (`v-model:height`) follows the drag as a fraction of the full height and is exposed to slotted content as `--tblr-modal-sheet`. A slow release leaves the modal where it is, while a flick keeps its momentum and springs on to `minHeight` (default `0.5`) or back to full height. Below full height the backdrop blur is dropped and the page behind the modal can be interacted with. Below `minHeight` the modal fades in proportion to its height, and on release slides away before `close` is emitted
+- :white_check_mark: Add `TablerModal` swipe tests
+
 ### v5.13.0 - 2026-11-25
 
 - :tada: Add `TablerConfirm`, a non-destructive counterpart to `TablerDelete` with the same `displaytype` modes and `open` model, plus `heading` & `description` props and a default slot for the confirmation body
